@@ -11,7 +11,7 @@ count=0
 row_open=false
 
 # Sorted images
-for img in $(find . -maxdepth 1 -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \) | sort); do
+for img in $(find . -maxdepth 1 -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \) | sort -V); do
     if (( count % 3 == 0 )); then
         echo "  <tr>" >> README.md
         row_open=true
