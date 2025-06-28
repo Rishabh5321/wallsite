@@ -77,7 +77,23 @@
             img.src = `src/${wallpaper}`;
             img.alt = wallpaper.split('.')[0]; // Use filename as alt text
 
-            galleryItem.appendChild(img);
+            const link = document.createElement('a');
+            link.href = `https://gitlab.com/YOUR_GITLAB_USERNAME/YOUR_GITLAB_REPOSITORY_NAME/-/blob/main/src/${wallpaper}`;
+            link.target = "_blank"; // Open in a new tab
+
+            link.appendChild(img);
+
+            galleryItem.appendChild(link);
+
+            const title = document.createElement('h3');
+            title.textContent = wallpaper.split('.')[0].replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()); // Format filename as title
+
+            const description = document.createElement('p');
+            description.textContent = 'A stunning wallpaper for your device.'; // Generic description
+
+            galleryItem.appendChild(title);
+            galleryItem.appendChild(description);
+
             galleryContainer.appendChild(galleryItem);
         });
     </script>
