@@ -1,6 +1,6 @@
 # 🖼️ Wallpaper Gallery
 
-*A curated collection of 7 stunning wallpapers.*
+*A curated collection of 8 stunning wallpapers.*
 
 
 ---
@@ -59,6 +59,13 @@
       </a>
       <br>
       <small><i>wall7</i></small>
+    </td>
+    <td width="300px" align="center">
+      <a href="src/wall8.png">
+        <img src="src/wall8.png" width="300px" alt="Wallpaper: wall8">
+      </a>
+      <br>
+      <small><i>wall8</i></small>
     </td>
   </tr>
 </table>
