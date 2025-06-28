@@ -1,9 +1,13 @@
 pages:
   stage: deploy
+  before_script:
+    - apt-get update -y && apt-get install -y --no-install-recommends imagemagick
   script:
-    - WALLPAPERS=$(find src -type f \( -name "*.png" -o -name "*.jpg" \) -printf "'%P',")
-    - WALLPAPERS=${WALLPAPERS%,} # Remove trailing comma
-    - sed -i "s|const wallpapers = \[];|const wallpapers = [${WALLPAPERS}];|" index.html
+    - mkdir -p src/thumbnails
+    - find src -maxdepth 1 -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \) | while read img; do convert "$img" -resize 300x "src/thumbnails/$(basename "$img")"; done
+    - WALLPAPERS=$(find src -maxdepth 1 -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \) -printf '{"full":"src/%P","thumbnail":"src/thumbnails/%P"},')
+    - WALLPAPERS="[${WALLPAPERS%,}]"
+    - sed -i "s|const wallpapers = \[];|const wallpapers = ${WALLPAPERS};|" index.html
     - mkdir .public
     - cp -r * .public
     - mv .public public
