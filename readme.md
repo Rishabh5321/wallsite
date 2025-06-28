@@ -9,21 +9,21 @@
   <tr align="center">
     <td width="300px" align="center">
       <a href="src/wall1.png">
-        <img src="src/wall1.png" width="300px" alt="Wallpaper: wall1">
+        <img src="src/thumbnails/wall1.png" width="300px" alt="Wallpaper: wall1">
       </a>
       <br>
       <small><i>wall1</i></small>
     </td>
     <td width="300px" align="center">
       <a href="src/wall2.png">
-        <img src="src/wall2.png" width="300px" alt="Wallpaper: wall2">
+        <img src="src/thumbnails/wall2.png" width="300px" alt="Wallpaper: wall2">
       </a>
       <br>
       <small><i>wall2</i></small>
     </td>
     <td width="300px" align="center">
       <a href="src/wall3.png">
-        <img src="src/wall3.png" width="300px" alt="Wallpaper: wall3">
+        <img src="src/thumbnails/wall3.png" width="300px" alt="Wallpaper: wall3">
       </a>
       <br>
       <small><i>wall3</i></small>
@@ -32,21 +32,21 @@
   <tr align="center">
     <td width="300px" align="center">
       <a href="src/wall4.jpg">
-        <img src="src/wall4.jpg" width="300px" alt="Wallpaper: wall4">
+        <img src="src/thumbnails/wall4.jpg" width="300px" alt="Wallpaper: wall4">
       </a>
       <br>
       <small><i>wall4</i></small>
     </td>
     <td width="300px" align="center">
       <a href="src/wall5.png">
-        <img src="src/wall5.png" width="300px" alt="Wallpaper: wall5">
+        <img src="src/thumbnails/wall5.png" width="300px" alt="Wallpaper: wall5">
       </a>
       <br>
       <small><i>wall5</i></small>
     </td>
     <td width="300px" align="center">
       <a href="src/wall6.png">
-        <img src="src/wall6.png" width="300px" alt="Wallpaper: wall6">
+        <img src="src/thumbnails/wall6.png" width="300px" alt="Wallpaper: wall6">
       </a>
       <br>
       <small><i>wall6</i></small>
@@ -55,14 +55,14 @@
   <tr align="center">
     <td width="300px" align="center">
       <a href="src/wall7.jpg">
-        <img src="src/wall7.jpg" width="300px" alt="Wallpaper: wall7">
+        <img src="src/thumbnails/wall7.jpg" width="300px" alt="Wallpaper: wall7">
       </a>
       <br>
       <small><i>wall7</i></small>
     </td>
     <td width="300px" align="center">
       <a href="src/wall8.png">
-        <img src="src/wall8.png" width="300px" alt="Wallpaper: wall8">
+        <img src="src/thumbnails/wall8.png" width="300px" alt="Wallpaper: wall8">
       </a>
       <br>
       <small><i>wall8</i></small>
