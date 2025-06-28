@@ -1,11 +1,9 @@
 pages:
   stage: deploy
   script:
-    - chmod +x ./generate_readme.sh
-    - ./generate_readme.sh
-    - mkdir .public
-    - cp -r * .public
-    - mv .public public
+    - mkdir -p public
+    - cp index.html readme*.md public/
+    - cp -r src public/
   artifacts:
     paths:
       - public
