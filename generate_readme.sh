@@ -8,7 +8,7 @@
 # --- Configuration ---
 IMAGES_PER_PAGE=9
 COLUMNS=3
-IMAGE_WIDTH=300
+IMAGE_WIDTH=400
 
 # Check if we're in a git repository
 if [ ! -d ".git" ]; then
