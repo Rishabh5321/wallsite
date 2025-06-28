@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wallpapers</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #1a1a1a; /* Dark background */
+            color: #e0e0e0; /* Light text */
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            color: #00bcd4; /* A vibrant blue for the title */
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        .gallery-item {
+            background-color: #2a2a2a; /* Slightly lighter dark for cards */
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* More pronounced shadow */
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #3a3a3a; /* Subtle border */
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 220px; /* Slightly increased height */
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid #3a3a3a;
+        }
+        .gallery-item h3 {
+            margin: 18px 0 10px;
+            font-size: 1.2em;
+            color: #00bcd4; /* Matching title color */
+        }
+        .gallery-item p {
+            padding: 0 15px 20px;
+            font-size: 0.95em;
+            color: #b0b0b0; /* Lighter grey for description */
+        }
+    </style>
+</head>
+<body>
+    <h1>My Wallpaper Collection</h1>
+    <div class="gallery-container">
+        </div>
+    <script>
+        const galleryContainer = document.querySelector('.gallery-container');
+        const wallpapers = [];
+        // Wallpapers will be added here dynamically by the CI/CD pipeline
+
+        wallpapers.forEach(wallpaper => {
+            const galleryItem = document.createElement('div');
+            galleryItem.classList.add('gallery-item');
+
+            const img = document.createElement('img');
+            img.src = `src/${wallpaper}`;
+            img.alt = wallpaper.split('.')[0]; // Use filename as alt text
+
+            galleryItem.appendChild(img);
+            galleryContainer.appendChild(galleryItem);
+        });
+    </script>
+</body>
+</html>

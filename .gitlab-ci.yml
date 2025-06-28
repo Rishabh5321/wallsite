@@ -1,0 +1,14 @@
+pages:
+  stage: deploy
+  script:
+    - WALLPAPERS=$(find src -type f \( -name "*.png" -o -name "*.jpg" \) -printf "'%P',")
+    - WALLPAPERS=${WALLPAPERS%,} # Remove trailing comma
+    - sed -i "s|const wallpapers = \[];|const wallpapers = [${WALLPAPERS}];|" index.html
+    - mkdir .public
+    - cp -r * .public
+    - mv .public public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
