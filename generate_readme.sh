@@ -227,6 +227,33 @@ if [ $total_pages -gt 1 ]; then
     } > index.md
 fi
 
+# --- HTML Index Generation ---
+
+echo ""
+echo "🌐 Generating index.html for local preview..."
+
+# Create the JSON for the wallpapers
+wallpaper_json=""
+for img in "${images[@]}"; do
+    img_clean="${img#./src/}"
+    wallpaper_json+="{\"full\":\"src/$img_clean\",\"thumbnail\":\"src/thumbnails/$img_clean\"},"
+done
+
+if [ -n "$wallpaper_json" ]; then
+    # Remove trailing comma and wrap in brackets
+    wallpaper_json="[${wallpaper_json%,}]"
+
+    # Use a temporary file for sed to avoid issues with macOS vs Linux sed
+    tmp_file=$(mktemp)
+    # Replace the placeholder in index.html, making it idempotent
+    sed "s|const wallpapers = .*|const wallpapers = ${wallpaper_json};|" "index.html" > "$tmp_file" && mv "$tmp_file" "index.html"
+
+    echo "✅ index.html has been updated with the latest wallpapers."
+    echo "   You can now open index.html in your browser to see the gallery."
+else
+    echo "⚠️ No images found, index.html was not updated."
+fi
+
 # --- Completion ---
 
 echo ""

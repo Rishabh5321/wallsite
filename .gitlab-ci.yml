@@ -1,9 +1,8 @@
 pages:
   stage: deploy
   script:
-    - WALLPAPERS=$(find src -maxdepth 1 -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \) -printf '{"full":"src/%P","thumbnail":"src/thumbnails/%P"},')
-    - WALLPAPERS="[${WALLPAPERS%,}]"
-    - sed -i "s|const wallpapers = \[];|const wallpapers = ${WALLPAPERS};|" index.html
+    - chmod +x ./generate_readme.sh
+    - ./generate_readme.sh
     - mkdir .public
     - cp -r * .public
     - mv .public public
