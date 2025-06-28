@@ -1,4 +1,4 @@
-name: Update README
+name: Update README and Sync to GitLab
 
 on:
   push:
@@ -11,6 +11,7 @@ on:
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -35,5 +36,20 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Auto-update README with wallpaper list" || exit 0
+          git commit -m "Auto-update README with wallpaper list [skip ci]" || exit 0
           git push
+
+  sync-to-gitlab:
+    needs: update-readme
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Sync to GitLab
+        uses: keninkujovic/gitlab-sync@2.1.0
+        with:
+          gitlab_url: ${{ secrets.GITLAB_URL }}
+          username: ${{ secrets.USERNAME }}
+          gitlab_pat: ${{ secrets.GITLAB_PAT }}
