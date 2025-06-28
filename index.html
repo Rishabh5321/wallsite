@@ -48,16 +48,7 @@
             display: block;
             border-bottom: 1px solid #3a3a3a;
         }
-        .gallery-item h3 {
-            margin: 18px 0 10px;
-            font-size: 1.2em;
-            color: #00bcd4; /* Matching title color */
-        }
-        .gallery-item p {
-            padding: 0 15px 20px;
-            font-size: 0.95em;
-            color: #b0b0b0; /* Lighter grey for description */
-        }
+        
     </style>
 </head>
 <body>
@@ -84,15 +75,6 @@
             link.appendChild(img);
 
             galleryItem.appendChild(link);
-
-            const title = document.createElement('h3');
-            title.textContent = wallpaper.split('.')[0].replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()); // Format filename as title
-
-            const description = document.createElement('p');
-            description.textContent = 'A stunning wallpaper for your device.'; // Generic description
-
-            galleryItem.appendChild(title);
-            galleryItem.appendChild(description);
 
             galleryContainer.appendChild(galleryItem);
         });
