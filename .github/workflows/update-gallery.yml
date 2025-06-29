@@ -1,15 +1,13 @@
-name: Update README and Sync to GitLab
+name: Update Gallery and Sync to GitLab
 
 on:
   push:
     branches:
       - main
   workflow_dispatch:
-  # schedule:
-  #   - cron: "0 0 * * *" # Runs daily at midnight UTC
 
 jobs:
-  update-readme:
+  update-gallery:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     steps:
@@ -26,7 +24,7 @@ jobs:
             convert "$img" -resize 400x "src/thumbnails/$(basename "$img")"
           done
 
-      - name: Run script to update README
+      - name: Run script to update gallery
         run: |
           chmod +x generate_readme.sh
           ./generate_readme.sh
@@ -36,11 +34,11 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Auto-update README with wallpaper list [skip ci]" || exit 0
+          git commit -m "Auto-update gallery with new wallpapers [skip ci]" || exit 0
           git push
 
   sync-to-gitlab:
-    needs: update-readme
+    needs: update-gallery
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
