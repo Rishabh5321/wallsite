@@ -4,7 +4,7 @@ This repository hosts a curated collection of beautiful wallpapers. The gallery 
 
 ## 🚀 Live Gallery
 
-You can view the live wallpaper gallery here: **[Live Gallery](https://rishabh.gitlab.io/wallpapers/)**
+You can view the live wallpaper gallery here: **[Live Gallery](https://rishabh5321.gitlab.io/wallpapers/)**
 
 *(Note: The live gallery is hosted on GitLab Pages and is updated automatically after every change to the `main` branch.)*
 
