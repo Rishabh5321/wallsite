@@ -47,6 +47,6 @@ To add a new wallpaper to the gallery, simply:
 2.  Commit and push the change to the `main` branch.
 3.  The GitHub Actions workflow will take care of the rest!
 
-## 📜 License
+## License
 
-The wallpapers in this collection are provided under the [MIT License](LICENSE), unless otherwise specified in the image metadata. You are free to use them as you wish.
+The code in this repository is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. The wallpapers are not covered by this license.
