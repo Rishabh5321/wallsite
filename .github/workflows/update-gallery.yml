@@ -9,7 +9,7 @@ on:
 jobs:
   generate-gallery:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    if: "!contains(github.event.head_commit.message, '[gallery-update]')"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -35,5 +35,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Auto-update gallery with new wallpapers [skip ci]" || exit 0
+          git commit -m "Auto-update gallery with new wallpapers [gallery-update]" || exit 0
           git push
