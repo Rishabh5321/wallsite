@@ -37,19 +37,3 @@ jobs:
           git add .
           git commit -m "Auto-update gallery with new wallpapers [skip ci]" || exit 0
           git push
-
-  sync-to-gitlab:
-    runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, '[skip ci]')"
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Sync to GitLab
-        uses: keninkujovic/gitlab-sync@2.1.0
-        with:
-          gitlab_url: ${{ secrets.GITLAB_URL }}
-          username: ${{ secrets.USERNAME }}
-          gitlab_pat: ${{ secrets.GITLAB_PAT }}
