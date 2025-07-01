@@ -99,6 +99,10 @@ header p {
     opacity: 0.85;
 }
 
+.gallery-item img.lazy {
+    background-color: #2c2c3a;
+}
+
 .wallpaper-title {
     position: absolute;
     bottom: 0;
