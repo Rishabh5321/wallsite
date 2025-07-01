@@ -59,6 +59,12 @@ function showLightbox(index) {
             }
         };
         document.addEventListener('keydown', keydownHandler);
+
+        // Prefetch next and previous images
+        const nextIndex = (index + 1) % wallpapers.length;
+        const prevIndex = (index - 1 + wallpapers.length) % wallpapers.length;
+        new Image().src = wallpapers[nextIndex].full;
+        new Image().src = wallpapers[prevIndex].full;
     };
 }
 
