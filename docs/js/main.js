@@ -7,6 +7,21 @@ function showLightbox(index) {
     const wallpaper = wallpapers[index];
     const imageName = wallpaper.full.split("/").pop().split(".").slice(0, -1).join(".");
 
+    // Show a loading spinner immediately
+    const loadingContent = `
+        <div class="lightbox-content">
+            <div class="loader"></div>
+        </div>
+    `;
+
+    if (lightbox) {
+        lightbox.close();
+    }
+
+    lightbox = basicLightbox.create(loadingContent);
+    lightbox.show();
+
+    // Load the full image in the background
     const img = new Image();
     img.src = wallpaper.full;
     img.onload = function () {
@@ -24,19 +39,14 @@ function showLightbox(index) {
                 <button class="lightbox-next">&gt;</button>
             </div>
         `;
-
-        if (lightbox) {
-            lightbox.close();
-        }
-
-        lightbox = basicLightbox.create(content, {
-            onShow: (instance) => {
-                instance.element().querySelector('.lightbox-prev').onclick = () => showLightbox((index - 1 + wallpapers.length) % wallpapers.length);
-                instance.element().querySelector('.lightbox-next').onclick = () => showLightbox((index + 1) % wallpapers.length);
-            }
-        });
-
-        lightbox.show();
+        
+        // Replace the loader with the loaded content
+        const lightboxElement = lightbox.element();
+        lightboxElement.innerHTML = content;
+        
+        // Re-attach event listeners
+        lightboxElement.querySelector('.lightbox-prev').onclick = () => showLightbox((index - 1 + wallpapers.length) % wallpapers.length);
+        lightboxElement.querySelector('.lightbox-next').onclick = () => showLightbox((index + 1) % wallpapers.length);
     };
 }
 
