@@ -1,4 +1,5 @@
+
 {
-  "buildCommand": "bash generate_readme.sh",
+  "buildCommand": "bash generate_readme.sh && cp -r src docs/",
   "outputDirectory": "docs"
 }
