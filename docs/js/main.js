@@ -2,12 +2,12 @@ const galleryContainer = document.querySelector(".gallery-container");
 const wallpapers = [{full:"../src/wall1.png",thumbnail:"../src/thumbnails/wall1.png"},{full:"../src/wall2.png",thumbnail:"../src/thumbnails/wall2.png"},{full:"../src/wall3.png",thumbnail:"../src/thumbnails/wall3.png"},{full:"../src/wall4.jpg",thumbnail:"../src/thumbnails/wall4.jpg"},{full:"../src/wall5.png",thumbnail:"../src/thumbnails/wall5.png"},{full:"../src/wall6.png",thumbnail:"../src/thumbnails/wall6.png"},{full:"../src/wall7.jpg",thumbnail:"../src/thumbnails/wall7.jpg"},{full:"../src/wall8.png",thumbnail:"../src/thumbnails/wall8.png"},{full:"../src/wall9.jpg",thumbnail:"../src/thumbnails/wall9.jpg"},{full:"../src/wall10.jpg",thumbnail:"../src/thumbnails/wall10.jpg"},{full:"../src/wall11.jpg",thumbnail:"../src/thumbnails/wall11.jpg"},{full:"../src/wall12.jpg",thumbnail:"../src/thumbnails/wall12.jpg"},{full:"../src/wall13.jpg",thumbnail:"../src/thumbnails/wall13.jpg"},{full:"../src/wall14.png",thumbnail:"../src/thumbnails/wall14.png"},{full:"../src/wall15.jpg",thumbnail:"../src/thumbnails/wall15.jpg"},{full:"../src/wall16.jpg",thumbnail:"../src/thumbnails/wall16.jpg"},{full:"../src/wall17.jpg",thumbnail:"../src/thumbnails/wall17.jpg"},{full:"../src/wall18.jpg",thumbnail:"../src/thumbnails/wall18.jpg"},{full:"../src/wall19.jpg",thumbnail:"../src/thumbnails/wall19.jpg"},{full:"../src/wall20.jpg",thumbnail:"../src/thumbnails/wall20.jpg"},{full:"../src/wall21.jpg",thumbnail:"../src/thumbnails/wall21.jpg"}];
 
 let lightbox;
+let keydownHandler;
 
 function showLightbox(index) {
     const wallpaper = wallpapers[index];
     const imageName = wallpaper.full.split("/").pop().split(".").slice(0, -1).join(".");
 
-    // Show a loading spinner immediately
     const loadingContent = `
         <div class="lightbox-content">
             <div class="loader"></div>
@@ -18,10 +18,13 @@ function showLightbox(index) {
         lightbox.close();
     }
 
-    lightbox = basicLightbox.create(loadingContent);
+    lightbox = basicLightbox.create(loadingContent, {
+        onClose: () => {
+            document.removeEventListener('keydown', keydownHandler);
+        }
+    });
     lightbox.show();
 
-    // Load the full image in the background
     const img = new Image();
     img.src = wallpaper.full;
     img.onload = function () {
@@ -40,13 +43,22 @@ function showLightbox(index) {
             </div>
         `;
         
-        // Replace the loader with the loaded content
         const lightboxElement = lightbox.element();
         lightboxElement.innerHTML = content;
         
-        // Re-attach event listeners
         lightboxElement.querySelector('.lightbox-prev').onclick = () => showLightbox((index - 1 + wallpapers.length) % wallpapers.length);
         lightboxElement.querySelector('.lightbox-next').onclick = () => showLightbox((index + 1) % wallpapers.length);
+
+        keydownHandler = (e) => {
+            if (e.key === 'ArrowLeft') {
+                showLightbox((index - 1 + wallpapers.length) % wallpapers.length);
+            } else if (e.key === 'ArrowRight') {
+                showLightbox((index + 1) % wallpapers.length);
+            } else if (e.key === 'Escape') {
+                lightbox.close();
+            }
+        };
+        document.addEventListener('keydown', keydownHandler);
     };
 }
 
