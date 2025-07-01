@@ -1,0 +1,4 @@
+{
+  "buildCommand": "bash generate_readme.sh",
+  "outputDirectory": "docs"
+}
