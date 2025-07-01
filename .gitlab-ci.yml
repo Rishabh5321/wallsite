@@ -1,9 +1,11 @@
 pages:
   stage: deploy
   script:
-    - mkdir -p public
-    - cp -r docs/* public/
+    - mkdir -p public/docs
+    - cp -r docs/* public/docs/
     - cp -r src public/
+    # Add a redirect from the root to the /docs/ page
+    - echo '<meta http-equiv="refresh" content="0; url=docs/">' > public/index.html
   artifacts:
     paths:
       - public
