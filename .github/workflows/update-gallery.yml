@@ -2,8 +2,8 @@ name: Update Gallery
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - "src/**"
   workflow_dispatch:
 
 jobs:
@@ -47,4 +47,3 @@ jobs:
           else
             echo "No changes to commit."
           fi
-
