@@ -2,7 +2,7 @@ pages:
   stage: deploy
   script:
     - mkdir -p public
-    - cp index.html readme.md public/
+    - cp -r docs/* public/
     - cp -r src public/
   artifacts:
     paths:
