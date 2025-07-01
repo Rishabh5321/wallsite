@@ -66,7 +66,15 @@ function showLightbox(index) {
     };
 }
 
+function showRandomWallpaper() {
+    const randomIndex = Math.floor(Math.random() * wallpapers.length);
+    showLightbox(randomIndex);
+}
+
 function initializeGallery() {
+    const randomWallpaperBtn = document.querySelector("#random-wallpaper-btn");
+    randomWallpaperBtn.addEventListener("click", showRandomWallpaper);
+
     wallpapers.forEach((wallpaper, index) => {
         const galleryItem = document.createElement("div");
         galleryItem.classList.add("gallery-item");
