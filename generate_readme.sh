@@ -9,7 +9,7 @@ echo "🎨 Initializing Wallpaper Gallery Generation..."
 # --- Configuration ---
 SRC_DIR="src"
 THUMBNAIL_DIR="src/thumbnails"
-OUTPUT_JS="docs/js/main.js"
+OUTPUT_JS="docs/js/gallery-data.js"
 IMG_EXTENSIONS=("png" "jpg" "jpeg" "gif" "webp")
 
 # --- Functions ---
@@ -60,18 +60,14 @@ done
 # Join JSON entries with a comma
 wallpaper_json="[$(join_by , "${json_entries[@]}")]"
 
-# Check if the output file exists
-if [ ! -f "$OUTPUT_JS" ]; then
-    echo "⚠️  Warning: '$OUTPUT_JS' not found. Creating it."
-    # Create a basic structure if the file doesn't exist
-    mkdir -p "$(dirname "$OUTPUT_JS")"
-    echo "const wallpapers = [];" > "$OUTPUT_JS"
+# Check if the output directory exists
+if [ ! -d "$(dirname "$OUTPUT_JSON")" ]; then
+    echo "⚠️  Warning: '$(dirname "$OUTPUT_JSON")' not found. Creating it."
+    mkdir -p "$(dirname "$OUTPUT_JSON")"
 fi
 
-# Use a temporary file for sed to avoid issues with macOS vs Linux sed
-tmp_file=$(mktemp)
-# Replace the placeholder in the JS file, making it idempotent
-sed "s|const wallpapers = .*|const wallpapers = ${wallpaper_json};|" "$OUTPUT_JS" > "$tmp_file" && mv "$tmp_file" "$OUTPUT_JS"
+# Write the JSON to the output file
+echo "const wallpapers = ${wallpaper_json};" > "$OUTPUT_JS"
 
 echo "✅ Gallery data in '$OUTPUT_JS' has been updated."
 
