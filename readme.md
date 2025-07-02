@@ -6,6 +6,12 @@
 
 ---
 
+<center>
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/050792fd-8efd-43ef-a85f-d841388b7050/deploy-status)](https://app.netlify.com/projects/rishabh5321-wallpapers/deploys)
+
+</center>
+
 ## 🚀 Live Gallery
 
 You can view the live wallpaper gallery here: **[Live Gallery](https://rishabh5321.gitlab.io/wallpapers/)**
