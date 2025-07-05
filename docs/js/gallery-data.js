@@ -1,1 +1,784 @@
-const galleryData = [{"folder": "Uncategorized", "wallpapers": [{"full":"../src/wall1.png","thumbnail":"../src/.thumbnails/wall1.png"},{"full":"../src/wall2.png","thumbnail":"../src/.thumbnails/wall2.png"},{"full":"../src/wall3.png","thumbnail":"../src/.thumbnails/wall3.png"},{"full":"../src/wall4.jpg","thumbnail":"../src/.thumbnails/wall4.jpg"},{"full":"../src/wall5.png","thumbnail":"../src/.thumbnails/wall5.png"},{"full":"../src/wall6.png","thumbnail":"../src/.thumbnails/wall6.png"},{"full":"../src/wall7.jpg","thumbnail":"../src/.thumbnails/wall7.jpg"},{"full":"../src/wall8.png","thumbnail":"../src/.thumbnails/wall8.png"},{"full":"../src/wall9.jpg","thumbnail":"../src/.thumbnails/wall9.jpg"},{"full":"../src/wall10.jpg","thumbnail":"../src/.thumbnails/wall10.jpg"},{"full":"../src/wall11.jpg","thumbnail":"../src/.thumbnails/wall11.jpg"},{"full":"../src/wall12.jpg","thumbnail":"../src/.thumbnails/wall12.jpg"},{"full":"../src/wall13.jpg","thumbnail":"../src/.thumbnails/wall13.jpg"},{"full":"../src/wall14.png","thumbnail":"../src/.thumbnails/wall14.png"},{"full":"../src/wall15.jpg","thumbnail":"../src/.thumbnails/wall15.jpg"},{"full":"../src/wall16.jpg","thumbnail":"../src/.thumbnails/wall16.jpg"},{"full":"../src/wall17.jpg","thumbnail":"../src/.thumbnails/wall17.jpg"},{"full":"../src/wall18.jpg","thumbnail":"../src/.thumbnails/wall18.jpg"},{"full":"../src/wall19.jpg","thumbnail":"../src/.thumbnails/wall19.jpg"},{"full":"../src/wall20.jpg","thumbnail":"../src/.thumbnails/wall20.jpg"},{"full":"../src/wall21.jpg","thumbnail":"../src/.thumbnails/wall21.jpg"},{"full":"../src/wall22.jpg","thumbnail":"../src/.thumbnails/wall22.jpg"},{"full":"../src/wall23.jpg","thumbnail":"../src/.thumbnails/wall23.jpg"},{"full":"../src/wall24.jpg","thumbnail":"../src/.thumbnails/wall24.jpg"},{"full":"../src/wall25.jpg","thumbnail":"../src/.thumbnails/wall25.jpg"},{"full":"../src/wall26.png","thumbnail":"../src/.thumbnails/wall26.png"},{"full":"../src/wall27.jpg","thumbnail":"../src/.thumbnails/wall27.jpg"},{"full":"../src/wall28.jpg","thumbnail":"../src/.thumbnails/wall28.jpg"}]},{"folder": "wallpapers", "wallpapers": [{"full":"../src/wallpapers/wall.png","thumbnail":"../src/.thumbnails/wallpapers/wall.png"},{"full":"../src/wallpapers/wall1.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall1.jpg"},{"full":"../src/wallpapers/wall2.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall2.jpg"},{"full":"../src/wallpapers/wall3.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall3.jpg"},{"full":"../src/wallpapers/wall4.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall4.jpg"},{"full":"../src/wallpapers/wall5.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall5.jpg"},{"full":"../src/wallpapers/wall6.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall6.jpg"},{"full":"../src/wallpapers/wall7.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall7.jpg"},{"full":"../src/wallpapers/wall8.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall8.jpg"},{"full":"../src/wallpapers/wall9.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall9.jpg"},{"full":"../src/wallpapers/wall10.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall10.jpg"},{"full":"../src/wallpapers/wall12.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall12.jpg"},{"full":"../src/wallpapers/wall13.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall13.jpg"},{"full":"../src/wallpapers/wall14.png","thumbnail":"../src/.thumbnails/wallpapers/wall14.png"},{"full":"../src/wallpapers/wall15.png","thumbnail":"../src/.thumbnails/wallpapers/wall15.png"},{"full":"../src/wallpapers/wall16.png","thumbnail":"../src/.thumbnails/wallpapers/wall16.png"},{"full":"../src/wallpapers/wall17.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall17.jpg"},{"full":"../src/wallpapers/wall18.png","thumbnail":"../src/.thumbnails/wallpapers/wall18.png"},{"full":"../src/wallpapers/wall19.png","thumbnail":"../src/.thumbnails/wallpapers/wall19.png"},{"full":"../src/wallpapers/wall20.png","thumbnail":"../src/.thumbnails/wallpapers/wall20.png"},{"full":"../src/wallpapers/wall21.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall21.jpg"},{"full":"../src/wallpapers/wall22.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall22.jpg"},{"full":"../src/wallpapers/wall23.png","thumbnail":"../src/.thumbnails/wallpapers/wall23.png"},{"full":"../src/wallpapers/wall24.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall24.jpg"},{"full":"../src/wallpapers/wall25.png","thumbnail":"../src/.thumbnails/wallpapers/wall25.png"},{"full":"../src/wallpapers/wall26.png","thumbnail":"../src/.thumbnails/wallpapers/wall26.png"},{"full":"../src/wallpapers/wall27.png","thumbnail":"../src/.thumbnails/wallpapers/wall27.png"},{"full":"../src/wallpapers/wall28.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall28.jpg"},{"full":"../src/wallpapers/wall29.png","thumbnail":"../src/.thumbnails/wallpapers/wall29.png"},{"full":"../src/wallpapers/wall30.gif","thumbnail":"../src/.thumbnails/wallpapers/wall30.gif"},{"full":"../src/wallpapers/wall31.png","thumbnail":"../src/.thumbnails/wallpapers/wall31.png"},{"full":"../src/wallpapers/wall32.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall32.jpg"},{"full":"../src/wallpapers/wall34.png","thumbnail":"../src/.thumbnails/wallpapers/wall34.png"},{"full":"../src/wallpapers/wall35.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall35.jpg"},{"full":"../src/wallpapers/wall36.png","thumbnail":"../src/.thumbnails/wallpapers/wall36.png"},{"full":"../src/wallpapers/wall37.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall37.jpg"},{"full":"../src/wallpapers/wall38.png","thumbnail":"../src/.thumbnails/wallpapers/wall38.png"},{"full":"../src/wallpapers/wall39.png","thumbnail":"../src/.thumbnails/wallpapers/wall39.png"},{"full":"../src/wallpapers/wall40.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall40.jpg"},{"full":"../src/wallpapers/wall41.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall41.jpg"},{"full":"../src/wallpapers/wall42.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall42.jpg"},{"full":"../src/wallpapers/wall43.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall43.jpg"},{"full":"../src/wallpapers/wall44.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall44.jpg"},{"full":"../src/wallpapers/wall46.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall46.jpg"},{"full":"../src/wallpapers/wall47.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall47.jpg"},{"full":"../src/wallpapers/wall49.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall49.jpg"},{"full":"../src/wallpapers/wall50.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall50.jpg"},{"full":"../src/wallpapers/wall51.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall51.jpg"},{"full":"../src/wallpapers/wall52.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall52.jpg"},{"full":"../src/wallpapers/wall53.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall53.jpg"},{"full":"../src/wallpapers/wall54.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall54.jpg"},{"full":"../src/wallpapers/wall55.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall55.jpg"},{"full":"../src/wallpapers/wall56.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall56.jpg"},{"full":"../src/wallpapers/wall57.png","thumbnail":"../src/.thumbnails/wallpapers/wall57.png"},{"full":"../src/wallpapers/wall58.png","thumbnail":"../src/.thumbnails/wallpapers/wall58.png"},{"full":"../src/wallpapers/wall59.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall59.jpg"},{"full":"../src/wallpapers/wall60.png","thumbnail":"../src/.thumbnails/wallpapers/wall60.png"},{"full":"../src/wallpapers/wall61.png","thumbnail":"../src/.thumbnails/wallpapers/wall61.png"},{"full":"../src/wallpapers/wall62.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall62.jpg"},{"full":"../src/wallpapers/wall63.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall63.jpg"},{"full":"../src/wallpapers/wall64.png","thumbnail":"../src/.thumbnails/wallpapers/wall64.png"},{"full":"../src/wallpapers/wall65.png","thumbnail":"../src/.thumbnails/wallpapers/wall65.png"},{"full":"../src/wallpapers/wall66.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall66.jpg"},{"full":"../src/wallpapers/wall67.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall67.jpg"},{"full":"../src/wallpapers/wall68.png","thumbnail":"../src/.thumbnails/wallpapers/wall68.png"},{"full":"../src/wallpapers/wall69.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall69.jpg"},{"full":"../src/wallpapers/wall70.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall70.jpg"},{"full":"../src/wallpapers/wall71.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall71.jpg"},{"full":"../src/wallpapers/wall72.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall72.jpg"},{"full":"../src/wallpapers/wall73.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall73.jpg"},{"full":"../src/wallpapers/wall74.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall74.jpg"},{"full":"../src/wallpapers/wall75.png","thumbnail":"../src/.thumbnails/wallpapers/wall75.png"},{"full":"../src/wallpapers/wall76.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall76.jpg"},{"full":"../src/wallpapers/wall77.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall77.jpg"},{"full":"../src/wallpapers/wall80.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall80.jpg"},{"full":"../src/wallpapers/wall81.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall81.jpg"},{"full":"../src/wallpapers/wall82.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall82.jpg"},{"full":"../src/wallpapers/wall83.png","thumbnail":"../src/.thumbnails/wallpapers/wall83.png"},{"full":"../src/wallpapers/wall84.png","thumbnail":"../src/.thumbnails/wallpapers/wall84.png"},{"full":"../src/wallpapers/wall85.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall85.jpg"},{"full":"../src/wallpapers/wall86.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall86.jpg"},{"full":"../src/wallpapers/wall87.png","thumbnail":"../src/.thumbnails/wallpapers/wall87.png"},{"full":"../src/wallpapers/wall88.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall88.jpg"},{"full":"../src/wallpapers/wall89.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall89.jpg"},{"full":"../src/wallpapers/wall91.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall91.jpg"},{"full":"../src/wallpapers/wall92.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall92.jpg"},{"full":"../src/wallpapers/wall93.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall93.jpg"},{"full":"../src/wallpapers/wall94.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall94.jpg"},{"full":"../src/wallpapers/wall95.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall95.jpg"},{"full":"../src/wallpapers/wall96.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall96.jpg"},{"full":"../src/wallpapers/wall97.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall97.jpg"},{"full":"../src/wallpapers/wall98.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall98.jpg"},{"full":"../src/wallpapers/wall99.png","thumbnail":"../src/.thumbnails/wallpapers/wall99.png"},{"full":"../src/wallpapers/wall100.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall100.jpg"},{"full":"../src/wallpapers/wall101.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall101.jpg"},{"full":"../src/wallpapers/wall102.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall102.jpg"},{"full":"../src/wallpapers/wall103.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall103.jpg"},{"full":"../src/wallpapers/wall104.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall104.jpg"},{"full":"../src/wallpapers/wall105.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall105.jpg"},{"full":"../src/wallpapers/wall106.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall106.jpg"},{"full":"../src/wallpapers/wall107.png","thumbnail":"../src/.thumbnails/wallpapers/wall107.png"},{"full":"../src/wallpapers/wall108.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall108.jpg"},{"full":"../src/wallpapers/wall109.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall109.jpg"},{"full":"../src/wallpapers/wall110.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall110.jpg"},{"full":"../src/wallpapers/wall111.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall111.jpg"},{"full":"../src/wallpapers/wall112.png","thumbnail":"../src/.thumbnails/wallpapers/wall112.png"},{"full":"../src/wallpapers/wall113.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall113.jpg"},{"full":"../src/wallpapers/wall115.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall115.jpg"},{"full":"../src/wallpapers/wall116.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall116.jpg"},{"full":"../src/wallpapers/wall117.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall117.jpg"},{"full":"../src/wallpapers/wall118.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall118.jpg"},{"full":"../src/wallpapers/wall119.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall119.jpg"},{"full":"../src/wallpapers/wall120.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall120.jpg"},{"full":"../src/wallpapers/wall121.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall121.jpg"},{"full":"../src/wallpapers/wall122.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall122.jpg"},{"full":"../src/wallpapers/wall123.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall123.jpg"},{"full":"../src/wallpapers/wall124.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall124.jpg"},{"full":"../src/wallpapers/wall125.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall125.jpg"},{"full":"../src/wallpapers/wall126.png","thumbnail":"../src/.thumbnails/wallpapers/wall126.png"},{"full":"../src/wallpapers/wall127.png","thumbnail":"../src/.thumbnails/wallpapers/wall127.png"},{"full":"../src/wallpapers/wall128.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall128.jpg"},{"full":"../src/wallpapers/wall129.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall129.jpg"},{"full":"../src/wallpapers/wall130.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall130.jpg"},{"full":"../src/wallpapers/wall131.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall131.jpg"},{"full":"../src/wallpapers/wall132.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall132.jpg"},{"full":"../src/wallpapers/wall133.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall133.jpg"},{"full":"../src/wallpapers/wall134.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall134.jpg"},{"full":"../src/wallpapers/wall135.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall135.jpg"},{"full":"../src/wallpapers/wall136.png","thumbnail":"../src/.thumbnails/wallpapers/wall136.png"},{"full":"../src/wallpapers/wall137.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall137.jpg"},{"full":"../src/wallpapers/wall138.png","thumbnail":"../src/.thumbnails/wallpapers/wall138.png"},{"full":"../src/wallpapers/wall139.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall139.jpg"},{"full":"../src/wallpapers/wall140.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall140.jpg"},{"full":"../src/wallpapers/wall141.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall141.jpg"},{"full":"../src/wallpapers/wall142.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall142.jpg"},{"full":"../src/wallpapers/wall143.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall143.jpg"},{"full":"../src/wallpapers/wall144.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall144.jpg"},{"full":"../src/wallpapers/wall145.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall145.jpg"},{"full":"../src/wallpapers/wall146.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall146.jpg"},{"full":"../src/wallpapers/wall147.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall147.jpg"},{"full":"../src/wallpapers/wall148.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall148.jpg"},{"full":"../src/wallpapers/wall149.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall149.jpg"},{"full":"../src/wallpapers/wall150.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall150.jpg"},{"full":"../src/wallpapers/wall151.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall151.jpg"},{"full":"../src/wallpapers/wall152.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall152.jpg"},{"full":"../src/wallpapers/wall153.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall153.jpg"},{"full":"../src/wallpapers/wall154.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall154.jpg"},{"full":"../src/wallpapers/wall155.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall155.jpg"},{"full":"../src/wallpapers/wall156.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall156.jpg"},{"full":"../src/wallpapers/wall157.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall157.jpg"},{"full":"../src/wallpapers/wall158.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall158.jpg"},{"full":"../src/wallpapers/wall159.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall159.jpg"},{"full":"../src/wallpapers/wall160.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall160.jpg"},{"full":"../src/wallpapers/wall161.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall161.jpg"},{"full":"../src/wallpapers/wall162.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall162.jpg"},{"full":"../src/wallpapers/wall163.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall163.jpg"},{"full":"../src/wallpapers/wall164.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall164.jpg"},{"full":"../src/wallpapers/wall165.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall165.jpg"},{"full":"../src/wallpapers/wall166.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall166.jpg"},{"full":"../src/wallpapers/wall167.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall167.jpg"},{"full":"../src/wallpapers/wall168.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall168.jpg"},{"full":"../src/wallpapers/wall169.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall169.jpg"},{"full":"../src/wallpapers/wall170.png","thumbnail":"../src/.thumbnails/wallpapers/wall170.png"},{"full":"../src/wallpapers/wall171.png","thumbnail":"../src/.thumbnails/wallpapers/wall171.png"},{"full":"../src/wallpapers/wall172.png","thumbnail":"../src/.thumbnails/wallpapers/wall172.png"},{"full":"../src/wallpapers/wall173.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall173.jpg"},{"full":"../src/wallpapers/wall174.png","thumbnail":"../src/.thumbnails/wallpapers/wall174.png"},{"full":"../src/wallpapers/wall175.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall175.jpg"},{"full":"../src/wallpapers/wall176.png","thumbnail":"../src/.thumbnails/wallpapers/wall176.png"},{"full":"../src/wallpapers/wall177.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall177.jpg"},{"full":"../src/wallpapers/wall178.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall178.jpg"},{"full":"../src/wallpapers/wall179.png","thumbnail":"../src/.thumbnails/wallpapers/wall179.png"},{"full":"../src/wallpapers/wall180.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall180.jpg"},{"full":"../src/wallpapers/wall181.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall181.jpg"},{"full":"../src/wallpapers/wall182.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall182.jpg"},{"full":"../src/wallpapers/wall183.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall183.jpg"},{"full":"../src/wallpapers/wall184.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall184.jpg"},{"full":"../src/wallpapers/wall185.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall185.jpg"},{"full":"../src/wallpapers/wall186.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall186.jpg"},{"full":"../src/wallpapers/wall187.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall187.jpg"},{"full":"../src/wallpapers/wall188.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall188.jpg"},{"full":"../src/wallpapers/wall189.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall189.jpg"},{"full":"../src/wallpapers/wall190.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall190.jpg"},{"full":"../src/wallpapers/wall191.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall191.jpg"},{"full":"../src/wallpapers/wall192.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall192.jpg"},{"full":"../src/wallpapers/wall193.jpg","thumbnail":"../src/.thumbnails/wallpapers/wall193.jpg"}]}];
+const galleryData = [
+  {
+    folder: "Uncategorized",
+    wallpapers: [
+      { full: "../src/wall1.png", thumbnail: "../src/thumbnails/wall1.png" },
+      { full: "../src/wall2.png", thumbnail: "../src/thumbnails/wall2.png" },
+      { full: "../src/wall3.png", thumbnail: "../src/thumbnails/wall3.png" },
+      { full: "../src/wall4.jpg", thumbnail: "../src/thumbnails/wall4.jpg" },
+      { full: "../src/wall5.png", thumbnail: "../src/thumbnails/wall5.png" },
+      { full: "../src/wall6.png", thumbnail: "../src/thumbnails/wall6.png" },
+      { full: "../src/wall7.jpg", thumbnail: "../src/thumbnails/wall7.jpg" },
+      { full: "../src/wall8.png", thumbnail: "../src/thumbnails/wall8.png" },
+      { full: "../src/wall9.jpg", thumbnail: "../src/thumbnails/wall9.jpg" },
+      { full: "../src/wall10.jpg", thumbnail: "../src/thumbnails/wall10.jpg" },
+      { full: "../src/wall11.jpg", thumbnail: "../src/thumbnails/wall11.jpg" },
+      { full: "../src/wall12.jpg", thumbnail: "../src/thumbnails/wall12.jpg" },
+      { full: "../src/wall13.jpg", thumbnail: "../src/thumbnails/wall13.jpg" },
+      { full: "../src/wall14.png", thumbnail: "../src/thumbnails/wall14.png" },
+      { full: "../src/wall15.jpg", thumbnail: "../src/thumbnails/wall15.jpg" },
+      { full: "../src/wall16.jpg", thumbnail: "../src/thumbnails/wall16.jpg" },
+      { full: "../src/wall17.jpg", thumbnail: "../src/thumbnails/wall17.jpg" },
+      { full: "../src/wall18.jpg", thumbnail: "../src/thumbnails/wall18.jpg" },
+      { full: "../src/wall19.jpg", thumbnail: "../src/thumbnails/wall19.jpg" },
+      { full: "../src/wall20.jpg", thumbnail: "../src/thumbnails/wall20.jpg" },
+      { full: "../src/wall21.jpg", thumbnail: "../src/thumbnails/wall21.jpg" },
+      { full: "../src/wall22.jpg", thumbnail: "../src/thumbnails/wall22.jpg" },
+      { full: "../src/wall23.jpg", thumbnail: "../src/thumbnails/wall23.jpg" },
+      { full: "../src/wall24.jpg", thumbnail: "../src/thumbnails/wall24.jpg" },
+      { full: "../src/wall25.jpg", thumbnail: "../src/thumbnails/wall25.jpg" },
+      { full: "../src/wall26.png", thumbnail: "../src/thumbnails/wall26.png" },
+      { full: "../src/wall27.jpg", thumbnail: "../src/thumbnails/wall27.jpg" },
+      { full: "../src/wall28.jpg", thumbnail: "../src/thumbnails/wall28.jpg" },
+    ],
+  },
+  {
+    folder: "wallpapers",
+    wallpapers: [
+      {
+        full: "../src/wallpapers/wall.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall.png",
+      },
+      {
+        full: "../src/wallpapers/wall1.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall1.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall2.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall2.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall3.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall3.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall4.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall4.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall5.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall5.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall6.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall6.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall7.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall7.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall8.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall8.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall9.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall9.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall10.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall10.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall12.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall12.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall13.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall13.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall14.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall14.png",
+      },
+      {
+        full: "../src/wallpapers/wall15.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall15.png",
+      },
+      {
+        full: "../src/wallpapers/wall16.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall16.png",
+      },
+      {
+        full: "../src/wallpapers/wall17.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall17.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall18.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall18.png",
+      },
+      {
+        full: "../src/wallpapers/wall19.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall19.png",
+      },
+      {
+        full: "../src/wallpapers/wall20.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall20.png",
+      },
+      {
+        full: "../src/wallpapers/wall21.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall21.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall22.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall22.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall23.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall23.png",
+      },
+      {
+        full: "../src/wallpapers/wall24.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall24.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall25.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall25.png",
+      },
+      {
+        full: "../src/wallpapers/wall26.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall26.png",
+      },
+      {
+        full: "../src/wallpapers/wall27.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall27.png",
+      },
+      {
+        full: "../src/wallpapers/wall28.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall28.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall29.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall29.png",
+      },
+      {
+        full: "../src/wallpapers/wall30.gif",
+        thumbnail: "../src/thumbnails/wallpapers/wall30.gif",
+      },
+      {
+        full: "../src/wallpapers/wall31.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall31.png",
+      },
+      {
+        full: "../src/wallpapers/wall32.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall32.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall34.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall34.png",
+      },
+      {
+        full: "../src/wallpapers/wall35.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall35.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall36.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall36.png",
+      },
+      {
+        full: "../src/wallpapers/wall37.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall37.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall38.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall38.png",
+      },
+      {
+        full: "../src/wallpapers/wall39.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall39.png",
+      },
+      {
+        full: "../src/wallpapers/wall40.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall40.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall41.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall41.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall42.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall42.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall43.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall43.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall44.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall44.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall46.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall46.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall47.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall47.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall49.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall49.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall50.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall50.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall51.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall51.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall52.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall52.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall53.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall53.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall54.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall54.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall55.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall55.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall56.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall56.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall57.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall57.png",
+      },
+      {
+        full: "../src/wallpapers/wall58.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall58.png",
+      },
+      {
+        full: "../src/wallpapers/wall59.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall59.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall60.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall60.png",
+      },
+      {
+        full: "../src/wallpapers/wall61.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall61.png",
+      },
+      {
+        full: "../src/wallpapers/wall62.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall62.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall63.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall63.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall64.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall64.png",
+      },
+      {
+        full: "../src/wallpapers/wall65.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall65.png",
+      },
+      {
+        full: "../src/wallpapers/wall66.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall66.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall67.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall67.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall68.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall68.png",
+      },
+      {
+        full: "../src/wallpapers/wall69.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall69.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall70.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall70.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall71.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall71.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall72.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall72.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall73.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall73.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall74.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall74.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall75.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall75.png",
+      },
+      {
+        full: "../src/wallpapers/wall76.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall76.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall77.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall77.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall80.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall80.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall81.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall81.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall82.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall82.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall83.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall83.png",
+      },
+      {
+        full: "../src/wallpapers/wall84.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall84.png",
+      },
+      {
+        full: "../src/wallpapers/wall85.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall85.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall86.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall86.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall87.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall87.png",
+      },
+      {
+        full: "../src/wallpapers/wall88.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall88.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall89.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall89.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall91.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall91.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall92.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall92.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall93.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall93.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall94.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall94.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall95.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall95.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall96.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall96.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall97.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall97.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall98.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall98.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall99.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall99.png",
+      },
+      {
+        full: "../src/wallpapers/wall100.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall100.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall101.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall101.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall102.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall102.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall103.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall103.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall104.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall104.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall105.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall105.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall106.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall106.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall107.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall107.png",
+      },
+      {
+        full: "../src/wallpapers/wall108.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall108.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall109.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall109.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall110.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall110.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall111.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall111.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall112.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall112.png",
+      },
+      {
+        full: "../src/wallpapers/wall113.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall113.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall115.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall115.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall116.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall116.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall117.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall117.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall118.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall118.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall119.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall119.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall120.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall120.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall121.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall121.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall122.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall122.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall123.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall123.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall124.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall124.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall125.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall125.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall126.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall126.png",
+      },
+      {
+        full: "../src/wallpapers/wall127.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall127.png",
+      },
+      {
+        full: "../src/wallpapers/wall128.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall128.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall129.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall129.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall130.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall130.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall131.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall131.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall132.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall132.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall133.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall133.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall134.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall134.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall135.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall135.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall136.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall136.png",
+      },
+      {
+        full: "../src/wallpapers/wall137.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall137.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall138.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall138.png",
+      },
+      {
+        full: "../src/wallpapers/wall139.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall139.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall140.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall140.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall141.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall141.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall142.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall142.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall143.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall143.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall144.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall144.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall145.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall145.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall146.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall146.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall147.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall147.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall148.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall148.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall149.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall149.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall150.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall150.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall151.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall151.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall152.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall152.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall153.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall153.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall154.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall154.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall155.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall155.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall156.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall156.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall157.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall157.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall158.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall158.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall159.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall159.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall160.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall160.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall161.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall161.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall162.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall162.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall163.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall163.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall164.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall164.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall165.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall165.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall166.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall166.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall167.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall167.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall168.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall168.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall169.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall169.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall170.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall170.png",
+      },
+      {
+        full: "../src/wallpapers/wall171.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall171.png",
+      },
+      {
+        full: "../src/wallpapers/wall172.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall172.png",
+      },
+      {
+        full: "../src/wallpapers/wall173.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall173.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall174.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall174.png",
+      },
+      {
+        full: "../src/wallpapers/wall175.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall175.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall176.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall176.png",
+      },
+      {
+        full: "../src/wallpapers/wall177.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall177.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall178.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall178.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall179.png",
+        thumbnail: "../src/thumbnails/wallpapers/wall179.png",
+      },
+      {
+        full: "../src/wallpapers/wall180.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall180.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall181.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall181.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall182.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall182.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall183.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall183.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall184.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall184.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall185.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall185.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall186.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall186.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall187.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall187.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall188.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall188.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall189.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall189.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall190.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall190.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall191.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall191.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall192.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall192.jpg",
+      },
+      {
+        full: "../src/wallpapers/wall193.jpg",
+        thumbnail: "../src/thumbnails/wallpapers/wall193.jpg",
+      },
+    ],
+  },
+];

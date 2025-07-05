@@ -1,9 +1,5 @@
 
 [build]
-  command = "bash generate_readme.sh && cp -r src docs/"
-  publish = "docs/"
-
-[[redirects]]
-  from = "/src/.thumbnails/*"
-  to = "/src/.thumbnails/:splat"
-  status = 200
+thumbnailsthumbnails
+command = "bash generate_readme.sh && cp -r src docs/"
+publish = "docs/"
