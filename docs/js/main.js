@@ -87,6 +87,13 @@ function renderGallery(wallpapersToRender) {
     galleryContainer.innerHTML = '';
     currentWallpapers = wallpapersToRender;
 
+    // Add a class to the container if there's only one item
+    if (currentWallpapers.length === 1) {
+        galleryContainer.classList.add('single-item');
+    } else {
+        galleryContainer.classList.remove('single-item');
+    }
+
     if (currentWallpapers.length === 0) {
         galleryContainer.innerHTML = '<p style="text-align: center; width: 100%;">No wallpapers to display.</p>';
         return;

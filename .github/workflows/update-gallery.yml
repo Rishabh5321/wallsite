@@ -20,16 +20,11 @@ jobs:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           fetch-depth: 0
 
-      - name: Generate Thumbnails
+      - name: Install ImageMagick
         run: |
           sudo apt-get update && sudo apt-get install -y imagemagick
-          mkdir -p src/thumbnails
-          find src -maxdepth 1 -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.gif" -o -name "*.webp" \) | while read img; do
-            # Use a more efficient resize operation
-            convert "$img" -resize 400x "src/thumbnails/$(basename "$img")"
-          done
 
-      - name: Run Script to Update Gallery
+      - name: Run Script to Update Gallery and Thumbnails
         run: |
           chmod +x generate_readme.sh
           ./generate_readme.sh
@@ -38,8 +33,8 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Add all changes, including new files in docs
-          git add docs/js/main.js src/thumbnails
+          # Add the updated data file and the entire thumbnails directory
+          git add docs/js/gallery-data.js src/thumbnails
           # Check for changes before committing
           if ! git diff --staged --quiet; then
             git commit -m "Update gallery and thumbnails [gallery-update]"
