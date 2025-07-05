@@ -9,15 +9,13 @@ on:
 jobs:
   generate-gallery:
     runs-on: ubuntu-latest
-    # Prevent running on commits that are just gallery updates
     if: "!contains(github.event.head_commit.message, '[gallery-update]')"
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          # Use a token with write access to push the changes
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - name: Install ImageMagick
@@ -33,9 +31,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Add the updated data file and the entire thumbnails directory
           git add docs/js/gallery-data.js src/thumbnails
-          # Check for changes before committing
           if ! git diff --staged --quiet; then
             git commit -m "Update gallery and thumbnails [gallery-update]"
             git push
