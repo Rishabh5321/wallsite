@@ -5,6 +5,22 @@ let lightbox;
 let keydownHandler;
 let structuredGalleryData;
 
+function getRandomColor(saturation = 50, lightness = 60) {
+    const hue = Math.floor(Math.random() * 360);
+    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+}
+
+function setRandomTheme() {
+    const accentColor = getRandomColor(70, 65);
+    const complementaryColor = getRandomColor(40, 80);
+    
+    document.documentElement.style.setProperty('--accent-color', accentColor);
+    document.documentElement.style.setProperty('--primary-button-bg', accentColor);
+    document.documentElement.style.setProperty('--primary-button-text', '#ffffff');
+    document.documentElement.style.setProperty('--secondary-button-bg', complementaryColor);
+    document.documentElement.style.setProperty('--secondary-button-text', '#202124');
+}
+
 // Check for the new `galleryData` structure, or fall back to the old `wallpapers` array.
 if (typeof galleryData !== 'undefined' && galleryData.length > 0) {
     structuredGalleryData = galleryData;
@@ -145,6 +161,7 @@ function renderGallery(wallpapersToRender) {
 }
 
 function initializeApp() {
+    setRandomTheme();
     if (!galleryContainer) {
         console.error("Gallery container not found. Halting initialization.");
         return;
