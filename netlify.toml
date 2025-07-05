@@ -1,5 +1,4 @@
 
 [build]
-thumbnailsthumbnails
 command = "bash generate_readme.sh && cp -r src docs/"
 publish = "docs/"
