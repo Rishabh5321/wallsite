@@ -5,6 +5,13 @@ let lightbox;
 let keydownHandler;
 let structuredGalleryData;
 
+// Helper function to extract wallpaper name from URL
+function getWallpaperName(url) {
+    if (!url) return '';
+    const fileName = url.split("/").pop();
+    return fileName.split(".").slice(0, -1).join(".");
+}
+
 function setRandomTheme() {
     const baseHue = Math.floor(Math.random() * 360);
     
@@ -36,11 +43,28 @@ const allWallpapers = structuredGalleryData.flatMap(folder =>
 );
 let currentWallpapers = [];
 
+function createLightboxContent(wallpaper, width, height) {
+    const imageName = getWallpaperName(wallpaper.full);
+    return `
+        <div class="lightbox-content">
+            <img src="${wallpaper.full}" alt="${imageName}">
+            <div class="lightbox-details">
+                <div class="wallpaper-info">
+                    <span class="wallpaper-name">${imageName}</span>
+                    <span class="wallpaper-resolution">${width}x${height}</span>
+                </div>
+                <a href="${wallpaper.full}" download class="download-btn">Download</a>
+            </div>
+            <button class="lightbox-prev">&lt;</button>
+            <button class="lightbox-next">&gt;</button>
+        </div>
+    `;
+}
+
 function showLightbox(wallpaperList, index) {
     if (!wallpaperList || wallpaperList.length === 0) return;
     const wallpaper = wallpaperList[index];
-    const imageName = wallpaper.full.split("/").pop().split(".").slice(0, -1).join(".");
-
+    
     const loadingContent = `<div class="lightbox-content"><div class="loader"></div></div>`;
 
     if (lightbox) lightbox.close();
@@ -55,20 +79,7 @@ function showLightbox(wallpaperList, index) {
     const img = new Image();
     img.src = wallpaper.full;
     img.onload = function () {
-        const content = `
-            <div class="lightbox-content">
-                <img src="${wallpaper.full}" alt="${imageName}">
-                <div class="lightbox-details">
-                    <div class="wallpaper-info">
-                        <span class="wallpaper-name">${imageName}</span>
-                        <span class="wallpaper-resolution">${this.width}x${this.height}</span>
-                    </div>
-                    <a href="${wallpaper.full}" download class="download-btn">Download</a>
-                </div>
-                <button class="lightbox-prev">&lt;</button>
-                <button class="lightbox-next">&gt;</button>
-            </div>
-        `;
+        const content = createLightboxContent(wallpaper, this.width, this.height);
         
         const lightboxElement = lightbox.element();
         lightboxElement.innerHTML = content;
@@ -86,6 +97,7 @@ function showLightbox(wallpaperList, index) {
         };
         document.addEventListener('keydown', keydownHandler);
 
+        // Preload next and previous images
         const nextIndex = (index + 1) % wallpaperList.length;
         const prevIndex = (index - 1 + wallpaperList.length) % wallpaperList.length;
         new Image().src = wallpaperList[nextIndex].full;
@@ -93,7 +105,7 @@ function showLightbox(wallpaperList, index) {
     };
     img.onerror = () => {
         const lightboxElement = lightbox.element();
-        lightboxElement.innerHTML = `<div class="lightbox-content"><p>Error loading image.</p></div>`;
+        lightboxElement.innerHTML = `<div class="lightbox-content"><p style="color: white; text-align: center;">Error loading image.</p></div>`;
     };
 }
 
@@ -115,7 +127,7 @@ function renderGallery(wallpapersToRender) {
 
         const link = document.createElement("a");
         link.href = wallpaper.full;
-        link.setAttribute("aria-label", `View wallpaper ${wallpaper.full}`);
+        link.setAttribute("aria-label", `View wallpaper ${getWallpaperName(wallpaper.full)}`);
         link.addEventListener("click", (e) => {
             e.preventDefault();
             showLightbox(currentWallpapers, index);
@@ -123,19 +135,23 @@ function renderGallery(wallpapersToRender) {
 
         const img = new Image();
         img.src = wallpaper.thumbnail;
-        img.alt = `Wallpaper: ${wallpaper.full.split("/").pop().split(".").slice(0, -1).join(".")}`;
+        img.alt = `Wallpaper: ${getWallpaperName(wallpaper.full)}`;
         img.onload = () => {
             const aspectRatio = img.naturalWidth / img.naturalHeight;
-            if (aspectRatio < 1) {
+            if (aspectRatio < 0.8) { // More portrait-like
                 galleryItem.classList.add("portrait");
-            } else if (aspectRatio > 16 / 9) {
+            } else if (aspectRatio > 2.0) { // More landscape-like
                 galleryItem.classList.add("ultrawide");
             }
+        };
+        img.onerror = () => {
+            galleryItem.innerHTML = '<span>Image failed to load</span>';
+            galleryItem.classList.add('error');
         };
 
         const title = document.createElement("div");
         title.classList.add("wallpaper-title");
-        title.textContent = wallpaper.full.split("/").pop().split(".").slice(0, -1).join(".");
+        title.textContent = getWallpaperName(wallpaper.full);
 
         link.appendChild(img);
         galleryItem.appendChild(link);
@@ -159,11 +175,13 @@ function initializeApp() {
 
     if (folderContainer) {
         const randomWallpaperBtn = document.createElement('button');
-        randomWallpaperBtn.innerHTML = '🎲 Random Wallpaper';
+        randomWallpaperBtn.innerHTML = '🎲 Random';
+        randomWallpaperBtn.title = 'Show a random wallpaper';
         randomWallpaperBtn.classList.add('folder-btn');
         randomWallpaperBtn.addEventListener("click", () => {
-            const randomIndex = Math.floor(Math.random() * currentWallpapers.length);
-            showLightbox(currentWallpapers, randomIndex);
+            const activeWallpapers = currentWallpapers.length > 0 ? currentWallpapers : allWallpapers;
+            const randomIndex = Math.floor(Math.random() * activeWallpapers.length);
+            showLightbox(activeWallpapers, randomIndex);
         });
         folderContainer.appendChild(randomWallpaperBtn);
 
