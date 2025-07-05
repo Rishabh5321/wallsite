@@ -8,16 +8,16 @@ let structuredGalleryData;
 function setRandomTheme() {
     const baseHue = Math.floor(Math.random() * 360);
     
-    const accentColor = `hsl(${baseHue}, 70%, 65%)`;
-    const complementaryColor = `hsl(${(baseHue + 180) % 360}, 40%, 80%)`;
-    const backgroundColorStart = `hsl(${baseHue}, 20%, 10%)`;
-    const backgroundColorEnd = `hsl(${(baseHue + 60) % 360}, 20%, 15%)`;
+    const accentColor = `hsl(${baseHue}, 80%, 50%)`;
+    const complementaryColor = `hsl(${(baseHue + 180) % 360}, 15%, 25%)`;
+    const backgroundColorStart = `hsl(${baseHue}, 15%, 8%)`;
+    const backgroundColorEnd = `hsl(${(baseHue + 60) % 360}, 15%, 12%)`;
 
     document.documentElement.style.setProperty('--accent-color', accentColor);
     document.documentElement.style.setProperty('--primary-button-bg', accentColor);
     document.documentElement.style.setProperty('--primary-button-text', '#ffffff');
     document.documentElement.style.setProperty('--secondary-button-bg', complementaryColor);
-    document.documentElement.style.setProperty('--secondary-button-text', '#202124');
+    document.documentElement.style.setProperty('--secondary-button-text', '#e0e0e0');
     document.documentElement.style.setProperty('--background-start', backgroundColorStart);
     document.documentElement.style.setProperty('--background-end', backgroundColorEnd);
 }
