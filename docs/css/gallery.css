@@ -109,8 +109,13 @@
 
 @media (max-width: 768px) {
 	.gallery-container {
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+		grid-auto-rows: 150px;
 		gap: 16px;
-		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	}
+
+	.gallery-item.ultrawide {
+		grid-column: span 1;
 	}
 }
 
