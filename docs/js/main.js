@@ -22,7 +22,6 @@ function setRandomTheme() {
     document.documentElement.style.setProperty('--background-end', backgroundColorEnd);
 }
 
-// Check for the new `galleryData` structure, or fall back to the old `wallpapers` array.
 if (typeof galleryData !== 'undefined' && galleryData.length > 0) {
     structuredGalleryData = galleryData;
 } else if (typeof wallpapers !== 'undefined' && wallpapers.length > 0) {
@@ -103,12 +102,7 @@ function renderGallery(wallpapersToRender) {
     galleryContainer.innerHTML = '';
     currentWallpapers = wallpapersToRender;
 
-    // Add a class to the container if there's only one item
-    if (currentWallpapers.length === 1) {
-        galleryContainer.classList.add('single-item');
-    } else {
-        galleryContainer.classList.remove('single-item');
-    }
+    galleryContainer.classList.toggle('single-item', currentWallpapers.length === 1);
 
     if (currentWallpapers.length === 0) {
         galleryContainer.innerHTML = '<p style="text-align: center; width: 100%;">No wallpapers to display.</p>';
@@ -127,10 +121,17 @@ function renderGallery(wallpapersToRender) {
             showLightbox(currentWallpapers, index);
         });
 
-        const img = document.createElement("img");
-        img.dataset.src = wallpaper.thumbnail;
+        const img = new Image();
+        img.src = wallpaper.thumbnail;
         img.alt = `Wallpaper: ${wallpaper.full.split("/").pop().split(".").slice(0, -1).join(".")}`;
-        img.classList.add('lazy');
+        img.onload = () => {
+            const aspectRatio = img.naturalWidth / img.naturalHeight;
+            if (aspectRatio < 1) {
+                galleryItem.classList.add("portrait");
+            } else if (aspectRatio > 16 / 9) {
+                galleryItem.classList.add("ultrawide");
+            }
+        };
 
         const title = document.createElement("div");
         title.classList.add("wallpaper-title");
@@ -141,24 +142,6 @@ function renderGallery(wallpapersToRender) {
         galleryItem.appendChild(title);
         galleryContainer.appendChild(galleryItem);
     });
-
-    const lazyImages = Array.from(document.querySelectorAll("img.lazy"));
-    if ("IntersectionObserver" in window) {
-        const lazyImageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const lazyImage = entry.target;
-                    lazyImage.src = lazyImage.dataset.src;
-                    lazyImage.classList.remove("lazy");
-                    observer.unobserve(lazyImage);
-                }
-            });
-        });
-        lazyImages.forEach(lazyImage => lazyImageObserver.observe(lazyImage));
-    } else {
-        // Fallback for older browsers
-        // (omitted for brevity as it was complex and less likely to be the issue)
-    }
 }
 
 function initializeApp() {
@@ -175,13 +158,12 @@ function initializeApp() {
     }
 
     if (folderContainer) {
-        // Create and add the "Random Wallpaper" button
         const randomWallpaperBtn = document.createElement('button');
         randomWallpaperBtn.innerHTML = '🎲 Random Wallpaper';
         randomWallpaperBtn.classList.add('folder-btn');
         randomWallpaperBtn.addEventListener("click", () => {
-            const randomIndex = Math.floor(Math.random() * allWallpapers.length);
-            showLightbox(allWallpapers, randomIndex);
+            const randomIndex = Math.floor(Math.random() * currentWallpapers.length);
+            showLightbox(currentWallpapers, randomIndex);
         });
         folderContainer.appendChild(randomWallpaperBtn);
 
