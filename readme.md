@@ -2,6 +2,7 @@
 <div align="center">
   <h1>Wallpaper Gallery</h1>
   <p>A curated collection of stunning wallpapers, ready for one-click deployment.</p>
+  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRishabh5321%2Fwallpapers"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
   <a href="https://rishabh5321-wallpapers.netlify.app/"><img src="http://img.shields.io/netlify/994538a8-0698-462d-a845-e07d778f1229?style=for-the-badge&logo=netlify" alt="Netlify Deploy"></img></a>
   <a href="https://rishabh5321-wallpapers.vercel.app/"><img src="https://deploy-badge.vercel.app/vercel/rishabh5321-wallpapers?style=for-the-badge" alt="Vercel Deploy"></img></a>
 </div>
