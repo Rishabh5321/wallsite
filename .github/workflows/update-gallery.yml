@@ -6,6 +6,9 @@ on:
       - "src/**"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   generate-gallery:
     runs-on: ubuntu-latest
