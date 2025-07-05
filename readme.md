@@ -14,20 +14,20 @@
 
 ## 🚀 Live Gallery
 
-You can view the live wallpaper gallery here: **[Live Gallery](https://rishabh5321.gitlab.io/wallpapers/)**
+You can view the live wallpaper gallery here: **[Live Gallery](https://rishabh5321-wallpapers.vercel.app/)**
 
 ## Deployment
 
 To deploy your own version of this wallpaper gallery, follow these steps:
 
 1.  **Fork the Repository**
-    
+
     Click the "Fork" button at the top right of this page to create your own copy of this repository.
 
 2.  **Connect to a Deployment Service**
-    
+
     Choose one of the following services and connect your forked repository:
-    
+
     *   **Vercel**: Connect your GitHub account to Vercel, and import your forked repository. Vercel will automatically detect the `vercel.json` file and deploy your site.
     *   **Netlify**: Connect your GitHub account to Netlify, and import your forked repository. Netlify will automatically detect the `netlify.toml` file and deploy your site.
 

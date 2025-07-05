@@ -1,127 +1,115 @@
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
 :root {
-    --background-start-rgb: 10, 10, 20;
-    --background-end-rgb: 30, 20, 40;
-    --card-bg-color: rgba(255, 255, 255, 0.05);
-    --card-border-color: rgba(255, 255, 255, 0.1);
-    --text-color: #e0e0e0;
-    --accent-color: #00e5ff;
-    --shadow-color: rgba(0, 0, 0, 0.5);
+	--background-start-rgb: 10, 10, 20;
+	--background-end-rgb: 30, 20, 40;
+	--card-bg-color: rgba(255, 255, 255, 0.05);
+	--card-border-color: rgba(255, 255, 255, 0.1);
+	--text-color: #e0e0e0;
+	--accent-color: #bb86fc;
+	--shadow-color: rgba(0, 0, 0, 0.5);
+	--primary-button-bg: #bb86fc;
+	--primary-button-text: #121212;
+	--secondary-button-bg: rgba(255, 255, 255, 0.1);
+	--secondary-button-text: #e0e0e0;
 }
 
 body {
-    font-family: "Inter", sans-serif;
-    margin: 0;
-    color: var(--text-color);
-    background: linear-gradient(
-        135deg,
-        rgb(var(--background-start-rgb)),
-        rgb(var(--background-end-rgb))
-    );
-    background-attachment: fixed;
-    line-height: 1.6;
-    overflow-x: hidden;
+	font-family: "Roboto", sans-serif;
+	margin: 0;
+	color: var(--text-color);
+	background: linear-gradient(
+		135deg,
+		rgb(var(--background-start-rgb)),
+		rgb(var(--background-end-rgb))
+	);
+	background-attachment: fixed;
+	line-height: 1.6;
+	overflow-x: hidden;
 }
 
 .container {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 40px 20px;
+	max-width: 1600px;
+	margin: 0 auto;
+	padding: 40px 20px;
 }
 
 header {
-    text-align: center;
-    margin-bottom: 60px;
-    animation: fadeInDown 1s ease-out;
+	text-align: center;
+	margin-bottom: 60px;
+	animation: fadeInDown 1s ease-out;
 }
 
 h1 {
-    font-family: "Orbitron", sans-serif;
-    color: var(--accent-color);
-    font-size: 4em;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-shadow:
-        0 0 15px var(--accent-color),
-        0 0 25px var(--shadow-color);
-    margin: 0;
+	font-family: "Roboto", sans-serif;
+	font-weight: 700;
+	color: var(--accent-color);
+	font-size: 3.5em;
+	letter-spacing: -0.5px;
+	text-shadow: 0 0 15px rgba(187, 134, 252, 0.5);
+	margin: 0;
 }
 
 header p {
-    font-size: 1.2em;
-    max-width: 700px;
-    margin: 15px auto 0;
-    opacity: 0.8;
-}
-
-#random-wallpaper-btn {
-    background: var(--card-bg-color);
-    border: 1px solid var(--card-border-color);
-    color: var(--accent-color);
-    padding: 10px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1.5em;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-}
-
-#random-wallpaper-btn:hover {
-    background: var(--accent-color);
-    color: #000;
-    box-shadow: 0 0 15px var(--accent-color);
+	font-size: 1.1em;
+	max-width: 700px;
+	margin: 15px auto 0;
+	opacity: 0.8;
 }
 
 footer {
-    text-align: center;
-    margin-top: 80px;
-    padding: 20px;
-    border-top: 1px solid var(--card-border-color);
-    color: rgba(255, 255, 255, 0.5);
+	text-align: center;
+	margin-top: 80px;
+	padding: 20px;
+	border-top: 1px solid var(--card-border-color);
+	color: rgba(255, 255, 255, 0.6);
 }
 
 footer a {
-    color: var(--accent-color);
-    text-decoration: none;
-    transition: color 0.3s;
+	color: var(--accent-color);
+	text-decoration: none;
+	font-weight: 500;
+	transition: color 0.3s;
 }
 
 footer a:hover {
-    color: #fff;
+	color: #fff;
 }
 
 @keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+	from {
+		opacity: 0;
+		transform: translateY(-30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+	from {
+		opacity: 0;
+		transform: translateY(40px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2.5em;
-    }
+	h1 {
+		font-size: 2.5em;
+	}
 
-    header p {
-        font-size: 1em;
-    }
+	header p {
+		font-size: 1em;
+	}
 
-    .container {
-        padding: 20px 10px;
-    }
+	.container {
+		padding: 20px 10px;
+	}
 }
+

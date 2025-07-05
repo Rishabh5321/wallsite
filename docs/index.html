@@ -1,57 +1,48 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Wallpaper Gallery</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" href="css/layout.css" />
-        <link rel="stylesheet" href="css/gallery.css" />
-        <link rel="stylesheet" href="css/lightbox.css" />
-        <link rel="icon" href="img/favicon.png" type="image/png" />
-    </head>
-    <body>
-        <div class="container">
-            <header>
-                <h1>Wallpaper Gallery</h1>
-                <p>
-                    A curated collection of stunning wallpapers. Click on any
-                    wallpaper to view the full-resolution image.
-                </p>
-                <button id="random-wallpaper-btn" aria-label="Show random wallpaper">
-                    🎲
-                </button>
-            </header>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Wallpaper Gallery</title>
+		<link rel="stylesheet" href="css/layout.css" />
+		<link rel="stylesheet" href="css/gallery.css" />
+		<link rel="stylesheet" href="css/lightbox.css" />
+		<link rel="icon" href="img/favicon.png" type="image/png" />
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>Wallpaper Gallery</h1>
+				<p>
+					A curated collection of stunning wallpapers. Click on any wallpaper to
+					view the full-resolution image.
+				</p>
+			</header>
 
-            <div class="folder-container">
-                <!-- Folder filter buttons will be injected here -->
-            </div>
+			<div class="folder-container">
+				<!-- Folder filter buttons will be injected here -->
+			</div>
 
-            <div class="gallery-container">
-                <!-- Wallpapers will be dynamically injected here -->
-            </div>
-        </div>
+			<div class="gallery-container">
+				<!-- Wallpapers will be dynamically injected here -->
+			</div>
+		</div>
 
-        <footer>
-            <p>
-                Managed and maintained by the
-                <a
-                    href="https://github.com/rishabh5321/wallpapers"
-                    target="_blank"
-                    >Wallpaper Gallery Project</a
-                >
-                on GitHub.
-            </p>
-            <p>This page is automatically generated.</p>
-        </footer>
+		<footer>
+			<p>
+				Managed and maintained by the
+				<a
+					href="https://github.com/rishabh5321/wallpapers"
+					target="_blank"
+					>Wallpaper Gallery Project</a
+				>
+				on GitHub.
+			</p>
+			<p>This page is automatically generated.</p>
+		</footer>
 
-        <script src="js/basicLightbox.min.js"></script>
-        <script src="js/gallery-data.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+		<script src="js/basicLightbox.min.js"></script>
+		<script src="js/gallery-data.js"></script>
+		<script src="js/main.js"></script>
+	</body>
 </html>

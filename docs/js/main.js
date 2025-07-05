@@ -1,6 +1,5 @@
 const galleryContainer = document.querySelector(".gallery-container");
 const folderContainer = document.querySelector(".folder-container");
-const randomWallpaperBtn = document.querySelector("#random-wallpaper-btn");
 
 let lightbox;
 let keydownHandler;
@@ -157,42 +156,41 @@ function initializeApp() {
         return;
     }
 
-    if (randomWallpaperBtn) {
+    if (folderContainer) {
+        // Create and add the "Random Wallpaper" button
+        const randomWallpaperBtn = document.createElement('button');
+        randomWallpaperBtn.innerHTML = '🎲 Random Wallpaper';
+        randomWallpaperBtn.classList.add('folder-btn');
         randomWallpaperBtn.addEventListener("click", () => {
             const randomIndex = Math.floor(Math.random() * allWallpapers.length);
             showLightbox(allWallpapers, randomIndex);
         });
-    }
+        folderContainer.appendChild(randomWallpaperBtn);
 
-    if (folderContainer) {
-        folderContainer.innerHTML = '';
-
-        const allBtn = document.createElement('button');
-        allBtn.textContent = 'All';
-        allBtn.classList.add('folder-btn', 'active');
-        allBtn.addEventListener('click', () => {
-            renderGallery(allWallpapers);
-            document.querySelectorAll('.folder-btn').forEach(btn => btn.classList.remove('active'));
-            allBtn.classList.add('active');
-        });
-        folderContainer.appendChild(allBtn);
-
-        structuredGalleryData.forEach(folder => {
-            if (folder.wallpapers.length === 0) return;
-            
-            const folderBtn = document.createElement('button');
-            folderBtn.textContent = folder.folder;
-            folderBtn.classList.add('folder-btn');
-            folderBtn.addEventListener('click', () => {
-                renderGallery(folder.wallpapers);
+        if (structuredGalleryData.length > 1) {
+            const allBtn = document.createElement('button');
+            allBtn.textContent = 'All';
+            allBtn.classList.add('folder-btn', 'active');
+            allBtn.addEventListener('click', () => {
+                renderGallery(allWallpapers);
                 document.querySelectorAll('.folder-btn').forEach(btn => btn.classList.remove('active'));
-                folderBtn.classList.add('active');
+                allBtn.classList.add('active');
             });
-            folderContainer.appendChild(folderBtn);
-        });
+            folderContainer.appendChild(allBtn);
 
-        if (structuredGalleryData.length <= 1) {
-            folderContainer.style.display = 'none';
+            structuredGalleryData.forEach(folder => {
+                if (folder.wallpapers.length === 0) return;
+                
+                const folderBtn = document.createElement('button');
+                folderBtn.textContent = folder.folder;
+                folderBtn.classList.add('folder-btn');
+                folderBtn.addEventListener('click', () => {
+                    renderGallery(folder.wallpapers);
+                    document.querySelectorAll('.folder-btn').forEach(btn => btn.classList.remove('active'));
+                    folderBtn.classList.add('active');
+                });
+                folderContainer.appendChild(folderBtn);
+            });
         }
     }
 
