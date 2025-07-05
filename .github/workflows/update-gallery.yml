@@ -34,7 +34,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Add the updated data file and the entire thumbnails directory
-          git add docs/js/gallery-data.js src/thumbnails
+          git add docs/js/gallery-data.js src/.thumbnails
           # Check for changes before committing
           if ! git diff --staged --quiet; then
             git commit -m "Update gallery and thumbnails [gallery-update]"
