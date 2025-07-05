@@ -5,20 +5,21 @@ let lightbox;
 let keydownHandler;
 let structuredGalleryData;
 
-function getRandomColor(saturation = 50, lightness = 60) {
-    const hue = Math.floor(Math.random() * 360);
-    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-}
-
 function setRandomTheme() {
-    const accentColor = getRandomColor(70, 65);
-    const complementaryColor = getRandomColor(40, 80);
+    const baseHue = Math.floor(Math.random() * 360);
     
+    const accentColor = `hsl(${baseHue}, 70%, 65%)`;
+    const complementaryColor = `hsl(${(baseHue + 180) % 360}, 40%, 80%)`;
+    const backgroundColorStart = `hsl(${baseHue}, 20%, 10%)`;
+    const backgroundColorEnd = `hsl(${(baseHue + 60) % 360}, 20%, 15%)`;
+
     document.documentElement.style.setProperty('--accent-color', accentColor);
     document.documentElement.style.setProperty('--primary-button-bg', accentColor);
     document.documentElement.style.setProperty('--primary-button-text', '#ffffff');
     document.documentElement.style.setProperty('--secondary-button-bg', complementaryColor);
     document.documentElement.style.setProperty('--secondary-button-text', '#202124');
+    document.documentElement.style.setProperty('--background-start', backgroundColorStart);
+    document.documentElement.style.setProperty('--background-end', backgroundColorEnd);
 }
 
 // Check for the new `galleryData` structure, or fall back to the old `wallpapers` array.
