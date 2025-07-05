@@ -2,35 +2,37 @@
 <div align="center">
   <h1>Wallpaper Gallery</h1>
   <p>A curated collection of stunning wallpapers, ready for one-click deployment.</p>
-  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRishabh5321%2Fwallpapers"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
-  <a href="https://rishabh5321-wallpapers.netlify.app/"><img src="http://img.shields.io/netlify/994538a8-0698-462d-a845-e07d778f1229?style=for-the-badge&logo=netlify" alt="Netlify Deploy"></img></a>
-  <a href="https://rishabh5321-wallpapers.vercel.app/"><img src="https://deploy-badge.vercel.app/vercel/rishabh5321-wallpapers?style=for-the-badge" alt="Vercel Deploy"></img></a>
 </div>
 
----
+## 🚀 One-Click Deployment
 
-<center>
+Deploy your own wallpaper gallery in a single click using one of the services below:
 
-</center>
+<div align="center">
+  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRishabh5321%2Fwallpapers"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/Rishabh5321/wallpapers"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
+</div>
 
-## 🚀 Live Gallery
+## 📸 Screenshots
+
+<div align="center">
+  <img src=".github/screenshot/screenshot-20250705-163409.png" alt="Screenshot 1" width="90%">
+  <img src=".github/screenshot/screenshot-20250705-163457.png" alt="Screenshot 2" width="45%">
+  <img src=".github/screenshot/screenshot-20250705-163526.png" alt="Screenshot 3" width="45%">
+</div>
+
+## ✨ Live Gallery
 
 You can view the live wallpaper gallery here: **[Live Gallery](https://rishabh5321-wallpapers.vercel.app/)**
 
-## Deployment
+## 📥 Adding New Wallpapers
 
-To deploy your own version of this wallpaper gallery, follow these steps:
+To add a new wallpaper to your gallery:
 
-1.  **Fork the Repository**
-
-    Click the "Fork" button at the top right of this page to create your own copy of this repository.
-
-2.  **Connect to a Deployment Service**
-
-    Choose one of the following services and connect your forked repository:
-
-    *   **Vercel**: Connect your GitHub account to Vercel, and import your forked repository. Vercel will automatically detect the `vercel.json` file and deploy your site.
-    *   **Netlify**: Connect your GitHub account to Netlify, and import your forked repository. Netlify will automatically detect the `netlify.toml` file and deploy your site.
+1.  **Fork the repository** if you haven't already.
+2.  Add your new image file (e.g., `my-cool-wallpaper.png`) to the `src` directory of your forked repository.
+3.  Commit and push the changes to your `main` branch.
+4.  The GitHub Actions workflow will automatically update the gallery and deploy the changes.
 
 ## 🎨 How It Works
 
@@ -41,14 +43,6 @@ This project uses a GitHub Actions workflow to automate the gallery generation p
 3.  **Update Gallery**: A shell script (`generate_readme.sh`) runs to scan for all images and injects the list into the `docs/js/gallery-data.js` file.
 4.  **Commit Changes**: The updated `gallery-data.js` is automatically committed back to the repository.
 5.  **Deployment**: The site is automatically deployed to Vercel and Netlify when changes are pushed to the `main` branch.
-
-## 📥 Adding New Wallpapers
-
-To add a new wallpaper to the gallery, simply:
-
-1.  Add your new image file (e.g., `my-cool-wallpaper.png`) to the `src` directory.
-2.  Commit and push the change to the `main` branch of your forked repository.
-3.  The GitHub Actions workflow will take care of the rest!
 
 ## License
 
