@@ -1,4 +1,4 @@
 
 [build]
-command = "bash generate_readme.sh && cp -r src docs/"
+command = "cp -r src docs/"
 publish = "docs/"
