@@ -287,12 +287,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!lightbox) return;
 
         const lightboxElement = lightbox.element();
+        const contentElement = lightboxElement.querySelector('.lightbox-content');
         const img = lightboxElement.querySelector('img');
-        const loader = lightboxElement.querySelector('.loader');
         const details = lightboxElement.querySelector('.lightbox-details');
 
-        img.style.opacity = '0';
-        loader.style.display = 'block';
+        contentElement.classList.add('loading');
         details.style.transform = 'translateY(100%)';
 
         const newImg = new Image();
@@ -310,23 +309,28 @@ document.addEventListener('DOMContentLoaded', () => {
             wallpaperRes.textContent = `${newImg.naturalWidth}x${newImg.naturalHeight}`;
             downloadBtn.href = wallpaper.full;
 
-            loader.style.display = 'none';
-            img.style.opacity = '1';
+            contentElement.classList.remove('loading');
             details.style.transform = 'translateY(0)';
+
+            // Preload adjacent images
+            const nextIndex = (currentLightboxIndex + 1) % currentWallpapers.length;
+            const prevIndex = (currentLightboxIndex - 1 + currentWallpapers.length) % currentWallpapers.length;
+            if (nextIndex !== currentLightboxIndex) new Image().src = currentWallpapers[nextIndex].full;
+            if (prevIndex !== currentLightboxIndex) new Image().src = currentWallpapers[prevIndex].full;
         };
         
         newImg.onerror = () => {
             img.alt = "Error loading image.";
-            loader.style.display = 'none';
+            contentElement.classList.remove('loading');
         };
     }
 
     function createLightboxContent(wallpaper) {
         const imageName = wallpaper.name.split('.').slice(0, -1).join('.');
         return `
-            <div class="lightbox-content">
+            <div class="lightbox-content loading">
                 <div class="loader"></div>
-                <img src="" alt="" style="opacity:0; transition: opacity 0.3s ease;">
+                <img src="" alt="">
                 <div class="lightbox-details">
                     <div class="wallpaper-info">
                         <span class="wallpaper-name">${imageName}</span>
