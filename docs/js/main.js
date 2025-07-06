@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
     // --- DOM Elements ---
     const galleryContainer = document.querySelector('.gallery-container');
     const treeContainer = document.getElementById('file-manager-tree');
@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentWallpapers = [];
     let allWallpapersList = [];
     let currentLightboxIndex = 0;
+    let lightboxWallpaperList = []; // Use a dedicated list for the lightbox
 
     // --- Initialization ---
     if (typeof galleryData === 'undefined' || !galleryData) {
@@ -239,60 +240,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Lightbox ---
+
+    function showNextLightboxItem() {
+        if (!lightbox || !lightbox.visible()) return;
+        currentLightboxIndex = (currentLightboxIndex + 1) % lightboxWallpaperList.length;
+        updateLightbox(lightboxWallpaperList[currentLightboxIndex]);
+    }
+
+    function showPrevLightboxItem() {
+        if (!lightbox || !lightbox.visible()) return;
+        currentLightboxIndex = (currentLightboxIndex - 1 + lightboxWallpaperList.length) % lightboxWallpaperList.length;
+        updateLightbox(lightboxWallpaperList[currentLightboxIndex]);
+    }
+
     function showLightbox(wallpaperList, index) {
         if (!wallpaperList || wallpaperList.length === 0) return;
-        
+
+        lightboxWallpaperList = wallpaperList;
         currentLightboxIndex = index;
-        const initialWallpaper = wallpaperList[currentLightboxIndex];
-        const content = createLightboxContent(initialWallpaper);
+        const wallpaper = lightboxWallpaperList[currentLightboxIndex];
 
-        const showNext = () => {
-            currentLightboxIndex = (currentLightboxIndex + 1) % wallpaperList.length;
-            updateLightboxContent(wallpaperList[currentLightboxIndex]);
-        };
-        const showPrev = () => {
-            currentLightboxIndex = (currentLightboxIndex - 1 + wallpaperList.length) % wallpaperList.length;
-            updateLightboxContent(wallpaperList[currentLightboxIndex]);
-        };
-
-        if (lightbox && lightbox.visible()) {
-            updateLightboxContent(initialWallpaper);
+        if (lightbox) {
+            if (!lightbox.visible()) {
+                lightbox.show();
+            }
+            updateLightbox(wallpaper);
             return;
         }
 
+        const content = createLightboxContent(wallpaper);
         lightbox = basicLightbox.create(content, {
             onShow: (instance) => {
                 const lightboxElement = instance.element();
-                lightboxElement.querySelector('.lightbox-prev').onclick = showPrev;
-                lightboxElement.querySelector('.lightbox-next').onclick = showNext;
+                
+                const placeholder = lightboxElement.querySelector('.basicLightbox__placeholder');
+                const controls = placeholder.querySelectorAll('.lightbox-details, .lightbox-prev, .lightbox-next');
+                controls.forEach(control => lightboxElement.appendChild(control));
+
+                lightboxElement.querySelector('.lightbox-prev').onclick = showPrevLightboxItem;
+                lightboxElement.querySelector('.lightbox-next').onclick = showNextLightboxItem;
 
                 keydownHandler = (e) => {
-                    if (e.key === 'ArrowLeft') showPrev();
-                    if (e.key === 'ArrowRight') showNext();
+                    if (e.key === 'ArrowLeft') showPrevLightboxItem();
+                    if (e.key === 'ArrowRight') showNextLightboxItem();
                 };
                 document.addEventListener('keydown', keydownHandler);
             },
             onClose: () => {
                 document.removeEventListener('keydown', keydownHandler);
-                lightbox = null;
             }
         });
 
         lightbox.show(() => {
-            updateLightboxContent(initialWallpaper);
+            updateLightbox(wallpaper);
         });
     }
 
-    function updateLightboxContent(wallpaper) {
+    function updateLightbox(wallpaper) {
         if (!lightbox) return;
 
         const lightboxElement = lightbox.element();
         const contentElement = lightboxElement.querySelector('.lightbox-content');
-        const img = lightboxElement.querySelector('img');
-        const details = lightboxElement.querySelector('.lightbox-details');
-
+        const img = contentElement.querySelector('img');
+        
         contentElement.classList.add('loading');
-        details.style.transform = 'translateY(100%)';
 
         const newImg = new Image();
         newImg.src = wallpaper.full;
@@ -310,13 +321,11 @@ document.addEventListener('DOMContentLoaded', () => {
             downloadBtn.href = wallpaper.full;
 
             contentElement.classList.remove('loading');
-            details.style.transform = 'translateY(0)';
 
-            // Preload adjacent images
-            const nextIndex = (currentLightboxIndex + 1) % currentWallpapers.length;
-            const prevIndex = (currentLightboxIndex - 1 + currentWallpapers.length) % currentWallpapers.length;
-            if (nextIndex !== currentLightboxIndex) new Image().src = currentWallpapers[nextIndex].full;
-            if (prevIndex !== currentLightboxIndex) new Image().src = currentWallpapers[prevIndex].full;
+            const nextIndex = (currentLightboxIndex + 1) % lightboxWallpaperList.length;
+            const prevIndex = (currentLightboxIndex - 1 + lightboxWallpaperList.length) % lightboxWallpaperList.length;
+            if (nextIndex !== currentLightboxIndex) new Image().src = lightboxWallpaperList[nextIndex].full;
+            if (prevIndex !== currentLightboxIndex) new Image().src = lightboxWallpaperList[prevIndex].full;
         };
         
         newImg.onerror = () => {
@@ -328,19 +337,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function createLightboxContent(wallpaper) {
         const imageName = wallpaper.name.split('.').slice(0, -1).join('.');
         return `
-            <div class="lightbox-content loading">
+            <div class="lightbox-content">
                 <div class="loader"></div>
                 <img src="" alt="">
-                <div class="lightbox-details">
-                    <div class="wallpaper-info">
-                        <span class="wallpaper-name">${imageName}</span>
-                        <span class="wallpaper-resolution"></span>
-                    </div>
-                    <a href="${wallpaper.full}" download class="download-btn">Download</a>
-                </div>
-                <button class="lightbox-prev">&lt;</button>
-                <button class="lightbox-next">&gt;</button>
             </div>
+            <div class="lightbox-details">
+                <div class="wallpaper-info">
+                    <span class="wallpaper-name">${imageName}</span>
+                    <span class="wallpaper-resolution"></span>
+                </div>
+                <a href="${wallpaper.full}" download class="download-btn">Download</a>
+            </div>
+            <button class="lightbox-prev">&lt;</button>
+            <button class="lightbox-next">&gt;</button>
         `;
     }
 
