@@ -16,9 +16,9 @@ Deploy your own wallpaper gallery in a single click using one of the services be
 ## 📸 Screenshots
 
 <div align="center">
-  <img src=".github/screenshot/screenshot-20250705-163409.png" alt="Screenshot 1" width="90%">
-  <img src=".github/screenshot/screenshot-20250705-163457.png" alt="Screenshot 2" width="45%">
-  <img src=".github/screenshot/screenshot-20250705-163526.png" alt="Screenshot 3" width="45%">
+  <img src=".github/screenshot/screenshot1.png" alt="Screenshot 1" width="90%">
+  <img src=".github/screenshot/screenshot2.png" alt="Screenshot 2" width="45%">
+  <img src=".github/screenshot/screenshot3.png" alt="Screenshot 3" width="45%">
 </div>
 
 ## ✨ Live Gallery
