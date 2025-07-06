@@ -2,20 +2,22 @@
 .sidebar {
     position: fixed;
     top: 0;
-    left: -300px; /* Initially hidden */
+    left: 0;
     width: 300px;
     height: 100vh;
     background: var(--background-start);
     border-right: 1px solid var(--card-border-color);
     display: flex;
     flex-direction: column;
-    transition: left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 1100;
     box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
 }
 
 .sidebar.open {
-    left: 0;
+    transform: translateX(0);
 }
 
 .sidebar-header {
@@ -44,7 +46,12 @@
 
 /* File Manager Tree Styles */
 .tree-node {
-    margin-left: 20px;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.tree-folder {
+    list-style-type: none;
 }
 
 .tree-item {
@@ -52,8 +59,8 @@
     align-items: center;
     padding: 8px 4px;
     cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
     color: var(--text-color);
 }
 
@@ -69,7 +76,38 @@
 .tree-item .icon {
     margin-right: 10px;
     width: 20px;
+    height: 20px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.tree-item .icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.tree-item .icon .icon-folder-open {
+    display: none;
+}
+
+.tree-item.active .icon .icon-folder {
+    display: none;
+}
+
+.tree-item.active .icon .icon-folder-open {
+    display: block;
+}
+
+.tree-folder.open > .tree-item .icon .icon-folder {
+    display: none;
+}
+
+.tree-folder.open > .tree-item .icon .icon-folder-open {
+    display: block;
 }
 
 .tree-item .name {
@@ -77,25 +115,26 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 0.95em;
 }
 
-.tree-folder > .tree-item .icon::before {
-    content: '📁';
+.tree-item .chevron {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    transition: transform 0.2s ease-in-out;
+    opacity: 0.7;
 }
 
-.tree-folder.open > .tree-item .icon::before {
-    content: '📂';
-}
-
-.tree-file > .tree-item .icon::before {
-    content: '🖼️';
+.tree-folder.open > .tree-item .chevron {
+    transform: rotate(90deg);
 }
 
 .tree-children {
     display: none;
-    padding-left: 15px;
+    padding-left: 20px;
+    margin-left: 14px;
     border-left: 1px solid var(--card-border-color);
-    margin-left: 10px;
 }
 
 .tree-folder.open > .tree-children {

@@ -71,59 +71,76 @@ document.addEventListener('DOMContentLoaded', () => {
         const ul = document.createElement('ul');
         ul.className = 'tree-node';
 
-        // Add 'All' folder at the root level
         if (container === treeContainer) {
-            const allFolderLi = document.createElement('li');
-            allFolderLi.className = 'tree-folder';
-            const allFolderDiv = document.createElement('div');
-            allFolderDiv.className = 'tree-item active'; // Active by default
-            allFolderDiv.innerHTML = `<span class="icon"></span><span class="name">All</span>`;
-            allFolderLi.appendChild(allFolderDiv);
+            const allFolderLi = createTreeElement({ name: 'All', type: 'folder', children: [galleryData] }, true);
+            allFolderLi.querySelector('.tree-item').classList.add('active');
             ul.appendChild(allFolderLi);
 
-            allFolderDiv.addEventListener('click', (e) => {
+            allFolderLi.querySelector('.tree-item').addEventListener('click', (e) => {
                 e.stopPropagation();
                 document.querySelectorAll('.tree-item.active').forEach(el => el.classList.remove('active'));
-                allFolderDiv.classList.add('active');
+                allFolderLi.querySelector('.tree-item').classList.add('active');
                 renderGallery(allWallpapersList);
-                if (window.innerWidth <= 768) {
-                    toggleSidebar();
-                }
+                if (window.innerWidth <= 768) toggleSidebar();
             });
         }
 
         if (node.children) {
-            node.children.forEach(child => {
-                if (child.type === 'folder') {
-                    const li = createTreeElement(child);
-                    if(li) ul.appendChild(li);
-                }
-            });
+            node.children
+                .filter(child => child.type === 'folder')
+                .forEach(child => {
+                    const li = createTreeElement(child, false);
+                    if (li) ul.appendChild(li);
+                });
         }
+        container.innerHTML = '';
         container.appendChild(ul);
     }
 
-    function createTreeElement(node) {
-        if (node.type !== 'folder') {
-            return null;
-        }
+    function createTreeElement(node, isRoot) {
+        if (node.type !== 'folder') return null;
 
         const li = document.createElement('li');
-        li.className = `tree-${node.type}`;
+        li.className = `tree-folder`;
 
         const itemDiv = document.createElement('div');
         itemDiv.className = 'tree-item';
-        itemDiv.innerHTML = `<span class="icon"></span><span class="name">${node.name}</span>`;
+
+        const hasSubfolders = node.children && node.children.some(child => child.type === 'folder');
+        
+        let chevronIcon = '';
+        if (hasSubfolders) {
+            chevronIcon = `<svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>`;
+        }
+
+        const folderIcon = `<svg class="icon-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path></svg>`;
+        const folderOpenIcon = `<svg class="icon-folder-open" viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"></path></svg>`;
+
+        itemDiv.innerHTML = `
+            ${chevronIcon}
+            <span class="icon">${folderIcon}${folderOpenIcon}</span>
+            <span class="name">${node.name}</span>
+        `;
         
         li.appendChild(itemDiv);
 
         itemDiv.addEventListener('click', (e) => {
             e.stopPropagation();
-            handleTreeSelection(node, itemDiv);
-            li.classList.toggle('open');
+            
+            if (isRoot) {
+                 document.querySelectorAll('.tree-item.active').forEach(el => el.classList.remove('active'));
+                 itemDiv.classList.add('active');
+                 renderGallery(allWallpapersList);
+            } else {
+                handleTreeSelection(node, itemDiv);
+            }
+
+            if (hasSubfolders) {
+                li.classList.toggle('open');
+            }
         });
 
-        if (node.children && node.children.some(child => child.type === 'folder')) {
+        if (hasSubfolders) {
             const childrenContainer = document.createElement('div');
             childrenContainer.className = 'tree-children';
             buildFileTree(node, childrenContainer);
