@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let keydownHandler;
     let currentWallpapers = [];
     let allWallpapersList = [];
+    let currentLightboxIndex = 0;
 
     // --- Initialization ---
     if (typeof galleryData === 'undefined' || !galleryData) {
@@ -240,56 +241,96 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Lightbox ---
     function showLightbox(wallpaperList, index) {
         if (!wallpaperList || wallpaperList.length === 0) return;
-        const wallpaper = wallpaperList[index];
         
-        const loadingContent = `<div class="lightbox-content"><div class="loader"></div></div>`;
-        if (lightbox) lightbox.close();
+        currentLightboxIndex = index;
+        const initialWallpaper = wallpaperList[currentLightboxIndex];
+        const content = createLightboxContent(initialWallpaper);
 
-        lightbox = basicLightbox.create(loadingContent, {
-            onClose: () => document.removeEventListener('keydown', keydownHandler)
-        });
-        lightbox.show();
-
-        const img = new Image();
-        img.src = wallpaper.full;
-        img.onload = function () {
-            const content = createLightboxContent(wallpaper, this.width, this.height);
-            const lightboxElement = lightbox.element();
-            lightboxElement.innerHTML = content;
-            
-            const showPrev = () => showLightbox(wallpaperList, (index - 1 + wallpaperList.length) % wallpaperList.length);
-            const showNext = () => showLightbox(wallpaperList, (index + 1) % wallpaperList.length);
-
-            lightboxElement.querySelector('.lightbox-prev').onclick = showPrev;
-            lightboxElement.querySelector('.lightbox-next').onclick = showNext;
-
-            keydownHandler = (e) => {
-                if (e.key === 'ArrowLeft') showPrev();
-                else if (e.key === 'ArrowRight') showNext();
-                else if (e.key === 'Escape') lightbox.close();
-            };
-            document.addEventListener('keydown', keydownHandler);
-
-            // Preload adjacent images
-            const nextIndex = (index + 1) % wallpaperList.length;
-            const prevIndex = (index - 1 + wallpaperList.length) % wallpaperList.length;
-            new Image().src = wallpaperList[nextIndex].full;
-            new Image().src = wallpaperList[prevIndex].full;
+        const showNext = () => {
+            currentLightboxIndex = (currentLightboxIndex + 1) % wallpaperList.length;
+            updateLightboxContent(wallpaperList[currentLightboxIndex]);
         };
-        img.onerror = () => {
-            lightbox.element().innerHTML = `<div class="lightbox-content"><p style="color: white;">Error loading image.</p></div>`;
+        const showPrev = () => {
+            currentLightboxIndex = (currentLightboxIndex - 1 + wallpaperList.length) % wallpaperList.length;
+            updateLightboxContent(wallpaperList[currentLightboxIndex]);
+        };
+
+        if (lightbox && lightbox.visible()) {
+            updateLightboxContent(initialWallpaper);
+            return;
+        }
+
+        lightbox = basicLightbox.create(content, {
+            onShow: (instance) => {
+                const lightboxElement = instance.element();
+                lightboxElement.querySelector('.lightbox-prev').onclick = showPrev;
+                lightboxElement.querySelector('.lightbox-next').onclick = showNext;
+
+                keydownHandler = (e) => {
+                    if (e.key === 'ArrowLeft') showPrev();
+                    if (e.key === 'ArrowRight') showNext();
+                };
+                document.addEventListener('keydown', keydownHandler);
+            },
+            onClose: () => {
+                document.removeEventListener('keydown', keydownHandler);
+                lightbox = null;
+            }
+        });
+
+        lightbox.show(() => {
+            updateLightboxContent(initialWallpaper);
+        });
+    }
+
+    function updateLightboxContent(wallpaper) {
+        if (!lightbox) return;
+
+        const lightboxElement = lightbox.element();
+        const img = lightboxElement.querySelector('img');
+        const loader = lightboxElement.querySelector('.loader');
+        const details = lightboxElement.querySelector('.lightbox-details');
+
+        img.style.opacity = '0';
+        loader.style.display = 'block';
+        details.style.transform = 'translateY(100%)';
+
+        const newImg = new Image();
+        newImg.src = wallpaper.full;
+
+        newImg.onload = () => {
+            img.src = newImg.src;
+            img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
+            
+            const wallpaperName = lightboxElement.querySelector('.wallpaper-name');
+            const wallpaperRes = lightboxElement.querySelector('.wallpaper-resolution');
+            const downloadBtn = lightboxElement.querySelector('.download-btn');
+
+            wallpaperName.textContent = wallpaper.name.split('.').slice(0, -1).join('.');
+            wallpaperRes.textContent = `${newImg.naturalWidth}x${newImg.naturalHeight}`;
+            downloadBtn.href = wallpaper.full;
+
+            loader.style.display = 'none';
+            img.style.opacity = '1';
+            details.style.transform = 'translateY(0)';
+        };
+        
+        newImg.onerror = () => {
+            img.alt = "Error loading image.";
+            loader.style.display = 'none';
         };
     }
 
-    function createLightboxContent(wallpaper, width, height) {
+    function createLightboxContent(wallpaper) {
         const imageName = wallpaper.name.split('.').slice(0, -1).join('.');
         return `
             <div class="lightbox-content">
-                <img src="${wallpaper.full}" alt="${imageName}">
+                <div class="loader"></div>
+                <img src="" alt="" style="opacity:0; transition: opacity 0.3s ease;">
                 <div class="lightbox-details">
                     <div class="wallpaper-info">
                         <span class="wallpaper-name">${imageName}</span>
-                        <span class="wallpaper-resolution">${width}x${height}</span>
+                        <span class="wallpaper-resolution"></span>
                     </div>
                     <a href="${wallpaper.full}" download class="download-btn">Download</a>
                 </div>
