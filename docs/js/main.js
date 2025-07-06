@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setupEventListeners();
         
         allWallpapersList = flattenTree(galleryData);
+        shuffleArray(allWallpapersList); // Shuffle initially
         buildFileTree(galleryData, treeContainer);
         
         // Initially display all wallpapers
@@ -80,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.stopPropagation();
                 document.querySelectorAll('.tree-item.active').forEach(el => el.classList.remove('active'));
                 allFolderLi.querySelector('.tree-item').classList.add('active');
+                shuffleArray(allWallpapersList); // Shuffle when "All" is clicked
                 renderGallery(allWallpapersList);
                 if (window.innerWidth <= 768) toggleSidebar();
             });
@@ -172,6 +174,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         return files;
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
     }
 
     // --- Gallery Rendering ---
