@@ -3,7 +3,10 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="A curated collection of stunning wallpapers for desktop and mobile, managed by the Wallpaper Gallery Project." />
+		<meta
+			name="description"
+			content="A curated collection of stunning wallpapers for desktop and mobile, managed by the Wallpaper Gallery Project."
+		/>
 		<title>Wallpaper Gallery</title>
 		<link rel="stylesheet" href="css/layout.css" />
 		<link rel="stylesheet" href="css/gallery.css" />
@@ -11,36 +14,53 @@
 		<link rel="icon" href="img/favicon.png" type="image/png" />
 	</head>
 	<body>
-		<div class="container">
-			<header>
-				<h1>Wallpaper Gallery</h1>
+		<button class="sidebar-toggle" aria-label="Toggle sidebar">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+
+		<aside class="sidebar">
+			<div class="sidebar-header">
+				<h2>Categories</h2>
+			</div>
+			<div id="file-manager-tree"></div>
+			<div class="sidebar-footer">
+			</div>
+		</aside>
+
+		<main class="main-content">
+			<div class="container">
+				<header>
+					<h1>Wallpaper Gallery</h1>
+					<p>
+						A curated collection of stunning wallpapers. Select a category from
+						the sidebar or click on any wallpaper to view the full-resolution
+						image.
+					</p>
+					<button id="random-wallpaper-btn" class="random-btn">
+						🎲 Random
+					</button>
+				</header>
+
+				<div class="gallery-container">
+					<!-- Wallpapers will be dynamically injected here -->
+				</div>
+			</div>
+
+			<footer>
 				<p>
-					A curated collection of stunning wallpapers. Click on any wallpaper to
-					view the full-resolution image.
+					Managed and maintained by the
+					<a
+						href="https://github.com/rishabh5321/wallpapers"
+						target="_blank"
+						>Wallpaper Gallery Project</a
+					>
+					on GitHub.
 				</p>
-			</header>
-
-			<div class="folder-container">
-				<!-- Folder filter buttons will be injected here -->
-			</div>
-
-			<div class="gallery-container">
-				<!-- Wallpapers will be dynamically injected here -->
-			</div>
-		</div>
-
-		<footer>
-			<p>
-				Managed and maintained by the
-				<a
-					href="https://github.com/rishabh5321/wallpapers"
-					target="_blank"
-					>Wallpaper Gallery Project</a
-				>
-				on GitHub.
-			</p>
-			<p>This page is automatically generated.</p>
-		</footer>
+				<p>This page is automatically generated.</p>
+			</footer>
+		</main>
 
 		<script src="js/basicLightbox.min.js"></script>
 		<script src="js/gallery-data.js"></script>
