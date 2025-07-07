@@ -40,7 +40,7 @@ This project uses a GitHub Actions workflow to automate the gallery generation p
 
 1.  **Push to `main`**: When changes are pushed to the `main` branch (e.g., adding a new wallpaper), a workflow is triggered.
 2.  **Generate Thumbnails**: The workflow generates smaller thumbnails for each image to ensure the gallery loads quickly.
-3.  **Update Gallery**: A shell script (`generate_readme.sh`) runs to scan for all images and injects the list into the `docs/js/gallery-data.js` file.
+3.  **Update Gallery**: A shell script (`generate_gallery.sh`) runs to scan for all images and injects the list into the `docs/js/gallery-data.js` file.
 4.  **Commit Changes**: The updated `gallery-data.js` is automatically committed back to the repository.
 5.  **Deployment**: The site is automatically deployed to Vercel and Netlify when changes are pushed to the `main` branch.
 

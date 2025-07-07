@@ -27,8 +27,8 @@ jobs:
 
       - name: Run Script to Update Gallery and Thumbnails
         run: |
-          chmod +x generate_readme.sh
-          ./generate_readme.sh
+          chmod +x generate_gallery.sh
+          ./generate_gallery.sh
 
       - name: Commit and Push Changes
         run: |
