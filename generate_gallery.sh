@@ -84,8 +84,8 @@ process_directory() {
     for img_path in "${images[@]}"; do
         local img_file=$(basename "$img_path")
         local thumb_path="$current_thumb_dir/$img_file"
-        local js_full_path="../$img_path"
-        local js_thumb_path="../$thumb_path"
+        local js_full_path="$img_path"
+        local js_thumb_path="$thumb_path"
 
         if [ ! -f "$thumb_path" ] || [ "$img_path" -nt "$thumb_path" ]; then
             echo "   -> Generating thumbnail for '$img_file'..." >&2

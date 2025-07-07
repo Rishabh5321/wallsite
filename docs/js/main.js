@@ -1,4 +1,6 @@
-    document.addEventListener('DOMContentLoaded', () => {
+    import * as basicLightbox from 'basiclightbox';
+
+document.addEventListener('DOMContentLoaded', () => {
     // --- DOM Elements ---
     const galleryContainer = document.querySelector('.gallery-container');
     const treeContainer = document.getElementById('file-manager-tree');
