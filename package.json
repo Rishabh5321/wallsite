@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "http-server .",
-    "build": "rm -rf public && mkdir -p public/js && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite && cp -r docs/* public/ && cp -r src public/",
+    "build": "rm -rf public && mkdir -p public && cp -r docs/* public/ && cp -r src public/ && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
