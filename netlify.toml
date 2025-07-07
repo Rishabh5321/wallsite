@@ -1,4 +1,4 @@
 
 [build]
-command = "cp -r src docs/"
+command = "npm install && npm run build"
 publish = "docs/"

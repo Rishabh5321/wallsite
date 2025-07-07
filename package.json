@@ -1,0 +1,30 @@
+{
+  "name": "wallpapers",
+  "version": "1.0.0",
+  "description": "<div align=\"center\">   <h1>Wallpaper Gallery</h1>   <p>A curated collection of stunning wallpapers, ready for one-click deployment.</p> </div>",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "http-server .",
+    "build": "cp node_modules/basiclightbox/dist/basicLightbox.min.js docs/js/ && cp -r src docs/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rishabh5321/wallpapers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rishabh5321/wallpapers/issues"
+  },
+  "homepage": "https://github.com/Rishabh5321/wallpapers#readme",
+  "dependencies": {
+    "@vercel/analytics": "^1.5.0",
+    "basiclightbox": "^5.0.4",
+    "http-server": "^14.1.1"
+  }
+}
