@@ -363,46 +363,57 @@ document.addEventListener('DOMContentLoaded', () => {
 		const contentElement =
 			lightboxElement.querySelector('.lightbox-content');
 		const img = contentElement.querySelector('img');
+		const wallpaperName =
+			lightboxElement.querySelector('.wallpaper-name');
+		const wallpaperRes = lightboxElement.querySelector(
+			'.wallpaper-resolution'
+		);
+		const downloadBtn = lightboxElement.querySelector('.download-btn');
 
+		// Immediately display thumbnail and apply loading styles
 		contentElement.classList.add('loading');
+		img.src = wallpaper.thumbnail;
+		img.alt = `Thumbnail for ${wallpaper.name}`;
 
-		const newImg = new Image();
-		newImg.src = wallpaper.full;
+		// Update text content
+		wallpaperName.textContent = wallpaper.name
+			.split('.')
+			.slice(0, -1)
+			.join('.');
+		wallpaperRes.textContent = 'Loading full resolution...';
+		downloadBtn.href = wallpaper.full;
 
-		newImg.onload = () => {
-			img.src = newImg.src;
+		// Load full image in the background
+		const fullImage = new Image();
+		fullImage.src = wallpaper.full;
+
+		fullImage.onload = () => {
+			// Replace thumbnail with full image
+			img.src = fullImage.src;
 			img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
-
-			const wallpaperName =
-				lightboxElement.querySelector('.wallpaper-name');
-			const wallpaperRes = lightboxElement.querySelector(
-				'.wallpaper-resolution'
-			);
-			const downloadBtn = lightboxElement.querySelector('.download-btn');
-
-			wallpaperName.textContent = wallpaper.name
-				.split('.')
-				.slice(0, -1)
-				.join('.');
-			wallpaperRes.textContent = `${newImg.naturalWidth}x${newImg.naturalHeight}`;
-			downloadBtn.href = wallpaper.full;
-
 			contentElement.classList.remove('loading');
 
+			// Update resolution info
+			wallpaperRes.textContent = `${fullImage.naturalWidth}x${fullImage.naturalHeight}`;
+
+			// Preload adjacent images for smoother navigation
 			const nextIndex =
 				(currentLightboxIndex + 1) % lightboxWallpaperList.length;
 			const prevIndex =
 				(currentLightboxIndex - 1 + lightboxWallpaperList.length) %
 				lightboxWallpaperList.length;
-			if (nextIndex !== currentLightboxIndex)
+			if (nextIndex !== currentLightboxIndex) {
 				new Image().src = lightboxWallpaperList[nextIndex].full;
-			if (prevIndex !== currentLightboxIndex)
+			}
+			if (prevIndex !== currentLightboxIndex) {
 				new Image().src = lightboxWallpaperList[prevIndex].full;
+			}
 		};
 
-		newImg.onerror = () => {
-			img.alt = 'Error loading image.';
+		fullImage.onerror = () => {
 			contentElement.classList.remove('loading');
+			wallpaperRes.textContent = 'Full image failed to load.';
+			// The thumbnail will remain visible
 		};
 	}
 
