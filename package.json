@@ -10,7 +10,8 @@
     "start": "http-server .",
     "build": "rm -rf public && mkdir -p public && cp -r docs/* public/ && cp -r src public/ && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint docs/js/*.js --fix"
+    "lint": "eslint docs/js/*.js --fix",
+    "format": "prettier --write docs/js/*.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,8 @@
   "devDependencies": {
     "esbuild": "^0.25.5",
     "eslint": "^8.57.1",
-    "eslint-config-standard": "^17.1.0"
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-config-standard": "^17.1.0",
+    "prettier": "^3.6.2"
   }
 }
