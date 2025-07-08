@@ -43,11 +43,35 @@ header {
 	position: relative;
 }
 
+.top-right-nav {
+	position: fixed;
+	top: 15px;
+	right: 15px;
+	z-index: 1200;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.github-link {
+	color: var(--secondary-button-text);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px;
+	border-radius: 50%;
+	background-color: var(--secondary-button-bg);
+	border: 1px solid var(--card-border-color);
+	transition: all 0.3s ease;
+}
+
+.github-link:hover {
+	color: var(--primary-button-text);
+	background-color: var(--accent-color);
+	transform: scale(1.1);
+}
+
 #random-wallpaper-btn {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    z-index: 1200;
     background-color: var(--secondary-button-bg);
     color: var(--secondary-button-text);
     border: 1px solid var(--card-border-color);
