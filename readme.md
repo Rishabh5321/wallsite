@@ -15,10 +15,8 @@ Deploy your own wallpaper gallery in a single click using one of the services be
 ## ✅ Status
 
 <div align="center">
-
-<img src="https://deploy-badge.vercel.app/vercel/rishabh5321-wallpapers?style=for-the-badge" alt="Vercel Deploy"></img>
-<img src="http://img.shields.io/netlify/994538a8-0698-462d-a845-e07d778f1229?style=for-the-badge&logo=netlify" alt="Netlify Deploy"></img>
-
+<a href="https://rishabh5321-wallpapers.vercel.app/"><img src="https://deploy-badge.vercel.app/vercel/rishabh5321-wallpapers?style=for-the-badge" alt="Vercel Deploy"></img>
+<a href="https://rishabh5321-wallpapers.netlify.app/"><img src="http://img.shields.io/netlify/994538a8-0698-462d-a845-e07d778f1229?style=for-the-badge&logo=netlify" alt="Netlify Deploy"></img>
 </div>
 
 ## 📸 Screenshots
