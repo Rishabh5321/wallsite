@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const sidebar = document.querySelector('.sidebar');
 	const sidebarToggle = document.querySelector('.sidebar-toggle');
 	const randomWallpaperBtn = document.getElementById('random-wallpaper-btn');
+	const searchInput = document.getElementById('search-input');
 
 	// --- State ---
 	let lightbox;
@@ -54,6 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		if (randomWallpaperBtn) {
 			randomWallpaperBtn.addEventListener('click', showRandomWallpaper);
+		}
+		if (searchInput) {
+			searchInput.addEventListener('input', handleSearch);
 		}
 	}
 
@@ -429,5 +433,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (activeWallpapers.length === 0) return;
 		const randomIndex = Math.floor(Math.random() * activeWallpapers.length);
 		showLightbox(activeWallpapers, randomIndex);
+	}
+
+	function handleSearch(event) {
+		const searchTerm = event.target.value.toLowerCase();
+		const filteredWallpapers = allWallpapersList.filter((wallpaper) =>
+			wallpaper.name.toLowerCase().includes(searchTerm)
+		);
+		renderGallery(filteredWallpapers);
 	}
 });
