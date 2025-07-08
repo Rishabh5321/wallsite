@@ -4,3 +4,4 @@ public/
 target
 result
 node_modules/
+.vercel

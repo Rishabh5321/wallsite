@@ -1,4 +1,4 @@
-    import * as basicLightbox from 'basiclightbox';
+import * as basicLightbox from 'basiclightbox';
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- DOM Elements ---
@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.querySelector('.sidebar');
     const sidebarToggle = document.querySelector('.sidebar-toggle');
     const randomWallpaperBtn = document.getElementById('random-wallpaper-btn');
-    const mainContent = document.querySelector('.main-content');
 
     // --- State ---
     let lightbox;
@@ -30,14 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function initializeApp() {
         setRandomTheme();
         setupEventListeners();
-        
+
         allWallpapersList = flattenTree(galleryData);
         shuffleArray(allWallpapersList); // Shuffle initially
         buildFileTree(galleryData, treeContainer);
-        
+
         // Initially display all wallpapers
         renderGallery(allWallpapersList);
-        
+
         // Add an overlay for mobile view to close sidebar
         const overlay = document.createElement('div');
         overlay.className = 'overlay';
@@ -107,36 +106,36 @@ document.addEventListener('DOMContentLoaded', () => {
         if (node.type !== 'folder') return null;
 
         const li = document.createElement('li');
-        li.className = `tree-folder`;
+        li.className = 'tree-folder';
 
         const itemDiv = document.createElement('div');
         itemDiv.className = 'tree-item';
 
         const hasSubfolders = node.children && node.children.some(child => child.type === 'folder');
-        
+
         let chevronIcon = '';
         if (hasSubfolders) {
-            chevronIcon = `<svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>`;
+            chevronIcon = '<svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>';
         }
 
-        const folderIcon = `<svg class="icon-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path></svg>`;
-        const folderOpenIcon = `<svg class="icon-folder-open" viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"></path></svg>`;
+        const folderIcon = '<svg class="icon-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path></svg>';
+        const folderOpenIcon = '<svg class="icon-folder-open" viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"></path></svg>';
 
         itemDiv.innerHTML = `
             ${chevronIcon}
             <span class="icon">${folderIcon}${folderOpenIcon}</span>
             <span class="name">${node.name}</span>
         `;
-        
+
         li.appendChild(itemDiv);
 
         itemDiv.addEventListener('click', (e) => {
             e.stopPropagation();
-            
+
             if (isRoot) {
-                 document.querySelectorAll('.tree-item.active').forEach(el => el.classList.remove('active'));
-                 itemDiv.classList.add('active');
-                 renderGallery(allWallpapersList);
+                document.querySelectorAll('.tree-item.active').forEach(el => el.classList.remove('active'));
+                itemDiv.classList.add('active');
+                renderGallery(allWallpapersList);
             } else {
                 handleTreeSelection(node, itemDiv);
             }
@@ -161,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const wallpapers = flattenTree(node);
         renderGallery(wallpapers);
-        
+
         if (window.innerWidth <= 768) {
             toggleSidebar();
         }
@@ -207,13 +206,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createGalleryItem(wallpaper, index) {
-        const galleryItem = document.createElement("div");
-        galleryItem.className = "gallery-item";
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
 
-        const link = document.createElement("a");
+        const link = document.createElement('a');
         link.href = wallpaper.full;
-        link.setAttribute("aria-label", `View wallpaper ${wallpaper.name}`);
-        link.addEventListener("click", (e) => {
+        link.setAttribute('aria-label', `View wallpaper ${wallpaper.name}`);
+        link.addEventListener('click', (e) => {
             e.preventDefault();
             showLightbox(currentWallpapers, index);
         });
@@ -221,18 +220,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = new Image();
         img.src = wallpaper.thumbnail;
         img.alt = `Wallpaper: ${wallpaper.name}`;
+        galleryItem.classList.add('loading');
+
         img.onload = () => {
             const aspectRatio = img.naturalWidth / img.naturalHeight;
-            if (aspectRatio < 0.8) galleryItem.classList.add("portrait");
-            else if (aspectRatio > 2.0) galleryItem.classList.add("ultrawide");
+            if (aspectRatio < 0.8) galleryItem.classList.add('portrait');
+            else if (aspectRatio > 2.0) galleryItem.classList.add('ultrawide');
+            galleryItem.classList.remove('loading');
+            galleryItem.classList.add('loaded');
         };
+
         img.onerror = () => {
             galleryItem.innerHTML = '<span>Image failed to load</span>';
             galleryItem.classList.add('error');
+            galleryItem.classList.remove('loading');
         };
 
-        const title = document.createElement("div");
-        title.className = "wallpaper-title";
+        const title = document.createElement('div');
+        title.className = 'wallpaper-title';
         title.textContent = wallpaper.name.split('.').slice(0, -1).join('.');
 
         link.appendChild(img);
@@ -274,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lightbox = basicLightbox.create(content, {
             onShow: (instance) => {
                 const lightboxElement = instance.element();
-                
+
                 const placeholder = lightboxElement.querySelector('.basicLightbox__placeholder');
                 const controls = placeholder.querySelectorAll('.lightbox-details, .lightbox-prev, .lightbox-next');
                 controls.forEach(control => lightboxElement.appendChild(control));
@@ -304,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const lightboxElement = lightbox.element();
         const contentElement = lightboxElement.querySelector('.lightbox-content');
         const img = contentElement.querySelector('img');
-        
+
         contentElement.classList.add('loading');
 
         const newImg = new Image();
@@ -313,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newImg.onload = () => {
             img.src = newImg.src;
             img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
-            
+
             const wallpaperName = lightboxElement.querySelector('.wallpaper-name');
             const wallpaperRes = lightboxElement.querySelector('.wallpaper-resolution');
             const downloadBtn = lightboxElement.querySelector('.download-btn');
@@ -329,9 +334,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (nextIndex !== currentLightboxIndex) new Image().src = lightboxWallpaperList[nextIndex].full;
             if (prevIndex !== currentLightboxIndex) new Image().src = lightboxWallpaperList[prevIndex].full;
         };
-        
+
         newImg.onerror = () => {
-            img.alt = "Error loading image.";
+            img.alt = 'Error loading image.';
             contentElement.classList.remove('loading');
         };
     }

@@ -1,0 +1,16 @@
+{
+  "extends": "standard",
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "globals": {
+    "galleryData": "readonly"
+  },
+  "rules": {
+    "semi": ["error", "always"],
+    "indent": ["error", 4],
+    "space-before-function-paren": ["error", "never"],
+    "no-unused-vars": "warn"
+  }
+}
