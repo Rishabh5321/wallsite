@@ -7,8 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "http-server .",
-    "build": "rm -rf public && mkdir -p public && cp -r docs/* public/ && cp -r src public/ && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite",
+    "start": "npm run build:assets && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --watch=forever --servedir=public",
+    "dev": "npm run start",
+    "build:assets": "rm -rf public && mkdir -p public && cp -r docs/* public/ && cp -r src public/",
+    "build": "npm run build:assets && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint docs/js/*.js --fix",
     "format": "prettier --write docs/js/*.js"
