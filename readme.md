@@ -1,4 +1,3 @@
-
 <div align="center">
   <h1>Wallpaper Gallery</h1>
   <p>A curated collection of stunning wallpapers, ready for one-click deployment.</p>
@@ -11,6 +10,15 @@ Deploy your own wallpaper gallery in a single click using one of the services be
 <div align="center">
   <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRishabh5321%2Fwallpapers"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
   <a href="https://app.netlify.com/start/deploy?repository=https://github.com/Rishabh5321/wallpapers"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
+</div>
+
+## ✅ Status
+
+<div align="center">
+
+<img src="https://deploy-badge.vercel.app/vercel/rishabh5321-wallpapers?style=for-the-badge" alt="Vercel Deploy"></img>
+<img src="http://img.shields.io/netlify/994538a8-0698-462d-a845-e07d778f1229?style=for-the-badge&logo=netlify" alt="Netlify Deploy"></img>
+
 </div>
 
 ## 📸 Screenshots
