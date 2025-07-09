@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Initially, filtered wallpapers are all wallpapers
 		filteredWallpapers = [...allWallpapersList];
-		
+
 		buildFileTree(galleryData, treeContainer);
 
 		// Initial load of wallpapers
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			randomWallpaperBtn.addEventListener('click', showRandomWallpaper);
 		}
 		if (searchInput) {
-			searchInput.addEventListener('input', handleSearch);
+			searchInput.addEventListener('input', debounce(handleSearch, 300));
 		}
 	}
 
@@ -242,7 +242,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (!galleryContainer) return;
 
 		wallpapersToAppend.forEach((wallpaper, index) => {
-			const galleryItem = createGalleryItem(wallpaper, loadedWallpapersCount + index); // Pass global index
+			const galleryItem = createGalleryItem(
+				wallpaper,
+				loadedWallpapersCount + index
+			); // Pass global index
 			galleryContainer.appendChild(galleryItem);
 		});
 		loadedWallpapersCount += wallpapersToAppend.length;
@@ -261,7 +264,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function loadMoreWallpapers() {
-		if (isLoadingMore || loadedWallpapersCount >= filteredWallpapers.length) {
+		if (
+			isLoadingMore ||
+			loadedWallpapersCount >= filteredWallpapers.length
+		) {
 			return; // Already loading or all wallpapers loaded
 		}
 
@@ -320,7 +326,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function updatePageIndicator() {
 		if (!pageIndicator) return;
-		const totalPages = Math.ceil(filteredWallpapers.length / wallpapersToLoad);
+		const totalPages = Math.ceil(
+			filteredWallpapers.length / wallpapersToLoad
+		);
 		const currentPage = Math.ceil(loadedWallpapersCount / wallpapersToLoad);
 		if (totalPages > 0) {
 			pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
@@ -444,8 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const contentElement =
 			lightboxElement.querySelector('.lightbox-content');
 		const img = contentElement.querySelector('img');
-		const wallpaperName =
-			lightboxElement.querySelector('.wallpaper-name');
+		const wallpaperName = lightboxElement.querySelector('.wallpaper-name');
 		const wallpaperRes = lightboxElement.querySelector(
 			'.wallpaper-resolution'
 		);
@@ -533,5 +540,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			wallpaper.name.toLowerCase().includes(searchTerm)
 		);
 		resetAndLoadGallery();
+	}
+
+	function debounce(func, delay) {
+		let timeout;
+		return function (...args) {
+			const context = this;
+			clearTimeout(timeout);
+			timeout = setTimeout(() => func.apply(context, args), delay);
+		};
 	}
 });
