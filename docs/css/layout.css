@@ -148,6 +148,14 @@ footer a:hover {
 	color: #fff;
 }
 
+#page-indicator {
+	text-align: center;
+	margin-top: 20px;
+	font-size: 1.1em;
+	color: var(--text-color);
+	opacity: 0.8;
+}
+
 @keyframes fadeInDown {
 	from {
 		opacity: 0;

@@ -8,14 +8,21 @@ document.addEventListener('DOMContentLoaded', () => {
 	const sidebarToggle = document.querySelector('.sidebar-toggle');
 	const randomWallpaperBtn = document.getElementById('random-wallpaper-btn');
 	const searchInput = document.getElementById('search-input');
+	const pageIndicator = document.getElementById('page-indicator');
 
 	// --- State ---
 	let lightbox;
 	let keydownHandler;
-	let currentWallpapers = [];
 	let allWallpapersList = [];
+	let filteredWallpapers = []; // Wallpapers after search/category filter
 	let currentLightboxIndex = 0;
 	let lightboxWallpaperList = []; // Use a dedicated list for the lightbox
+
+	// --- Infinite Scroll State ---
+	const wallpapersToLoad = 20; // Number of wallpapers to load at a time
+	let loadedWallpapersCount = 0;
+	let isLoadingMore = false;
+	let intersectionObserver;
 
 	// --- Initialization ---
 	if (typeof galleryData === 'undefined' || !galleryData) {
@@ -37,10 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		allWallpapersList = flattenTree(galleryData);
 		shuffleArray(allWallpapersList); // Shuffle initially
+
+		// Initially, filtered wallpapers are all wallpapers
+		filteredWallpapers = [...allWallpapersList];
+		
 		buildFileTree(galleryData, treeContainer);
 
-		// Initially display all wallpapers
-		renderGallery(allWallpapersList);
+		// Initial load of wallpapers
+		loadedWallpapersCount = 0; // Reset count
+		loadMoreWallpapers();
 
 		// Add an overlay for mobile view to close sidebar
 		const overlay = document.createElement('div');
@@ -114,7 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
 						.querySelector('.tree-item')
 						.classList.add('active');
 					shuffleArray(allWallpapersList); // Shuffle when "All" is clicked
-					renderGallery(allWallpapersList);
+					filteredWallpapers = [...allWallpapersList]; // Reset filtered wallpapers
+					resetAndLoadGallery(); // Reset and load for infinite scroll
 					if (window.innerWidth <= 768) toggleSidebar();
 				});
 		}
@@ -171,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					.querySelectorAll('.tree-item.active')
 					.forEach((el) => el.classList.remove('active'));
 				itemDiv.classList.add('active');
-				renderGallery(allWallpapersList);
+				resetAndLoadGallery(); // Reset and load for infinite scroll
 			} else {
 				handleTreeSelection(node, itemDiv);
 			}
@@ -196,8 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			.forEach((el) => el.classList.remove('active'));
 		element.classList.add('active');
 
-		const wallpapers = flattenTree(node);
-		renderGallery(wallpapers);
+		filteredWallpapers = flattenTree(node);
+		resetAndLoadGallery(); // Reset and load for infinite scroll
 
 		if (window.innerWidth <= 768) {
 			toggleSidebar();
@@ -225,38 +238,106 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	// --- Gallery Rendering ---
-	function renderGallery(wallpapersToRender) {
+	function renderGallery(wallpapersToAppend) {
 		if (!galleryContainer) return;
-		galleryContainer.innerHTML = '';
-		currentWallpapers = wallpapersToRender;
+
+		wallpapersToAppend.forEach((wallpaper, index) => {
+			const galleryItem = createGalleryItem(wallpaper, loadedWallpapersCount + index); // Pass global index
+			galleryContainer.appendChild(galleryItem);
+		});
+		loadedWallpapersCount += wallpapersToAppend.length;
 
 		galleryContainer.classList.toggle(
 			'single-item',
-			currentWallpapers.length === 1
+			filteredWallpapers.length === 1
 		);
 
-		if (currentWallpapers.length === 0) {
-			galleryContainer.innerHTML =
-				'<p style="text-align: center; width: 100%;">No wallpapers to display in this category.</p>';
-			return;
+		if (loadedWallpapersCount >= filteredWallpapers.length) {
+			// All wallpapers loaded, disconnect observer
+			if (intersectionObserver) {
+				intersectionObserver.disconnect();
+			}
+		}
+	}
+
+	function loadMoreWallpapers() {
+		if (isLoadingMore || loadedWallpapersCount >= filteredWallpapers.length) {
+			return; // Already loading or all wallpapers loaded
 		}
 
-		currentWallpapers.forEach((wallpaper, index) => {
-			const galleryItem = createGalleryItem(wallpaper, index);
-			galleryContainer.appendChild(galleryItem);
-		});
+		isLoadingMore = true;
+
+		const wallpapersToRender = filteredWallpapers.slice(
+			loadedWallpapersCount,
+			loadedWallpapersCount + wallpapersToLoad
+		);
+
+		if (wallpapersToRender.length > 0) {
+			renderGallery(wallpapersToRender);
+		} else if (loadedWallpapersCount === 0) {
+			// No wallpapers to display at all
+			galleryContainer.innerHTML =
+				'<p style="text-align: center; width: 100%;">No wallpapers to display in this category.</p>';
+		}
+
+		isLoadingMore = false;
+		updatePageIndicator();
+		setupInfiniteScroll();
+	}
+
+	function setupInfiniteScroll() {
+		if (intersectionObserver) {
+			intersectionObserver.disconnect();
+		}
+
+		intersectionObserver = new IntersectionObserver(
+			(entries) => {
+				if (entries[0].isIntersecting && !isLoadingMore) {
+					loadMoreWallpapers();
+				}
+			},
+			{ rootMargin: '800px' } // Load when 800px from bottom
+		);
+
+		// Observe the last element in the gallery, or the gallery container itself if empty
+		const lastGalleryItem = galleryContainer.lastElementChild;
+		if (lastGalleryItem) {
+			intersectionObserver.observe(lastGalleryItem);
+		} else {
+			// If no items, observe the container itself to trigger initial load if needed
+			intersectionObserver.observe(galleryContainer);
+		}
+		updatePageIndicator();
+	}
+
+	function resetAndLoadGallery() {
+		galleryContainer.innerHTML = ''; // Clear existing wallpapers
+		loadedWallpapersCount = 0; // Reset loaded count
+		isLoadingMore = false;
+		loadMoreWallpapers(); // Load initial batch
+		setupInfiniteScroll(); // Re-setup observer
+	}
+
+	function updatePageIndicator() {
+		if (!pageIndicator) return;
+		const totalPages = Math.ceil(filteredWallpapers.length / wallpapersToLoad);
+		const currentPage = Math.ceil(loadedWallpapersCount / wallpapersToLoad);
+		if (totalPages > 0) {
+			pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+		} else {
+			pageIndicator.textContent = '';
+		}
 	}
 
 	function createGalleryItem(wallpaper, index) {
 		const galleryItem = document.createElement('div');
 		galleryItem.className = 'gallery-item';
-
 		const link = document.createElement('a');
 		link.href = wallpaper.full;
 		link.setAttribute('aria-label', `View wallpaper ${wallpaper.name}`);
 		link.addEventListener('click', (e) => {
 			e.preventDefault();
-			showLightbox(currentWallpapers, index);
+			showLightbox(filteredWallpapers, index); // Use filteredWallpapers for lightbox
 		});
 
 		const img = new Image();
@@ -438,8 +519,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function showRandomWallpaper() {
 		const activeWallpapers =
-			currentWallpapers.length > 0
-				? currentWallpapers
+			filteredWallpapers.length > 0
+				? filteredWallpapers
 				: allWallpapersList;
 		if (activeWallpapers.length === 0) return;
 		const randomIndex = Math.floor(Math.random() * activeWallpapers.length);
@@ -448,9 +529,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function handleSearch(event) {
 		const searchTerm = event.target.value.toLowerCase();
-		const filteredWallpapers = allWallpapersList.filter((wallpaper) =>
+		filteredWallpapers = allWallpapersList.filter((wallpaper) =>
 			wallpaper.name.toLowerCase().includes(searchTerm)
 		);
-		renderGallery(filteredWallpapers);
+		resetAndLoadGallery();
 	}
 });
