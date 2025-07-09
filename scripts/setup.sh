@@ -44,9 +44,4 @@ sed -i "s|$TEMPLATE_REPO|$CURRENT_REPO|g" "$README_FILE"
 sed -i "s|$TEMPLATE_VERCEL_APP|$VERCEL_APP_NAME|g" "$README_FILE"
 echo "✅ README.md updated successfully."
 
-# 4. Update the repository description on GitHub using the GitHub CLI ('gh').
-echo "🔄 Updating repository description..."
-gh repo edit "$CURRENT_REPO" --description "$REPO_DESCRIPTION"
-echo "✅ Repository description updated successfully."
-
 echo "🎉 Repository setup complete!"

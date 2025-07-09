@@ -50,6 +50,15 @@ This project uses a GitHub Actions workflow to automate the gallery generation p
 4.  **Commit Changes**: The updated `gallery-data.js` is automatically committed back to the repository.
 5.  **Deployment**: The site is automatically deployed to Vercel and Netlify when changes are pushed to the `main` branch.
 
+## 🔧 Final Configuration
+
+After the initial setup, it is recommended to update the repository description to reflect that it is a personal gallery, not the original template.
+
+1.  Go to your repository's main page.
+2.  Click the "Edit" button next to the "About" section.
+3.  Update the description to something like: "My personal wallpaper gallery."
+4.  Click "Save changes".
+
 ## License
 
 The code in this repository is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. The wallpapers are not covered by this license.
