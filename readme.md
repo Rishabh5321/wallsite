@@ -35,8 +35,8 @@ You can view the live wallpaper gallery here: **[Live Gallery](https://rishabh53
 
 To add a new wallpaper to your gallery:
 
-1.  **Fork the repository** if you haven't already.
-2.  Add your new image file (e.g., `my-cool-wallpaper.png`) to the `src` directory of your forked repository.
+1.  Enter the Github Repository you creeted using vercel/netify one click deploy.
+2.  Add your new image file (e.g., `my-cool-wallpaper.png`) to the `src` directory of your own repository.
 3.  Commit and push the changes to your `main` branch.
 4.  The GitHub Actions workflow will automatically update the gallery and deploy the changes.
 

@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      packages: write
-      id-token: true
     # Only run this job if the repository is NOT the template repository.
     if: github.repository != 'Rishabh5321/wallpapers'
     steps:
