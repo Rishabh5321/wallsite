@@ -6,7 +6,7 @@ export function loadFavorites() {
         try {
             state.favorites = JSON.parse(storedFavorites);
         } catch (e) {
-            console.error("Error parsing favorites from localStorage", e);
+            console.error('Error parsing favorites from localStorage', e);
             state.favorites = [];
         }
     }
@@ -23,7 +23,9 @@ export function isFavorite(wallpaper) {
 
 export function toggleFavorite(wallpaper) {
     if (!wallpaper) return;
-    const index = state.favorites.findIndex((fav) => fav.full === wallpaper.full);
+    const index = state.favorites.findIndex(
+        (fav) => fav.full === wallpaper.full
+    );
     if (index > -1) {
         state.favorites.splice(index, 1);
     } else {

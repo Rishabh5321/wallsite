@@ -7,9 +7,11 @@ export function handleSearch() {
     state.filteredWallpapers = state.allWallpapersList.filter((wallpaper) =>
         wallpaper.name.toLowerCase().includes(searchTerm)
     );
-    
+
     // Also, deactivate any active tree item since search is a global action
-    document.querySelectorAll('.tree-item.active').forEach(el => el.classList.remove('active'));
+    document
+        .querySelectorAll('.tree-item.active')
+        .forEach((el) => el.classList.remove('active'));
     if (dom.favoritesBtn) dom.favoritesBtn.classList.remove('active');
 
     resetAndLoadGallery();

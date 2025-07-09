@@ -12,15 +12,27 @@ export function setRandomTheme() {
     const backgroundColorEnd = `hsl(${(baseHue + 60) % 360}, 15%, 12%)`;
 
     document.documentElement.style.setProperty('--accent-color', accentColor);
-    document.documentElement.style.setProperty('--primary-button-bg', accentColor);
-    document.documentElement.style.setProperty('--background-start', backgroundColorStart);
-    document.documentElement.style.setProperty('--background-end', backgroundColorEnd);
+    document.documentElement.style.setProperty(
+        '--primary-button-bg',
+        accentColor
+    );
+    document.documentElement.style.setProperty(
+        '--background-start',
+        backgroundColorStart
+    );
+    document.documentElement.style.setProperty(
+        '--background-end',
+        backgroundColorEnd
+    );
 }
 
 export function updatePageIndicator() {
     if (!dom.pageIndicator) return;
-    const totalPages = Math.ceil(state.filteredWallpapers.length / state.wallpapersToLoad);
-    const currentPage = Math.ceil(state.loadedWallpapersCount / state.wallpapersToLoad) || 1;
+    const totalPages = Math.ceil(
+        state.filteredWallpapers.length / state.wallpapersToLoad
+    );
+    const currentPage =
+		Math.ceil(state.loadedWallpapersCount / state.wallpapersToLoad) || 1;
     if (totalPages > 1) {
         dom.pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
     } else {
