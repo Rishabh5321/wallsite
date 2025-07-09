@@ -59,6 +59,15 @@ After the initial setup, it is recommended to update the repository description 
 3.  Update the description to something like: "My personal wallpaper gallery."
 4.  Click "Save changes".
 
+### Adding a Netlify Status Badge (Optional)
+
+The setup script automatically updates the Vercel status badge. If you have deployed to Netlify, you can add a status badge for it as well:
+
+1.  Go to your site's page on Netlify.
+2.  Go to **Site settings > General > Status badges**.
+3.  Copy the Markdown snippet for the badge.
+4.  Paste it into your `readme.md` file in the "Status" section.
+
 ## License
 
 The code in this repository is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. The wallpapers are not covered by this license.

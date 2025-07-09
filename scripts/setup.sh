@@ -7,15 +7,13 @@ set -e # Exit immediately if a command exits with a non-zero status.
 
 # --- Configuration ---
 TEMPLATE_REPO="Rishabh5321/wallsite"
-TEMPLATE_VERCEL_APP="rishabh5321-wallsite"
+TEMPLATE_VERCEL_PROJECT="Rishabh5321-wallsite"
 README_FILE="readme.md"
-REPO_DESCRIPTION="A curated collection of stunning wallpapers, ready for one-click deployment."
 
 # --- Main Logic ---
 echo "🚀 Starting repository setup..."
 
 # 1. Get the current repository name from the environment variable provided by GitHub Actions.
-# The GITHUB_REPOSITORY variable is in the format "owner/repo-name".
 if [ -z "$GITHUB_REPOSITORY" ]; then
     echo "❌ Error: GITHUB_REPOSITORY environment variable is not set."
     exit 1
@@ -23,25 +21,27 @@ fi
 CURRENT_REPO="$GITHUB_REPOSITORY"
 OWNER=$(echo "$CURRENT_REPO" | cut -d'/' -f1)
 REPO_NAME=$(echo "$CURRENT_REPO" | cut -d'/' -f2)
-VERCEL_APP_NAME="$OWNER-$REPO_NAME"
+NEW_VERCEL_PROJECT="$OWNER-$REPO_NAME"
 
 echo "✅ Detected repository: $CURRENT_REPO"
-echo "✅ Owner: $OWNER"
-echo "✅ Repo name: $REPO_NAME"
-echo "✅ Vercel app name: $VERCEL_APP_NAME"
 
 # 2. Check if the script is running in the template repository itself.
-# If so, exit gracefully to avoid making changes to the template.
 if [ "$CURRENT_REPO" == "$TEMPLATE_REPO" ]; then
     echo "✅ This is the template repository. No changes needed. Exiting."
     exit 0
 fi
 
-# 3. Replace all occurrences of the template repository URL in the README.md file.
-# The 'sed' command is used for in-place replacement.
+# 3. Replace URLs in README.md
 echo "🔄 Updating URLs in $README_FILE..."
-sed -i "s|$TEMPLATE_REPO|$CURRENT_REPO|g" "$README_FILE"
-sed -i "s|$TEMPLATE_VERCEL_APP|$VERCEL_APP_NAME|g" "$README_FILE"
-echo "✅ README.md updated successfully."
 
+# 3a. Replace repository URL for deployment buttons
+sed -i "s|$TEMPLATE_REPO|$CURRENT_REPO|g" "$README_FILE"
+
+# 3b. Replace Vercel project name for status badge and live gallery link
+sed -i "s|$TEMPLATE_VERCEL_PROJECT|$NEW_VERCEL_PROJECT|g" "$README_FILE"
+
+# 3c. Remove the Netlify status badge as the site ID cannot be predicted.
+sed -i '/img.shields.io\/netlify/d' "$README_FILE"
+
+echo "✅ README.md updated successfully."
 echo "🎉 Repository setup complete!"
