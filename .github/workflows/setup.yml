@@ -1,0 +1,45 @@
+name: Setup New Repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      id-token: true
+    # Only run this job if the repository is NOT the template repository.
+    if: github.repository != 'Rishabh5321/wallpapers'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up GitHub CLI
+        run: |
+          sudo apt-get install -y gh
+
+      - name: Run Setup Script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          chmod +x scripts/setup.sh
+          ./scripts/setup.sh
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add readme.md
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: update repository URLs and description"
+            git push
+          else
+            echo "No changes to commit."
+          fi
