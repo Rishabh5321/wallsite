@@ -1,4 +1,4 @@
 {
-  "buildCommand": "npm install && npm run build",
-  "outputDirectory": "public"
+	"buildCommand": "bash scripts/generate.sh && npm install && npm run build",
+	"outputDirectory": "public"
 }
