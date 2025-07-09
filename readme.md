@@ -8,8 +8,8 @@
 Deploy your own wallpaper gallery in a single click using one of the services below:
 
 <div align="center">
-  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRishabh5321%2Fwallpapers"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
-  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/Rishabh5321/wallpapers"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
+  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRishabh5321%2Fwallsite"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/Rishabh5321/wallsite"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
 </div>
 
 ## ✅ Status
