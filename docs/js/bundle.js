@@ -637,6 +637,16 @@
 						.forEach((v) => b.appendChild(v)),
 						(b.querySelector('.lightbox-prev').onclick = R),
 						(b.querySelector('.lightbox-next').onclick = O),
+                        (b.querySelector('.favorite-btn').onclick = () => {
+                            const v = b.querySelector('.favorite-btn');
+                            const q = n[f];
+                            const isFavorited = v.classList.toggle('favorited');
+                            if (isFavorited) {
+                                u.push(q);
+                            } else {
+                                u = u.filter(w => w.full !== q.full);
+                            }
+                        }),
 						(d = (v) => {
 							(v.key === 'ArrowLeft' && R(),
 								v.key === 'ArrowRight' && O());
@@ -659,25 +669,27 @@
 			const m = i.querySelector('.wallpaper-name');
 			const b = i.querySelector('.wallpaper-resolution');
 			const E = i.querySelector('.download-btn');
+            const _ = i.querySelector('.favorite-btn');
 			(o.classList.add('loading'),
 				(r.src = t.thumbnail),
 				(r.alt = `Thumbnail for ${t.name}`),
 				(m.textContent = t.name.split('.').slice(0, -1).join('.')),
 				(b.textContent = 'Loading full resolution...'),
 				(E.href = t.full));
-			const _ = new Image();
-			((_.src = t.full),
-				(_.onload = () => {
-					((r.src = _.src),
+            _.classList.toggle('favorited', u.some(w => w.full === t.full));
+			const v = new Image();
+			((v.src = t.full),
+				(v.onload = () => {
+					((r.src = v.src),
 						(r.alt = t.name.split('.').slice(0, -1).join('.')),
 						o.classList.remove('loading'),
-						(b.textContent = `${_.naturalWidth}x${_.naturalHeight}`));
-					const v = (f + 1) % n.length;
-					const q = (f - 1 + n.length) % n.length;
-					(v !== f && (new Image().src = n[v].full),
-						q !== f && (new Image().src = n[q].full));
+						(b.textContent = `${v.naturalWidth}x${v.naturalHeight}`));
+					const q = (f + 1) % n.length;
+					const S = (f - 1 + n.length) % n.length;
+					(q !== f && (new Image().src = n[q].full),
+						S !== f && (new Image().src = n[S].full));
 				}),
-				(_.onerror = () => {
+				(v.onerror = () => {
 					(o.classList.remove('loading'),
 						(b.textContent = 'Full image failed to load.'));
 				}));
@@ -693,7 +705,12 @@
                     <span class="wallpaper-name">${t.name.split('.').slice(0, -1).join('.')}</span>
                     <span class="wallpaper-resolution"></span>
                 </div>
-                <a href="${t.full}" download class="download-btn">Download</a>
+                <div class="lightbox-actions">
+                    <button class="favorite-btn">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </button>
+                    <a href="${t.full}" download class="download-btn">Download</a>
+                </div>
             </div>
             <button class="lightbox-prev">&lt;</button>
             <button class="lightbox-next">&gt;</button>
