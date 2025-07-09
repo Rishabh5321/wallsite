@@ -114,6 +114,44 @@
 	opacity: 1;
 }
 
+.favorite-btn {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	background: rgba(0, 0, 0, 0.5);
+	border: none;
+	color: white;
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: transform 0.2s ease, color 0.2s ease;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.gallery-item:hover .favorite-btn {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.favorite-btn:hover {
+	transform: scale(1.1);
+}
+
+.favorite-btn.favorited {
+	color: #ff6b6b;
+}
+
+.favorite-btn svg {
+	width: 20px;
+	height: 20px;
+	fill: currentColor;
+}
+
 @media (max-width: 768px) {
 	.gallery-container {
 		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));

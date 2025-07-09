@@ -9,12 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	const randomWallpaperBtn = document.getElementById('random-wallpaper-btn');
 	const searchInput = document.getElementById('search-input');
 	const pageIndicator = document.getElementById('page-indicator');
+	const favoritesBtn = document.getElementById('favorites-btn');
 
 	// --- State ---
 	let lightbox;
 	let keydownHandler;
 	let allWallpapersList = [];
 	let filteredWallpapers = []; // Wallpapers after search/category filter
+	let favorites = [];
 	let currentLightboxIndex = 0;
 	let lightboxWallpaperList = []; // Use a dedicated list for the lightbox
 
@@ -40,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// --- Functions ---
 	function initializeApp() {
 		setRandomTheme();
+		loadFavorites();
 		setupEventListeners();
 
 		allWallpapersList = flattenTree(galleryData);
@@ -47,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Initially, filtered wallpapers are all wallpapers
 		filteredWallpapers = [...allWallpapersList];
-
+		
 		buildFileTree(galleryData, treeContainer);
 
 		// Initial load of wallpapers
@@ -71,11 +74,47 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (searchInput) {
 			searchInput.addEventListener('input', debounce(handleSearch, 300));
 		}
+		if (favoritesBtn) {
+			favoritesBtn.addEventListener('click', showFavorites);
+		}
 	}
 
 	function toggleSidebar() {
 		sidebar.classList.toggle('open');
 		sidebarToggle.classList.toggle('open');
+	}
+
+	function loadFavorites() {
+		const storedFavorites = localStorage.getItem('wallpaperFavorites');
+		if (storedFavorites) {
+			favorites = JSON.parse(storedFavorites);
+		}
+	}
+
+	function saveFavorites() {
+		localStorage.setItem('wallpaperFavorites', JSON.stringify(favorites));
+	}
+
+	function toggleFavorite(wallpaper) {
+		const index = favorites.findIndex((fav) => fav.full === wallpaper.full);
+		if (index > -1) {
+			favorites.splice(index, 1);
+		} else {
+			favorites.push(wallpaper);
+		}
+		saveFavorites();
+	}
+
+	function showFavorites() {
+		document
+			.querySelectorAll('.tree-item.active')
+			.forEach((el) => el.classList.remove('active'));
+		favoritesBtn.classList.add('active');
+		filteredWallpapers = [...favorites];
+		resetAndLoadGallery();
+		if (window.innerWidth <= 768) {
+			toggleSidebar();
+		}
 	}
 
 	function setRandomTheme() {
@@ -371,9 +410,23 @@ document.addEventListener('DOMContentLoaded', () => {
 		title.className = 'wallpaper-title';
 		title.textContent = wallpaper.name.split('.').slice(0, -1).join('.');
 
+		const favoriteBtn = document.createElement('button');
+		favoriteBtn.className = 'favorite-btn';
+		if (favorites.some((fav) => fav.full === wallpaper.full)) {
+			favoriteBtn.classList.add('favorited');
+		}
+		favoriteBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+		favoriteBtn.addEventListener('click', (e) => {
+			e.stopPropagation();
+			e.preventDefault();
+			toggleFavorite(wallpaper);
+			favoriteBtn.classList.toggle('favorited');
+		});
+
 		link.appendChild(img);
 		galleryItem.appendChild(link);
 		galleryItem.appendChild(title);
+		galleryItem.appendChild(favoriteBtn);
 		return galleryItem;
 	}
 
@@ -457,6 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			'.wallpaper-resolution'
 		);
 		const downloadBtn = lightboxElement.querySelector('.download-btn');
+		const favoriteBtn = lightboxElement.querySelector('.favorite-btn');
 
 		// Immediately display thumbnail and apply loading styles
 		contentElement.classList.add('loading');
@@ -470,6 +524,17 @@ document.addEventListener('DOMContentLoaded', () => {
 			.join('.');
 		wallpaperRes.textContent = 'Loading full resolution...';
 		downloadBtn.href = wallpaper.full;
+
+		// Update favorite button
+		if (favorites.some((fav) => fav.full === wallpaper.full)) {
+			favoriteBtn.classList.add('favorited');
+		} else {
+			favoriteBtn.classList.remove('favorited');
+		}
+		favoriteBtn.onclick = () => {
+			toggleFavorite(wallpaper);
+			favoriteBtn.classList.toggle('favorited');
+		};
 
 		// Load full image in the background
 		const fullImage = new Image();
@@ -517,6 +582,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="wallpaper-name">${imageName}</span>
                     <span class="wallpaper-resolution"></span>
                 </div>
+				<button class="favorite-btn">
+					<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+				</button>
                 <a href="${wallpaper.full}" download class="download-btn">Download</a>
             </div>
             <button class="lightbox-prev">&lt;</button>
