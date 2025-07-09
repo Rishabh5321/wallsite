@@ -15,8 +15,8 @@ Deploy your own wallpaper gallery in a single click using one of the services be
 ## ✅ Status
 
 <div align="center">
-<a href="https://rishabh5321-wallpapers.vercel.app/"><img src="https://deploy-badge.vercel.app/vercel/rishabh5321-wallpapers?style=for-the-badge" alt="Vercel Deploy"></img>
-<a href="https://rishabh5321-wallpapers.netlify.app/"><img src="http://img.shields.io/netlify/994538a8-0698-462d-a845-e07d778f1229?style=for-the-badge&logo=netlify" alt="Netlify Deploy"></img>
+<a href="https://Rishabh5321-wallsite.vercel.app/"><img src="https://deploy-badge.vercel.app/vercel/Rishabh5321-wallsite?style=for-the-badge" alt="Vercel Deploy"></img>
+<a href="https://Rishabh5321-wallsite.netlify.app/"><img src="http://img.shields.io/netlify/994538a8-0698-462d-a845-e07d778f1229?style=for-the-badge&logo=netlify" alt="Netlify Deploy"></img>
 </div>
 
 ## 📸 Screenshots
@@ -29,7 +29,7 @@ Deploy your own wallpaper gallery in a single click using one of the services be
 
 ## ✨ Live Gallery
 
-You can view the live wallpaper gallery here: **[Live Gallery](https://rishabh5321-wallpapers.vercel.app/)**
+You can view the live wallpaper gallery here: **[Live Gallery](https://Rishabh5321-wallsite.vercel.app/)**
 
 ## 📥 Adding New Wallpapers
 
