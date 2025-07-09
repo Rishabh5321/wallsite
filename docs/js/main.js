@@ -1,578 +1,581 @@
 import * as basicLightbox from 'basiclightbox';
 
 document.addEventListener('DOMContentLoaded', () => {
-	// --- DOM Elements ---
-	const galleryContainer = document.querySelector('.gallery-container');
-	const treeContainer = document.getElementById('file-manager-tree');
-	const sidebar = document.querySelector('.sidebar');
-	const sidebarToggle = document.querySelector('.sidebar-toggle');
-	const randomWallpaperBtn = document.getElementById('random-wallpaper-btn');
-	const searchInput = document.getElementById('search-input');
-	const pageIndicator = document.getElementById('page-indicator');
-	const favoritesBtn = document.getElementById('favorites-btn');
+    // --- DOM Elements ---
+    const galleryContainer = document.querySelector('.gallery-container');
+    const treeContainer = document.getElementById('file-manager-tree');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const randomWallpaperBtn = document.getElementById('random-wallpaper-btn');
+    const searchInput = document.getElementById('search-input');
+    const pageIndicator = document.getElementById('page-indicator');
+    const favoritesBtn = document.getElementById('favorites-btn');
 
-	// --- State ---
-	let lightbox;
-	let keydownHandler;
-	let allWallpapersList = [];
-	let filteredWallpapers = []; // Wallpapers after search/category filter
-	let favorites = [];
-	let currentLightboxIndex = 0;
-	let lightboxWallpaperList = []; // Use a dedicated list for the lightbox
+    // --- State ---
+    let lightbox;
+    let keydownHandler;
+    let allWallpapersList = [];
+    let filteredWallpapers = []; // Wallpapers after search/category filter
+    let favorites = [];
+    let currentLightboxIndex = 0;
+    let lightboxWallpaperList = []; // Use a dedicated list for the lightbox
 
-	// --- Infinite Scroll State ---
-	const wallpapersToLoad = 20; // Number of wallpapers to load at a time
-	let loadedWallpapersCount = 0;
-	let isLoadingMore = false;
-	let intersectionObserver;
+    // --- Infinite Scroll State ---
+    const wallpapersToLoad = 20; // Number of wallpapers to load at a time
+    let loadedWallpapersCount = 0;
+    let isLoadingMore = false;
+    let intersectionObserver;
 
-	// --- Initialization ---
-	if (typeof galleryData === 'undefined' || !galleryData) {
-		console.error(
-			"Wallpaper data not found. Please ensure 'js/gallery-data.js' is loaded correctly."
-		);
-		if (galleryContainer)
-			galleryContainer.innerHTML =
+    // --- Initialization ---
+    if (typeof galleryData === 'undefined' || !galleryData) {
+        console.error(
+            "Wallpaper data not found. Please ensure 'js/gallery-data.js' is loaded correctly."
+        );
+        if (galleryContainer)
+            galleryContainer.innerHTML =
 				'<p>Error: Wallpaper data could not be loaded.</p>';
-		return;
-	}
+        return;
+    }
 
-	initializeApp();
+    initializeApp();
 
-	// --- Functions ---
-	function initializeApp() {
-		setRandomTheme();
-		loadFavorites();
-		setupEventListeners();
+    // --- Functions ---
+    function initializeApp() {
+        setRandomTheme();
+        loadFavorites();
+        setupEventListeners();
 
-		allWallpapersList = flattenTree(galleryData);
-		shuffleArray(allWallpapersList); // Shuffle initially
+        allWallpapersList = flattenTree(galleryData);
+        shuffleArray(allWallpapersList); // Shuffle initially
 
-		// Initially, filtered wallpapers are all wallpapers
-		filteredWallpapers = [...allWallpapersList];
-		
-		buildFileTree(galleryData, treeContainer);
+        // Initially, filtered wallpapers are all wallpapers
+        filteredWallpapers = [...allWallpapersList];
 
-		// Initial load of wallpapers
-		loadedWallpapersCount = 0; // Reset count
-		loadMoreWallpapers();
+        buildFileTree(galleryData, treeContainer);
 
-		// Add an overlay for mobile view to close sidebar
-		const overlay = document.createElement('div');
-		overlay.className = 'overlay';
-		document.body.appendChild(overlay);
-		overlay.addEventListener('click', toggleSidebar);
-	}
+        // Initial load of wallpapers
+        loadedWallpapersCount = 0; // Reset count
+        loadMoreWallpapers();
 
-	function setupEventListeners() {
-		if (sidebarToggle) {
-			sidebarToggle.addEventListener('click', toggleSidebar);
-		}
-		if (randomWallpaperBtn) {
-			randomWallpaperBtn.addEventListener('click', showRandomWallpaper);
-		}
-		if (searchInput) {
-			searchInput.addEventListener('input', debounce(handleSearch, 300));
-		}
-		if (favoritesBtn) {
-			favoritesBtn.addEventListener('click', showFavorites);
-		}
-	}
+        // Add an overlay for mobile view to close sidebar
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        document.body.appendChild(overlay);
+        overlay.addEventListener('click', toggleSidebar);
+    }
 
-	function toggleSidebar() {
-		sidebar.classList.toggle('open');
-		sidebarToggle.classList.toggle('open');
-	}
+    function setupEventListeners() {
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', toggleSidebar);
+        }
+        if (randomWallpaperBtn) {
+            randomWallpaperBtn.addEventListener('click', showRandomWallpaper);
+        }
+        if (searchInput) {
+            searchInput.addEventListener('input', debounce(handleSearch, 300));
+        }
+        if (favoritesBtn) {
+            favoritesBtn.addEventListener('click', showFavorites);
+        }
+    }
 
-	function loadFavorites() {
-		const storedFavorites = localStorage.getItem('wallpaperFavorites');
-		if (storedFavorites) {
-			favorites = JSON.parse(storedFavorites);
-		}
-	}
+    function toggleSidebar() {
+        sidebar.classList.toggle('open');
+        sidebarToggle.classList.toggle('open');
+    }
 
-	function saveFavorites() {
-		localStorage.setItem('wallpaperFavorites', JSON.stringify(favorites));
-	}
+    function loadFavorites() {
+        const storedFavorites = localStorage.getItem('wallpaperFavorites');
+        if (storedFavorites) {
+            favorites = JSON.parse(storedFavorites);
+        }
+    }
 
-	function toggleFavorite(wallpaper) {
-		const index = favorites.findIndex((fav) => fav.full === wallpaper.full);
-		if (index > -1) {
-			favorites.splice(index, 1);
-		} else {
-			favorites.push(wallpaper);
-		}
-		saveFavorites();
-	}
+    function saveFavorites() {
+        localStorage.setItem('wallpaperFavorites', JSON.stringify(favorites));
+    }
 
-	function showFavorites() {
-		document
-			.querySelectorAll('.tree-item.active')
-			.forEach((el) => el.classList.remove('active'));
-		favoritesBtn.classList.add('active');
-		filteredWallpapers = [...favorites];
-		resetAndLoadGallery();
-		if (window.innerWidth <= 768) {
-			toggleSidebar();
-		}
-	}
+    function toggleFavorite(wallpaper) {
+        const index = favorites.findIndex((fav) => fav.full === wallpaper.full);
+        if (index > -1) {
+            favorites.splice(index, 1);
+        } else {
+            favorites.push(wallpaper);
+        }
+        saveFavorites();
+    }
 
-	function setRandomTheme() {
-		const baseHue = Math.floor(Math.random() * 360);
-		const accentColor = `hsl(${baseHue}, 80%, 50%)`;
-		const backgroundColorStart = `hsl(${baseHue}, 15%, 8%)`;
-		const backgroundColorEnd = `hsl(${(baseHue + 60) % 360}, 15%, 12%)`;
+    function showFavorites() {
+        document
+            .querySelectorAll('.tree-item.active')
+            .forEach((el) => el.classList.remove('active'));
+        favoritesBtn.classList.add('active');
+        filteredWallpapers = [...favorites];
+        resetAndLoadGallery();
+        if (window.innerWidth <= 768) {
+            toggleSidebar();
+        }
+    }
 
-		document.documentElement.style.setProperty(
-			'--accent-color',
-			accentColor
-		);
-		document.documentElement.style.setProperty(
-			'--primary-button-bg',
-			accentColor
-		);
-		document.documentElement.style.setProperty(
-			'--background-start',
-			backgroundColorStart
-		);
-		document.documentElement.style.setProperty(
-			'--background-end',
-			backgroundColorEnd
-		);
-	}
+    function setRandomTheme() {
+        const baseHue = Math.floor(Math.random() * 360);
+        const accentColor = `hsl(${baseHue}, 80%, 50%)`;
+        const backgroundColorStart = `hsl(${baseHue}, 15%, 8%)`;
+        const backgroundColorEnd = `hsl(${(baseHue + 60) % 360}, 15%, 12%)`;
 
-	// --- File Tree ---
-	function buildFileTree(node, container) {
-		const ul = document.createElement('ul');
-		ul.className = 'tree-node';
+        document.documentElement.style.setProperty(
+            '--accent-color',
+            accentColor
+        );
+        document.documentElement.style.setProperty(
+            '--primary-button-bg',
+            accentColor
+        );
+        document.documentElement.style.setProperty(
+            '--background-start',
+            backgroundColorStart
+        );
+        document.documentElement.style.setProperty(
+            '--background-end',
+            backgroundColorEnd
+        );
+    }
 
-		if (container === treeContainer) {
-			const allFolderLi = createTreeElement(
-				{ name: 'All', type: 'folder', children: [galleryData] },
-				true
-			);
-			allFolderLi.querySelector('.tree-item').classList.add('active');
-			ul.appendChild(allFolderLi);
+    // --- File Tree ---
+    function buildFileTree(node, container) {
+        const ul = document.createElement('ul');
+        ul.className = 'tree-node';
 
-			allFolderLi
-				.querySelector('.tree-item')
-				.addEventListener('click', (e) => {
-					e.stopPropagation();
-					document
-						.querySelectorAll('.tree-item.active')
-						.forEach((el) => el.classList.remove('active'));
-					allFolderLi
-						.querySelector('.tree-item')
-						.classList.add('active');
-					shuffleArray(allWallpapersList); // Shuffle when "All" is clicked
-					filteredWallpapers = [...allWallpapersList]; // Reset filtered wallpapers
-					resetAndLoadGallery(); // Reset and load for infinite scroll
-					if (window.innerWidth <= 768) toggleSidebar();
-				});
-		}
+        if (container === treeContainer) {
+            const allFolderLi = createTreeElement(
+                { name: 'All', type: 'folder', children: [galleryData] },
+                true
+            );
+            allFolderLi.querySelector('.tree-item').classList.add('active');
+            ul.appendChild(allFolderLi);
 
-		if (node.children) {
-			node.children
-				.filter((child) => child.type === 'folder')
-				.forEach((child) => {
-					const li = createTreeElement(child, false);
-					if (li) ul.appendChild(li);
-				});
-		}
-		container.innerHTML = '';
-		container.appendChild(ul);
-	}
+            allFolderLi
+                .querySelector('.tree-item')
+                .addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    document
+                        .querySelectorAll('.tree-item.active')
+                        .forEach((el) => el.classList.remove('active'));
+                    allFolderLi
+                        .querySelector('.tree-item')
+                        .classList.add('active');
+                    shuffleArray(allWallpapersList); // Shuffle when "All" is clicked
+                    filteredWallpapers = [...allWallpapersList]; // Reset filtered wallpapers
+                    resetAndLoadGallery(); // Reset and load for infinite scroll
+                    if (window.innerWidth <= 768) toggleSidebar();
+                });
+        }
 
-	function createTreeElement(node, isRoot) {
-		if (node.type !== 'folder') return null;
+        if (node.children) {
+            node.children
+                .filter((child) => child.type === 'folder')
+                .forEach((child) => {
+                    const li = createTreeElement(child, false);
+                    if (li) ul.appendChild(li);
+                });
+        }
+        container.innerHTML = '';
+        container.appendChild(ul);
+    }
 
-		const li = document.createElement('li');
-		li.className = 'tree-folder';
+    function createTreeElement(node, isRoot) {
+        if (node.type !== 'folder') return null;
 
-		const itemDiv = document.createElement('div');
-		itemDiv.className = 'tree-item';
+        const li = document.createElement('li');
+        li.className = 'tree-folder';
 
-		const hasSubfolders =
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'tree-item';
+
+        const hasSubfolders =
 			node.children &&
 			node.children.some((child) => child.type === 'folder');
 
-		let chevronIcon = '';
-		if (hasSubfolders) {
-			chevronIcon =
+        let chevronIcon = '';
+        if (hasSubfolders) {
+            chevronIcon =
 				'<svg class="chevron" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>';
-		}
+        }
 
-		const folderIcon =
+        const folderIcon =
 			'<svg class="icon-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"></path></svg>';
-		const folderOpenIcon =
+        const folderOpenIcon =
 			'<svg class="icon-folder-open" viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"></path></svg>';
 
-		itemDiv.innerHTML = `
+        itemDiv.innerHTML = `
             ${chevronIcon}
             <span class="icon">${folderIcon}${folderOpenIcon}</span>
             <span class="name">${node.name}</span>
         `;
 
-		li.appendChild(itemDiv);
+        li.appendChild(itemDiv);
 
-		itemDiv.addEventListener('click', (e) => {
-			e.stopPropagation();
+        itemDiv.addEventListener('click', (e) => {
+            e.stopPropagation();
 
-			if (isRoot) {
-				document
-					.querySelectorAll('.tree-item.active')
-					.forEach((el) => el.classList.remove('active'));
-				itemDiv.classList.add('active');
-				resetAndLoadGallery(); // Reset and load for infinite scroll
-			} else {
-				handleTreeSelection(node, itemDiv);
-			}
+            if (isRoot) {
+                document
+                    .querySelectorAll('.tree-item.active')
+                    .forEach((el) => el.classList.remove('active'));
+                itemDiv.classList.add('active');
+                resetAndLoadGallery(); // Reset and load for infinite scroll
+            } else {
+                handleTreeSelection(node, itemDiv);
+            }
 
-			if (hasSubfolders) {
-				li.classList.toggle('open');
-			}
-		});
+            if (hasSubfolders) {
+                li.classList.toggle('open');
+            }
+        });
 
-		if (hasSubfolders) {
-			const childrenContainer = document.createElement('div');
-			childrenContainer.className = 'tree-children';
-			buildFileTree(node, childrenContainer);
-			li.appendChild(childrenContainer);
-		}
-		return li;
-	}
+        if (hasSubfolders) {
+            const childrenContainer = document.createElement('div');
+            childrenContainer.className = 'tree-children';
+            buildFileTree(node, childrenContainer);
+            li.appendChild(childrenContainer);
+        }
+        return li;
+    }
 
-	function handleTreeSelection(node, element) {
-		document
-			.querySelectorAll('.tree-item.active')
-			.forEach((el) => el.classList.remove('active'));
-		element.classList.add('active');
+    function handleTreeSelection(node, element) {
+        document
+            .querySelectorAll('.tree-item.active')
+            .forEach((el) => el.classList.remove('active'));
+        element.classList.add('active');
 
-		filteredWallpapers = flattenTree(node);
-		resetAndLoadGallery(); // Reset and load for infinite scroll
+        filteredWallpapers = flattenTree(node);
+        resetAndLoadGallery(); // Reset and load for infinite scroll
 
-		if (window.innerWidth <= 768) {
-			toggleSidebar();
-		}
-	}
+        if (window.innerWidth <= 768) {
+            toggleSidebar();
+        }
+    }
 
-	function flattenTree(node) {
-		let files = [];
-		if (node.type === 'file') {
-			return [node];
-		}
-		if (node.children) {
-			node.children.forEach((child) => {
-				files = files.concat(flattenTree(child));
-			});
-		}
-		return files;
-	}
+    function flattenTree(node) {
+        let files = [];
+        if (node.type === 'file') {
+            return [node];
+        }
+        if (node.children) {
+            node.children.forEach((child) => {
+                files = files.concat(flattenTree(child));
+            });
+        }
+        return files;
+    }
 
-	function shuffleArray(array) {
-		for (let i = array.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[array[i], array[j]] = [array[j], array[i]];
-		}
-	}
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
 
-	// --- Gallery Rendering ---
-	function renderGallery(wallpapersToAppend) {
-		if (!galleryContainer) return;
+    // --- Gallery Rendering ---
+    function renderGallery(wallpapersToAppend) {
+        if (!galleryContainer) return;
 
-		wallpapersToAppend.forEach((wallpaper, index) => {
-			const galleryItem = createGalleryItem(
-				wallpaper,
-				loadedWallpapersCount + index
-			); // Pass global index
-			galleryContainer.appendChild(galleryItem);
-		});
-		loadedWallpapersCount += wallpapersToAppend.length;
+        wallpapersToAppend.forEach((wallpaper, index) => {
+            const galleryItem = createGalleryItem(
+                wallpaper,
+                loadedWallpapersCount + index
+            ); // Pass global index
+            galleryContainer.appendChild(galleryItem);
+        });
+        loadedWallpapersCount += wallpapersToAppend.length;
 
-		galleryContainer.classList.toggle(
-			'single-item',
-			filteredWallpapers.length === 1
-		);
+        galleryContainer.classList.toggle(
+            'single-item',
+            filteredWallpapers.length === 1
+        );
 
-		if (loadedWallpapersCount >= filteredWallpapers.length) {
-			// All wallpapers loaded, disconnect observer
-			if (intersectionObserver) {
-				intersectionObserver.disconnect();
-			}
-		}
-	}
+        if (loadedWallpapersCount >= filteredWallpapers.length) {
+            // All wallpapers loaded, disconnect observer
+            if (intersectionObserver) {
+                intersectionObserver.disconnect();
+            }
+        }
+    }
 
-	function loadMoreWallpapers() {
-		if (
-			isLoadingMore ||
+    function loadMoreWallpapers() {
+        if (
+            isLoadingMore ||
 			loadedWallpapersCount >= filteredWallpapers.length
-		) {
-			return; // Already loading or all wallpapers loaded
-		}
+        ) {
+            return; // Already loading or all wallpapers loaded
+        }
 
-		isLoadingMore = true;
+        isLoadingMore = true;
 
-		const wallpapersToRender = filteredWallpapers.slice(
-			loadedWallpapersCount,
-			loadedWallpapersCount + wallpapersToLoad
-		);
+        const wallpapersToRender = filteredWallpapers.slice(
+            loadedWallpapersCount,
+            loadedWallpapersCount + wallpapersToLoad
+        );
 
-		if (wallpapersToRender.length > 0) {
-			renderGallery(wallpapersToRender);
-		} else if (loadedWallpapersCount === 0) {
-			// No wallpapers to display at all
-			galleryContainer.innerHTML =
+        if (wallpapersToRender.length > 0) {
+            renderGallery(wallpapersToRender);
+        } else if (loadedWallpapersCount === 0) {
+            // No wallpapers to display at all
+            galleryContainer.innerHTML =
 				'<p style="text-align: center; width: 100%;">No wallpapers to display in this category.</p>';
-		}
+        }
 
-		isLoadingMore = false;
-		updatePageIndicator();
-		setupInfiniteScroll();
-	}
+        isLoadingMore = false;
+        updatePageIndicator();
+        setupInfiniteScroll();
+    }
 
-	function setupInfiniteScroll() {
-		if (intersectionObserver) {
-			intersectionObserver.disconnect();
-		}
+    function setupInfiniteScroll() {
+        if (intersectionObserver) {
+            intersectionObserver.disconnect();
+        }
 
-		intersectionObserver = new IntersectionObserver(
-			(entries) => {
-				if (entries[0].isIntersecting && !isLoadingMore) {
-					loadMoreWallpapers();
-				}
-			},
-			{ rootMargin: '800px' } // Load when 800px from bottom
-		);
+        intersectionObserver = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && !isLoadingMore) {
+                    loadMoreWallpapers();
+                }
+            },
+            { rootMargin: '800px' } // Load when 800px from bottom
+        );
 
-		// Observe the last element in the gallery, or the gallery container itself if empty
-		const lastGalleryItem = galleryContainer.lastElementChild;
-		if (lastGalleryItem) {
-			intersectionObserver.observe(lastGalleryItem);
-		} else {
-			// If no items, observe the container itself to trigger initial load if needed
-			intersectionObserver.observe(galleryContainer);
-		}
-		updatePageIndicator();
-	}
+        // Observe the last element in the gallery, or the gallery container itself if empty
+        const lastGalleryItem = galleryContainer.lastElementChild;
+        if (lastGalleryItem) {
+            intersectionObserver.observe(lastGalleryItem);
+        } else {
+            // If no items, observe the container itself to trigger initial load if needed
+            intersectionObserver.observe(galleryContainer);
+        }
+        updatePageIndicator();
+    }
 
-	function resetAndLoadGallery() {
-		galleryContainer.innerHTML = ''; // Clear existing wallpapers
-		loadedWallpapersCount = 0; // Reset loaded count
-		isLoadingMore = false;
-		loadMoreWallpapers(); // Load initial batch
-		setupInfiniteScroll(); // Re-setup observer
-	}
+    function resetAndLoadGallery() {
+        galleryContainer.innerHTML = ''; // Clear existing wallpapers
+        loadedWallpapersCount = 0; // Reset loaded count
+        isLoadingMore = false;
+        loadMoreWallpapers(); // Load initial batch
+        setupInfiniteScroll(); // Re-setup observer
+    }
 
-	function updatePageIndicator() {
-		if (!pageIndicator) return;
-		const totalPages = Math.ceil(
-			filteredWallpapers.length / wallpapersToLoad
-		);
-		const currentPage = Math.ceil(loadedWallpapersCount / wallpapersToLoad);
-		if (totalPages > 0) {
-			pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
-		} else {
-			pageIndicator.textContent = '';
-		}
-	}
+    function updatePageIndicator() {
+        if (!pageIndicator) return;
+        const totalPages = Math.ceil(
+            filteredWallpapers.length / wallpapersToLoad
+        );
+        const currentPage = Math.ceil(loadedWallpapersCount / wallpapersToLoad);
+        if (totalPages > 0) {
+            pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+        } else {
+            pageIndicator.textContent = '';
+        }
+    }
 
-	function createGalleryItem(wallpaper, index) {
-		const galleryItem = document.createElement('div');
-		galleryItem.className = 'gallery-item';
-		const link = document.createElement('a');
-		link.href = wallpaper.full;
-		link.setAttribute('aria-label', `View wallpaper ${wallpaper.name}`);
-		link.addEventListener('click', (e) => {
-			e.preventDefault();
-			showLightbox(filteredWallpapers, index); // Use filteredWallpapers for lightbox
-		});
+    function createGalleryItem(wallpaper, index) {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        const link = document.createElement('a');
+        link.href = wallpaper.full;
+        link.setAttribute('aria-label', `View wallpaper ${wallpaper.name}`);
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLightbox(filteredWallpapers, index); // Use filteredWallpapers for lightbox
+        });
 
-		const img = new Image();
-		img.src = wallpaper.thumbnail;
-		img.alt = `Wallpaper: ${wallpaper.name}`;
-		galleryItem.classList.add('loading');
+        const img = new Image();
+        img.src = wallpaper.thumbnail;
+        img.alt = `Wallpaper: ${wallpaper.name}`;
+        galleryItem.classList.add('loading');
 
-		img.onload = () => {
-			const aspectRatio = img.naturalWidth / img.naturalHeight;
-			if (aspectRatio < 0.8) galleryItem.classList.add('portrait');
-			else if (aspectRatio > 2.0) galleryItem.classList.add('ultrawide');
-			galleryItem.classList.remove('loading');
-			galleryItem.classList.add('loaded');
-		};
+        img.onload = () => {
+            const aspectRatio = img.naturalWidth / img.naturalHeight;
+            if (aspectRatio < 0.8) galleryItem.classList.add('portrait');
+            else if (aspectRatio > 2.0) galleryItem.classList.add('ultrawide');
+            galleryItem.classList.remove('loading');
+            galleryItem.classList.add('loaded');
+        };
 
-		img.onerror = () => {
-			galleryItem.innerHTML = '<span>Image failed to load</span>';
-			galleryItem.classList.add('error');
-			galleryItem.classList.remove('loading');
-		};
+        img.onerror = () => {
+            galleryItem.innerHTML = '<span>Image failed to load</span>';
+            galleryItem.classList.add('error');
+            galleryItem.classList.remove('loading');
+        };
 
-		const title = document.createElement('div');
-		title.className = 'wallpaper-title';
-		title.textContent = wallpaper.name.split('.').slice(0, -1).join('.');
+        const title = document.createElement('div');
+        title.className = 'wallpaper-title';
+        title.textContent = wallpaper.name.split('.').slice(0, -1).join('.');
 
-		const favoriteBtn = document.createElement('button');
-		favoriteBtn.className = 'favorite-btn';
-		if (favorites.some((fav) => fav.full === wallpaper.full)) {
-			favoriteBtn.classList.add('favorited');
-		}
-		favoriteBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
-		favoriteBtn.addEventListener('click', (e) => {
-			e.stopPropagation();
-			e.preventDefault();
-			toggleFavorite(wallpaper);
-			favoriteBtn.classList.toggle('favorited');
-		});
+        const favoriteBtn = document.createElement('button');
+        favoriteBtn.className = 'favorite-btn';
+        if (favorites.some((fav) => fav.full === wallpaper.full)) {
+            favoriteBtn.classList.add('favorited');
+        }
+        favoriteBtn.innerHTML =
+			'<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+        favoriteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            toggleFavorite(wallpaper);
+            favoriteBtn.classList.toggle('favorited');
+        });
 
-		link.appendChild(img);
-		galleryItem.appendChild(link);
-		galleryItem.appendChild(title);
-		galleryItem.appendChild(favoriteBtn);
-		return galleryItem;
-	}
+        link.appendChild(img);
+        galleryItem.appendChild(link);
+        galleryItem.appendChild(title);
+        galleryItem.appendChild(favoriteBtn);
+        return galleryItem;
+    }
 
-	// --- Lightbox ---
+    // --- Lightbox ---
 
-	function showNextLightboxItem() {
-		if (!lightbox || !lightbox.visible()) return;
-		currentLightboxIndex =
+    function showNextLightboxItem() {
+        if (!lightbox || !lightbox.visible()) return;
+        currentLightboxIndex =
 			(currentLightboxIndex + 1) % lightboxWallpaperList.length;
-		updateLightbox(lightboxWallpaperList[currentLightboxIndex]);
-	}
+        updateLightbox(lightboxWallpaperList[currentLightboxIndex]);
+    }
 
-	function showPrevLightboxItem() {
-		if (!lightbox || !lightbox.visible()) return;
-		currentLightboxIndex =
+    function showPrevLightboxItem() {
+        if (!lightbox || !lightbox.visible()) return;
+        currentLightboxIndex =
 			(currentLightboxIndex - 1 + lightboxWallpaperList.length) %
 			lightboxWallpaperList.length;
-		updateLightbox(lightboxWallpaperList[currentLightboxIndex]);
-	}
+        updateLightbox(lightboxWallpaperList[currentLightboxIndex]);
+    }
 
-	function showLightbox(wallpaperList, index) {
-		if (!wallpaperList || wallpaperList.length === 0) return;
+    function showLightbox(wallpaperList, index) {
+        if (!wallpaperList || wallpaperList.length === 0) return;
 
-		lightboxWallpaperList = wallpaperList;
-		currentLightboxIndex = index;
-		const wallpaper = lightboxWallpaperList[currentLightboxIndex];
+        lightboxWallpaperList = wallpaperList;
+        currentLightboxIndex = index;
+        const wallpaper = lightboxWallpaperList[currentLightboxIndex];
 
-		if (lightbox) {
-			if (!lightbox.visible()) {
-				lightbox.show();
-			}
-			updateLightbox(wallpaper);
-			return;
-		}
+        if (lightbox) {
+            if (!lightbox.visible()) {
+                lightbox.show();
+            }
+            updateLightbox(wallpaper);
+            return;
+        }
 
-		const content = createLightboxContent(wallpaper);
-		lightbox = basicLightbox.create(content, {
-			onShow: (instance) => {
-				const lightboxElement = instance.element();
+        const content = createLightboxContent(wallpaper);
+        lightbox = basicLightbox.create(content, {
+            onShow: (instance) => {
+                const lightboxElement = instance.element();
 
-				const placeholder = lightboxElement.querySelector(
-					'.basicLightbox__placeholder'
-				);
-				const controls = placeholder.querySelectorAll(
-					'.lightbox-details, .lightbox-prev, .lightbox-next'
-				);
-				controls.forEach((control) =>
-					lightboxElement.appendChild(control)
-				);
+                const placeholder = lightboxElement.querySelector(
+                    '.basicLightbox__placeholder'
+                );
+                const controls = placeholder.querySelectorAll(
+                    '.lightbox-details, .lightbox-prev, .lightbox-next'
+                );
+                controls.forEach((control) =>
+                    lightboxElement.appendChild(control)
+                );
 
-				lightboxElement.querySelector('.lightbox-prev').onclick =
+                lightboxElement.querySelector('.lightbox-prev').onclick =
 					showPrevLightboxItem;
-				lightboxElement.querySelector('.lightbox-next').onclick =
+                lightboxElement.querySelector('.lightbox-next').onclick =
 					showNextLightboxItem;
 
-				keydownHandler = (e) => {
-					if (e.key === 'ArrowLeft') showPrevLightboxItem();
-					if (e.key === 'ArrowRight') showNextLightboxItem();
-				};
-				document.addEventListener('keydown', keydownHandler);
-			},
-			onClose: () => {
-				document.removeEventListener('keydown', keydownHandler);
-			},
-		});
+                keydownHandler = (e) => {
+                    if (e.key === 'ArrowLeft') showPrevLightboxItem();
+                    if (e.key === 'ArrowRight') showNextLightboxItem();
+                };
+                document.addEventListener('keydown', keydownHandler);
+            },
+            onClose: () => {
+                document.removeEventListener('keydown', keydownHandler);
+            },
+        });
 
-		lightbox.show(() => {
-			updateLightbox(wallpaper);
-		});
-	}
+        lightbox.show(() => {
+            updateLightbox(wallpaper);
+        });
+    }
 
-	function updateLightbox(wallpaper) {
-		if (!lightbox) return;
+    function updateLightbox(wallpaper) {
+        if (!lightbox) return;
 
-		const lightboxElement = lightbox.element();
-		const contentElement =
+        const lightboxElement = lightbox.element();
+        const contentElement =
 			lightboxElement.querySelector('.lightbox-content');
-		const img = contentElement.querySelector('img');
-		const wallpaperName = lightboxElement.querySelector('.wallpaper-name');
-		const wallpaperRes = lightboxElement.querySelector(
-			'.wallpaper-resolution'
-		);
-		const downloadBtn = lightboxElement.querySelector('.download-btn');
-		const favoriteBtn = lightboxElement.querySelector('.lightbox-favorite-btn');
+        const img = contentElement.querySelector('img');
+        const wallpaperName = lightboxElement.querySelector('.wallpaper-name');
+        const wallpaperRes = lightboxElement.querySelector(
+            '.wallpaper-resolution'
+        );
+        const downloadBtn = lightboxElement.querySelector('.download-btn');
+        const favoriteBtn = lightboxElement.querySelector(
+            '.lightbox-favorite-btn'
+        );
 
-		// Immediately display thumbnail and apply loading styles
-		contentElement.classList.add('loading');
-		img.src = wallpaper.thumbnail;
-		img.alt = `Thumbnail for ${wallpaper.name}`;
+        // Immediately display thumbnail and apply loading styles
+        contentElement.classList.add('loading');
+        img.src = wallpaper.thumbnail;
+        img.alt = `Thumbnail for ${wallpaper.name}`;
 
-		// Update text content
-		wallpaperName.textContent = wallpaper.name
-			.split('.')
-			.slice(0, -1)
-			.join('.');
-		wallpaperRes.textContent = 'Loading full resolution...';
-		downloadBtn.href = wallpaper.full;
+        // Update text content
+        wallpaperName.textContent = wallpaper.name
+            .split('.')
+            .slice(0, -1)
+            .join('.');
+        wallpaperRes.textContent = 'Loading full resolution...';
+        downloadBtn.href = wallpaper.full;
 
-		// Update favorite button
-		if (favorites.some((fav) => fav.full === wallpaper.full)) {
-			favoriteBtn.classList.add('favorited');
-		} else {
-			favoriteBtn.classList.remove('favorited');
-		}
-		favoriteBtn.onclick = () => {
-			toggleFavorite(wallpaper);
-			favoriteBtn.classList.toggle('favorited');
-		};
+        // Update favorite button
+        if (favorites.some((fav) => fav.full === wallpaper.full)) {
+            favoriteBtn.classList.add('favorited');
+        } else {
+            favoriteBtn.classList.remove('favorited');
+        }
+        favoriteBtn.onclick = () => {
+            toggleFavorite(wallpaper);
+            favoriteBtn.classList.toggle('favorited');
+        };
 
-		// Load full image in the background
-		const fullImage = new Image();
-		fullImage.src = wallpaper.full;
+        // Load full image in the background
+        const fullImage = new Image();
+        fullImage.src = wallpaper.full;
 
-		fullImage.onload = () => {
-			// Replace thumbnail with full image
-			img.src = fullImage.src;
-			img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
-			contentElement.classList.remove('loading');
+        fullImage.onload = () => {
+            // Replace thumbnail with full image
+            img.src = fullImage.src;
+            img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
+            contentElement.classList.remove('loading');
 
-			// Update resolution info
-			wallpaperRes.textContent = `${fullImage.naturalWidth}x${fullImage.naturalHeight}`;
+            // Update resolution info
+            wallpaperRes.textContent = `${fullImage.naturalWidth}x${fullImage.naturalHeight}`;
 
-			// Preload adjacent images for smoother navigation
-			const nextIndex =
+            // Preload adjacent images for smoother navigation
+            const nextIndex =
 				(currentLightboxIndex + 1) % lightboxWallpaperList.length;
-			const prevIndex =
+            const prevIndex =
 				(currentLightboxIndex - 1 + lightboxWallpaperList.length) %
 				lightboxWallpaperList.length;
-			if (nextIndex !== currentLightboxIndex) {
-				new Image().src = lightboxWallpaperList[nextIndex].full;
-			}
-			if (prevIndex !== currentLightboxIndex) {
-				new Image().src = lightboxWallpaperList[prevIndex].full;
-			}
-		};
+            if (nextIndex !== currentLightboxIndex) {
+                new Image().src = lightboxWallpaperList[nextIndex].full;
+            }
+            if (prevIndex !== currentLightboxIndex) {
+                new Image().src = lightboxWallpaperList[prevIndex].full;
+            }
+        };
 
-		fullImage.onerror = () => {
-			contentElement.classList.remove('loading');
-			wallpaperRes.textContent = 'Full image failed to load.';
-			// The thumbnail will remain visible
-		};
-	}
+        fullImage.onerror = () => {
+            contentElement.classList.remove('loading');
+            wallpaperRes.textContent = 'Full image failed to load.';
+            // The thumbnail will remain visible
+        };
+    }
 
-	function createLightboxContent(wallpaper) {
-		const imageName = wallpaper.name.split('.').slice(0, -1).join('.');
-		return `
+    function createLightboxContent(wallpaper) {
+        const imageName = wallpaper.name.split('.').slice(0, -1).join('.');
+        return `
             <div class="lightbox-content">
                 <div class="loader"></div>
                 <img src="" alt="">
@@ -592,32 +595,32 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="lightbox-prev">&lt;</button>
             <button class="lightbox-next">&gt;</button>
         `;
-	}
+    }
 
-	function showRandomWallpaper() {
-		const activeWallpapers =
+    function showRandomWallpaper() {
+        const activeWallpapers =
 			filteredWallpapers.length > 0
-				? filteredWallpapers
-				: allWallpapersList;
-		if (activeWallpapers.length === 0) return;
-		const randomIndex = Math.floor(Math.random() * activeWallpapers.length);
-		showLightbox(activeWallpapers, randomIndex);
-	}
+			    ? filteredWallpapers
+			    : allWallpapersList;
+        if (activeWallpapers.length === 0) return;
+        const randomIndex = Math.floor(Math.random() * activeWallpapers.length);
+        showLightbox(activeWallpapers, randomIndex);
+    }
 
-	function handleSearch(event) {
-		const searchTerm = event.target.value.toLowerCase();
-		filteredWallpapers = allWallpapersList.filter((wallpaper) =>
-			wallpaper.name.toLowerCase().includes(searchTerm)
-		);
-		resetAndLoadGallery();
-	}
+    function handleSearch(event) {
+        const searchTerm = event.target.value.toLowerCase();
+        filteredWallpapers = allWallpapersList.filter((wallpaper) =>
+            wallpaper.name.toLowerCase().includes(searchTerm)
+        );
+        resetAndLoadGallery();
+    }
 
-	function debounce(func, delay) {
-		let timeout;
-		return function (...args) {
-			const context = this;
-			clearTimeout(timeout);
-			timeout = setTimeout(() => func.apply(context, args), delay);
-		};
-	}
+    function debounce(func, delay) {
+        let timeout;
+        return function(...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), delay);
+        };
+    }
 });

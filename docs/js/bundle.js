@@ -637,16 +637,16 @@
 						.forEach((v) => b.appendChild(v)),
 						(b.querySelector('.lightbox-prev').onclick = R),
 						(b.querySelector('.lightbox-next').onclick = O),
-                        (b.querySelector('.favorite-btn').onclick = () => {
-                            const v = b.querySelector('.favorite-btn');
-                            const q = n[f];
-                            const isFavorited = v.classList.toggle('favorited');
-                            if (isFavorited) {
-                                u.push(q);
-                            } else {
-                                u = u.filter(w => w.full !== q.full);
-                            }
-                        }),
+						(b.querySelector('.favorite-btn').onclick = () => {
+							const v = b.querySelector('.favorite-btn');
+							const q = n[f];
+							const isFavorited = v.classList.toggle('favorited');
+							if (isFavorited) {
+								u.push(q);
+							} else {
+								u = u.filter((w) => w.full !== q.full);
+							}
+						}),
 						(d = (v) => {
 							(v.key === 'ArrowLeft' && R(),
 								v.key === 'ArrowRight' && O());
@@ -669,14 +669,17 @@
 			const m = i.querySelector('.wallpaper-name');
 			const b = i.querySelector('.wallpaper-resolution');
 			const E = i.querySelector('.download-btn');
-            const _ = i.querySelector('.favorite-btn');
+			const _ = i.querySelector('.favorite-btn');
 			(o.classList.add('loading'),
 				(r.src = t.thumbnail),
 				(r.alt = `Thumbnail for ${t.name}`),
 				(m.textContent = t.name.split('.').slice(0, -1).join('.')),
 				(b.textContent = 'Loading full resolution...'),
 				(E.href = t.full));
-            _.classList.toggle('favorited', u.some(w => w.full === t.full));
+			_.classList.toggle(
+				'favorited',
+				u.some((w) => w.full === t.full)
+			);
 			const v = new Image();
 			((v.src = t.full),
 				(v.onload = () => {
