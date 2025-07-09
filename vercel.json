@@ -1,4 +1,4 @@
 {
-	"buildCommand": "bash scripts/generate_gallery.sh && npm install && npm run build",
+	"buildCommand": "bash scripts/generate_gallery.sh && pnpm install && pnpm run build",
 	"outputDirectory": "public"
 }
