@@ -6,8 +6,8 @@
 set -e # Exit immediately if a command exits with a non-zero status.
 
 # --- Configuration ---
-TEMPLATE_REPO="Rishabh5321/wallpapers"
-TEMPLATE_VERCEL_APP="rishabh5321-wallpapers"
+TEMPLATE_REPO="Rishabh5321/wallsite"
+TEMPLATE_VERCEL_APP="rishabh5321-wallsite"
 README_FILE="readme.md"
 REPO_DESCRIPTION="A curated collection of stunning wallpapers, ready for one-click deployment."
 
