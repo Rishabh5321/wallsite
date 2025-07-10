@@ -43,9 +43,12 @@ export function showLightbox(wallpaperList, index) {
             const navControls = placeholder.querySelectorAll(
                 '.lightbox-prev, .lightbox-next'
             );
-            navControls.forEach((control) => lightboxElement.appendChild(control));
+            navControls.forEach((control) =>
+                lightboxElement.appendChild(control)
+            );
 
-            const lightboxDetails = placeholder.querySelector('.lightbox-details');
+            const lightboxDetails =
+				placeholder.querySelector('.lightbox-details');
             if (lightboxDetails) {
                 lightboxElement.appendChild(lightboxDetails);
             }
@@ -83,7 +86,7 @@ function updateLightbox(wallpaper) {
     const favoriteBtn = lightboxElement.querySelector('.lightbox-favorite-btn');
 
     contentElement.classList.add('loading');
-    console.log('Lightbox: Setting thumbnail src to:', encodeURI(wallpaper.thumbnail));
+
     img.src = encodeURI(wallpaper.thumbnail);
     img.alt = `Thumbnail for ${wallpaper.name}`;
     const currentThumbnail = wallpaper.thumbnail;
@@ -93,7 +96,7 @@ function updateLightbox(wallpaper) {
         .slice(0, -1)
         .join('.');
     wallpaperRes.textContent = 'Loading full resolution...';
-    console.log('Lightbox: Setting download button href to:', encodeURI(wallpaper.full));
+
     downloadBtn.href = encodeURI(wallpaper.full);
 
     favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
@@ -103,22 +106,17 @@ function updateLightbox(wallpaper) {
     };
 
     const fullImage = new Image();
-    console.log('Lightbox: Preloading full image from:', encodeURI(wallpaper.full));
+
     fullImage.src = encodeURI(wallpaper.full);
 
     fullImage.onload = () => {
-        console.log('Lightbox: Full image loaded successfully for', wallpaper.name);
-        console.log('Lightbox: Current img.src before update:', img.src);
-        console.log('Lightbox: currentThumbnail before update:', currentThumbnail);
-        // Debugging: Log the encoded thumbnail path for comparison
-        console.log('Lightbox: Encoded currentThumbnail:', encodeURI(currentThumbnail));
-        if (img.src.includes(encodeURI(currentThumbnail))) { // Ensure comparison is with encoded URI
+        if (img.src.includes(encodeURI(currentThumbnail))) {
+            // Ensure comparison is with encoded URI
             img.src = fullImage.src;
             img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
             contentElement.classList.remove('loading');
             wallpaperRes.textContent = `${fullImage.naturalWidth}x${fullImage.naturalHeight}`;
         } else {
-            console.warn('Lightbox: Thumbnail URL mismatch. img.src:', img.src, 'does not include encoded currentThumbnail:', encodeURI(currentThumbnail));
             // Fallback: Force update if mismatch, but log warning
             img.src = fullImage.src;
             img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
@@ -135,13 +133,22 @@ function updateLightbox(wallpaper) {
 				state.lightboxWallpaperList.length) %
 			state.lightboxWallpaperList.length;
         if (nextIndex !== state.currentLightboxIndex)
-            new Image().src = encodeURI(state.lightboxWallpaperList[nextIndex].full);
+            new Image().src = encodeURI(
+                state.lightboxWallpaperList[nextIndex].full
+            );
         if (prevIndex !== state.currentLightboxIndex)
-            new Image().src = encodeURI(state.lightboxWallpaperList[prevIndex].full);
+            new Image().src = encodeURI(
+                state.lightboxWallpaperList[prevIndex].full
+            );
     };
 
     fullImage.onerror = () => {
-        console.error('Lightbox: Full image failed to load for', wallpaper.name, 'URL:', encodeURI(wallpaper.full));
+        console.error(
+            'Lightbox: Full image failed to load for',
+            wallpaper.name,
+            'URL:',
+            encodeURI(wallpaper.full)
+        );
         contentElement.classList.remove('loading');
         wallpaperRes.textContent = 'Full image failed to load.';
     };
@@ -150,7 +157,7 @@ function updateLightbox(wallpaper) {
 function createLightboxContent(wallpaper) {
     const imageName = wallpaper.name.split('.').slice(0, -1).join('.');
     const encodedFullUrl = encodeURI(wallpaper.full);
-    console.log('Lightbox: Creating content with encoded full URL:', encodedFullUrl);
+
     return `
         <div class="lightbox-main-wrapper">
             <div class="lightbox-content">
