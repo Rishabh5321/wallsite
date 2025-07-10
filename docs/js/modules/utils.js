@@ -17,7 +17,10 @@ export function shuffleArray(array) {
 export function flattenTree(node) {
     let files = [];
     if (node.type === 'file') {
-        return [node];
+        const parts = node.full.split('/');
+        // The folder name is usually the second to last part if it's src/Category/file.jpg
+        const folderName = parts.length > 2 ? parts[parts.length - 2] : 'Root';
+        return [{ ...node, path: folderName }];
     }
     if (node.children) {
         node.children.forEach((child) => {

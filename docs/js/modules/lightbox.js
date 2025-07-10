@@ -82,6 +82,8 @@ function updateLightbox(wallpaper) {
     const img = contentElement.querySelector('img');
     const wallpaperName = lightboxElement.querySelector('.wallpaper-name');
     const wallpaperRes = lightboxElement.querySelector('.wallpaper-resolution');
+    const wallpaperFormat = lightboxElement.querySelector('.wallpaper-format');
+    const wallpaperFolder = lightboxElement.querySelector('.wallpaper-folder');
     const downloadBtn = lightboxElement.querySelector('.download-btn');
     const favoriteBtn = lightboxElement.querySelector('.lightbox-favorite-btn');
 
@@ -97,6 +99,13 @@ function updateLightbox(wallpaper) {
         .join('.');
     wallpaperRes.textContent = 'Loading full resolution...';
 
+    // Extract format
+    const format = wallpaper.name.split('.').pop().toUpperCase();
+    wallpaperFormat.textContent = `Format: ${format}`;
+
+    // Extract folder
+    wallpaperFolder.textContent = `Folder: ${wallpaper.path}`;
+
     downloadBtn.href = encodeURI(wallpaper.full);
 
     favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
@@ -106,23 +115,15 @@ function updateLightbox(wallpaper) {
     };
 
     const fullImage = new Image();
-
+    console.log('Attempting to load full image from:', encodeURI(wallpaper.full));
     fullImage.src = encodeURI(wallpaper.full);
 
     fullImage.onload = () => {
-        if (img.src.includes(encodeURI(currentThumbnail))) {
-            // Ensure comparison is with encoded URI
-            img.src = fullImage.src;
-            img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
-            contentElement.classList.remove('loading');
-            wallpaperRes.textContent = `${fullImage.naturalWidth}x${fullImage.naturalHeight}`;
-        } else {
-            // Fallback: Force update if mismatch, but log warning
-            img.src = fullImage.src;
-            img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
-            contentElement.classList.remove('loading');
-            wallpaperRes.textContent = `${fullImage.naturalWidth}x${fullImage.naturalHeight}`;
-        }
+        console.log('Full image loaded successfully. Setting img.src to:', fullImage.src);
+        img.src = fullImage.src;
+        img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
+        contentElement.classList.remove('loading');
+        wallpaperRes.textContent = `${fullImage.naturalWidth}x${fullImage.naturalHeight}`;
 
         const nextIndex =
 			(state.currentLightboxIndex + 1) %
@@ -168,6 +169,8 @@ function createLightboxContent(wallpaper) {
                 <div class="wallpaper-info">
                     <span class="wallpaper-name">${imageName}</span>
                     <span class="wallpaper-resolution"></span>
+                    <span class="wallpaper-format"></span>
+                    <span class="wallpaper-folder"></span>
                 </div>
                 <div class="lightbox-actions">
                     <button class="lightbox-favorite-btn" aria-label="Toggle Favorite">
