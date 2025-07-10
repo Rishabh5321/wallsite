@@ -98,6 +98,7 @@ function createGalleryItem(wallpaper, index) {
     const img = new Image();
     img.src = encodeURI(wallpaper.thumbnail);
     img.alt = `Wallpaper: ${wallpaper.name}`;
+    img.loading = 'lazy';
     galleryItem.classList.add('loading');
 
     img.onload = () => {
