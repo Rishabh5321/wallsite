@@ -39,11 +39,16 @@ export function showLightbox(wallpaperList, index) {
             const placeholder = lightboxElement.querySelector(
                 '.basicLightbox__placeholder'
             );
-            // Only move navigation controls, lightbox-details remains within lightbox-main-wrapper
+            // Move navigation controls and lightbox-details out of the placeholder
             const navControls = placeholder.querySelectorAll(
                 '.lightbox-prev, .lightbox-next'
             );
             navControls.forEach((control) => lightboxElement.appendChild(control));
+
+            const lightboxDetails = placeholder.querySelector('.lightbox-details');
+            if (lightboxDetails) {
+                lightboxElement.appendChild(lightboxDetails);
+            }
 
             lightboxElement.querySelector('.lightbox-prev').onclick =
 				showPrevLightboxItem;

@@ -253,8 +253,17 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
-        height: 100%;
+        height: 100%; /* Ensure it takes full height of basicLightbox */
         justify-content: center; /* Center content vertically */
+    }
+
+    .lightbox-content { /* Add this block */
+        flex-grow: 1; /* Allow content to take available space */
+        display: flex; /* Make it a flex container to center image */
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* Hide overflow if image is too big */
+        width: 100%; /* Ensure it takes full width */
     }
 
     .lightbox-details {
@@ -303,6 +312,14 @@
 
     .lightbox-content img {
         max-width: 95vw;
-        max-height: 85vh; /* Increased from 75vh */
+        max-height: 95vh; /* Reverted to 95vh as lightbox-details is now truly fixed */
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        opacity: 1;
+        transition:
+            opacity 0.4s ease-in-out,
+            transform 0.4s ease,
+            filter 0.4s ease;
     }
 }
