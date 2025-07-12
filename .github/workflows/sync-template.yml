@@ -27,6 +27,13 @@ jobs:
           # Crucially, exclude the src, .git, and specific workflow files
           rsync -av --delete --exclude='/src/' --exclude='.git/' --exclude='.github/workflows/publish-docker.yml' --exclude='.github/workflows/sync-template.yml' source/ destination/
 
+      - name: Create placeholder in src directory
+        run: |
+          mkdir -p destination/src
+          echo "## Add Your Wallpapers Here" > destination/src/README.md
+          echo "" >> destination/src/README.md
+          echo "You can upload your .jpg, .png, .gif, or .webp files directly into this folder." >> destination/src/README.md
+
       - name: Commit and push changes
         run: |
           cd destination
