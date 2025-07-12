@@ -1,0 +1,24 @@
+# Git files
+.git
+.gitignore
+
+# Node modules
+node_modules
+
+# Nix environment files
+.direnv
+.envrc
+flake.nix
+flake.lock
+
+# Vercel deployment files
+.vercel
+
+# GitHub specific files
+.github
+
+# Build output
+public
+
+# Source files (to be mounted by user)
+src
