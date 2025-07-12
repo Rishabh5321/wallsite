@@ -17,23 +17,21 @@ You can view the live wallpaper gallery hosted from this repository here: **[Liv
 
 ---
 
-## 🚀 One-Click Deployment
+## 🚀 Create Your Own Gallery
 
-Deploy your own wallpaper gallery in a single click. This will create a new repository in your GitHub account from a clean template, ready for your wallpapers.
+Ready to build your own gallery? Click the button below to generate a new repository from the template. You'll get a clean copy of the project with an empty `src` folder, ready for your wallpapers and deployment.
 
-<div align="center">
-  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRishabh5321%2Fwallsite-template&repository-name=my-wallpaper-gallery"><img src="https://vercel.com/button" alt="Deploy with Vercel"/></a>
-  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/Rishabh5321/wallsite-template"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
+<div align="center" style="margin-top: 20px; margin-bottom: 20px;">
+  <a href="https://github.com/Rishabh5321/wallsite-template/generate" style="text-decoration: none;">
+    <img src="https://img.shields.io/badge/Use%20this%20template-brightgreen?style=for-the-badge&logo=github" alt="Use this template"/>
+  </a>
 </div>
 
-### How it Works
-1. Clicking a deploy button creates a new repository for you from a clean template.
-2. It then deploys this new repository to Vercel or Netlify.
-3. Once deployed, you can add wallpapers to the `src` folder in your new repository, and your site will automatically update.
+After you create your repository, follow the simple deployment instructions in your new repository's `README.md` file.
 
 ---
 
-### 🔧 Advanced Use: Self-hosting with Docker
+## 🔧 Advanced Use: Self-hosting with Docker
 
 For users who want to host the gallery on their own server, a pre-built Docker image is available.
 
@@ -54,7 +52,7 @@ For users who want to host the gallery on their own server, a pre-built Docker i
       --name my-wallsite \
       ghcr.io/rishabh5321/wallsite:latest
     ```
-    Your gallery will be running at `http://<HOST-IP>:8000`.
+    Your gallery will be running at `http://localhost:8000`.
 
 ## License
 
