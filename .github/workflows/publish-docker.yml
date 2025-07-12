@@ -15,6 +15,10 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
+            - name: Get short SHA
+              id: sha
+              run: echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
             - name: Log in to the GitHub Container Registry
               uses: docker/login-action@v3
               with:
@@ -27,4 +31,6 @@ jobs:
               with:
                   context: .
                   push: true
-                  tags: ghcr.io/rishabh5321/wallsite:latest
+                  tags: |
+                    ghcr.io/rishabh5321/wallsite:latest
+                    ghcr.io/rishabh5321/wallsite:${{ steps.sha.outputs.sha }}
