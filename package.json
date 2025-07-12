@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "npm run build:assets && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --watch=forever --servedir=public",
+    "start": "npm run build:assets && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --watch --servedir=public --serve=0.0.0.0:8000",
     "dev": "npm run start",
     "build:assets": "rm -rf public && mkdir -p public && cp -r docs/* public/ && cp -r src public/",
     "build": "npm run build:assets && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --minify",
