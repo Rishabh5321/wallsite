@@ -24,8 +24,8 @@ jobs:
       - name: Sync files from source to destination
         run: |
           # Copy all files, deleting ones that no longer exist in source
-          # Crucially, exclude the src and .git directories
-          rsync -av --delete --exclude='/src/' --exclude='.git/' source/ destination/
+          # Crucially, exclude the src, .git, and specific workflow files
+          rsync -av --delete --exclude='/src/' --exclude='.git/' --exclude='.github/workflows/publish-docker.yml' --exclude='.github/workflows/sync-template.yml' source/ destination/
 
       - name: Commit and push changes
         run: |
