@@ -41,7 +41,7 @@ export function showLightbox(wallpaperList, index) {
             );
             // Move navigation controls and lightbox-details out of the placeholder
             const navControls = placeholder.querySelectorAll(
-                '.lightbox-prev, .lightbox-next'
+                '.lightbox-prev, .lightbox-next, .lightbox-close'
             );
             navControls.forEach((control) =>
                 lightboxElement.appendChild(control)
@@ -57,10 +57,13 @@ export function showLightbox(wallpaperList, index) {
 				showPrevLightboxItem;
             lightboxElement.querySelector('.lightbox-next').onclick =
 				showNextLightboxItem;
+            lightboxElement.querySelector('.lightbox-close').onclick = () =>
+                state.lightbox.close();
 
             state.keydownHandler = (e) => {
                 if (e.key === 'ArrowLeft') showPrevLightboxItem();
                 if (e.key === 'ArrowRight') showNextLightboxItem();
+                if (e.key === 'Escape') state.lightbox.close();
             };
             document.addEventListener('keydown', state.keydownHandler);
         },
@@ -188,5 +191,6 @@ function createLightboxContent(wallpaper) {
         </div>
         <button class="lightbox-prev" aria-label="Previous">&lt;</button>
         <button class="lightbox-next" aria-label="Next">&gt;</button>
+        <button class="lightbox-close" aria-label="Close">&times;</button>
     `;
 }

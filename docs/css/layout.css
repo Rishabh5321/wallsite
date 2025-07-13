@@ -293,3 +293,9 @@ footer a:hover {
 	}
 }
 
+/* Hide header buttons when lightbox is visible */
+body:has(.basicLightbox--visible) .top-right-nav,
+body:has(.basicLightbox--visible) .sidebar-toggle {
+	display: none;
+}
+

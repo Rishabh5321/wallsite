@@ -207,6 +207,35 @@
     right: 20px;
 }
 
+.lightbox-close {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	background: rgba(0, 0, 0, 0.3);
+	color: white;
+	border: none;
+	font-size: 2.5rem;
+	font-weight: bold;
+	line-height: 1;
+	cursor: pointer;
+	padding: 0;
+	z-index: 1001;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition:
+		background-color 0.3s ease,
+		transform 0.2s ease;
+}
+
+.lightbox-close:hover {
+	background: rgba(0, 0, 0, 0.6);
+	transform: scale(1.1);
+}
+
 .lightbox-content img {
     max-width: 95vw;
     max-height: 95vh;

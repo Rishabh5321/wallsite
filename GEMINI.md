@@ -55,14 +55,14 @@ The Docker setup is designed for maximum flexibility. It uses a single-stage `Do
 -   **Hierarchical Folder Navigation**: Users can navigate through nested folders directly in the main gallery view, with a "Back" button for easy traversal.
 -   **Dynamic Masonry Grid**: A responsive grid that intelligently arranges wallpapers based on their aspect ratio (portrait, ultrawide).
 -   **Performant Image Loading**: Utilizes lazy loading and infinite scroll to ensure a fast and smooth user experience, even with large galleries.
--   **Advanced Lightbox**: A full-featured lightbox for viewing images with keyboard navigation, image preloading, and metadata display (name, resolution, format, folder).
+-   **Advanced Lightbox**: A full-featured lightbox for viewing images with keyboard navigation, image preloading, an explicit close button, and metadata display (name, resolution, format, folder). The mobile view is optimized to ensure controls are always visible, regardless of wallpaper aspect ratio.
 -   **Category Browsing**: A collapsible sidebar with a hierarchical file tree lets users browse wallpapers by category.
 -   **Client-Side Search**: Instantly search and filter wallpapers by name.
 -   **Advanced Sorting**: Users can sort wallpapers by name, modification date, or resolution.
 -   **Favorites System**: Users can mark their favorite wallpapers, which are saved locally in the browser.
 -   **Random Discovery**: A "Random" button to discover new wallpapers easily. The initial view is a random assortment of all available wallpapers.
 -   **User-Controlled Theme (Dark/Light Mode)**: The UI features a toggle for users to switch between dedicated light and dark modes. The theme also respects the user's system preference (`prefers-color-scheme`). On each page load, a new random color scheme is generated, and the toggle switches between the light and dark variants of that scheme.
--   **Fully Responsive**: The entire interface is optimized for both desktop and mobile devices.
+-   **Fully Responsive**: The entire interface is optimized for both desktop and mobile devices. Conflicting UI elements are automatically hidden in the lightbox view for a cleaner experience.
 
 ### Automation & Deployment
 -   **Automatic Gallery Generation**: A highly optimized, parallelized shell script (`generate_gallery.sh`) uses ImageMagick to automatically generate thumbnails and a JSON-like data file for the frontend at high speed.
