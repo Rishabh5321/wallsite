@@ -20,6 +20,10 @@ if ! command -v magick &> /dev/null && ! command -v convert &> /dev/null; then
     echo "   On Debian/Ubuntu: sudo apt-get update && sudo apt-get install imagemagick" >&2
     exit 1
 fi
+if ! command -v identify &> /dev/null; then
+    echo "❌ Error: 'identify' command (part of ImageMagick) not found." >&2
+    exit 1
+fi
 MAGICK_CMD=$(command -v magick || command -v convert)
 echo "✅ Using ImageMagick command: $MAGICK_CMD" >&2
 
@@ -114,7 +118,14 @@ process_directory() {
         img_dir_path=$(dirname "$relative_img_path")
         local thumb_path="$THUMBNAIL_DIR/$relative_img_path"
 
-        children_json+=("{\"name\": \"$img_file\", \"type\": \"file\", \"path\": \"$img_dir_path\", \"full\": \"$img_path\", \"thumbnail\": \"$thumb_path\"}")
+        # Get additional metadata
+        local modified_date
+        modified_date=$(stat -c %Y "$img_path")
+        # [0] is used to only take the first frame of animated images (like GIFs)
+        local resolution
+        resolution=$(identify -format '%wx%h' "$img_path[0]")
+
+        children_json+=("{\"name\": \"$img_file\", \"type\": \"file\", \"path\": \"$img_dir_path\", \"full\": \"$img_path\", \"thumbnail\": \"$thumb_path\", \"modified\": $modified_date, \"resolution\": \"$resolution\"}")
     done
 
     local folder_name

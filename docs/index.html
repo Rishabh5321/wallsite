@@ -71,15 +71,32 @@
 						category from the sidebar or click on any wallpaper to
 						view the full-resolution image.
 					</p>
-					<div class="search-container">
-						<input
-							type="search"
-							id="search-input"
-							placeholder="Search wallpapers..."
-							aria-label="Search wallpapers"
-						/>
+					<div class="controls-container">
+						<div class="search-container">
+							<input
+								type="search"
+								id="search-input"
+								placeholder="Search wallpapers..."
+								aria-label="Search wallpapers"
+							/>
+						</div>
 					</div>
 				</header>
+
+				<div class="gallery-toolbar">
+					<div class="sorting-container">
+						<label for="sort-by">Sort by:</label>
+						<select id="sort-by">
+							<option value="default">Default</option>
+							<option value="name-asc">Name (A-Z)</option>
+							<option value="name-desc">Name (Z-A)</option>
+							<option value="date-new">Date (Newest)</option>
+							<option value="date-old">Date (Oldest)</option>
+							<option value="res-high">Resolution (High-Low)</option>
+							<option value="res-low">Resolution (Low-High)</option>
+						</select>
+					</div>
+				</div>
 
 				<div class="gallery-container">
 					<!-- Wallpapers will be dynamically injected here -->

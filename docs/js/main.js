@@ -76,4 +76,64 @@ function setupEventListeners() {
             }
         });
     }
+    if (dom.sortBy) {
+        dom.sortBy.addEventListener('change', handleSort);
+    }
+}
+
+function handleSort() {
+    const sortBy = dom.sortBy.value;
+    // Separate folders and files to sort files independently
+    const wallpapers = state.filteredWallpapers.filter(
+        (item) => item.type === 'file'
+    );
+    const folders = state.filteredWallpapers.filter(
+        (item) => item.type === 'folder'
+    );
+
+    switch (sortBy) {
+        case 'name-asc':
+            wallpapers.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+        case 'name-desc':
+            wallpapers.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+        case 'date-new':
+            wallpapers.sort((a, b) => b.modified - a.modified);
+            break;
+        case 'date-old':
+            wallpapers.sort((a, b) => a.modified - b.modified);
+            break;
+        case 'res-high':
+            wallpapers.sort((a, b) => {
+                const resA = a.resolution.split('x').map(Number);
+                const resB = b.resolution.split('x').map(Number);
+                return resB[0] * resB[1] - (resA[0] * resA[1]);
+            });
+            break;
+        case 'res-low':
+            wallpapers.sort((a, b) => {
+                const resA = a.resolution.split('x').map(Number);
+                const resB = b.resolution.split('x').map(Number);
+                return resA[0] * resA[1] - (resB[0] * resB[1]);
+            });
+            break;
+        case 'default':
+        default:
+            // For default, we don't re-sort the wallpapers themselves,
+            // but let the gallery reset logic handle it (e.g. folders first)
+            // If the current view is the flat list, we might want to shuffle it.
+            if (state.directoryHistory.length <= 1 && dom.searchInput.value === '') {
+                 shuffleArray(wallpapers);
+            } else {
+                // In a directory, sort by name by default
+                wallpapers.sort((a, b) => a.name.localeCompare(b.name));
+            }
+            break;
+    }
+
+    // Re-combine folders and sorted wallpapers
+    state.filteredWallpapers = [...folders, ...wallpapers];
+    // Reset gallery without applying default sorting
+    resetAndLoadGallery(false);
 }

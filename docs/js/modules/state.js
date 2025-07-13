@@ -8,6 +8,7 @@ export const dom = {
     pageIndicator: document.getElementById('page-indicator'),
     favoritesBtn: document.getElementById('favorites-btn'),
     themeToggle: document.getElementById('theme-toggle'),
+    sortBy: document.getElementById('sort-by'),
 };
 
 export const state = {
