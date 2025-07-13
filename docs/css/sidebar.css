@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     z-index: 1100;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    box-shadow: 0 0 20px var(--shadow-color);
     transform: translateX(-100%);
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -182,7 +182,7 @@
     top: 15px;
     left: 15px;
     z-index: 1200;
-    background: rgba(0,0,0,0.3);
+    background: var(--secondary-button-bg);
     border: 1px solid var(--card-border-color);
     border-radius: 50%;
     width: 50px;
@@ -200,7 +200,7 @@
     display: block;
     width: 24px;
     height: 2px;
-    background: white;
+    background: var(--secondary-button-text);
     margin: 2px 0;
     transition: all 0.3s ease;
 }

@@ -3,15 +3,21 @@
 @import url("sidebar.css");
 
 :root {
-	--background-start: hsl(240, 20%, 10%);
-	--background-end: hsl(300, 20%, 15%);
+	--primary-button-text: #ffffff;
+	--card-bg-color: rgba(255, 255, 255, 0.7);
+	--card-border-color: rgba(0, 0, 0, 0.1);
+	--text-color: #2c3e50;
+	--shadow-color: rgba(0, 0, 0, 0.1);
+	--secondary-button-bg: rgba(0, 0, 0, 0.05);
+	--secondary-button-text: #2c3e50;
+}
+
+html.dark-mode {
+	--primary-button-text: #121212;
 	--card-bg-color: rgba(255, 255, 255, 0.05);
 	--card-border-color: rgba(255, 255, 255, 0.1);
 	--text-color: #e0e0e0;
-	--accent-color: #bb86fc;
 	--shadow-color: rgba(0, 0, 0, 0.5);
-	--primary-button-bg: #bb86fc;
-	--primary-button-text: #121212;
 	--secondary-button-bg: rgba(255, 255, 255, 0.1);
 	--secondary-button-text: #e0e0e0;
 }
@@ -51,6 +57,40 @@ header {
 	display: flex;
 	align-items: center;
 	gap: 10px;
+}
+
+.theme-toggle-btn {
+	background-color: var(--secondary-button-bg);
+	color: var(--secondary-button-text);
+	border: 1px solid var(--card-border-color);
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.3s ease;
+	padding: 0;
+}
+
+.theme-toggle-btn:hover {
+	transform: scale(1.1);
+	background-color: var(--accent-color);
+	color: var(--primary-button-text);
+}
+
+.theme-toggle-btn .icon {
+	width: 22px;
+	height: 22px;
+}
+
+html:not(.dark-mode) .theme-toggle-btn .icon-sun {
+	display: none;
+}
+
+html.dark-mode .theme-toggle-btn .icon-moon {
+	display: none;
 }
 
 .github-link {
@@ -134,7 +174,8 @@ footer {
 	margin-top: 80px;
 	padding: 20px;
 	border-top: 1px solid var(--card-border-color);
-	color: rgba(255, 255, 255, 0.6);
+	color: var(--text-color);
+	opacity: 0.7;
 }
 
 footer a {
@@ -145,7 +186,7 @@ footer a {
 }
 
 footer a:hover {
-	color: #fff;
+	color: var(--text-color);
 }
 
 #page-indicator {

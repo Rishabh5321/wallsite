@@ -7,6 +7,7 @@ export const dom = {
     searchInput: document.getElementById('search-input'),
     pageIndicator: document.getElementById('page-indicator'),
     favoritesBtn: document.getElementById('favorites-btn'),
+    themeToggle: document.getElementById('theme-toggle'),
 };
 
 export const state = {
@@ -24,4 +25,5 @@ export const state = {
     loadedWallpapersCount: 0,
     isLoadingMore: false,
     intersectionObserver: null,
+    themeBaseHue: null,
 };

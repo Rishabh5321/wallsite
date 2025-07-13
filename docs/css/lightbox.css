@@ -216,7 +216,7 @@
 }
 
 .loader {
-    border: 8px solid #f3f3f3;
+    border: 8px solid var(--secondary-button-bg);
     border-top: 8px solid var(--accent-color);
     border-radius: 50%;
     width: 60px;

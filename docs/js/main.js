@@ -1,6 +1,7 @@
 import { dom, state } from './modules/state.js';
 import { debounce, shuffleArray, flattenTree } from './modules/utils.js';
-import { setRandomTheme, toggleSidebar } from './modules/ui.js';
+import { toggleSidebar } from './modules/ui.js';
+import { initializeTheme } from './modules/theme.js';
 import { loadFavorites } from './modules/favorites.js';
 import { buildFileTree } from './modules/file-tree.js';
 import {
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initializeApp() {
-    setRandomTheme();
+    initializeTheme();
     loadFavorites();
     setupEventListeners();
 
