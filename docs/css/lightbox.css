@@ -253,78 +253,123 @@
 }
 
 @media (max-width: 768px) {
-    .lightbox-main-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        height: 100%; /* Ensure it takes full height of basicLightbox */
-        justify-content: center; /* Center content vertically */
-    }
+	/* Ensure the main lightbox container uses flexbox to manage its direct children */
+	.basicLightbox {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end; /* Align details to the bottom */
+		overflow: hidden; /* Prevent content from pushing the container */
+	}
 
-    .lightbox-content { /* Add this block */
-        flex-grow: 1; /* Allow content to take available space */
-        display: flex; /* Make it a flex container to center image */
-        justify-content: center;
-        align-items: center;
-        overflow: hidden; /* Hide overflow if image is too big */
-        width: 100%; /* Ensure it takes full width */
-    }
+	/* The placeholder should contain the image and take up the available space */
+	.basicLightbox__placeholder {
+		flex: 1 1 auto; /* Allow growing and shrinking, with an auto basis */
+		min-height: 0; /* CRITICAL for allowing the container to shrink for tall images */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+	}
 
-    .lightbox-details {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 12px;
-        position: fixed; /* Changed from relative to fixed */
-        bottom: 0; /* Ensure it's at the bottom */
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.8);
-        transform: none;
-        width: 100%; /* Take full width */
-        box-sizing: border-box; /* Include padding in width */
-    }
+	.lightbox-main-wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+		justify-content: center;
+	}
 
-    .wallpaper-name {
-        font-size: 1em;
-    }
+	.lightbox-content {
+		flex-grow: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		width: 100%;
+	}
 
-    .wallpaper-resolution {
-        font-size: 0.8em;
-    }
+	/* The image must be contained within its parent */
+	.lightbox-content img {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+		border-radius: 8px;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+	}
 
-    .download-btn {
-        margin-top: 10px;
-        padding: 8px 14px;
-        font-size: 0.9em;
-    }
+	/* The details bar should have a fixed height based on its content */
+	.lightbox-details {
+		flex: 0 0 auto; /* Do not grow, do not shrink */
+		position: relative;
+		width: 100%;
+		box-sizing: border-box;
+		background: rgba(0, 0, 0, 0.85);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+		color: white;
+		z-index: 1001;
+		display: flex;
+		flex-direction: row; /* Arrange info and actions side-by-side */
+		align-items: center;
+		justify-content: space-between; /* Space out info and actions */
+		padding: 12px 16px;
+		gap: 16px;
+	}
 
-    .lightbox-prev,
-    .lightbox-next {
-        font-size: 1.5rem;
-        width: 40px;
-        height: 40px;
-        top: 45%;
-    }
+	.wallpaper-info {
+		text-align: left;
+		flex-shrink: 1;
+		min-width: 0;
+	}
 
-    .lightbox-prev {
-        left: 10px;
-    }
+	.wallpaper-name {
+		font-size: 1em;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 
-    .lightbox-next {
-        right: 10px;
-    }
+	.wallpaper-resolution {
+		font-size: 0.8em;
+	}
 
-    .lightbox-content img {
-        max-width: 95vw;
-        max-height: 95vh; /* Reverted to 95vh as lightbox-details is now truly fixed */
-        object-fit: contain;
-        border-radius: 8px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        opacity: 1;
-        transition:
-            opacity 0.4s ease-in-out,
-            transform 0.4s ease,
-            filter 0.4s ease;
-    }
+	.lightbox-actions {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 8px; /* Space out the buttons */
+		flex-shrink: 0; /* Prevent action buttons from shrinking */
+	}
+
+	.download-btn {
+		padding: 8px 16px;
+		font-size: 0.9em;
+		white-space: nowrap;
+	}
+
+	.lightbox-favorite-btn,
+	.share-btn {
+		padding: 8px;
+		margin-right: 0;
+	}
+
+	.lightbox-prev,
+	.lightbox-next {
+		font-size: 1.5rem;
+		width: 40px;
+		height: 40px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.lightbox-prev {
+		left: 10px;
+	}
+
+	.lightbox-next {
+		right: 10px;
+	}
 }
