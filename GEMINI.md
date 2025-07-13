@@ -58,6 +58,7 @@ The Docker setup is designed for maximum flexibility. It uses a single-stage `Do
 -   **Advanced Lightbox**: A full-featured lightbox for viewing images with keyboard navigation, image preloading, and metadata display (name, resolution, format, folder).
 -   **Category Browsing**: A collapsible sidebar with a hierarchical file tree lets users browse wallpapers by category.
 -   **Client-Side Search**: Instantly search and filter wallpapers by name.
+-   **Advanced Sorting**: Users can sort wallpapers by name, modification date, or resolution.
 -   **Favorites System**: Users can mark their favorite wallpapers, which are saved locally in the browser.
 -   **Random Discovery**: A "Random" button to discover new wallpapers easily. The initial view is a random assortment of all available wallpapers.
 -   **User-Controlled Theme (Dark/Light Mode)**: The UI features a toggle for users to switch between dedicated light and dark modes. The theme also respects the user's system preference (`prefers-color-scheme`). On each page load, a new random color scheme is generated, and the toggle switches between the light and dark variants of that scheme.
