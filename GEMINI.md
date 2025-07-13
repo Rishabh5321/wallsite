@@ -4,7 +4,7 @@ This file provides context for the AI assistant to understand the architecture a
 
 ## 1. Project Overview
 
-This is a self-hostable wallpaper gallery project. Its primary goal is to be distributed as a user-friendly GitHub template, allowing others to easily create and deploy their own galleries. The project supports two main deployment methods: a simple Git-based deployment via Vercel/Netlify and an advanced self-hosted deployment via a pre-built Docker image.
+This is a self-hostable wallpaper gallery project. Its primary goal is to be distributed as a user-friendly GitHub template, allowing others to easily create and deploy their own galleries. The project supports two main deployment methods: a simple Git-based deployment via Vercel/Netlify and an advanced self-hosted deployment via Docker.
 
 ## 2. Core Technologies
 
@@ -39,6 +39,10 @@ This project uses two separate repositories to function correctly:
 -   **`sync-template.yml`:** This workflow runs in the main `wallsite` repo. It copies all relevant files (excluding `/src` and specific developer workflows) to the `wallsite-template` repo to keep it up-to-date.
 -   **`publish-docker.yml`:** This workflow runs in the main `wallsite` repo to build and publish the Docker image to the GitHub Container Registry (GHCR).
 
+### Dynamic Docker Deployment
+
+The Docker setup is designed for maximum flexibility. It uses a single-stage `Dockerfile` with a custom `docker-entrypoint.sh` script. This architecture ensures that when a user runs the container with their own wallpaper directory mounted to `/app/src`, the gallery is generated **at runtime**. This means any changes to the user's local wallpaper folder are reflected on the next container start, without needing to rebuild the Docker image itself.
+
 ## 4. Development Rules & Conventions
 
 -   **Rule 1: Never edit generated files directly.** The `docs/js/gallery-data.js` file and the contents of the `src/thumbnails` directory are generated artifacts. To update them, run the `./scripts/generate_gallery.sh` script.
@@ -63,7 +67,7 @@ This project uses two separate repositories to function correctly:
 -   **Automatic Gallery Generation**: A highly optimized, parallelized shell script (`generate_gallery.sh`) uses ImageMagick to automatically generate thumbnails and a JSON-like data file for the frontend at high speed.
 -   **GitHub Actions Integration**: The `update-gallery.yml` workflow automatically runs the generation script whenever images in the `src` directory are updated.
 -   **One-Click Deployment**: Pre-configured for seamless deployment to Vercel and Netlify.
--   **Self-Hosting Support**: A `Dockerfile` and `docker-compose.yml` are provided for easy self-hosting. A pre-built image is available on GHCR.
+-   **Dynamic Self-Hosting**: A `Dockerfile` and `docker-entrypoint.sh` are provided for easy self-hosting. The container generates all gallery content on startup based on a mounted volume, allowing for dynamic wallpaper management without rebuilding the image.
 
 ### Developer Experience
 -   **Live Development Server**: A `dev` script (`pnpm run dev`) provides a live-reloading development server powered by `esbuild` for a fast and efficient workflow.
