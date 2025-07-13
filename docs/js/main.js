@@ -1,14 +1,9 @@
 import { dom, state } from './modules/state.js';
 import { debounce, shuffleArray, flattenTree } from './modules/utils.js';
-import {
-    setRandomTheme,
-    toggleSidebar,
-    updatePageIndicator,
-} from './modules/ui.js';
+import { setRandomTheme, toggleSidebar } from './modules/ui.js';
 import { loadFavorites } from './modules/favorites.js';
 import { buildFileTree } from './modules/file-tree.js';
 import {
-    loadMoreWallpapers,
     resetAndLoadGallery,
     showRandomWallpaper,
 } from './modules/gallery.js';
@@ -21,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
         if (dom.galleryContainer) {
             dom.galleryContainer.innerHTML =
-				'<p>Error: Wallpaper data could not be loaded.</p>';
+                '<p>Error: Wallpaper data could not be loaded.</p>';
         }
         return;
     }
@@ -34,14 +29,18 @@ function initializeApp() {
     loadFavorites();
     setupEventListeners();
 
+    state.galleryData = galleryData;
+    // A flat list of all wallpapers is useful for global search and random
     state.allWallpapersList = flattenTree(galleryData);
-    shuffleArray(state.allWallpapersList);
 
+    // Start at the root directory, but display all wallpapers randomly.
+    state.currentDirectory = galleryData;
+    state.directoryHistory = [galleryData];
     state.filteredWallpapers = [...state.allWallpapersList];
+    shuffleArray(state.filteredWallpapers);
 
     buildFileTree(galleryData);
-
-    loadMoreWallpapers();
+    resetAndLoadGallery(false); // Pass false to prevent sorting
 
     const overlay = document.createElement('div');
     overlay.className = 'overlay';
@@ -65,8 +64,12 @@ function setupEventListeners() {
                 .querySelectorAll('.tree-item.active')
                 .forEach((el) => el.classList.remove('active'));
             dom.favoritesBtn.classList.add('active');
+
+            // Set current view to favorites
+            state.directoryHistory = []; // No history for favorites view
             state.filteredWallpapers = [...state.favorites];
-            resetAndLoadGallery();
+            resetAndLoadGallery(false); // Pass false to prevent sorting
+
             if (window.innerWidth <= 768) {
                 toggleSidebar();
             }

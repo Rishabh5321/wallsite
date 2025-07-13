@@ -103,8 +103,8 @@ function updateLightbox(wallpaper) {
     const format = wallpaper.name.split('.').pop().toUpperCase();
     wallpaperFormat.textContent = `Format: ${format}`;
 
-    // Extract folder
-    wallpaperFolder.textContent = `Folder: ${wallpaper.path}`;
+    // Extract folder and provide a fallback
+    wallpaperFolder.textContent = `Folder: ${wallpaper.path || 'Root'}`;
 
     downloadBtn.href = encodeURI(wallpaper.full);
 
@@ -115,11 +115,9 @@ function updateLightbox(wallpaper) {
     };
 
     const fullImage = new Image();
-    console.log('Attempting to load full image from:', encodeURI(wallpaper.full));
     fullImage.src = encodeURI(wallpaper.full);
 
     fullImage.onload = () => {
-        console.log('Full image loaded successfully. Setting img.src to:', fullImage.src);
         img.src = fullImage.src;
         img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
         contentElement.classList.remove('loading');
@@ -144,12 +142,6 @@ function updateLightbox(wallpaper) {
     };
 
     fullImage.onerror = () => {
-        console.error(
-            'Lightbox: Full image failed to load for',
-            wallpaper.name,
-            'URL:',
-            encodeURI(wallpaper.full)
-        );
         contentElement.classList.remove('loading');
         wallpaperRes.textContent = 'Full image failed to load.';
     };

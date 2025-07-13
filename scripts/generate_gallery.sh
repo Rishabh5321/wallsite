@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-# 🎨 Wallpaper Gallery Generator v3.3
+# 🎨 Wallpaper Gallery Generator v3.5 (Parallelized)
 #
 # This script recursively scans the 'src' directory to build a nested JSON
-# structure, including a special 'Uncategorized' folder for images in the root.
-# All logs are sent to stderr to keep stdout clean for the JSON output.
+# structure and generates thumbnails in parallel for faster execution.
 
-echo "🎨 Initializing Wallpaper Gallery Generation (v3.3)..." >&2
+echo "🎨 Initializing Wallpaper Gallery Generation (v3.5)..." >&2
 
 # --- Configuration ---
 SRC_DIR="src"
@@ -14,7 +13,6 @@ THUMBNAIL_DIR="src/thumbnails"
 OUTPUT_JS="docs/js/gallery-data.js"
 IMG_EXTENSIONS=("png" "jpg" "jpeg" "gif" "webp")
 THUMBNAIL_WIDTH=400
-UNCATEGORIZED_FOLDER_NAME="Uncategorized"
 
 # --- Pre-flight Checks ---
 if ! command -v magick &> /dev/null && ! command -v convert &> /dev/null; then
@@ -22,11 +20,52 @@ if ! command -v magick &> /dev/null && ! command -v convert &> /dev/null; then
     echo "   On Debian/Ubuntu: sudo apt-get update && sudo apt-get install imagemagick" >&2
     exit 1
 fi
-
 MAGICK_CMD=$(command -v magick || command -v convert)
 echo "✅ Using ImageMagick command: $MAGICK_CMD" >&2
 
+# Determine the number of parallel jobs
+if command -v nproc &> /dev/null; then
+    NUM_JOBS=$(nproc)
+else
+    NUM_JOBS=4 # Fallback value
+fi
+echo "✅ Using up to $NUM_JOBS parallel jobs for thumbnail generation." >&2
+
+
 # --- Functions ---
+
+# Function to generate a single thumbnail. To be used with xargs.
+# It takes one argument: the path to the source image.
+export SRC_DIR
+export THUMBNAIL_DIR
+export THUMBNAIL_WIDTH
+export MAGICK_CMD
+
+generate_thumbnail() {
+    local img_path="$1"
+    # Correctly handle paths with spaces or special characters
+    local relative_img_path="${img_path#$SRC_DIR/}"
+    local relative_dir_path
+    relative_dir_path=$(dirname "$relative_img_path")
+    local img_file
+    img_file=$(basename "$img_path")
+
+    local thumb_dir="$THUMBNAIL_DIR/$relative_dir_path"
+    local thumb_path="$thumb_dir/$img_file"
+
+    # Create the thumbnail directory if it doesn't exist
+    mkdir -p "$thumb_dir"
+
+    # Generate thumbnail if it doesn't exist or if the source is newer
+    if [ ! -f "$thumb_path" ] || [ "$img_path" -nt "$thumb_path" ]; then
+        echo "   -> Generating thumbnail for '$img_path'..." >&2
+        # [0] is used to only take the first frame of animated images (like GIFs)
+        "$MAGICK_CMD" "$img_path[0]" -resize "${THUMBNAIL_WIDTH}x" "$thumb_path"
+    fi
+}
+export -f generate_thumbnail
+
+# Function to join array elements by a delimiter
 join_by() {
   local d=${1-} f=${2-}
   if shift 2; then
@@ -34,99 +73,92 @@ join_by() {
   fi
 }
 
-# Recursively process a directory to build the JSON structure
+# Recursively process a directory to build the JSON structure.
+# This function now ASSUMES thumbnails have already been generated.
 process_directory() {
     local dir_path="$1"
     local relative_dir_path="${dir_path#$SRC_DIR/}"
-    local parent_thumb_dir="$2"
-    local is_root=false
-    local folder_name
-
+    
     if [ "$dir_path" == "$SRC_DIR" ]; then
-        is_root=true
-        folder_name="Wallpapers"
         relative_dir_path=""
-    else
-        folder_name=$(basename "$dir_path")
     fi
 
-    echo "🔍 Processing directory: '$dir_path'..." >&2
+    local children_json=()
 
-    local current_thumb_dir
-    if [ -z "$relative_dir_path" ]; then
-        current_thumb_dir="$parent_thumb_dir"
-    else
-        current_thumb_dir="$parent_thumb_dir/$relative_dir_path"
-    fi
-    mkdir -p "$current_thumb_dir"
+    # Process subdirectories
+    for subdir_path in "$dir_path"/*/; do
+        if [ -d "${subdir_path}" ]; then
+            local subdir_name
+            subdir_name=$(basename "$subdir_path")
+            if [ "$subdir_name" == "thumbnails" ]; then
+                continue
+            fi
+            children_json+=("$(process_directory "$subdir_path")")
+        fi
+    done
 
+    # Process images
     local find_params=()
     for ext in "${IMG_EXTENSIONS[@]}"; do
         [ ${#find_params[@]} -gt 0 ] && find_params+=(-o)
         find_params+=(-iname "*.$ext")
     done
-
+    
     mapfile -t images < <(find "$dir_path" -maxdepth 1 -type f \( "${find_params[@]}" \) 2>/dev/null | sort -V)
-    mapfile -t subdirs < <(find "$dir_path" -maxdepth 1 -type d | tail -n +2 | sort -V)
 
-    local children_json=()
-
-    # Process subdirectories first
-    for subdir_path in "${subdirs[@]}"; do
-        if [ "$subdir_path" == "$THUMBNAIL_DIR" ]; then
-            continue
-        fi
-        children_json+=("$(process_directory "$subdir_path" "$parent_thumb_dir")")
-    done
-
-    # Handle images
-    local image_json_entries=()
     for img_path in "${images[@]}"; do
-        local img_file=$(basename "$img_path")
-        local thumb_path="$current_thumb_dir/$img_file"
-        local js_full_path="$img_path"
-        local js_thumb_path="$thumb_path"
+        local img_file
+        img_file=$(basename "$img_path")
+        local relative_img_path="${img_path#$SRC_DIR/}"
+        local img_dir_path
+        img_dir_path=$(dirname "$relative_img_path")
+        local thumb_path="$THUMBNAIL_DIR/$relative_img_path"
 
-        if [ ! -f "$thumb_path" ] || [ "$img_path" -nt "$thumb_path" ]; then
-            echo "   -> Generating thumbnail for '$img_file'..." >&2
-            "$MAGICK_CMD" "$img_path" -resize "${THUMBNAIL_WIDTH}x" "$thumb_path"
-        fi
-        image_json_entries+=("{\"name\": \"$img_file\", \"type\": \"file\", \"full\": \"$js_full_path\", \"thumbnail\": \"$js_thumb_path\"}")
+        children_json+=("{\"name\": \"$img_file\", \"type\": \"file\", \"path\": \"$img_dir_path\", \"full\": \"$img_path\", \"thumbnail\": \"$thumb_path\"}")
     done
 
-    # If this is a non-root directory, add its images to its children
-    if ! $is_root && [ ${#image_json_entries[@]} -gt 0 ]; then
-        children_json+=("${image_json_entries[@]}")
+    local folder_name
+    folder_name=$(basename "$dir_path")
+    if [ "$dir_path" == "$SRC_DIR" ]; then
+        folder_name="Wallpapers"
     fi
 
-    # If this is the root directory, create an "Uncategorized" folder for root images
-    if $is_root && [ ${#image_json_entries[@]} -gt 0 ]; then
-        echo "🔍 Processing uncategorized images..." >&2
-        local uncategorized_wallpapers_json="[$(join_by , "${image_json_entries[@]}")]"
-        local uncategorized_folder_json="{\"name\": \"$UNCATEGORIZED_FOLDER_NAME\", \"type\": \"folder\", \"path\": \"\", \"children\": ${uncategorized_wallpapers_json}}"
-        children_json+=("$uncategorized_folder_json")
-    fi
-
-    local children_output
+    local children_output=""
     if [ ${#children_json[@]} -gt 0 ]; then
         children_output=",\"children\": [$(join_by , "${children_json[@]}")]"
     else
         children_output=""
     fi
     
-echo "{\"name\": \"$folder_name\", \"type\": \"folder\", \"path\": \"$relative_dir_path\" ${children_output}}"
+    echo "{\"name\": \"$folder_name\", \"type\": \"folder\", \"path\": \"$relative_dir_path\" ${children_output}}"
 }
 
 # --- Main Script ---
-echo "🖼️  Generating nested gallery data..." >&2
 
-gallery_data_json=$(process_directory "$SRC_DIR" "$THUMBNAIL_DIR")
+# 1. Clean old thumbnails directory to remove orphans
+echo "🗑️  Cleaning old thumbnails directory..." >&2
+rm -rf "$THUMBNAIL_DIR"
+mkdir -p "$THUMBNAIL_DIR"
+
+# 2. Find all images and generate thumbnails in parallel
+echo "🖼️  Finding all images and generating thumbnails in parallel..." >&2
+find_params=()
+for ext in "${IMG_EXTENSIONS[@]}"; do
+    [ ${#find_params[@]} -gt 0 ] && find_params+=(-o)
+    find_params+=(-name "*.$ext")
+done
+find "$SRC_DIR" -type f \( "${find_params[@]}" \) -print0 | xargs -0 -n 1 -P "$NUM_JOBS" bash -c 'generate_thumbnail "$@"' _
+
+# 3. Generate the gallery data JSON
+echo "🔍 Generating nested gallery data..." >&2
+gallery_data_json=$(process_directory "$SRC_DIR")
 
 if [ -z "$gallery_data_json" ]; then
     echo "❌ No images or folders found. Gallery will not be updated." >&2
     exit 0
 fi
 
+# 4. Write the JSON data to the output file
 echo "✅ Data generation complete. Writing to '$OUTPUT_JS'..." >&2
 echo "const galleryData = ${gallery_data_json};" > "$OUTPUT_JS"
 

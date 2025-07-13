@@ -1,6 +1,6 @@
 export function debounce(func, delay) {
     let timeout;
-    return function(...args) {
+    return function (...args) {
         const context = this;
         clearTimeout(timeout);
         timeout = setTimeout(() => func.apply(context, args), delay);
@@ -14,13 +14,16 @@ export function shuffleArray(array) {
     }
 }
 
+/**
+ * Flattens the gallery data tree into a simple list of all files,
+ * ensuring the path from the parent is preserved.
+ * @param {object} node - The current node in the gallery data tree.
+ * @returns {Array} A flat array of file objects.
+ */
 export function flattenTree(node) {
     let files = [];
     if (node.type === 'file') {
-        const parts = node.full.split('/');
-        // The folder name is usually the second to last part if it's src/Category/file.jpg
-        const folderName = parts.length > 2 ? parts[parts.length - 2] : 'Root';
-        return [{ ...node, path: folderName }];
+        return [node]; // The node from generate_gallery.sh already has the path
     }
     if (node.children) {
         node.children.forEach((child) => {
