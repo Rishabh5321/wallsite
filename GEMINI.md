@@ -48,23 +48,25 @@ This project uses two separate repositories to function correctly:
 ## 5. Project Features
 
 ### Frontend & User Experience
+-   **Hierarchical Folder Navigation**: Users can navigate through nested folders directly in the main gallery view, with a "Back" button for easy traversal.
 -   **Dynamic Masonry Grid**: A responsive grid that intelligently arranges wallpapers based on their aspect ratio (portrait, ultrawide).
 -   **Performant Image Loading**: Utilizes lazy loading and infinite scroll to ensure a fast and smooth user experience, even with large galleries.
 -   **Advanced Lightbox**: A full-featured lightbox for viewing images with keyboard navigation, image preloading, and metadata display (name, resolution, format, folder).
 -   **Category Browsing**: A collapsible sidebar with a hierarchical file tree lets users browse wallpapers by category.
 -   **Client-Side Search**: Instantly search and filter wallpapers by name.
 -   **Favorites System**: Users can mark their favorite wallpapers, which are saved locally in the browser.
--   **Random Discovery**: A "Random" button to discover new wallpapers easily.
+-   **Random Discovery**: A "Random" button to discover new wallpapers easily. The initial view is a random assortment of all available wallpapers.
 -   **Dynamic Theme**: The UI generates a new random color theme on each visit for a fresh look.
 -   **Fully Responsive**: The entire interface is optimized for both desktop and mobile devices.
 
 ### Automation & Deployment
--   **Automatic Gallery Generation**: A shell script (`generate_gallery.sh`) uses ImageMagick to automatically generate thumbnails and a JSON-like data file for the frontend.
+-   **Automatic Gallery Generation**: A highly optimized, parallelized shell script (`generate_gallery.sh`) uses ImageMagick to automatically generate thumbnails and a JSON-like data file for the frontend at high speed.
 -   **GitHub Actions Integration**: The `update-gallery.yml` workflow automatically runs the generation script whenever images in the `src` directory are updated.
 -   **One-Click Deployment**: Pre-configured for seamless deployment to Vercel and Netlify.
 -   **Self-Hosting Support**: A `Dockerfile` and `docker-compose.yml` are provided for easy self-hosting. A pre-built image is available on GHCR.
 
 ### Developer Experience
+-   **Live Development Server**: A `dev` script (`pnpm run dev`) provides a live-reloading development server powered by `esbuild` for a fast and efficient workflow.
 -   **GitHub Template**: Designed to be used as a template, allowing for easy project scaffolding.
 -   **Modular Codebase**: The frontend JavaScript is organized into clean, reusable ES modules.
 -   **Reproducible Environments**: A `flake.nix` file is included for setting up a consistent development environment using Nix.
