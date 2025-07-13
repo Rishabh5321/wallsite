@@ -146,13 +146,12 @@ process_directory() {
 
 # --- Main Script ---
 
-# 1. Clean old thumbnails directory to remove orphans
-echo "🗑️  Cleaning old thumbnails directory..." >&2
-rm -rf "$THUMBNAIL_DIR"
+# 1. Ensure the main thumbnail directory exists
+echo "✅ Ensuring thumbnail directory exists..." >&2
 mkdir -p "$THUMBNAIL_DIR"
 
-# 2. Find all images and generate thumbnails in parallel
-echo "🖼️  Finding all images and generating thumbnails in parallel..." >&2
+# 2. Find all images and generate thumbnails in parallel (if they don't exist)
+echo "🖼️  Finding all images and generating missing thumbnails in parallel..." >&2
 find_params=()
 for ext in "${IMG_EXTENSIONS[@]}"; do
     [ ${#find_params[@]} -gt 0 ] && find_params+=(-o)

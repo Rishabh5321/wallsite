@@ -17,12 +17,12 @@ if [ ! -d "/app/src" ] || [ -z "$(ls -A /app/src | grep -v -E '^(README.md|thumb
     exec http-server public --host 0.0.0.0 --port 8000
 fi
 
-# Run the gallery generation script to create thumbnails and data file.
-echo "🎨 Generating gallery data and thumbnails..."
-./scripts/generate_gallery.sh
+# Clean old thumbnails to ensure a fresh start, since the main script no longer does this.
+echo "🗑️  Cleaning old thumbnails directory..."
+rm -rf src/thumbnails
 
-# Build the application to populate the 'public' directory.
-echo "🏗️  Building static assets..."
+# Build the application. This will run the gallery generation script and then build the assets.
+echo "🏗️  Building static assets and generating gallery..."
 pnpm run build
 
 # Start the http-server to serve the generated content.
