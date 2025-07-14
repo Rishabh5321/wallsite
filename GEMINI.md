@@ -45,6 +45,7 @@ The Docker setup is designed for maximum flexibility. It uses a single-stage `Do
 - **Rule 1: Never edit generated files directly.** The `public/js/gallery-data.js` file and the contents of the `public/thumbnails` directory are generated artifacts. To update them, run the `pnpm run build` or `pnpm run dev` command.
 - **Rule 2: The template repository is sacred.** Do not make manual changes to the `wallsite-template` repository. All changes must be made in the main `wallsite` repository and will be synced automatically.
 - **Rule 3: The user experience is paramount.** The main `README.md` acts as a "launchpad" directing users to the template. The template's `README.md` provides the actual deployment steps for the user.
+- **Rule 4: Emphasize pure functions and separation of concerns.** The frontend code is structured to be highly modular. Business logic should be written in pure functions, separate from DOM manipulation and state management. The `main.js` and `events.js` modules are the primary places where DOM interactions should occur.
 
 ## 5. Project Features
 
