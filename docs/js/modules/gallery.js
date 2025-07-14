@@ -50,7 +50,7 @@ function createWallpaperItem(wallpaper, index) {
     favoriteBtn.className = 'favorite-btn';
     favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
     favoriteBtn.innerHTML =
-        '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+		'<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
     favoriteBtn.setAttribute('aria-label', 'Add to favorites');
     favoriteBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -96,10 +96,8 @@ function createBackItem() {
     backItem.addEventListener('click', () => {
         state.directoryHistory.pop();
         state.currentDirectory =
-            state.directoryHistory[state.directoryHistory.length - 1];
-        state.filteredWallpapers = [
-            ...(state.currentDirectory.children || []),
-        ];
+			state.directoryHistory[state.directoryHistory.length - 1];
+        state.filteredWallpapers = [...(state.currentDirectory.children || [])];
         resetAndLoadGallery();
     });
     return backItem;
@@ -124,7 +122,7 @@ function renderGallery(itemsToAppend) {
     dom.galleryContainer.classList.toggle(
         'single-item',
         state.filteredWallpapers.length === 1 &&
-            state.filteredWallpapers[0].type === 'file'
+			state.filteredWallpapers[0].type === 'file'
     );
 
     if (state.loadedWallpapersCount >= state.filteredWallpapers.length) {
@@ -137,7 +135,7 @@ function renderGallery(itemsToAppend) {
 export function loadMoreWallpapers() {
     if (
         state.isLoadingMore ||
-        state.loadedWallpapersCount >= state.filteredWallpapers.length
+		state.loadedWallpapersCount >= state.filteredWallpapers.length
     ) {
         return;
     }
@@ -152,7 +150,7 @@ export function loadMoreWallpapers() {
         renderGallery(itemsToRender);
     } else if (state.loadedWallpapersCount === 0) {
         dom.galleryContainer.innerHTML =
-            '<p style="text-align: center; width: 100%;">No items to display.</p>';
+			'<p style="text-align: center; width: 100%;">No items to display.</p>';
     }
 
     state.isLoadingMore = false;

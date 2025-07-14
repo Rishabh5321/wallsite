@@ -20,8 +20,14 @@ function applyThemeColors(theme) {
     }
 
     document.documentElement.style.setProperty('--accent-color', accentColor);
-    document.documentElement.style.setProperty('--primary-button-bg', accentColor);
-    document.documentElement.style.setProperty('--background-start', bgColorStart);
+    document.documentElement.style.setProperty(
+        '--primary-button-bg',
+        accentColor
+    );
+    document.documentElement.style.setProperty(
+        '--background-start',
+        bgColorStart
+    );
     document.documentElement.style.setProperty('--background-end', bgColorEnd);
 }
 
@@ -37,7 +43,11 @@ function applyTheme(theme) {
 }
 
 function toggleTheme() {
-    const currentTheme = document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light';
+    const currentTheme = document.documentElement.classList.contains(
+        'dark-mode'
+    )
+        ? 'dark'
+        : 'light';
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     applyTheme(newTheme);
     localStorage.setItem('theme', newTheme);
@@ -51,15 +61,19 @@ export function initializeTheme() {
     state.themeBaseHue = Math.floor(Math.random() * 360);
 
     const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDark = window.matchMedia(
+        '(prefers-color-scheme: dark)'
+    ).matches;
     const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
 
     applyTheme(currentTheme);
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-            const newTheme = e.matches ? 'dark' : 'light';
-            applyTheme(newTheme);
-        }
-    });
+    window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                const newTheme = e.matches ? 'dark' : 'light';
+                applyTheme(newTheme);
+            }
+        });
 }
