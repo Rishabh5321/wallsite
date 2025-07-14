@@ -3,19 +3,27 @@
 	"version": "1.0.0",
 	"description": "<div align=\"center\">   <h1>Wallpaper Gallery</h1>   <p>A curated collection of stunning wallpapers, ready for one-click deployment.</p> </div>",
 	"main": "index.js",
+	"sideEffects": [
+		"docs/js/app.js"
+	],
 	"directories": {
 		"doc": "docs"
 	},
 	"scripts": {
 		"generate": "pnpm run build:assets && bash ./scripts/generate_gallery.sh",
-		"dev": "pnpm run generate && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --servedir=public --serve=0.0.0.0:8000 --watch",
-		"build": "pnpm run generate && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --minify",
+		"dev": "pnpm run build:assets && pnpm run generate:gallery && concurrently \"pnpm:watch:assets\" \"pnpm:watch:js\"",
+		"watch:js": "esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --servedir=public --serve=0.0.0.0:8000 --watch --target=es2020,chrome90,firefox90,safari15",
+		"watch:assets": "onchange 'docs/**' -- pnpm run copy:assets",
+		"copy:assets": "cp -r docs/. public/",
+		"generate:gallery": "bash ./scripts/generate_gallery.sh",
+		"build": "pnpm run generate && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --minify --target=es2020,chrome90,firefox90,safari15 --metafile=meta.json --drop:console --define:process.env.NODE_ENV='\"production\"'",
 		"start": "pnpm run build && http-server public --host 0.0.0.0 --port 8000",
-		"build:assets": "rm -rf public && mkdir -p public && cp -r docs/* public/ && cp -r src public/",
+		"build:assets": "rm -rf public && mkdir -p public && cp -r docs/. public/ && cp -r src public/",
 		"lint": "eslint docs/js/**/*.js --fix",
 		"format": "prettier --write docs/js/**/*.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"prepare": "husky"
+		"prepare": "husky",
+		"analyze": "esbuild-visualizer --metadata meta.json"
 	},
 	"repository": {
 		"type": "git",
@@ -42,7 +50,9 @@
 		"http-server": "^14.1.1"
 	},
 	"devDependencies": {
+		"concurrently": "^9.2.0",
 		"esbuild": "^0.25.6",
+		"esbuild-visualizer": "^0.7.0",
 		"eslint": "^8.57.1",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-config-prettier": "^10.1.5",
@@ -50,6 +60,7 @@
 		"eslint-plugin-prettier": "^5.5.1",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.1.2",
+		"onchange": "^7.1.0",
 		"prettier": "^3.6.2"
 	}
 }

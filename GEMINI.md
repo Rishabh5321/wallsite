@@ -7,7 +7,7 @@ This is a self-hostable wallpaper gallery project. Its primary goal is to be dis
 ## 2. Core Technologies
 
 - **Frontend:** Vanilla JavaScript (ESM), HTML, CSS.
-- **Build Tool:** `esbuild` is used for bundling assets.
+- **Build Tool:** `esbuild` is used for bundling assets, with optimized configurations for development (watch mode, incremental builds) and production (minification, tree-shaking, target-specific outputs).
 - **Package Manager:** `pnpm`.
 - **Image Processing:** `ImageMagick` is a required dependency for thumbnail generation.
 - **Automation:** GitHub Actions are used for syncing the template repository.
@@ -44,7 +44,7 @@ The Docker setup is designed for maximum flexibility. It uses a single-stage `Do
 
 - **Rule 1: Never edit generated files directly.** The `public/js/gallery-data.js` file and the contents of the `public/thumbnails` directory are generated artifacts. To update them, run the `pnpm run build` or `pnpm run dev` command.
 - **Rule 2: The template repository is sacred.** Do not make manual changes to the `wallsite-template` repository. All changes must be made in the main `wallsite` repository and will be synced automatically.
-- **Rule 3: The user experience is paramount.** The main `README.md` acts as a "launchpad" directing users to the template. The template's `README.md` provides the actual deployment steps for the user.
+- **Rule 3: The user experience is paramount.** The main `README.md` acts as a "launchpad" directing users to the template. The's `README.md` provides the actual deployment steps for the user.
 - **Rule 4: Emphasize pure functions and separation of concerns.** The frontend code is structured to be highly modular. Business logic should be written in pure functions, separate from DOM manipulation and state management. The `main.js` and `events.js` modules are the primary places where DOM interactions should occur.
 
 ## 5. Project Features
@@ -71,7 +71,8 @@ The Docker setup is designed for maximum flexibility. It uses a single-stage `Do
 
 ### Developer Experience
 
-- **Live Development Server**: A `dev` script (`pnpm run dev`) provides a live-reloading development server powered by `esbuild` for a fast and efficient workflow.
+- **Live Development Server**: A `dev` script (`pnpm run dev`) provides a live-reloading development server powered by `esbuild`. It uses `onchange` to watch for file changes and only copies modified assets, resulting in a highly efficient development workflow.
+- **Bundle Analysis**: The production build generates a `meta.json` file, which can be analyzed using `pnpm run analyze` to visualize the bundle and inspect for tree-shaking effectiveness.
 - **GitHub Template**: Designed to be used as a template, allowing for easy project scaffolding.
 - **Modular Codebase**: The frontend JavaScript is organized into clean, reusable ES modules.
 - **Reproducible Environments**: A `flake.nix` file is included for setting up a consistent development environment using Nix.
