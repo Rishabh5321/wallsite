@@ -1,45 +1,55 @@
 {
-  "name": "wallpapers",
-  "version": "1.0.0",
-  "description": "<div align=\"center\">   <h1>Wallpaper Gallery</h1>   <p>A curated collection of stunning wallpapers, ready for one-click deployment.</p> </div>",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
-  "scripts": {
-    "generate": "pnpm run build:assets && bash ./scripts/generate_gallery.sh",
-    "dev": "pnpm run generate && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --servedir=public --serve=0.0.0.0:8000 --watch",
-    "build": "pnpm run generate && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --minify",
-    "start": "pnpm run build && http-server public --host 0.0.0.0 --port 8000",
-    "build:assets": "rm -rf public && mkdir -p public && cp -r docs/* public/ && cp -r src public/",
-    "lint": "eslint docs/js/**/*.js --fix",
-    "format": "prettier --write docs/js/**/*.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Rishabh5321/wallpapers.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Rishabh5321/wallpapers/issues"
-  },
-  "homepage": "https://github.com/Rishabh5321/wallpapers#readme",
-  "dependencies": {
-    "@vercel/analytics": "^1.5.0",
-    "@vercel/speed-insights": "^1.2.0",
-    "basiclightbox": "^5.0.4",
-    "http-server": "^14.1.1"
-  },
-  "devDependencies": {
-    "esbuild": "^0.25.6",
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^5.5.1",
-    "prettier": "^3.6.2"
-  }
+	"name": "wallpapers",
+	"version": "1.0.0",
+	"description": "<div align=\"center\">   <h1>Wallpaper Gallery</h1>   <p>A curated collection of stunning wallpapers, ready for one-click deployment.</p> </div>",
+	"main": "index.js",
+	"directories": {
+		"doc": "docs"
+	},
+	"scripts": {
+		"generate": "pnpm run build:assets && bash ./scripts/generate_gallery.sh",
+		"dev": "pnpm run generate && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --servedir=public --serve=0.0.0.0:8000 --watch",
+		"build": "pnpm run generate && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --minify",
+		"start": "pnpm run build && http-server public --host 0.0.0.0 --port 8000",
+		"build:assets": "rm -rf public && mkdir -p public && cp -r docs/* public/ && cp -r src public/",
+		"lint": "eslint docs/js/**/*.js --fix",
+		"format": "prettier --write docs/js/**/*.js",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"prepare": "husky"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Rishabh5321/wallpapers.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Rishabh5321/wallpapers/issues"
+	},
+	"homepage": "https://github.com/Rishabh5321/wallpapers#readme",
+	"lint-staged": {
+		"*.js": [
+			"eslint --fix",
+			"prettier --write"
+		],
+		"*.{css,json,md}": "prettier --write"
+	},
+	"dependencies": {
+		"@vercel/analytics": "^1.5.0",
+		"@vercel/speed-insights": "^1.2.0",
+		"basiclightbox": "^5.0.4",
+		"http-server": "^14.1.1"
+	},
+	"devDependencies": {
+		"esbuild": "^0.25.6",
+		"eslint": "^8.57.1",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-prettier": "^10.1.5",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^5.5.1",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.1.2",
+		"prettier": "^3.6.2"
+	}
 }
