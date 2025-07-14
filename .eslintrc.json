@@ -1,16 +1,23 @@
 {
-  "extends": ["standard", "prettier"],
+  "extends": ["airbnb-base", "prettier"],
   "env": {
     "browser": true,
     "es2021": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
   },
   "globals": {
     "galleryData": "readonly"
   },
   "rules": {
-    "semi": ["error", "always"],
-    "indent": ["error", 4],
-    "space-before-function-paren": ["error", "never"],
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "import/extensions": "off",
+    "no-use-before-define": "off",
+    "import/prefer-default-export": "off",
+    "no-plusplus": "off",
+    "no-param-reassign": "off",
+    "func-names": "off",
+    "no-console": "off"
   }
 }
