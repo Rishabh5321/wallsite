@@ -9,7 +9,7 @@ echo "🎨 Initializing Wallpaper Gallery Generation (v3.5)..." >&2
 
 # --- Configuration ---
 SRC_DIR="src"
-THUMBNAIL_DIR="src/thumbnails"
+THUMBNAIL_DIR="public/thumbnails"
 OUTPUT_JS="docs/js/gallery-data.js"
 IMG_EXTENSIONS=("png" "jpg" "jpeg" "gif" "webp")
 THUMBNAIL_WIDTH=400
@@ -111,21 +111,24 @@ process_directory() {
     mapfile -t images < <(find "$dir_path" -maxdepth 1 -type f \( "${find_params[@]}" \) 2>/dev/null | sort -V)
 
     for img_path in "${images[@]}"; do
+        local clean_img_path
+        clean_img_path=$(echo "$img_path" | sed 's#//*#/#g')
         local img_file
-        img_file=$(basename "$img_path")
-        local relative_img_path="${img_path#$SRC_DIR/}"
+        img_file=$(basename "$clean_img_path")
+        local relative_img_path="${clean_img_path#$SRC_DIR/}"
         local img_dir_path
         img_dir_path=$(dirname "$relative_img_path")
         local thumb_path="$THUMBNAIL_DIR/$relative_img_path"
+        local json_thumb_path="thumbnails/$relative_img_path"
 
         # Get additional metadata
         local modified_date
-        modified_date=$(stat -c %Y "$img_path")
+        modified_date=$(stat -c %Y "$clean_img_path")
         # [0] is used to only take the first frame of animated images (like GIFs)
         local resolution
-        resolution=$(identify -format '%wx%h' "$img_path[0]")
+        resolution=$(identify -format '%wx%h' "$clean_img_path[0]")
 
-        children_json+=("{\"name\": \"$img_file\", \"type\": \"file\", \"path\": \"$img_dir_path\", \"full\": \"$img_path\", \"thumbnail\": \"$thumb_path\", \"modified\": $modified_date, \"resolution\": \"$resolution\"}")
+        children_json+=("{\"name\": \"$img_file\", \"type\": \"file\", \"path\": \"$img_dir_path\", \"full\": \"$clean_img_path\", \"thumbnail\": \"$json_thumb_path\", \"modified\": $modified_date, \"resolution\": \"$resolution\"}")
     done
 
     local folder_name
@@ -157,7 +160,7 @@ for ext in "${IMG_EXTENSIONS[@]}"; do
     [ ${#find_params[@]} -gt 0 ] && find_params+=(-o)
     find_params+=(-name "*.$ext")
 done
-find "$SRC_DIR" -type f \( "${find_params[@]}" \) -print0 | xargs -0 -n 1 -P "$NUM_JOBS" bash -c 'generate_thumbnail "$@"' _
+find "$SRC_DIR" -type f \( "${find_params[@]}" \) -not -path "*/thumbnails/*" -print0 | xargs -0 -n 1 -P "$NUM_JOBS" bash -c 'generate_thumbnail "$@"' _
 
 # 3. Generate the gallery data JSON
 echo "🔍 Generating nested gallery data..." >&2

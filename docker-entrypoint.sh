@@ -19,7 +19,7 @@ fi
 
 # Clean old thumbnails to ensure a fresh start, since the main script no longer does this.
 echo "🗑️  Cleaning old thumbnails directory..."
-rm -rf src/thumbnails
+rm -rf public/thumbnails
 
 # Build the application. This will run the gallery generation script and then build the assets.
 echo "🏗️  Building static assets and generating gallery..."

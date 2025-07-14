@@ -1,5 +1,3 @@
-# Gemini Project Configuration: wallsite
-
 This file provides context for the AI assistant to understand the architecture and conventions of the `wallsite` project.
 
 ## 1. Project Overview
@@ -12,7 +10,7 @@ This is a self-hostable wallpaper gallery project. Its primary goal is to be dis
 -   **Build Tool:** `esbuild` is used for bundling assets.
 -   **Package Manager:** `pnpm`.
 -   **Image Processing:** `ImageMagick` is a required dependency for thumbnail generation.
--   **Automation:** GitHub Actions are critical for all automation.
+-   **Automation:** GitHub Actions are used for syncing the template repository.
 -   **Containerization:** Docker is used for the self-hosting option.
 
 ## 3. Key Architectural Concepts
@@ -31,11 +29,10 @@ This project uses two separate repositories to function correctly:
     -   It is **automatically kept in sync** with `wallsite` by the `sync-template.yml` workflow.
     -   **Crucially, its `/src` folder is kept empty** (containing only a placeholder `README.md`).
     -   Its `README.md` is different from the main one and contains deployment instructions for the user.
-    -   It only contains the `update-gallery.yml` workflow, as the others are excluded by the sync process.
+    -   It does not contain any workflows, as they are excluded by the sync process.
 
 ### Core Automation Workflows
 
--   **`update-gallery.yml`:** This is the essential workflow for the end-user. It watches for changes in the `/src` directory and runs the `generate_gallery.sh` script to update the gallery data and thumbnails.
 -   **`sync-template.yml`:** This workflow runs in the main `wallsite` repo. It copies all relevant files (excluding `/src` and specific developer workflows) to the `wallsite-template` repo to keep it up-to-date.
 -   **`publish-docker.yml`:** This workflow runs in the main `wallsite` repo to build and publish the Docker image to the GitHub Container Registry (GHCR).
 
@@ -45,7 +42,7 @@ The Docker setup is designed for maximum flexibility. It uses a single-stage `Do
 
 ## 4. Development Rules & Conventions
 
--   **Rule 1: Never edit generated files directly.** The `docs/js/gallery-data.js` file and the contents of the `src/thumbnails` directory are generated artifacts. To update them, run the `./scripts/generate_gallery.sh` script.
+-   **Rule 1: Never edit generated files directly.** The `public/js/gallery-data.js` file and the contents of the `public/thumbnails` directory are generated artifacts. To update them, run the `pnpm run build` or `pnpm run dev` command.
 -   **Rule 2: The template repository is sacred.** Do not make manual changes to the `wallsite-template` repository. All changes must be made in the main `wallsite` repository and will be synced automatically.
 -   **Rule 3: The user experience is paramount.** The main `README.md` acts as a "launchpad" directing users to the template. The template's `README.md` provides the actual deployment steps for the user.
 
@@ -65,9 +62,8 @@ The Docker setup is designed for maximum flexibility. It uses a single-stage `Do
 -   **Fully Responsive**: The entire interface is optimized for both desktop and mobile devices. Conflicting UI elements are automatically hidden in the lightbox view for a cleaner experience.
 
 ### Automation & Deployment
--   **Automatic Gallery Generation**: A highly optimized, parallelized shell script (`generate_gallery.sh`) uses ImageMagick to automatically generate thumbnails and a JSON-like data file for the frontend at high speed.
--   **GitHub Actions Integration**: The `update-gallery.yml` workflow automatically runs the generation script whenever images in the `src` directory are updated.
--   **One-Click Deployment**: Pre-configured for seamless deployment to Vercel and Netlify.
+-   **Automatic Gallery Generation**: A highly optimized, parallelized shell script (`generate_gallery.sh`) uses ImageMagick to automatically generate thumbnails and a JSON-like data file for the frontend at high speed. This is handled automatically by the build process on Vercel/Netlify.
+-   **One-Click Deployment**: Pre-configured for seamless deployment to Vercel and Netlify. The `pnpm run build` command handles all asset generation.
 -   **Dynamic Self-Hosting**: A `Dockerfile` and `docker-entrypoint.sh` are provided for easy self-hosting. The container generates all gallery content on startup based on a mounted volume, allowing for dynamic wallpaper management without rebuilding the image.
 
 ### Developer Experience

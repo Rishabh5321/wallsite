@@ -7,8 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "pnpm run build:assets && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --servedir=public --serve=0.0.0.0:8000",
-    "build": "bash ./scripts/generate_gallery.sh && pnpm run build:assets && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --minify",
+    "generate": "pnpm run build:assets && bash ./scripts/generate_gallery.sh",
+    "dev": "pnpm run generate && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --servedir=public --serve=0.0.0.0:8000 --watch",
+    "build": "pnpm run generate && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --minify",
     "start": "pnpm run build && http-server public --host 0.0.0.0 --port 8000",
     "build:assets": "rm -rf public && mkdir -p public && cp -r docs/* public/ && cp -r src public/",
     "lint": "eslint docs/js/**/*.js --fix",
