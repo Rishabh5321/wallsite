@@ -58,7 +58,7 @@
 			"format": "cjs"
 		},
 		"docs/js/modules/lightbox.js": {
-			"bytes": 9120,
+			"bytes": 9161,
 			"imports": [
 				{
 					"path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js",
@@ -90,7 +90,7 @@
 			"format": "esm"
 		},
 		"docs/js/modules/gallery.js": {
-			"bytes": 7140,
+			"bytes": 8018,
 			"imports": [
 				{
 					"path": "docs/js/modules/state.js",
@@ -299,7 +299,7 @@
 					"bytesInOutput": 363
 				},
 				"docs/js/modules/gallery.js": {
-					"bytesInOutput": 4344
+					"bytesInOutput": 4731
 				},
 				"docs/js/modules/file-tree.js": {
 					"bytesInOutput": 2050
@@ -320,7 +320,7 @@
 					"bytesInOutput": 57
 				}
 			},
-			"bytes": 25033
+			"bytes": 25420
 		},
 		"public/js/bundle.css": {
 			"imports": [],

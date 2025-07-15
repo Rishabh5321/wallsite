@@ -2,11 +2,35 @@ import { dom, state } from './state.js';
 import { isFavorite, toggleFavorite } from './favorites.js';
 import { showLightbox } from './lightbox.js';
 import { updatePageIndicator } from './ui.js';
-// import { shuffleArray } from './utils.js';
+
+const lazyLoadObserver = new IntersectionObserver(
+	(entries, observer) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				const galleryItem = entry.target;
+				const picture = galleryItem.querySelector('picture');
+				const source = picture.querySelector('source');
+				const img = picture.querySelector('img');
+
+				if (source && source.dataset.srcset) {
+					source.srcset = source.dataset.srcset;
+				}
+				img.src = img.dataset.src;
+
+				galleryItem.classList.remove('lazy');
+				observer.unobserve(galleryItem);
+			}
+		});
+	},
+	{
+		rootMargin: '0px 0px 200px 0px', // Load images 200px before they enter the viewport
+		threshold: 0.01,
+	}
+);
 
 function createWallpaperItem(wallpaper) {
 	const galleryItem = document.createElement('div');
-	galleryItem.className = 'gallery-item';
+	galleryItem.className = 'gallery-item lazy'; // Add .lazy class for the observer
 
 	const link = document.createElement('a');
 	link.href = wallpaper.webp
@@ -27,15 +51,15 @@ function createWallpaperItem(wallpaper) {
 	const picture = document.createElement('picture');
 	if (wallpaper.thumbnailWebp) {
 		const sourceWebp = document.createElement('source');
-		sourceWebp.srcset = encodeURI(wallpaper.thumbnailWebp);
+		sourceWebp.dataset.srcset = encodeURI(wallpaper.thumbnailWebp); // Use data-srcset
 		sourceWebp.type = 'image/webp';
 		picture.appendChild(sourceWebp);
 	}
 
 	const img = new Image();
-	img.src = encodeURI(wallpaper.thumbnail);
+	img.dataset.src = encodeURI(wallpaper.thumbnail); // Use data-src
 	img.alt = `Wallpaper: ${wallpaper.name}`;
-	img.loading = 'lazy';
+	img.loading = 'lazy'; // Keep native lazy loading as a fallback
 	picture.appendChild(img);
 	galleryItem.classList.add('loading');
 
@@ -127,6 +151,10 @@ function renderGallery(itemsToAppend) {
 	itemsToAppend.forEach((item) => {
 		const galleryItem = createGalleryItem(item);
 		dom.galleryContainer.appendChild(galleryItem);
+		// Observe the new item if it's a file
+		if (item.type === 'file') {
+			lazyLoadObserver.observe(galleryItem);
+		}
 	});
 	state.loadedWallpapersCount += itemsToAppend.length;
 
