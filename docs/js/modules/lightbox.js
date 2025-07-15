@@ -82,7 +82,8 @@ function updateLightbox(wallpaper) {
 
 	const lightboxElement = state.lightbox.element();
 	const contentElement = lightboxElement.querySelector('.lightbox-content');
-	const img = contentElement.querySelector('img');
+	const pictureElement = contentElement.querySelector('picture');
+	const fallbackImg = pictureElement.querySelector('img');
 	const wallpaperName = lightboxElement.querySelector('.wallpaper-name');
 	const wallpaperRes = lightboxElement.querySelector('.wallpaper-resolution');
 	const wallpaperFormat = lightboxElement.querySelector('.wallpaper-format');
@@ -93,9 +94,27 @@ function updateLightbox(wallpaper) {
 
 	contentElement.classList.add('loading');
 
-	img.src = encodeURI(wallpaper.thumbnail);
-	img.alt = `Thumbnail for ${wallpaper.name}`;
-	//	const currentThumbnail = wallpaper.thumbnail;
+	// Set thumbnail as initial image
+	fallbackImg.src = encodeURI(wallpaper.thumbnail);
+	fallbackImg.alt = `Thumbnail for ${wallpaper.name}`;
+
+	// Update WebP source if it exists
+	const webpSource = pictureElement.querySelector(
+		'source[type="image/webp"]'
+	);
+	if (wallpaper.webp) {
+		if (webpSource) {
+			webpSource.srcset = encodeURI(wallpaper.webp);
+		} else {
+			const newWebpSource = document.createElement('source');
+			newWebpSource.srcset = encodeURI(wallpaper.webp);
+			newWebpSource.type = 'image/webp';
+			pictureElement.prepend(newWebpSource);
+		}
+	} else if (webpSource) {
+		// Remove source if wallpaper has no webp version
+		webpSource.remove();
+	}
 
 	wallpaperName.textContent = wallpaper.name
 		.split('.')
@@ -103,14 +122,13 @@ function updateLightbox(wallpaper) {
 		.join('.');
 	wallpaperRes.textContent = 'Loading full resolution...';
 
-	// Extract format
 	const format = wallpaper.name.split('.').pop().toUpperCase();
 	wallpaperFormat.textContent = `Format: ${format}`;
-
-	// Extract folder and provide a fallback
 	wallpaperFolder.textContent = `Folder: ${wallpaper.path || 'Root'}`;
 
-	downloadBtn.href = encodeURI(wallpaper.full);
+	const downloadUrl = wallpaper.webp ? wallpaper.webp : wallpaper.full;
+	downloadBtn.href = encodeURI(downloadUrl);
+	downloadBtn.download = wallpaper.name.replace(/\.[^/.]+$/, '.webp');
 
 	favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
 	favoriteBtn.onclick = () => {
@@ -119,7 +137,7 @@ function updateLightbox(wallpaper) {
 	};
 
 	shareBtn.onclick = () => {
-		const url = new URL(wallpaper.full, window.location.href).href;
+		const url = new URL(downloadUrl, window.location.href).href;
 		navigator.clipboard.writeText(url).then(() => {
 			shareBtn.textContent = 'Copied!';
 			setTimeout(() => {
@@ -128,15 +146,20 @@ function updateLightbox(wallpaper) {
 		});
 	};
 
+	// Use <picture> for loading, but the main logic relies on a final full-res Image object
 	const fullImage = new Image();
-	fullImage.src = encodeURI(wallpaper.full);
+	const imageUrl = wallpaper.webp ? wallpaper.webp : wallpaper.full;
+	fullImage.src = encodeURI(imageUrl);
 
 	fullImage.onload = () => {
-		img.src = fullImage.src;
-		img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
+		// Once loaded, we can just set the img src directly for simplicity,
+		// as the browser has already chosen the best source.
+		fallbackImg.src = fullImage.src;
+		fallbackImg.alt = wallpaper.name.split('.').slice(0, -1).join('.');
 		contentElement.classList.remove('loading');
 		wallpaperRes.textContent = `${fullImage.naturalWidth}x${fullImage.naturalHeight}`;
 
+		// Preload adjacent images
 		const nextIndex =
 			(state.currentLightboxIndex + 1) %
 			state.lightboxWallpaperList.length;
@@ -145,14 +168,19 @@ function updateLightbox(wallpaper) {
 				1 +
 				state.lightboxWallpaperList.length) %
 			state.lightboxWallpaperList.length;
-		if (nextIndex !== state.currentLightboxIndex)
+
+		if (nextIndex !== state.currentLightboxIndex) {
+			const nextWallpaper = state.lightboxWallpaperList[nextIndex];
 			new Image().src = encodeURI(
-				state.lightboxWallpaperList[nextIndex].full
+				nextWallpaper.webp ? nextWallpaper.webp : nextWallpaper.full
 			);
-		if (prevIndex !== state.currentLightboxIndex)
+		}
+		if (prevIndex !== state.currentLightboxIndex) {
+			const prevWallpaper = state.lightboxWallpaperList[prevIndex];
 			new Image().src = encodeURI(
-				state.lightboxWallpaperList[prevIndex].full
+				prevWallpaper.webp ? prevWallpaper.webp : prevWallpaper.full
 			);
+		}
 	};
 
 	fullImage.onerror = () => {
@@ -163,13 +191,17 @@ function updateLightbox(wallpaper) {
 
 function createLightboxContent(wallpaper) {
 	const imageName = wallpaper.name.split('.').slice(0, -1).join('.');
-	const encodedFullUrl = encodeURI(wallpaper.full);
+	const downloadUrl = wallpaper.webp ? wallpaper.webp : wallpaper.full;
+	const encodedDownloadUrl = encodeURI(downloadUrl);
 
 	return `
         <div class="lightbox-main-wrapper">
             <div class="lightbox-content">
                 <div class="loader"></div>
-                <img src="" alt="">
+                <picture>
+                    <!-- WebP source will be added dynamically -->
+                    <img src="" alt="">
+                </picture>
             </div>
             <div class="lightbox-details">
                 <div class="wallpaper-info">
@@ -185,7 +217,7 @@ function createLightboxContent(wallpaper) {
                     <button class="share-btn" aria-label="Share Wallpaper">
                         <svg class="icon" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
                     </button>
-                    <a href="${encodedFullUrl}" download class="download-btn">Download</a>
+                    <a href="${encodedDownloadUrl}" download="${imageName}.webp" class="download-btn">Download</a>
                 </div>
             </div>
         </div>

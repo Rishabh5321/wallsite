@@ -7,12 +7,14 @@ import { updatePageIndicator } from './ui.js';
 function createWallpaperItem(wallpaper) {
 	const galleryItem = document.createElement('div');
 	galleryItem.className = 'gallery-item';
+
 	const link = document.createElement('a');
-	link.href = encodeURI(wallpaper.full);
+	link.href = wallpaper.webp
+		? encodeURI(wallpaper.webp)
+		: encodeURI(wallpaper.full);
 	link.setAttribute('aria-label', `View wallpaper ${wallpaper.name}`);
 	link.addEventListener('click', (e) => {
 		e.preventDefault();
-		// Pass only the wallpapers from the current view to the lightbox
 		const wallpapersInView = state.filteredWallpapers.filter(
 			(item) => item.type === 'file'
 		);
@@ -22,10 +24,19 @@ function createWallpaperItem(wallpaper) {
 		showLightbox(wallpapersInView, wallpaperIndex);
 	});
 
+	const picture = document.createElement('picture');
+	if (wallpaper.thumbnailWebp) {
+		const sourceWebp = document.createElement('source');
+		sourceWebp.srcset = encodeURI(wallpaper.thumbnailWebp);
+		sourceWebp.type = 'image/webp';
+		picture.appendChild(sourceWebp);
+	}
+
 	const img = new Image();
 	img.src = encodeURI(wallpaper.thumbnail);
 	img.alt = `Wallpaper: ${wallpaper.name}`;
 	img.loading = 'lazy';
+	picture.appendChild(img);
 	galleryItem.classList.add('loading');
 
 	img.onload = () => {
@@ -59,7 +70,7 @@ function createWallpaperItem(wallpaper) {
 		favoriteBtn.classList.toggle('favorited');
 	});
 
-	link.appendChild(img);
+	link.appendChild(picture);
 	galleryItem.appendChild(link);
 	galleryItem.appendChild(title);
 	galleryItem.appendChild(favoriteBtn);
