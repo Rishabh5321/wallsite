@@ -10,7 +10,7 @@ echo "🎨 Initializing Wallpaper Gallery Generation (v3.5)..." >&2
 # --- Configuration ---
 SRC_DIR="src"
 THUMBNAIL_DIR="public/thumbnails"
-OUTPUT_JS="docs/js/gallery-data.js"
+OUTPUT_JS="public/js/gallery-data.js"
 IMG_EXTENSIONS=("png" "jpg" "jpeg" "gif" "webp")
 THUMBNAIL_WIDTH=400
 
