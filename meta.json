@@ -15,7 +15,7 @@
 			"imports": []
 		},
 		"docs/js/modules/state.js": {
-			"bytes": 1503,
+			"bytes": 1504,
 			"imports": [],
 			"format": "esm"
 		},
@@ -58,7 +58,7 @@
 			"format": "cjs"
 		},
 		"docs/js/modules/lightbox.js": {
-			"bytes": 6258,
+			"bytes": 7151,
 			"imports": [
 				{
 					"path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js",
@@ -90,7 +90,7 @@
 			"format": "esm"
 		},
 		"docs/js/modules/gallery.js": {
-			"bytes": 7983,
+			"bytes": 7981,
 			"imports": [
 				{
 					"path": "docs/js/modules/state.js",
@@ -194,7 +194,7 @@
 			"format": "esm"
 		},
 		"docs/js/main.js": {
-			"bytes": 2619,
+			"bytes": 2608,
 			"imports": [
 				{
 					"path": "docs/js/modules/state.js",
@@ -293,7 +293,7 @@
 					"bytesInOutput": 396
 				},
 				"docs/js/modules/lightbox.js": {
-					"bytesInOutput": 3921
+					"bytesInOutput": 4668
 				},
 				"docs/js/modules/ui.js": {
 					"bytesInOutput": 363
@@ -320,7 +320,7 @@
 					"bytesInOutput": 56
 				}
 			},
-			"bytes": 24067
+			"bytes": 24814
 		},
 		"public/js/bundle.css": {
 			"imports": [],
