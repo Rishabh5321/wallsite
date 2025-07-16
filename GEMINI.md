@@ -49,7 +49,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - `docs/`: Contains the source code for the frontend application (HTML, CSS, JS). This is the directory to edit during development.
 - `public/`: The output directory for the build process. **Do not edit files here directly.**
 - `scripts/`: Contains the core generation scripts.
-    - `generate_gallery.sh`: A bash script that uses ImageMagick to create responsive WebP versions of all images.
+    - `generate_gallery.sh`: A highly optimized bash script that uses ImageMagick to create responsive WebP versions of all images. It intelligently skips processing images that already exist and are up-to-date, dramatically speeding up builds.
     - `generate_data.mjs`: A Node.js script that scans the `src` directory and creates `docs/js/gallery-data.js` with all the metadata for the frontend.
 - `.github/workflows/`: Contains the GitHub Actions workflows.
 - `Dockerfile` & `docker-entrypoint.sh`: Define the Docker image and its runtime behavior.
@@ -60,7 +60,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - **Rule 2: The template repository is sacred.** Do not make manual changes to the `wallsite-template` repository. All changes are synced from the main `wallsite` repository.
 - **Rule 3: The user experience is paramount.** The main `README.md` is for developers and directs users to the template. The template's `README.md` provides the actual deployment steps for the user.
 - **Rule 4: Emphasize pure functions and separation of concerns.** The frontend JavaScript is organized into modules with specific responsibilities:
-    - `main.js`: The main application entry point. Initializes the app and wires up event listeners.
+    - `main.js`: The main application entry point. Initializes the app, builds the hierarchical data structure from the flat `galleryData`, and wires up event listeners.
     - `state.js`: Manages the application's state, including the list of wallpapers, favorites, and UI element references.
     - `gallery.js`: Handles rendering the main gallery grid, including lazy loading and infinite scroll.
     - `lightbox.js`: Manages the full-screen lightbox view.
@@ -72,22 +72,25 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 ### Frontend & User Experience
 
 - **Hierarchical Folder Navigation**: Users can navigate through nested folders in the main gallery view, with a "Back" button.
-- **Dynamic Masonry Grid**: A responsive grid that arranges wallpapers based on their aspect ratio (portrait, ultrawide).
-- **Performant Image Loading**: Utilizes lazy loading (`IntersectionObserver`), responsive images (`srcset`), and infinite scroll.
-- **Advanced Lightbox**: A full-featured lightbox with keyboard navigation, image preloading, a close button, and metadata display (name, resolution, format, folder). The mobile view is optimized to keep controls visible.
+- **Dynamic Masonry Grid**: A responsive grid that intelligently arranges wallpapers based on their aspect ratio (portrait, ultrawide).
+- **Performant Image Loading**: Utilizes lazy loading (`IntersectionObserver`), responsive images (`srcset`), and infinite scroll to ensure a fast and smooth user experience, even with large galleries.
+- **Advanced Lightbox**: A full-featured lightbox for viewing images with keyboard navigation, image preloading, an explicit close button, and metadata display (name, resolution, format, folder). The mobile view is optimized to ensure controls are always visible, regardless of wallpaper aspect ratio.
 - **Category Browsing**: A collapsible sidebar with a hierarchical file tree lets users browse by category.
 - **Client-Side Search**: Instantly search and filter wallpapers by name.
 - **Advanced Sorting**: Users can sort wallpapers by name, modification date, or resolution.
-- **Favorites System**: Users can mark favorite wallpapers, which are saved in the browser's `localStorage`.
-- **Random Discovery**: A "Random" button to discover new wallpapers.
-- **User-Controlled Theme (Dark/Light Mode)**: A toggle for light and dark modes, which also respects the user's system preference. A new random color scheme is generated on each page load.
-- **Fully Responsive**: The interface is optimized for both desktop and mobile devices.
+- **Favorites System**: Users can mark their favorite wallpapers, which are saved locally in the browser.
+- **Random Discovery**: A "Random" button to discover new wallpapers easily. The initial view is a random assortment of all available wallpapers.
+- **User-Controlled Theme (Dark/Light Mode)**: The UI features a toggle for users to switch between dedicated light and dark modes. The theme also respects the user's system preference (`prefers-color-scheme`). On each page load, a new random color scheme is generated, and the toggle switches between the light and dark variants of that scheme.
+- **Fully Responsive**: The entire interface is optimized for both desktop and mobile devices. Conflicting UI elements are automatically hidden in the lightbox view for a cleaner experience.
 
 ### Automation & Deployment
 
-- **Automatic Gallery Generation**: The `generate_gallery.sh` and `generate_data.mjs` scripts work together to automatically process images and create the necessary data for the frontend.
+- **Optimized Gallery Generation**: The `generate_gallery.sh` script is highly optimized. It intelligently checks if a wallpaper has already been converted to WebP and is up-to-date, skipping redundant processing. This works in tandem with the Vercel build cache to make subsequent deployments very fast. The `generate_data.mjs` script then creates the necessary metadata for the frontend.
 - **One-Click Deployment**: Pre-configured for seamless deployment to Vercel and Netlify.
 - **Dynamic Self-Hosting**: A `Dockerfile` and `docker-entrypoint.sh` are provided for easy self-hosting.
+- **Vercel Deployment & Caching**:
+    - **Build Cache**: The project uses a custom build script (`scripts/vercel_build.sh`) to significantly speed up deployments. It manually caches the generated `public/webp` directory within Vercel's persistent cache (`.vercel/cache`). Before a new build starts, it restores these images, and the generation script only processes new or changed wallpapers, saving significant time.
+    - **Edge Network (CDN) Caching**: Vercel automatically caches all static assets from the `public` directory on its Edge Network for up to 31 days. It uses a `Cache-Control` header that forces browser revalidation on each request, ensuring users always get the latest content. A new deployment automatically purges the CDN cache.
 
 ### Developer Experience
 
