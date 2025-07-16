@@ -10,13 +10,13 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"generate": "pnpm run build:assets && bash ./scripts/generate_gallery.sh",
-		"dev": "pnpm run build:assets && pnpm run generate:gallery && concurrently \"pnpm:watch:assets\" \"pnpm:watch:js\"",
+		"generate": "bash ./scripts/generate_gallery.sh && node ./scripts/generate_data.mjs",
+		"dev": "pnpm run generate && pnpm run build:assets && concurrently \"pnpm:watch:assets\" \"pnpm:watch:js\"",
 		"watch:js": "esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --servedir=public --serve=0.0.0.0:8000 --watch --target=es2020,chrome90,firefox90,safari15",
 		"watch:assets": "onchange 'docs/**' -- pnpm run copy:assets",
 		"copy:assets": "cp -r docs/. public/",
 		"generate:gallery": "bash ./scripts/generate_gallery.sh",
-		"build": "pnpm run generate && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --minify --target=es2020,chrome90,firefox90,safari15 --metafile=meta.json --drop:console --define:process.env.NODE_ENV='\"production\"'",
+		"build": "pnpm run generate && pnpm run build:assets && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --minify --target=es2020,chrome90,firefox90,safari15 --metafile=meta.json --drop:console --define:process.env.NODE_ENV='\"production\"'",
 		"start": "pnpm run build && http-server public --host 0.0.0.0 --port 8000",
 		"build:assets": "mkdir -p public && rm -rf public/js public/css public/src && cp -r docs/. public/ && cp -r src public/",
 		"lint": "eslint docs/js/**/*.js --fix",
@@ -61,6 +61,7 @@
 		"husky": "^9.1.7",
 		"lint-staged": "^16.1.2",
 		"onchange": "^7.1.0",
-		"prettier": "^3.6.2"
+		"prettier": "^3.6.2",
+		"image-size": "^1.1.1"
 	}
 }

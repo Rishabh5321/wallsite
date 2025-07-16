@@ -1,22 +1,19 @@
 #!/usr/bin/env bash
 
-# 🎨 Wallpaper Gallery Generator v4.0 (Enhanced & Optimized)
+# Wallpaper Gallery Generator v5.2 (Responsive Srcset) - Image Generation only
 
 set -uo pipefail
 
-readonly SCRIPT_VERSION="4.0"
+# --- Configuration ---
+readonly SCRIPT_VERSION="5.2"
 readonly SRC_DIR="${SRC_DIR:-src}"
-readonly THUMBNAIL_DIR="${THUMBNAIL_DIR:-public/thumbnails}"
 readonly WEBP_DIR="${WEBP_DIR:-public/webp}"
-readonly OUTPUT_JS="${OUTPUT_JS:-public/js/gallery-data.js}"
 readonly IMG_EXTENSIONS=("png" "jpg" "jpeg" "gif" "bmp" "tiff" "webp")
-readonly THUMBNAIL_WIDTH="${THUMBNAIL_WIDTH:-400}"
 readonly WEBP_QUALITY="${WEBP_QUALITY:-82}"
-readonly THUMBNAIL_QUALITY="${THUMBNAIL_QUALITY:-85}"
-readonly WEBP_THUMB_QUALITY="${WEBP_THUMB_QUALITY:-75}"
 readonly LOG_FILE="${LOG_FILE:-gallery-generator.log}"
-readonly TEMP_DIR=$(mktemp -d)
+readonly RESPONSIVE_WIDTHS=(320 640 1024 1920) # For srcset
 
+# --- Colors & Logging ---
 readonly RED='\033[0;31m'
 readonly GREEN='\033[0;32m'
 readonly YELLOW='\033[1;33m'
@@ -28,43 +25,31 @@ log_warn()    { echo -e "${YELLOW}[WARN]${NC} $*" >&2; echo "[$(date)] WARN: $*"
 log_error()   { echo -e "${RED}[ERROR]${NC} $*" >&2; echo "[$(date)] ERROR: $*" >> "$LOG_FILE"; }
 log_debug()   { [[ "${DEBUG:-}" == "1" ]] && { echo -e "${BLUE}[DEBUG]${NC} $*" >&2; echo "[$(date)] DEBUG: $*" >> "$LOG_FILE"; }; }
 
-cleanup() {
-    local exit_code=$?
-    log_debug "Cleaning up temporary directory: $TEMP_DIR"
-    rm -rf "$TEMP_DIR" 2>/dev/null || true
-    if [[ $exit_code -eq 0 ]]; then
-        log_info "Script completed successfully"
-    else
-        log_error "Script failed with exit code $exit_code"
-    fi
-}
+# --- Cleanup ---
+trap 'rm -rf "$TEMP_DIR" 2>/dev/null || true' EXIT INT TERM
+readonly TEMP_DIR=$(mktemp -d)
 
-trap cleanup EXIT INT TERM
+# --- Functions ---
 
 show_usage() {
     cat << EOF
-🎨 Wallpaper Gallery Generator v${SCRIPT_VERSION}
+Wallpaper Gallery Generator v${SCRIPT_VERSION}
+
+Generates responsive WebP images.
 
 Usage: $0 [OPTIONS]
 
 OPTIONS:
-  -s, --src DIR             Source directory (default: src)
-  -t, --thumbnail DIR       Thumbnail directory (default: public/thumbnails)
-  -w, --webp DIR            WebP directory (default: public/webp)
-  -o, --output FILE         Output JS file (default: public/js/gallery-data.js)
-  -j, --jobs NUM            Number of parallel jobs (default: auto)
-  -q, --quality NUM         WebP quality (default: 82)
-  --thumb-quality NUM       Thumbnail quality (default: 85)
-  --thumb-width NUM         Thumbnail width (default: 400)
-  --force                   Force regenerate
-  --debug                   Enable debug logs
-  -h, --help                Show this help
+  -s, --src DIR             Source directory (default: ${SRC_DIR})
+  -w, --webp DIR            WebP output directory (default: ${WEBP_DIR})
+  -j, --jobs NUM            Number of parallel jobs (default: auto-detect)
+  -q, --quality NUM         WebP quality (default: ${WEBP_QUALITY})
+  --force                   Force regeneration of all images
+  --debug                   Enable debug logging
+  -h, --help                Show this help message
 
 ENV:
-  DEBUG=1                   Enable debug
-  SKIP_WEBP=1               Skip WebP generation
-  SKIP_THUMBNAILS=1         Skip thumbnails
-
+  DEBUG=1                   Enable debug logging
 EOF
 }
 
@@ -74,13 +59,9 @@ parse_args() {
     while [[ $# -gt 0 ]]; do
         case $1 in
             -s|--src) SRC_DIR="$2"; shift 2 ;;
-            -t|--thumbnail) THUMBNAIL_DIR="$2"; shift 2 ;;
             -w|--webp) WEBP_DIR="$2"; shift 2 ;;
-            -o|--output) OUTPUT_JS="$2"; shift 2 ;;
             -j|--jobs) jobs="$2"; shift 2 ;;
             -q|--quality) WEBP_QUALITY="$2"; shift 2 ;;
-            --thumb-quality) THUMBNAIL_QUALITY="$2"; shift 2 ;;
-            --thumb-width) THUMBNAIL_WIDTH="$2"; shift 2 ;;
             --force) force_regen=1; shift ;;
             --debug) DEBUG=1; shift ;;
             -h|--help) show_usage; exit 0 ;;
@@ -88,8 +69,7 @@ parse_args() {
         esac
     done
 
-    export SRC_DIR THUMBNAIL_DIR WEBP_DIR OUTPUT_JS THUMBNAIL_WIDTH
-    export WEBP_QUALITY THUMBNAIL_QUALITY WEBP_THUMB_QUALITY FORCE_REGEN=$force_regen DEBUG
+    export SRC_DIR WEBP_DIR WEBP_QUALITY FORCE_REGEN=$force_regen DEBUG
 
     if [[ -n "$jobs" ]]; then
         NUM_JOBS="$jobs"
@@ -103,153 +83,104 @@ parse_args() {
 
 check_dependencies() {
     log_info "Checking dependencies..."
-
     if ! command -v magick &> /dev/null && ! command -v convert &> /dev/null; then
-        log_error "ImageMagick is required but not found."
+        log_error "ImageMagick is required but not found. It is essential for image processing."
         exit 1
     fi
-
     if ! command -v identify &> /dev/null; then
-        log_error "'identify' command missing."
+        log_error "'identify' command (part of ImageMagick) is required but not found."
         exit 1
     fi
 
     MAGICK_CMD=$(command -v magick || command -v convert)
     export MAGICK_CMD
 
-    log_info "Using ImageMagick command: $MAGICK_CMD"
-    log_info "ImageMagick version: $("$MAGICK_CMD" -version | head -1)"
-
-    if ! "$MAGICK_CMD" -list format | grep -q "WEBP"; then
-        log_warn "WebP format not supported by ImageMagick."
-        SKIP_WEBP=1
-        export SKIP_WEBP
+    if ! "$MAGICK_CMD" -list format | grep -qi "WEBP"; then
+        log_error "WebP format not supported by your ImageMagick installation."
+        exit 1
     fi
 
-    [[ ! -d "$SRC_DIR" ]] && log_error "Source directory '$SRC_DIR' missing." && exit 1
-
-    log_info "Using up to $NUM_JOBS parallel jobs"
+    [[ ! -d "$SRC_DIR" ]] && { log_error "Source directory '$SRC_DIR' not found."; exit 1; }
+    log_info "Dependencies met. Using ImageMagick: $($MAGICK_CMD -version | head -1)"
 }
 
 needs_regeneration() {
     local src_file="$1" dest_file="$2"
     [[ "${FORCE_REGEN:-0}" == "1" ]] && return 0
     [[ ! -f "$dest_file" || ! -s "$dest_file" ]] && return 0
+    [[ "$src_file" -nt "$dest_file" ]] && return 0
     return 1
 }
 
-generate_thumbnail() {
-    local img="$1"
-    local rel="${img#$SRC_DIR/}"
-    local out="$THUMBNAIL_DIR/$rel"
-    mkdir -p "$(dirname "$out")"
-    if needs_regeneration "$img" "$out"; then
-        log_info "Generating thumbnail for '$img'..."
-        "$MAGICK_CMD" "$img[0]" -resize "${THUMBNAIL_WIDTH}x" -quality "$THUMBNAIL_QUALITY" "$out" || return 1
-    else
-        log_info "Skipping thumbnail for '$img' (already exists)."
-    fi
-}
+generate_responsive_versions() {
+    local img_path="$1"
+    local rel_path="${img_path#$SRC_DIR/}"
+    local base_name
+    base_name=$(basename "${rel_path%.*}" | tr -d '\n')
+    local dir_name
+    dir_name=$(dirname "$rel_path" | tr -d '\n')
 
-generate_webp() {
-    local img="$1"
-    local rel="${img#$SRC_DIR/}"
-    local out="$WEBP_DIR/$(dirname "$rel")/$(basename "${img%.*}").webp"
-    mkdir -p "$(dirname "$out")"
-    if needs_regeneration "$img" "$out"; then
-        if "$MAGICK_CMD" "$img[0]" -quality "$WEBP_QUALITY" "$out"; then
-            log_info "Generated WebP for '$img'"
+    for width in "${RESPONSIVE_WIDTHS[@]}"; do
+        local out_path="$WEBP_DIR/$dir_name/${base_name}_${width}w.webp"
+        # Correct the path for root-level images where dirname is '.'
+        out_path="${out_path//\/.\//\/}"
+        mkdir -p "$(dirname "$out_path")"
+
+        if needs_regeneration "$img_path" "$out_path"; then
+            log_info "Generating WebP ${width}w for '$img_path'"
+            "$MAGICK_CMD" "$img_path[0]" -resize "${width}x" -quality "$WEBP_QUALITY" -strip "$out_path"
         else
-            log_error "Failed WebP for '$img'"
-            failed_files+=("$img")
+            log_debug "Skipping ${width}w for '$img_path' (exists)"
         fi
-    else
-        log_info "Skipping WebP for '$img' (already exists)."
-    fi
-}
-
-generate_webp_thumbnail() {
-    local img="$1"
-    local rel="${img#$SRC_DIR/}"
-    local out="$THUMBNAIL_DIR/$(dirname "$rel")/$(basename "${img%.*}").webp"
-    mkdir -p "$(dirname "$out")"
-    if needs_regeneration "$img" "$out"; then
-        log_info "Generating WebP thumbnail for '$img'..."
-        "$MAGICK_CMD" "$img[0]" -resize "${THUMBNAIL_WIDTH}x" -quality "$WEBP_THUMB_QUALITY" "$out" || return 1
-    else
-        log_info "Skipping WebP thumbnail for '$img' (already exists)."
-    fi
+    done
 }
 
 run_parallel() {
-    local func="$1"
+    local func_name="$1"
     shift
-    local files=("$@")
+    local files_to_process=("$@")
     local pids=()
-    local status=0
 
-    for file in "${files[@]}"; do
-        while [[ "${#pids[@]}" -ge $NUM_JOBS ]]; do
-            wait "${pids[0]}" || true
-            pids=("${pids[@]:1}")
+    for file in "${files_to_process[@]}"; do
+        while ((${#pids[@]} >= NUM_JOBS)); do
+            wait -n "${pids[@]}" 2>/dev/null || true
+            # Clean up finished PIDs
+            for i in "${!pids[@]}"; do
+                ! kill -0 "${pids[i]}" 2>/dev/null && unset 'pids[i]'
+            done
         done
 
-        (
-            if ! "$func" "$file"; then
-                echo "[ERROR] $func failed for $file" >&2
-                exit 0  # ✅ do NOT return non-zero here
-            fi
-        ) &
+        "$func_name" "$file" &
         pids+=($!)
     done
 
-    for pid in "${pids[@]}"; do
-        wait "$pid" || true  # ✅ prevent pipeline failure
-    done
-
-    return 0
+    wait "${pids[@]}" # Wait for all remaining jobs
 }
+
+# --- Main Execution ---
 
 main() {
-    log_info "🎨 Initializing Wallpaper Gallery Generation (v$SCRIPT_VERSION)..."
     parse_args "$@"
     check_dependencies
-    mkdir -p "$THUMBNAIL_DIR" "$WEBP_DIR" "$(dirname "$OUTPUT_JS")"
+    mkdir -p "$WEBP_DIR"
 
-    log_info "🔍 Finding source images..."
-    local find_args=()
-    for ext in "${IMG_EXTENSIONS[@]}"; do
-        [[ ${#find_args[@]} -gt 0 ]] && find_args+=(-o)
-        find_args+=(-iname "*.$ext")
-    done
-
-    mapfile -t all_images < <(find "$SRC_DIR" -type f \( "${find_args[@]}" \) -not -path "*/thumbnails/*" -not -path "*/webp/*" 2>/dev/null | sort -V)
-    log_info "Found ${#all_images[@]} images to process"
+    log_info "Finding all source images..."
+    mapfile -t all_images < <(find "$SRC_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.gif" -o -iname "*.bmp" -o -iname "*.tiff" -o -iname "*.webp" \) | sort -V)
 
     if [[ ${#all_images[@]} -eq 0 ]]; then
-        echo "const galleryData = {};" > "$OUTPUT_JS"
-        log_info "No images found. Wrote empty gallery data to $OUTPUT_JS"
-        return 0
+        log_warn "No images found in '$SRC_DIR'."
+        exit 0
     fi
 
-    if [[ "${SKIP_THUMBNAILS:-0}" != "1" ]]; then
-        log_info "🖼️  Generating thumbnails..."
-        run_parallel generate_thumbnail "${all_images[@]}"
-        if [[ "${SKIP_WEBP:-0}" != "1" ]]; then
-            log_info "🖼️  Generating WebP thumbnails..."
-            run_parallel generate_webp_thumbnail "${all_images[@]}"
-        fi
-    fi
+    log_info "Found ${#all_images[@]} images to process."
+    log_info "Generating responsive WebP versions..."
+    run_parallel generate_responsive_versions "${all_images[@]}"
 
-    if [[ "${SKIP_WEBP:-0}" != "1" ]]; then
-        log_info "🖼️  Generating WebP versions..."
-        run_parallel generate_webp "${all_images[@]}"
-    fi
-
-    log_info "✅ Processing complete."
+    log_info "Image generation complete!"
 }
 
-export -f generate_thumbnail generate_webp generate_webp_thumbnail needs_regeneration log_debug log_error
+export -f generate_responsive_versions needs_regeneration log_info log_debug log_error log_warn
+export MAGICK_CMD WEBP_DIR WEBP_QUALITY FORCE_REGEN RESPONSIVE_WIDTHS
 
-main "$@" || true
+main "$@"
 exit 0

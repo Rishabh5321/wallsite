@@ -8,14 +8,14 @@ const lazyLoadObserver = new IntersectionObserver(
 		entries.forEach((entry) => {
 			if (entry.isIntersecting) {
 				const galleryItem = entry.target;
-				const picture = galleryItem.querySelector('picture');
-				const source = picture.querySelector('source');
-				const img = picture.querySelector('img');
+				const img = galleryItem.querySelector('img');
 
-				if (source && source.dataset.srcset) {
-					source.srcset = source.dataset.srcset;
+				if (img && img.dataset.srcset) {
+					img.srcset = img.dataset.srcset;
 				}
-				img.src = img.dataset.src;
+				if (img && img.dataset.src) {
+					img.src = img.dataset.src;
+				}
 
 				galleryItem.classList.remove('lazy');
 				observer.unobserve(galleryItem);
@@ -33,9 +33,7 @@ function createWallpaperItem(wallpaper) {
 	galleryItem.className = 'gallery-item lazy'; // Add .lazy class for the observer
 
 	const link = document.createElement('a');
-	link.href = wallpaper.webp
-		? encodeURI(wallpaper.webp)
-		: encodeURI(wallpaper.full);
+	link.href = encodeURI(wallpaper.full);
 	link.setAttribute('aria-label', `View wallpaper ${wallpaper.name}`);
 	link.addEventListener('click', (e) => {
 		e.preventDefault();
@@ -49,17 +47,19 @@ function createWallpaperItem(wallpaper) {
 	});
 
 	const picture = document.createElement('picture');
-	if (wallpaper.thumbnailWebp) {
-		const sourceWebp = document.createElement('source');
-		sourceWebp.dataset.srcset = encodeURI(wallpaper.thumbnailWebp); // Use data-srcset
-		sourceWebp.type = 'image/webp';
-		picture.appendChild(sourceWebp);
-	}
-
 	const img = new Image();
-	img.dataset.src = encodeURI(wallpaper.thumbnail); // Use data-src
+
+	// The data-srcset contains all the responsive image paths and sizes
+	img.dataset.srcset = wallpaper.srcset;
+	// The data-src is the smallest image, used as a thumbnail and for initial display
+	img.dataset.src = encodeURI(wallpaper.thumbnail);
+
 	img.alt = `Wallpaper: ${wallpaper.name}`;
-	img.loading = 'lazy'; // Keep native lazy loading as a fallback
+	img.loading = 'lazy'; // Native lazy loading as a fallback
+
+	// Set sizes attribute to give the browser hints on how the image will be displayed
+	img.sizes = '(max-width: 600px) 45vw, (max-width: 1200px) 30vw, 20vw';
+
 	picture.appendChild(img);
 	galleryItem.classList.add('loading');
 

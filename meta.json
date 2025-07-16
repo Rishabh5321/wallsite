@@ -15,7 +15,7 @@
 			"imports": []
 		},
 		"docs/js/modules/state.js": {
-			"bytes": 1207,
+			"bytes": 1503,
 			"imports": [],
 			"format": "esm"
 		},
@@ -58,7 +58,7 @@
 			"format": "cjs"
 		},
 		"docs/js/modules/lightbox.js": {
-			"bytes": 9161,
+			"bytes": 6258,
 			"imports": [
 				{
 					"path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js",
@@ -90,7 +90,7 @@
 			"format": "esm"
 		},
 		"docs/js/modules/gallery.js": {
-			"bytes": 8018,
+			"bytes": 7983,
 			"imports": [
 				{
 					"path": "docs/js/modules/state.js",
@@ -194,7 +194,7 @@
 			"format": "esm"
 		},
 		"docs/js/main.js": {
-			"bytes": 1359,
+			"bytes": 2619,
 			"imports": [
 				{
 					"path": "docs/js/modules/state.js",
@@ -269,7 +269,7 @@
 			"cssBundle": "public/js/bundle.css",
 			"inputs": {
 				"node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js": {
-					"bytesInOutput": 3178
+					"bytesInOutput": 3184
 				},
 				"node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs": {
 					"bytesInOutput": 1444
@@ -281,10 +281,10 @@
 					"bytesInOutput": 0
 				},
 				"docs/js/modules/state.js": {
-					"bytesInOutput": 857
+					"bytesInOutput": 1074
 				},
 				"docs/js/modules/utils.js": {
-					"bytesInOutput": 320
+					"bytesInOutput": 212
 				},
 				"docs/js/modules/theme.js": {
 					"bytesInOutput": 1898
@@ -293,34 +293,34 @@
 					"bytesInOutput": 396
 				},
 				"docs/js/modules/lightbox.js": {
-					"bytesInOutput": 5756
+					"bytesInOutput": 3921
 				},
 				"docs/js/modules/ui.js": {
 					"bytesInOutput": 363
 				},
 				"docs/js/modules/gallery.js": {
-					"bytesInOutput": 4731
+					"bytesInOutput": 4617
 				},
 				"docs/js/modules/file-tree.js": {
 					"bytesInOutput": 2050
 				},
 				"docs/js/modules/search.js": {
-					"bytesInOutput": 313
+					"bytesInOutput": 312
 				},
 				"docs/js/modules/sorting.js": {
-					"bytesInOutput": 721
+					"bytesInOutput": 720
 				},
 				"docs/js/modules/events.js": {
-					"bytesInOutput": 807
+					"bytesInOutput": 804
 				},
 				"docs/js/main.js": {
-					"bytesInOutput": 413
+					"bytesInOutput": 900
 				},
 				"docs/js/app.js": {
-					"bytesInOutput": 57
+					"bytesInOutput": 56
 				}
 			},
-			"bytes": 25420
+			"bytes": 24067
 		},
 		"public/js/bundle.css": {
 			"imports": [],
