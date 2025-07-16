@@ -84,6 +84,8 @@ function updateLightbox(wallpaper) {
 	const img = contentElement.querySelector('img');
 	const wallpaperName = lightboxElement.querySelector('.wallpaper-name');
 	const wallpaperRes = lightboxElement.querySelector('.wallpaper-resolution');
+	const wallpaperFormat = lightboxElement.querySelector('.wallpaper-format');
+	const wallpaperFolder = lightboxElement.querySelector('.wallpaper-folder');
 	const downloadBtn = lightboxElement.querySelector('.download-btn');
 	const favoriteBtn = lightboxElement.querySelector('.lightbox-favorite-btn');
 	const shareBtn = lightboxElement.querySelector('.share-btn');
@@ -99,6 +101,8 @@ function updateLightbox(wallpaper) {
 		.slice(0, -1)
 		.join('.');
 	wallpaperRes.textContent = 'Loading full resolution...';
+	wallpaperFormat.textContent = wallpaper.name.split('.').pop().toUpperCase();
+	wallpaperFolder.textContent = wallpaper.path === '' ? '.' : wallpaper.path;
 
 	downloadBtn.href = encodeURI(wallpaper.full);
 	downloadBtn.download = wallpaper.name;
@@ -172,6 +176,8 @@ function createLightboxContent(wallpaper) {
                 <div class="wallpaper-info">
                     <span class="wallpaper-name">${imageName}</span>
                     <span class="wallpaper-resolution"></span>
+                    <span class="wallpaper-format"></span>
+                    <span class="wallpaper-folder"></span>
                 </div>
                 <div class="lightbox-actions">
                     <button class="lightbox-favorite-btn" aria-label="Toggle Favorite">
