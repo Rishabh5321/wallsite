@@ -141,7 +141,10 @@ generate_thumbnail() {
     local out="$THUMBNAIL_DIR/$rel"
     mkdir -p "$(dirname "$out")"
     if needs_regeneration "$img" "$out"; then
+        log_info "Generating thumbnail for '$img'..."
         "$MAGICK_CMD" "$img[0]" -resize "${THUMBNAIL_WIDTH}x" -quality "$THUMBNAIL_QUALITY" "$out" || return 1
+    else
+        log_info "Skipping thumbnail for '$img' (already exists)."
     fi
 }
 
@@ -151,7 +154,10 @@ generate_webp() {
     local out="$WEBP_DIR/$(dirname "$rel")/$(basename "${img%.*}").webp"
     mkdir -p "$(dirname "$out")"
     if needs_regeneration "$img" "$out"; then
+        log_info "Generating WebP for '$img'..."
         "$MAGICK_CMD" "$img[0]" -quality "$WEBP_QUALITY" "$out" || return 1
+    else
+        log_info "Skipping WebP for '$img' (already exists)."
     fi
 }
 
@@ -161,7 +167,10 @@ generate_webp_thumbnail() {
     local out="$THUMBNAIL_DIR/$(dirname "$rel")/$(basename "${img%.*}").webp"
     mkdir -p "$(dirname "$out")"
     if needs_regeneration "$img" "$out"; then
+        log_info "Generating WebP thumbnail for '$img'..."
         "$MAGICK_CMD" "$img[0]" -resize "${THUMBNAIL_WIDTH}x" -quality "$WEBP_THUMB_QUALITY" "$out" || return 1
+    else
+        log_info "Skipping WebP thumbnail for '$img' (already exists)."
     fi
 }
 
