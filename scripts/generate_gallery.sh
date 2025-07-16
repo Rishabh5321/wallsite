@@ -131,7 +131,7 @@ check_dependencies() {
 needs_regeneration() {
     local src_file="$1" dest_file="$2"
     [[ "${FORCE_REGEN:-0}" == "1" ]] && return 0
-    [[ ! -f "$dest_file" || "$src_file" -nt "$dest_file" || ! -s "$dest_file" ]] && return 0
+    [[ ! -f "$dest_file" || ! -s "$dest_file" ]] && return 0
     return 1
 }
 
