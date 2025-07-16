@@ -52,7 +52,7 @@ generate_thumbnail() {
     local thumb_path="$thumb_dir/$(basename "$img_path")"
 
     mkdir -p "$thumb_dir"
-    if [ ! -f "$thumb_path" ] || [ "$img_path" -nt "$thumb_path" ]; then
+    if [ ! -f "$thumb_path" ]; then
         echo "   -> Generating thumbnail for '$img_path'..." >&2
         "$MAGICK_CMD" "$img_path[0]" -resize "${THUMBNAIL_WIDTH}x" -quality 85 "$thumb_path"
     fi
@@ -70,7 +70,7 @@ generate_webp() {
     local webp_path="$webp_dir/$(basename "${img_path%.*}").webp"
 
     mkdir -p "$webp_dir"
-    if [ ! -f "$webp_path" ] || [ "$img_path" -nt "$webp_path" ]; then
+    if [ ! -f "$webp_path" ]; then
         echo "   -> Generating WebP for '$img_path'..." >&2
         "$MAGICK_CMD" "$img_path[0]" -quality "$WEBP_QUALITY" "$webp_path"
     fi
@@ -85,7 +85,7 @@ generate_webp_thumbnail() {
     local thumb_path="$thumb_dir/$(basename "${img_path%.*}").webp"
 
     mkdir -p "$thumb_dir"
-    if [ ! -f "$thumb_path" ] || [ "$img_path" -nt "$thumb_path" ]; then
+    if [ ! -f "$thumb_path" ]; then
         echo "   -> Generating WebP thumbnail for '$img_path'..." >&2
         "$MAGICK_CMD" "$img_path[0]" -resize "${THUMBNAIL_WIDTH}x" -quality 75 "$thumb_path"
     fi
