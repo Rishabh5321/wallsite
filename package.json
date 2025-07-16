@@ -18,7 +18,7 @@
 		"generate:gallery": "bash ./scripts/generate_gallery.sh",
 		"build": "pnpm run generate && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --minify --target=es2020,chrome90,firefox90,safari15 --metafile=meta.json --drop:console --define:process.env.NODE_ENV='\"production\"'",
 		"start": "pnpm run build && http-server public --host 0.0.0.0 --port 8000",
-		"build:assets": "rm -rf public && mkdir -p public && cp -r docs/. public/ && cp -r src public/",
+		"build:assets": "mkdir -p public && rm -rf public/js public/css public/src && cp -r docs/. public/ && cp -r src public/",
 		"lint": "eslint docs/js/**/*.js --fix",
 		"format": "prettier --write docs/js/**/*.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
