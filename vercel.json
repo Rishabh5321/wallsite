@@ -1,4 +1,4 @@
 {
-	"buildCommand": "pnpm install && pnpm run build",
+	"buildCommand": "mkdir -p .vercel_cache/public && if [ -d \".vercel_cache/public/thumbnails\" ]; then cp -r .vercel_cache/public/thumbnails public/; fi && if [ -d \".vercel_cache/public/webp\" ]; then cp -r .vercel_cache/public/webp public/; fi && pnpm install && pnpm run build && cp -r public/thumbnails .vercel_cache/public/ && cp -r public/webp .vercel_cache/public/",
 	"outputDirectory": "public"
 }
