@@ -144,22 +144,26 @@ function updateLightbox(wallpaper) {
 		};
 
 		// Preload adjacent images
-		const nextIndex =
-			(state.currentLightboxIndex + 1) %
-			state.lightboxWallpaperList.length;
-		const prevIndex =
-			(state.currentLightboxIndex -
-				1 +
-				state.lightboxWallpaperList.length) %
-			state.lightboxWallpaperList.length;
+		const PRELOAD_COUNT = 2; // Preload 2 images in each direction
 
-		if (nextIndex !== state.currentLightboxIndex) {
-			const nextWallpaper = state.lightboxWallpaperList[nextIndex];
-			new Image().src = encodeURI(nextWallpaper.full);
-		}
-		if (prevIndex !== state.currentLightboxIndex) {
-			const prevWallpaper = state.lightboxWallpaperList[prevIndex];
-			new Image().src = encodeURI(prevWallpaper.full);
+		for (let i = 1; i <= PRELOAD_COUNT; i++) {
+			const nextIndex =
+				(state.currentLightboxIndex + i) %
+				state.lightboxWallpaperList.length;
+			const prevIndex =
+				(state.currentLightboxIndex -
+					i +
+					state.lightboxWallpaperList.length) %
+				state.lightboxWallpaperList.length;
+
+			if (nextIndex !== state.currentLightboxIndex) {
+				const nextWallpaper = state.lightboxWallpaperList[nextIndex];
+				new Image().src = encodeURI(nextWallpaper.full);
+			}
+			if (prevIndex !== state.currentLightboxIndex) {
+				const prevWallpaper = state.lightboxWallpaperList[prevIndex];
+				new Image().src = encodeURI(prevWallpaper.full);
+			}
 		}
 	};
 

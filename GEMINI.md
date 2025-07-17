@@ -78,6 +78,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - **Advanced Lightbox**: A full-featured lightbox for viewing images with keyboard navigation, image preloading, an explicit close button, and metadata display (name, resolution, format, folder). The mobile view is optimized to ensure controls are always visible, regardless of wallpaper aspect ratio.
     - **Synchronized Image and Metadata Updates**: Wallpaper information now updates simultaneously with the image load, preventing visual stutter.
     - **Smoother Image Transitions**: Implemented a fade-out/fade-in effect for a less jarring experience when changing wallpapers.
+    - **Enhanced Preloading**: Preloads multiple adjacent images (2 in each direction) to further reduce perceived loading times during navigation.
 - **Category Browsing**: A collapsible sidebar with a hierarchical file tree lets users browse by category.
 - **Client-Side Search**: Instantly search and filter wallpapers by name.
 - **Advanced Sorting**: Users can sort wallpapers by name, modification date, or resolution.
