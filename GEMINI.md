@@ -90,6 +90,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 ### Automation & Deployment
 
 - **Optimized Gallery Generation**: The `generate_gallery.sh` script is highly optimized. It intelligently checks if a wallpaper has already been converted to WebP and is up-to-date, skipping redundant processing. This works in tandem with the Vercel build cache to make subsequent deployments very fast. The `generate_data.mjs` script then creates the necessary metadata for the frontend.
+    - **Reduced WebP Quality**: The default WebP quality has been set to `78` for smaller file sizes and faster loading.
 - **One-Click Deployment**: Pre-configured for seamless deployment to Vercel and Netlify.
 - **Static Asset Caching**: Includes `.htaccess` for Apache and `_headers` for Netlify to set long-term `Cache-Control` headers, improving client-side performance.
 - **Dynamic Self-Hosting**: A `Dockerfile` and `docker-entrypoint.sh` are provided for easy self-hosting.

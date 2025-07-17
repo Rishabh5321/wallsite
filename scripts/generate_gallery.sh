@@ -9,7 +9,7 @@ readonly SCRIPT_VERSION="5.2"
 readonly SRC_DIR="${SRC_DIR:-src}"
 readonly WEBP_DIR="${WEBP_DIR:-public/webp}"
 readonly IMG_EXTENSIONS=("png" "jpg" "jpeg" "gif" "bmp" "tiff" "webp")
-readonly WEBP_QUALITY="${WEBP_QUALITY:-82}"
+readonly WEBP_QUALITY="${WEBP_QUALITY:-78}"
 readonly LOG_FILE="${LOG_FILE:-gallery-generator.log}"
 readonly RESPONSIVE_WIDTHS=(320 640 1024 1920) # For srcset
 
