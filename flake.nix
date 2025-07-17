@@ -1,7 +1,7 @@
 {
   description = "A Nix-flake-based Node.js development environment";
 
-  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/*";
 
   outputs = inputs:
     let
@@ -21,7 +21,7 @@
 
       devShells = forEachSupportedSystem ({ pkgs }: {
         default = pkgs.mkShell {
-          packages = with pkgs; [ node2nix nodejs nodePackages.pnpm yarn nodePackages.vercel ];
+          packages = with pkgs; [ node2nix nodejs nodePackages.pnpm yarn nodePackages.vercel imagemagick brotli ];
         };
       });
     };

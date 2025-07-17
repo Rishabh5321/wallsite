@@ -44,9 +44,6 @@
 		"*.{css,json,md}": "prettier --write"
 	},
 	"pnpm": {
-		"allow-build": [
-			"@vercel/speed-insights"
-		],
 		"onlyBuiltDependencies": [
 			"@vercel/speed-insights",
 			"esbuild"
@@ -68,7 +65,7 @@
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-prettier": "^5.5.1",
 		"husky": "^9.1.7",
-		"image-size": "^1.1.1",
+		"image-size": "^1.2.1",
 		"lint-staged": "^16.1.2",
 		"onchange": "^7.1.0",
 		"prettier": "^3.6.2"

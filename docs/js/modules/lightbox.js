@@ -2,19 +2,40 @@ import * as basicLightbox from 'basiclightbox';
 import { state } from './state.js';
 import { isFavorite, toggleFavorite } from './favorites.js';
 
-function showNextLightboxItem() {
+function getHighestResUrl(srcset) {
+	if (!srcset) return null;
+	const sources = srcset.split(',').map((s) => s.trim().split(' '));
+	return sources[sources.length - 1][0];
+}
+
+function transitionTo(direction) {
 	if (!state.lightbox || !state.lightbox.visible()) return;
-	state.currentLightboxIndex =
-		(state.currentLightboxIndex + 1) % state.lightboxWallpaperList.length;
-	updateLightbox(state.lightboxWallpaperList[state.currentLightboxIndex]);
+
+	const img = state.lightbox.element().querySelector('.lightbox-content img');
+	img.style.opacity = 0;
+
+	setTimeout(() => {
+		if (direction === 'next') {
+			state.currentLightboxIndex =
+				(state.currentLightboxIndex + 1) %
+				state.lightboxWallpaperList.length;
+		} else {
+			state.currentLightboxIndex =
+				(state.currentLightboxIndex -
+					1 +
+					state.lightboxWallpaperList.length) %
+				state.lightboxWallpaperList.length;
+		}
+		updateLightbox(state.lightboxWallpaperList[state.currentLightboxIndex]);
+	}, 150); // Match CSS transition duration
+}
+
+function showNextLightboxItem() {
+	transitionTo('next');
 }
 
 function showPrevLightboxItem() {
-	if (!state.lightbox || !state.lightbox.visible()) return;
-	state.currentLightboxIndex =
-		(state.currentLightboxIndex - 1 + state.lightboxWallpaperList.length) %
-		state.lightboxWallpaperList.length;
-	updateLightbox(state.lightboxWallpaperList[state.currentLightboxIndex]);
+	transitionTo('prev');
 }
 
 export function showLightbox(wallpaperList, index) {
@@ -130,90 +151,84 @@ function updateLightbox(wallpaper) {
 	const favoriteBtn = lightboxElement.querySelector('.lightbox-favorite-btn');
 	const shareBtn = lightboxElement.querySelector('.share-btn');
 
-	contentElement.classList.add('loading');
+	// --- Synchronous UI updates ---
+	wallpaperName.textContent = wallpaper.name
+		.split('.')
+		.slice(0, -1)
+		.join('.');
+	wallpaperFormat.textContent = wallpaper.name.split('.').pop().toUpperCase();
+	wallpaperFolder.textContent = wallpaper.path === '' ? '.' : wallpaper.path;
+	wallpaperRes.textContent = 'Loading...';
+	downloadBtn.href = encodeURI(wallpaper.full);
+	downloadBtn.download = wallpaper.name;
+	favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
+	favoriteBtn.onclick = () => {
+		toggleFavorite(wallpaper);
+		favoriteBtn.classList.toggle('favorited');
+	};
+	shareBtn.onclick = () => {
+		const url = new URL(wallpaper.full, window.location.href).href;
+		navigator.clipboard.writeText(url).then(() => {
+			const originalContent = shareBtn.innerHTML;
+			shareBtn.textContent = 'Copied!';
+			setTimeout(() => {
+				shareBtn.innerHTML = originalContent;
+			}, 2000);
+		});
+	};
 
-	// Set LQIP as initial src and add blur class
-	img.src = encodeURI(wallpaper.lqip);
-	img.alt = `Low quality thumbnail for ${wallpaper.name}`;
-	img.classList.add('blurred');
-	img.sizes = '100vw'; // The lightbox image can take up the full viewport width
-
-	// Set initial loading state for resolution
-	wallpaperRes.textContent = 'Loading full resolution...';
-
-	const fullImage = new Image();
-	fullImage.src = encodeURI(wallpaper.full);
-	fullImage.srcset = wallpaper.srcset;
-	fullImage.sizes = '100vw';
-
-	fullImage.onload = () => {
-		img.src = fullImage.src;
-		img.srcset = fullImage.srcset;
-		img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
-		contentElement.classList.remove('loading');
-		img.classList.remove('blurred'); // Remove blur after full image loads
-
-		// Update all metadata after the full image has loaded
-		wallpaperName.textContent = wallpaper.name
-			.split('.')
-			.slice(0, -1)
-			.join('.');
+	// --- Asynchronous image loading ---
+	const highResUrl = getHighestResUrl(wallpaper.srcset);
+	if (!highResUrl) {
+		// Fallback for items without srcset (like GIFs)
+		img.src = encodeURI(wallpaper.full);
 		wallpaperRes.textContent = `${wallpaper.width}x${wallpaper.height}`;
-		wallpaperFormat.textContent = wallpaper.name
-			.split('.')
-			.pop()
-			.toUpperCase();
-		wallpaperFolder.textContent =
-			wallpaper.path === '' ? '.' : wallpaper.path;
+		return;
+	}
 
-		downloadBtn.href = encodeURI(wallpaper.full);
-		downloadBtn.download = wallpaper.name;
+	const preloadImage = document.getElementById('preload-image');
+	const isPreloaded =
+		preloadImage.complete && preloadImage.src.endsWith(highResUrl);
 
-		favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
-		favoriteBtn.onclick = () => {
-			toggleFavorite(wallpaper);
-			favoriteBtn.classList.toggle('favorited');
+	if (isPreloaded) {
+		img.src = preloadImage.src;
+		img.alt = wallpaper.name;
+		wallpaperRes.textContent = `${wallpaper.width}x${wallpaper.height}`;
+		img.style.opacity = 1;
+	} else {
+		contentElement.classList.add('loading');
+		img.classList.add('blurred');
+		img.src = encodeURI(wallpaper.lqip);
+		img.alt = `Low quality thumbnail for ${wallpaper.name}`;
+
+		const fullImage = new Image();
+		fullImage.src = highResUrl;
+		fullImage.onload = () => {
+			img.src = fullImage.src;
+			img.alt = wallpaper.name;
+			wallpaperRes.textContent = `${wallpaper.width}x${wallpaper.height}`;
+			contentElement.classList.remove('loading');
+			img.classList.remove('blurred');
+			img.style.opacity = 1;
 		};
-
-		shareBtn.onclick = () => {
-			const url = new URL(wallpaper.full, window.location.href).href;
-			navigator.clipboard.writeText(url).then(() => {
-				const originalContent = shareBtn.innerHTML;
-				shareBtn.textContent = 'Copied!';
-				setTimeout(() => {
-					shareBtn.innerHTML = originalContent;
-				}, 2000);
-			});
+		fullImage.onerror = () => {
+			contentElement.classList.remove('loading');
+			wallpaperRes.textContent = 'Full image failed to load.';
+			img.style.opacity = 1;
 		};
+	}
 
-		// Preload adjacent images
-		const PRELOAD_COUNT = 2; // Preload 2 images in each direction
-
-		for (let i = 1; i <= PRELOAD_COUNT; i++) {
-			const nextIndex =
-				(state.currentLightboxIndex + i) %
-				state.lightboxWallpaperList.length;
-			const prevIndex =
-				(state.currentLightboxIndex -
-					i +
-					state.lightboxWallpaperList.length) %
-				state.lightboxWallpaperList.length;
-
-			if (nextIndex !== state.currentLightboxIndex) {
-				const nextWallpaper = state.lightboxWallpaperList[nextIndex];
-				new Image().src = encodeURI(nextWallpaper.full);
-			}
-			if (prevIndex !== state.currentLightboxIndex) {
-				const prevWallpaper = state.lightboxWallpaperList[prevIndex];
-				new Image().src = encodeURI(prevWallpaper.full);
-			}
+	// Preload adjacent images
+	const PRELOAD_COUNT = 2;
+	for (let i = 1; i <= PRELOAD_COUNT; i += 1) {
+		const nextIndex =
+			(state.currentLightboxIndex + i) %
+			state.lightboxWallpaperList.length;
+		const nextWallpaper = state.lightboxWallpaperList[nextIndex];
+		if (nextWallpaper.srcset) {
+			new Image().src = getHighestResUrl(nextWallpaper.srcset);
 		}
-	};
-
-	fullImage.onerror = () => {
-		contentElement.classList.remove('loading');
-		wallpaperRes.textContent = 'Full image failed to load.';
-	};
+	}
 }
 
 function createLightboxContent(wallpaper) {
@@ -224,7 +239,7 @@ function createLightboxContent(wallpaper) {
         <div class="lightbox-main-wrapper">
             <div class="lightbox-content">
                 <div class="loader"></div>
-                <img src="" alt="">
+                <img src="" alt="" style="opacity: 0;">
             </div>
             <div class="lightbox-details">
                 <div class="wallpaper-info">

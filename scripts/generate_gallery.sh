@@ -94,6 +94,12 @@ check_dependencies() {
         log_error "'identify' command (part of ImageMagick) is required but not found."
         exit 1
     fi
+    if ! command -v brotli &> /dev/null; then
+        log_warn "brotli is not installed. Skipping .br compression."
+        export BROTLI_ENABLED=0
+    else
+        export BROTLI_ENABLED=1
+    fi
 
     MAGICK_CMD=$(command -v magick || command -v convert)
     export MAGICK_CMD
@@ -203,11 +209,28 @@ main() {
     log_info "Generating Low Quality Image Placeholders (LQIPs)..."
     run_parallel generate_lqip "${all_images[@]}"
 
+    if [[ "${BROTLI_ENABLED:-0}" == "1" ]]; then
+        log_info "Generating Brotli compressed versions..."
+        mapfile -t webp_files < <(find "$WEBP_DIR" "$LQIP_DIR" -type f -name "*.webp")
+        run_parallel compress_brotli "${webp_files[@]}"
+    fi
+
     log_info "Image generation complete!"
 }
 
-export -f generate_responsive_versions generate_lqip needs_regeneration log_info log_debug log_error log_warn
-export MAGICK_CMD WEBP_DIR WEBP_QUALITY LQIP_DIR LQIP_QUALITY LQIP_WIDTH FORCE_REGEN RESPONSIVE_WIDTHS
+compress_brotli() {
+    local webp_file="$1"
+    local br_file="$webp_file.br"
+    if [[ "$webp_file" -nt "$br_file" ]]; then
+        log_info "Brotli compressing '$webp_file'"
+        brotli -q 11 -o "$br_file" "$webp_file"
+    else
+        log_debug "Skipping Brotli for '$webp_file' (exists)"
+    fi
+}
+
+export -f generate_responsive_versions generate_lqip needs_regeneration compress_brotli log_info log_debug log_error log_warn
+export MAGICK_CMD WEBP_DIR WEBP_QUALITY LQIP_DIR LQIP_QUALITY LQIP_WIDTH FORCE_REGEN RESPONSIVE_WIDTHS BROTLI_ENABLED
 
 main "$@"
 exit 0

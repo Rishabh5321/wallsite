@@ -41,6 +41,13 @@ function getAllFilesFromNode(node) {
 	);
 }
 
+function getHighestResUrl(srcset) {
+	if (!srcset) return null;
+	// Simple parser that assumes the last URL in the srcset is the highest resolution
+	const sources = srcset.split(',').map((s) => s.trim().split(' '));
+	return sources[sources.length - 1][0];
+}
+
 function createWallpaperItem(wallpaper) {
 	const galleryItem = document.createElement('div');
 	galleryItem.className = 'gallery-item lazy'; // Add .lazy class for the observer
@@ -57,6 +64,17 @@ function createWallpaperItem(wallpaper) {
 			(w) => w.full === wallpaper.full
 		);
 		showLightbox(wallpapersInView, wallpaperIndex);
+	});
+
+	// --- Preload on hover ---
+	galleryItem.addEventListener('mouseenter', () => {
+		const preloadImage = document.getElementById('preload-image');
+		if (preloadImage) {
+			const highResUrl = getHighestResUrl(wallpaper.srcset);
+			if (highResUrl) {
+				preloadImage.src = highResUrl;
+			}
+		}
 	});
 
 	const picture = document.createElement('picture');
