@@ -86,6 +86,11 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - **Random Discovery**: A "Random" button to discover new wallpapers easily. The initial view is a random assortment of all available wallpapers. When inside a category, the button will select a random wallpaper from within that category and its subcategories.
 - **User-Controlled Theme (Dark/Light Mode)**: The UI features a toggle for users to switch between dedicated light and dark modes. The theme also respects the user's system preference (`prefers-color-scheme`). On each page load, a new random color scheme is generated, and the toggle switches between the light and dark variants of that scheme.
 - **Fully Responsive**: The entire interface is optimized for both desktop and mobile devices. Conflicting UI elements are automatically hidden in the lightbox view for a cleaner experience.
+- **Accessibility (WCAG 2.2 AA)**:
+    - **Semantic Landmarks**: Implemented `<nav>` for primary and sidebar navigation, and `<section>` with `aria-labelledby` for the main gallery content, improving document structure for assistive technologies.
+    - **ARIA Attributes**: Added `aria-label` to icon buttons and `role="img"` to SVG icons for better context. `aria-live="polite"` is used on the gallery container to announce dynamic content updates (e.g., search results).
+    - **Focus Management**: The lightbox modal now traps keyboard focus, ensuring users cannot tab outside of it while open. Focus is automatically returned to the element that triggered the lightbox upon closing.
+    - **Visually Hidden Content**: Utilized a `visually-hidden` CSS class to provide screen reader-only headings for better navigation without affecting visual layout.
 
 ### Automation & Deployment
 

@@ -24,6 +24,9 @@ export function showLightbox(wallpaperList, index) {
 	state.currentLightboxIndex = index;
 	const wallpaper = state.lightboxWallpaperList[state.currentLightboxIndex];
 
+	// Store the element that had focus before the lightbox opened
+	state.elementBeforeLightbox = document.activeElement;
+
 	if (state.lightbox) {
 		if (!state.lightbox.visible()) {
 			state.lightbox.show();
@@ -52,6 +55,34 @@ export function showLightbox(wallpaperList, index) {
 				lightboxElement.appendChild(lightboxDetails);
 			}
 
+			const focusableElements = lightboxElement.querySelectorAll(
+				'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+			);
+			const firstFocusableElement = focusableElements[0];
+			const lastFocusableElement =
+				focusableElements[focusableElements.length - 1];
+
+			// Set initial focus
+			firstFocusableElement.focus();
+
+			// Trap focus within the lightbox
+			state.focusTrapHandler = (e) => {
+				if (e.key === 'Tab') {
+					if (e.shiftKey) {
+						if (document.activeElement === firstFocusableElement) {
+							e.preventDefault();
+							lastFocusableElement.focus();
+						}
+					} else if (
+						document.activeElement === lastFocusableElement
+					) {
+						e.preventDefault();
+						firstFocusableElement.focus();
+					}
+				}
+			};
+			lightboxElement.addEventListener('keydown', state.focusTrapHandler);
+
 			lightboxElement.querySelector('.lightbox-prev').onclick =
 				showPrevLightboxItem;
 			lightboxElement.querySelector('.lightbox-next').onclick =
@@ -68,6 +99,15 @@ export function showLightbox(wallpaperList, index) {
 		},
 		onClose: () => {
 			document.removeEventListener('keydown', state.keydownHandler);
+			if (state.focusTrapHandler) {
+				state.lightbox
+					.element()
+					.removeEventListener('keydown', state.focusTrapHandler);
+			}
+			// Return focus to the element that had focus before the lightbox opened
+			if (state.elementBeforeLightbox) {
+				state.elementBeforeLightbox.focus();
+			}
 		},
 	});
 

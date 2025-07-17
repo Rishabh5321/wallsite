@@ -63,7 +63,7 @@
 			"format": "cjs"
 		},
 		"docs/js/modules/lightbox.js": {
-			"bytes": 8008,
+			"bytes": 9253,
 			"imports": [
 				{
 					"path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js",
@@ -306,7 +306,7 @@
 					"bytesInOutput": 396
 				},
 				"docs/js/modules/lightbox.js": {
-					"bytesInOutput": 5048
+					"bytesInOutput": 5596
 				},
 				"docs/js/modules/ui.js": {
 					"bytesInOutput": 363
@@ -333,7 +333,7 @@
 					"bytesInOutput": 57
 				}
 			},
-			"bytes": 96081
+			"bytes": 96629
 		},
 		"public/js/bundle.css": {
 			"imports": [],
