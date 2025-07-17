@@ -66,6 +66,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
     - `lightbox.js`: Manages the full-screen lightbox view.
     - `ui.js`: Controls UI elements like the sidebar, theme, and sorting.
     - `favorites.js`: Manages the favorites system using `localStorage`.
+- **Rule 5: Keep the context file updated.** After any modification to the project's architecture, dependencies, or conventions, update `GEMINI.md` accordingly.
 
 ## 6. Project Features
 
@@ -87,6 +88,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 
 - **Optimized Gallery Generation**: The `generate_gallery.sh` script is highly optimized. It intelligently checks if a wallpaper has already been converted to WebP and is up-to-date, skipping redundant processing. This works in tandem with the Vercel build cache to make subsequent deployments very fast. The `generate_data.mjs` script then creates the necessary metadata for the frontend.
 - **One-Click Deployment**: Pre-configured for seamless deployment to Vercel and Netlify.
+- **Static Asset Caching**: Includes `.htaccess` for Apache and `_headers` for Netlify to set long-term `Cache-Control` headers, improving client-side performance.
 - **Dynamic Self-Hosting**: A `Dockerfile` and `docker-entrypoint.sh` are provided for easy self-hosting.
 - **Vercel Deployment & Caching**:
     - **Build Cache**: The project uses a custom build script (`scripts/vercel_build.sh`) to significantly speed up deployments. It manually caches the generated `public/webp` directory within Vercel's persistent cache (`.vercel/cache`). Before a new build starts, it restores these images, and the generation script only processes new or changed wallpapers, saving significant time.
