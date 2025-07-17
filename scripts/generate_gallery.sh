@@ -165,7 +165,7 @@ main() {
     mkdir -p "$WEBP_DIR"
 
     log_info "Finding all source images..."
-    mapfile -t all_images < <(find "$SRC_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.gif" -o -iname "*.bmp" -o -iname "*.tiff" -o -iname "*.webp" \) | sort -V)
+    mapfile -t all_images < <(find "$SRC_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.bmp" -o -iname "*.tiff" -o -iname "*.webp" \) | sort -V)
 
     if [[ ${#all_images[@]} -eq 0 ]]; then
         log_warn "No images found in '$SRC_DIR'."
