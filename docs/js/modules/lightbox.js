@@ -4,17 +4,34 @@ import { isFavorite, toggleFavorite } from './favorites.js';
 
 function showNextLightboxItem() {
 	if (!state.lightbox || !state.lightbox.visible()) return;
-	state.currentLightboxIndex =
-		(state.currentLightboxIndex + 1) % state.lightboxWallpaperList.length;
-	updateLightbox(state.lightboxWallpaperList[state.currentLightboxIndex]);
+
+	const img = state.lightbox.element().querySelector('.lightbox-content img');
+	img.style.opacity = 0;
+
+	setTimeout(() => {
+		state.currentLightboxIndex =
+			(state.currentLightboxIndex + 1) %
+			state.lightboxWallpaperList.length;
+		updateLightbox(state.lightboxWallpaperList[state.currentLightboxIndex]);
+		img.style.opacity = 1;
+	}, 200); // This timeout should match the CSS transition duration
 }
 
 function showPrevLightboxItem() {
 	if (!state.lightbox || !state.lightbox.visible()) return;
-	state.currentLightboxIndex =
-		(state.currentLightboxIndex - 1 + state.lightboxWallpaperList.length) %
-		state.lightboxWallpaperList.length;
-	updateLightbox(state.lightboxWallpaperList[state.currentLightboxIndex]);
+
+	const img = state.lightbox.element().querySelector('.lightbox-content img');
+	img.style.opacity = 0;
+
+	setTimeout(() => {
+		state.currentLightboxIndex =
+			(state.currentLightboxIndex -
+				1 +
+				state.lightboxWallpaperList.length) %
+			state.lightboxWallpaperList.length;
+		updateLightbox(state.lightboxWallpaperList[state.currentLightboxIndex]);
+		img.style.opacity = 1;
+	}, 200); // This timeout should match the CSS transition duration
 }
 
 export function showLightbox(wallpaperList, index) {
