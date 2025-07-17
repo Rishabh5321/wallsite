@@ -46,6 +46,10 @@
 	"pnpm": {
 		"allow-build": [
 			"@vercel/speed-insights"
+		],
+		"onlyBuiltDependencies": [
+			"@vercel/speed-insights",
+			"esbuild"
 		]
 	},
 	"dependencies": {
