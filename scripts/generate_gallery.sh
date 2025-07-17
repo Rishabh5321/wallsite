@@ -14,7 +14,7 @@ readonly WEBP_QUALITY="${WEBP_QUALITY:-78}"
 readonly LQIP_QUALITY="${LQIP_QUALITY:-10}" # New: LQIP WebP quality
 readonly LQIP_WIDTH="${LQIP_WIDTH:-40}"     # New: LQIP width
 readonly LOG_FILE="${LOG_FILE:-gallery-generator.log}"
-readonly RESPONSIVE_WIDTHS=(320 640 1024 1920) # For srcset
+readonly RESPONSIVE_WIDTHS=(640 1920) # For srcset
 
 # --- Colors & Logging ---
 readonly RED='\033[0;31m'
