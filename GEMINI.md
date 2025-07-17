@@ -103,3 +103,4 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - **Reproducible Environments**: A `flake.nix` file is included for Nix users.
 - **Code Quality**: Uses ESLint with `eslint-config-airbnb-base` and `eslint-plugin-prettier`.
 - **Automated Formatting**: Pre-commit hooks with Husky and lint-staged automatically format code.
+- **Dependency Build Scripts**: The `package.json` is configured with `pnpm.allow-build` to explicitly approve necessary build scripts for dependencies like `@vercel/speed-insights`, preventing warnings in CI/CD environments.
