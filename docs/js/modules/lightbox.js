@@ -130,16 +130,42 @@ function updateLightbox(wallpaper) {
 	const favoriteBtn = lightboxElement.querySelector('.lightbox-favorite-btn');
 	const shareBtn = lightboxElement.querySelector('.share-btn');
 
+	// --- Synchronous UI updates ---
+	// Update all metadata immediately for a responsive feel.
+	wallpaperName.textContent = wallpaper.name
+		.split('.')
+		.slice(0, -1)
+		.join('.');
+	wallpaperFormat.textContent = wallpaper.name.split('.').pop().toUpperCase();
+	wallpaperFolder.textContent = wallpaper.path === '' ? '.' : wallpaper.path;
+	wallpaperRes.textContent = 'Loading...'; // Placeholder for resolution
+
+	downloadBtn.href = encodeURI(wallpaper.full);
+	downloadBtn.download = wallpaper.name;
+
+	favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
+	favoriteBtn.onclick = () => {
+		toggleFavorite(wallpaper);
+		favoriteBtn.classList.toggle('favorited');
+	};
+
+	shareBtn.onclick = () => {
+		const url = new URL(wallpaper.full, window.location.href).href;
+		navigator.clipboard.writeText(url).then(() => {
+			const originalContent = shareBtn.innerHTML;
+			shareBtn.textContent = 'Copied!';
+			setTimeout(() => {
+				shareBtn.innerHTML = originalContent;
+			}, 2000);
+		});
+	};
+
+	// --- Asynchronous image loading ---
 	contentElement.classList.add('loading');
-
-	// Set LQIP as initial src and add blur class
-	img.src = encodeURI(wallpaper.lqip);
-	img.alt = `Low quality thumbnail for ${wallpaper.name}`;
 	img.classList.add('blurred');
-	img.sizes = '100vw'; // The lightbox image can take up the full viewport width
-
-	// Set initial loading state for resolution
-	wallpaperRes.textContent = 'Loading full resolution...';
+	img.src = encodeURI(wallpaper.lqip); // Show LQIP first
+	img.alt = `Low quality thumbnail for ${wallpaper.name}`;
+	img.sizes = '100vw';
 
 	const fullImage = new Image();
 	fullImage.src = encodeURI(wallpaper.full);
@@ -147,49 +173,18 @@ function updateLightbox(wallpaper) {
 	fullImage.sizes = '100vw';
 
 	fullImage.onload = () => {
+		// Once the full image is loaded, swap the src and update details
 		img.src = fullImage.src;
 		img.srcset = fullImage.srcset;
 		img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
-		contentElement.classList.remove('loading');
-		img.classList.remove('blurred'); // Remove blur after full image loads
-
-		// Update all metadata after the full image has loaded
-		wallpaperName.textContent = wallpaper.name
-			.split('.')
-			.slice(0, -1)
-			.join('.');
 		wallpaperRes.textContent = `${wallpaper.width}x${wallpaper.height}`;
-		wallpaperFormat.textContent = wallpaper.name
-			.split('.')
-			.pop()
-			.toUpperCase();
-		wallpaperFolder.textContent =
-			wallpaper.path === '' ? '.' : wallpaper.path;
 
-		downloadBtn.href = encodeURI(wallpaper.full);
-		downloadBtn.download = wallpaper.name;
+		contentElement.classList.remove('loading');
+		img.classList.remove('blurred'); // This will trigger the CSS filter transition
 
-		favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
-		favoriteBtn.onclick = () => {
-			toggleFavorite(wallpaper);
-			favoriteBtn.classList.toggle('favorited');
-		};
-
-		shareBtn.onclick = () => {
-			const url = new URL(wallpaper.full, window.location.href).href;
-			navigator.clipboard.writeText(url).then(() => {
-				const originalContent = shareBtn.innerHTML;
-				shareBtn.textContent = 'Copied!';
-				setTimeout(() => {
-					shareBtn.innerHTML = originalContent;
-				}, 2000);
-			});
-		};
-
-		// Preload adjacent images
-		const PRELOAD_COUNT = 2; // Preload 2 images in each direction
-
-		for (let i = 1; i <= PRELOAD_COUNT; i++) {
+		// Preload adjacent images to make navigation smoother
+		const PRELOAD_COUNT = 2;
+		for (let i = 1; i <= PRELOAD_COUNT; i += 1) {
 			const nextIndex =
 				(state.currentLightboxIndex + i) %
 				state.lightboxWallpaperList.length;
@@ -200,12 +195,14 @@ function updateLightbox(wallpaper) {
 				state.lightboxWallpaperList.length;
 
 			if (nextIndex !== state.currentLightboxIndex) {
-				const nextWallpaper = state.lightboxWallpaperList[nextIndex];
-				new Image().src = encodeURI(nextWallpaper.full);
+				new Image().src = encodeURI(
+					state.lightboxWallpaperList[nextIndex].full
+				);
 			}
 			if (prevIndex !== state.currentLightboxIndex) {
-				const prevWallpaper = state.lightboxWallpaperList[prevIndex];
-				new Image().src = encodeURI(prevWallpaper.full);
+				new Image().src = encodeURI(
+					state.lightboxWallpaperList[prevIndex].full
+				);
 			}
 		}
 	};

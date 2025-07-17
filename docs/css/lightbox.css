@@ -283,7 +283,6 @@
 }
 
 .lightbox-content.loading img {
-	opacity: 0;
 	filter: blur(10px);
 	transform: scale(0.98);
 }
