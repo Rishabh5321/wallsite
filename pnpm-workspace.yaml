@@ -1,3 +1,1 @@
-onlyBuiltDependencies:
-  - '@vercel/speed-insights'
-  - esbuild
+
