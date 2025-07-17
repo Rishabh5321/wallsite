@@ -44,9 +44,6 @@
 		"*.{css,json,md}": "prettier --write"
 	},
 	"pnpm": {
-		"allow-build": [
-			"@vercel/speed-insights"
-		],
 		"onlyBuiltDependencies": [
 			"@vercel/speed-insights",
 			"esbuild"
@@ -56,7 +53,6 @@
 		"@vercel/analytics": "^1.5.0",
 		"@vercel/speed-insights": "^1.2.0",
 		"basiclightbox": "^5.0.4",
-		"brotli-cli": "^2.1.1",
 		"http-server": "^14.1.1"
 	},
 	"devDependencies": {
