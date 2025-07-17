@@ -92,8 +92,10 @@ function updateLightbox(wallpaper) {
 
 	contentElement.classList.add('loading');
 
-	img.src = encodeURI(wallpaper.thumbnail);
-	img.alt = `Thumbnail for ${wallpaper.name}`;
+	// Set LQIP as initial src and add blur class
+	img.src = encodeURI(wallpaper.lqip);
+	img.alt = `Low quality thumbnail for ${wallpaper.name}`;
+	img.classList.add('blurred');
 	img.sizes = '100vw'; // The lightbox image can take up the full viewport width
 
 	// Set initial loading state for resolution
@@ -109,6 +111,7 @@ function updateLightbox(wallpaper) {
 		img.srcset = fullImage.srcset;
 		img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
 		contentElement.classList.remove('loading');
+		img.classList.remove('blurred'); // Remove blur after full image loads
 
 		// Update all metadata after the full image has loaded
 		wallpaperName.textContent = wallpaper.name

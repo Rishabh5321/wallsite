@@ -255,6 +255,12 @@
 		filter 0.4s ease;
 }
 
+.lightbox-content img.blurred {
+	filter: blur(20px);
+	transform: scale(1.05);
+	opacity: 0.8;
+}
+
 .loader {
 	border: 8px solid var(--secondary-button-bg);
 	border-top: 8px solid var(--accent-color);

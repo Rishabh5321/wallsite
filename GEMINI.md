@@ -94,6 +94,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - **One-Click Deployment**: Pre-configured for seamless deployment to Vercel and Netlify.
 - **Static Asset Caching**: Includes `.htaccess` for Apache and `_headers` for Netlify to set long-term `Cache-Control` headers, improving client-side performance.
 - **Dynamic Self-Hosting**: A `Dockerfile` and `docker-entrypoint.sh` are provided for easy self-hosting.
+    - **Long-term HTTP Caching**: The `docker-entrypoint.sh` now configures `http-server` to set `Cache-Control: max-age=31536000` for all served assets, significantly improving performance for returning users by enabling long-term browser and intermediate cache storage.
 - **Vercel Deployment & Caching**:
     - **Build Cache**: The project uses a custom build script (`scripts/vercel_build.sh`) to significantly speed up deployments. It manually caches the generated `public/webp` directory within Vercel's persistent cache (`.vercel/cache`). Before a new build starts, it restores these images, and the generation script only processes new or changed wallpapers, saving significant time.
     - **Edge Network (CDN) Caching**: Vercel automatically caches all static assets from the `public` directory on its Edge Network for up to 31 days. It uses a `Cache-Control` header that forces browser revalidation on each request, ensuring users always get the latest content. A new deployment automatically purges the CDN cache.
