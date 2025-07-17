@@ -5,13 +5,16 @@
 set -uo pipefail
 
 # --- Configuration ---
-readonly SCRIPT_VERSION="5.2"
+readonly SCRIPT_VERSION="5.3"
 readonly SRC_DIR="${SRC_DIR:-src}"
 readonly WEBP_DIR="${WEBP_DIR:-public/webp}"
+readonly LQIP_DIR="${LQIP_DIR:-public/lqip}" # New: Low Quality Image Placeholder directory
 readonly IMG_EXTENSIONS=("png" "jpg" "jpeg" "gif" "bmp" "tiff" "webp")
-readonly WEBP_QUALITY="${WEBP_QUALITY:-82}"
+readonly WEBP_QUALITY="${WEBP_QUALITY:-78}"
+readonly LQIP_QUALITY="${LQIP_QUALITY:-10}" # New: LQIP WebP quality
+readonly LQIP_WIDTH="${LQIP_WIDTH:-40}"     # New: LQIP width
 readonly LOG_FILE="${LOG_FILE:-gallery-generator.log}"
-readonly RESPONSIVE_WIDTHS=(320 640 1024 1920) # For srcset
+readonly RESPONSIVE_WIDTHS=(640 1920) # For srcset
 
 # --- Colors & Logging ---
 readonly RED='\033[0;31m'
@@ -135,6 +138,26 @@ generate_responsive_versions() {
     done
 }
 
+generate_lqip() {
+    local img_path="$1"
+    local rel_path="${img_path#$SRC_DIR/}"
+    local base_name
+    base_name=$(basename "${rel_path%.*}" | tr -d '\n')
+    local dir_name
+    dir_name=$(dirname "$rel_path" | tr -d '\n')
+
+    local out_path="$LQIP_DIR/$dir_name/${base_name}_lqip.webp"
+    out_path="${out_path//\/.\//\/}"
+    mkdir -p "$(dirname "$out_path")"
+
+    if needs_regeneration "$img_path" "$out_path"; then
+        log_info "Generating LQIP for '$img_path'"
+        "$MAGICK_CMD" "$img_path[0]" -resize "${LQIP_WIDTH}x" -quality "$LQIP_QUALITY" -strip "$out_path"
+    else
+        log_debug "Skipping LQIP for '$img_path' (exists)"
+    fi
+}
+
 run_parallel() {
     local func_name="$1"
     shift
@@ -163,6 +186,7 @@ main() {
     parse_args "$@"
     check_dependencies
     mkdir -p "$WEBP_DIR"
+    mkdir -p "$LQIP_DIR"
 
     log_info "Finding all source images..."
     mapfile -t all_images < <(find "$SRC_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.bmp" -o -iname "*.tiff" -o -iname "*.webp" \) | sort -V)
@@ -176,11 +200,14 @@ main() {
     log_info "Generating responsive WebP versions..."
     run_parallel generate_responsive_versions "${all_images[@]}"
 
+    log_info "Generating Low Quality Image Placeholders (LQIPs)..."
+    run_parallel generate_lqip "${all_images[@]}"
+
     log_info "Image generation complete!"
 }
 
-export -f generate_responsive_versions needs_regeneration log_info log_debug log_error log_warn
-export MAGICK_CMD WEBP_DIR WEBP_QUALITY FORCE_REGEN RESPONSIVE_WIDTHS
+export -f generate_responsive_versions generate_lqip needs_regeneration log_info log_debug log_error log_warn
+export MAGICK_CMD WEBP_DIR WEBP_QUALITY LQIP_DIR LQIP_QUALITY LQIP_WIDTH FORCE_REGEN RESPONSIVE_WIDTHS
 
 main "$@"
 exit 0

@@ -43,6 +43,15 @@
 		],
 		"*.{css,json,md}": "prettier --write"
 	},
+	"pnpm": {
+		"allow-build": [
+			"@vercel/speed-insights"
+		],
+		"onlyBuiltDependencies": [
+			"@vercel/speed-insights",
+			"esbuild"
+		]
+	},
 	"dependencies": {
 		"@vercel/analytics": "^1.5.0",
 		"@vercel/speed-insights": "^1.2.0",

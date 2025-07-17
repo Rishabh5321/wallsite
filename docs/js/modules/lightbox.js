@@ -24,6 +24,9 @@ export function showLightbox(wallpaperList, index) {
 	state.currentLightboxIndex = index;
 	const wallpaper = state.lightboxWallpaperList[state.currentLightboxIndex];
 
+	// Store the element that had focus before the lightbox opened
+	state.elementBeforeLightbox = document.activeElement;
+
 	if (state.lightbox) {
 		if (!state.lightbox.visible()) {
 			state.lightbox.show();
@@ -52,6 +55,34 @@ export function showLightbox(wallpaperList, index) {
 				lightboxElement.appendChild(lightboxDetails);
 			}
 
+			const focusableElements = lightboxElement.querySelectorAll(
+				'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+			);
+			const firstFocusableElement = focusableElements[0];
+			const lastFocusableElement =
+				focusableElements[focusableElements.length - 1];
+
+			// Set initial focus
+			firstFocusableElement.focus();
+
+			// Trap focus within the lightbox
+			state.focusTrapHandler = (e) => {
+				if (e.key === 'Tab') {
+					if (e.shiftKey) {
+						if (document.activeElement === firstFocusableElement) {
+							e.preventDefault();
+							lastFocusableElement.focus();
+						}
+					} else if (
+						document.activeElement === lastFocusableElement
+					) {
+						e.preventDefault();
+						firstFocusableElement.focus();
+					}
+				}
+			};
+			lightboxElement.addEventListener('keydown', state.focusTrapHandler);
+
 			lightboxElement.querySelector('.lightbox-prev').onclick =
 				showPrevLightboxItem;
 			lightboxElement.querySelector('.lightbox-next').onclick =
@@ -68,6 +99,15 @@ export function showLightbox(wallpaperList, index) {
 		},
 		onClose: () => {
 			document.removeEventListener('keydown', state.keydownHandler);
+			if (state.focusTrapHandler) {
+				state.lightbox
+					.element()
+					.removeEventListener('keydown', state.focusTrapHandler);
+			}
+			// Return focus to the element that had focus before the lightbox opened
+			if (state.elementBeforeLightbox) {
+				state.elementBeforeLightbox.focus();
+			}
 		},
 	});
 
@@ -92,37 +132,14 @@ function updateLightbox(wallpaper) {
 
 	contentElement.classList.add('loading');
 
-	img.src = encodeURI(wallpaper.thumbnail);
-	img.alt = `Thumbnail for ${wallpaper.name}`;
+	// Set LQIP as initial src and add blur class
+	img.src = encodeURI(wallpaper.lqip);
+	img.alt = `Low quality thumbnail for ${wallpaper.name}`;
+	img.classList.add('blurred');
 	img.sizes = '100vw'; // The lightbox image can take up the full viewport width
 
-	wallpaperName.textContent = wallpaper.name
-		.split('.')
-		.slice(0, -1)
-		.join('.');
+	// Set initial loading state for resolution
 	wallpaperRes.textContent = 'Loading full resolution...';
-	wallpaperFormat.textContent = wallpaper.name.split('.').pop().toUpperCase();
-	wallpaperFolder.textContent = wallpaper.path === '' ? '.' : wallpaper.path;
-
-	downloadBtn.href = encodeURI(wallpaper.full);
-	downloadBtn.download = wallpaper.name;
-
-	favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
-	favoriteBtn.onclick = () => {
-		toggleFavorite(wallpaper);
-		favoriteBtn.classList.toggle('favorited');
-	};
-
-	shareBtn.onclick = () => {
-		const url = new URL(wallpaper.full, window.location.href).href;
-		navigator.clipboard.writeText(url).then(() => {
-			const originalContent = shareBtn.innerHTML;
-			shareBtn.textContent = 'Copied!';
-			setTimeout(() => {
-				shareBtn.innerHTML = originalContent;
-			}, 2000);
-		});
-	};
 
 	const fullImage = new Image();
 	fullImage.src = encodeURI(wallpaper.full);
@@ -134,25 +151,62 @@ function updateLightbox(wallpaper) {
 		img.srcset = fullImage.srcset;
 		img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
 		contentElement.classList.remove('loading');
+		img.classList.remove('blurred'); // Remove blur after full image loads
+
+		// Update all metadata after the full image has loaded
+		wallpaperName.textContent = wallpaper.name
+			.split('.')
+			.slice(0, -1)
+			.join('.');
 		wallpaperRes.textContent = `${wallpaper.width}x${wallpaper.height}`;
+		wallpaperFormat.textContent = wallpaper.name
+			.split('.')
+			.pop()
+			.toUpperCase();
+		wallpaperFolder.textContent =
+			wallpaper.path === '' ? '.' : wallpaper.path;
+
+		downloadBtn.href = encodeURI(wallpaper.full);
+		downloadBtn.download = wallpaper.name;
+
+		favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
+		favoriteBtn.onclick = () => {
+			toggleFavorite(wallpaper);
+			favoriteBtn.classList.toggle('favorited');
+		};
+
+		shareBtn.onclick = () => {
+			const url = new URL(wallpaper.full, window.location.href).href;
+			navigator.clipboard.writeText(url).then(() => {
+				const originalContent = shareBtn.innerHTML;
+				shareBtn.textContent = 'Copied!';
+				setTimeout(() => {
+					shareBtn.innerHTML = originalContent;
+				}, 2000);
+			});
+		};
 
 		// Preload adjacent images
-		const nextIndex =
-			(state.currentLightboxIndex + 1) %
-			state.lightboxWallpaperList.length;
-		const prevIndex =
-			(state.currentLightboxIndex -
-				1 +
-				state.lightboxWallpaperList.length) %
-			state.lightboxWallpaperList.length;
+		const PRELOAD_COUNT = 2; // Preload 2 images in each direction
 
-		if (nextIndex !== state.currentLightboxIndex) {
-			const nextWallpaper = state.lightboxWallpaperList[nextIndex];
-			new Image().src = encodeURI(nextWallpaper.full);
-		}
-		if (prevIndex !== state.currentLightboxIndex) {
-			const prevWallpaper = state.lightboxWallpaperList[prevIndex];
-			new Image().src = encodeURI(prevWallpaper.full);
+		for (let i = 1; i <= PRELOAD_COUNT; i++) {
+			const nextIndex =
+				(state.currentLightboxIndex + i) %
+				state.lightboxWallpaperList.length;
+			const prevIndex =
+				(state.currentLightboxIndex -
+					i +
+					state.lightboxWallpaperList.length) %
+				state.lightboxWallpaperList.length;
+
+			if (nextIndex !== state.currentLightboxIndex) {
+				const nextWallpaper = state.lightboxWallpaperList[nextIndex];
+				new Image().src = encodeURI(nextWallpaper.full);
+			}
+			if (prevIndex !== state.currentLightboxIndex) {
+				const prevWallpaper = state.lightboxWallpaperList[prevIndex];
+				new Image().src = encodeURI(prevWallpaper.full);
+			}
 		}
 	};
 

@@ -27,4 +27,4 @@ pnpm run build
 
 # Start the http-server to serve the generated content.
 echo "✅ Build complete. Starting server on port 8000..."
-exec pnpm exec http-server public --host 0.0.0.0 --port 8000
+exec pnpm exec http-server public --host 0.0.0.0 --port 8000 --cache 31536000

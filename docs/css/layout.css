@@ -1,6 +1,5 @@
-
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
-@import url("sidebar.css");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('sidebar.css');
 
 :root {
 	--primary-button-text: #ffffff;
@@ -25,7 +24,7 @@ html.dark-mode {
 }
 
 body {
-	font-family: "Roboto", sans-serif;
+	font-family: 'Roboto', sans-serif;
 	margin: 0;
 	color: var(--text-color);
 	background: linear-gradient(
@@ -114,25 +113,27 @@ html.dark-mode .theme-toggle-btn .icon-moon {
 }
 
 #random-wallpaper-btn {
-    background-color: var(--secondary-button-bg);
-    color: var(--secondary-button-text);
-    border: 1px solid var(--card-border-color);
-    padding: 10px 20px;
-    border-radius: 24px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+	background-color: var(--secondary-button-bg);
+	color: var(--secondary-button-text);
+	border: 1px solid var(--card-border-color);
+	padding: 10px 20px;
+	border-radius: 24px;
+	cursor: pointer;
+	font-size: 1em;
+	font-weight: 500;
+	transition:
+		background-color 0.3s ease,
+		transform 0.2s ease;
 }
 
 #random-wallpaper-btn:hover {
-    background-color: var(--accent-color);
-    color: var(--primary-button-text);
-    transform: scale(1.05);
+	background-color: var(--accent-color);
+	color: var(--primary-button-text);
+	transform: scale(1.05);
 }
 
 h1 {
-	font-family: "Roboto", sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 	color: var(--accent-color);
 	font-size: 3.5em;
@@ -293,9 +294,18 @@ footer a:hover {
 	}
 }
 
-/* Hide header buttons when lightbox is visible */
+/* Visually hidden class for accessibility */
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
 body:has(.basicLightbox--visible) .top-right-nav,
 body:has(.basicLightbox--visible) .sidebar-toggle {
 	display: none;
 }
-
