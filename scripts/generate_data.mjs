@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 const SRC_DIR = path.resolve(__dirname, '../src');
 const OUTPUT_JS = path.resolve(__dirname, '../docs/js/gallery-data.js');
 const IMG_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff', '.webp'];
-const RESPONSIVE_WIDTHS = [320, 640, 1024, 1920];
+const RESPONSIVE_WIDTHS = [640, 1920];
 const LQIP_DIR = path.resolve(__dirname, '../public/lqip'); // New: LQIP directory
 
 async function findFiles(dir) {
@@ -76,17 +76,19 @@ async function generateGalleryData() {
             const srcset = RESPONSIVE_WIDTHS.map(width => `${src_path_prefix}_${width}w.webp ${width}w`).join(', ');
             
             const dimensions = getDimensions(imgPath);
+            const stats = await fs.stat(imgPath);
 
             galleryData.push({
                 type: 'file',
                 name: file_name,
-                thumbnail: `${src_path_prefix}_320w.webp`,
+                thumbnail: `${src_path_prefix}_640w.webp`,
                 srcset: srcset,
                 full: `src/${rel_path.replace(/\\/g, '/')}`,
                 lqip: `${lqip_path_prefix}_lqip.webp`, // New: LQIP path
                 width: dimensions.width,
                 height: dimensions.height,
                 path: rel_path_dir === '.' ? '' : rel_path_dir,
+                mtime: stats.mtimeMs,
             });
         }
     }

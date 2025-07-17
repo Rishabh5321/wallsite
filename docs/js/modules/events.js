@@ -3,14 +3,7 @@ import { debounce } from './utils.js';
 import { toggleSidebar } from './ui.js';
 import { showRandomWallpaper, resetAndLoadGallery } from './gallery.js';
 import { handleSearch } from './search.js';
-import { handleSort as sortWallpapers } from './sorting.js';
-
-function handleSort() {
-	const sortBy = dom.sortBy.value;
-	state.filteredWallpapers = sortWallpapers(sortBy, state.filteredWallpapers);
-	// Reset gallery without applying default sorting
-	resetAndLoadGallery(false);
-}
+import { handleSort } from './sorting.js';
 
 function setupCoreEventListeners() {
 	if (dom.sidebarToggle) {

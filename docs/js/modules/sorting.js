@@ -1,44 +1,41 @@
-function handleSort(sortBy, wallpapers) {
-	// Separate folders and files to sort files independently
-	const files = wallpapers.filter((item) => item.type === 'file');
-	const folders = wallpapers.filter((item) => item.type === 'folder');
+import { dom, state } from './state.js';
+import { resetAndLoadGallery } from './gallery.js';
+
+function sortWallpapers(sortBy, wallpapers) {
+	const sortedWallpapers = [...wallpapers];
 
 	switch (sortBy) {
 		case 'name-asc':
-			files.sort((a, b) => a.name.localeCompare(b.name));
+			sortedWallpapers.sort((a, b) => a.name.localeCompare(b.name));
 			break;
 		case 'name-desc':
-			files.sort((a, b) => b.name.localeCompare(a.name));
+			sortedWallpapers.sort((a, b) => b.name.localeCompare(a.name));
 			break;
 		case 'date-new':
-			files.sort((a, b) => b.modified - a.modified);
+			sortedWallpapers.sort((a, b) => b.mtime - a.mtime);
 			break;
 		case 'date-old':
-			files.sort((a, b) => a.modified - b.modified);
+			sortedWallpapers.sort((a, b) => a.mtime - b.mtime);
 			break;
 		case 'res-high':
-			files.sort((a, b) => {
-				const resA = a.resolution.split('x').map(Number);
-				const resB = b.resolution.split('x').map(Number);
-				return resB[0] * resB[1] - resA[0] * resA[1];
-			});
+			sortedWallpapers.sort(
+				(a, b) => b.width * b.height - a.width * a.height
+			);
 			break;
 		case 'res-low':
-			files.sort((a, b) => {
-				const resA = a.resolution.split('x').map(Number);
-				const resB = b.resolution.split('x').map(Number);
-				return resA[0] * resA[1] - resB[0] * resB[1];
-			});
+			sortedWallpapers.sort(
+				(a, b) => a.width * a.height - b.width * b.height
+			);
 			break;
-		case 'default':
 		default:
-			// In a directory, sort by name by default
-			files.sort((a, b) => a.name.localeCompare(b.name));
+			// 'default' or any other case will not re-sort, maintaining the current order
 			break;
 	}
-
-	// Re-combine folders and sorted wallpapers
-	return [...folders, ...files];
+	return sortedWallpapers;
 }
 
-export { handleSort };
+export function handleSort() {
+	const sortBy = dom.sortBy.value;
+	state.filteredWallpapers = sortWallpapers(sortBy, state.filteredWallpapers);
+	resetAndLoadGallery(false);
+}

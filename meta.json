@@ -15,7 +15,7 @@
 			"imports": []
 		},
 		"docs/js/gallery-data.js": {
-			"bytes": 87688,
+			"bytes": 79088,
 			"imports": [],
 			"format": "esm"
 		},
@@ -63,7 +63,7 @@
 			"format": "cjs"
 		},
 		"docs/js/modules/lightbox.js": {
-			"bytes": 9253,
+			"bytes": 9264,
 			"imports": [
 				{
 					"path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js",
@@ -158,12 +158,23 @@
 			"format": "esm"
 		},
 		"docs/js/modules/sorting.js": {
-			"bytes": 1270,
-			"imports": [],
+			"bytes": 1081,
+			"imports": [
+				{
+					"path": "docs/js/modules/state.js",
+					"kind": "import-statement",
+					"original": "./state.js"
+				},
+				{
+					"path": "docs/js/modules/gallery.js",
+					"kind": "import-statement",
+					"original": "./gallery.js"
+				}
+			],
 			"format": "esm"
 		},
 		"docs/js/modules/events.js": {
-			"bytes": 1839,
+			"bytes": 1602,
 			"imports": [
 				{
 					"path": "docs/js/modules/state.js",
@@ -198,9 +209,24 @@
 			],
 			"format": "esm"
 		},
-		"docs/js/main.js": {
-			"bytes": 2291,
+		"docs/js/app.js": {
+			"bytes": 2300,
 			"imports": [
+				{
+					"path": "node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs",
+					"kind": "import-statement",
+					"original": "@vercel/analytics"
+				},
+				{
+					"path": "node_modules/.pnpm/@vercel+speed-insights@1.2.0/node_modules/@vercel/speed-insights/dist/index.mjs",
+					"kind": "import-statement",
+					"original": "@vercel/speed-insights"
+				},
+				{
+					"path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.css",
+					"kind": "import-statement",
+					"original": "basiclightbox/dist/basicLightbox.min.css"
+				},
 				{
 					"path": "docs/js/gallery-data.js",
 					"kind": "import-statement",
@@ -243,32 +269,6 @@
 				}
 			],
 			"format": "esm"
-		},
-		"docs/js/app.js": {
-			"bytes": 297,
-			"imports": [
-				{
-					"path": "node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs",
-					"kind": "import-statement",
-					"original": "@vercel/analytics"
-				},
-				{
-					"path": "node_modules/.pnpm/@vercel+speed-insights@1.2.0/node_modules/@vercel/speed-insights/dist/index.mjs",
-					"kind": "import-statement",
-					"original": "@vercel/speed-insights"
-				},
-				{
-					"path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.css",
-					"kind": "import-statement",
-					"original": "basiclightbox/dist/basicLightbox.min.css"
-				},
-				{
-					"path": "docs/js/main.js",
-					"kind": "import-statement",
-					"original": "./main.js"
-				}
-			],
-			"format": "esm"
 		}
 	},
 	"outputs": {
@@ -291,7 +291,7 @@
 					"bytesInOutput": 0
 				},
 				"docs/js/gallery-data.js": {
-					"bytesInOutput": 70850
+					"bytesInOutput": 60984
 				},
 				"docs/js/modules/state.js": {
 					"bytesInOutput": 1074
@@ -321,19 +321,16 @@
 					"bytesInOutput": 312
 				},
 				"docs/js/modules/sorting.js": {
-					"bytesInOutput": 721
+					"bytesInOutput": 526
 				},
 				"docs/js/modules/events.js": {
-					"bytesInOutput": 806
-				},
-				"docs/js/main.js": {
-					"bytesInOutput": 716
+					"bytesInOutput": 717
 				},
 				"docs/js/app.js": {
-					"bytesInOutput": 57
+					"bytesInOutput": 773
 				}
 			},
-			"bytes": 96629
+			"bytes": 86479
 		},
 		"public/js/bundle.css": {
 			"imports": [],
