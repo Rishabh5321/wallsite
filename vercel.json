@@ -1,4 +1,4 @@
 {
-	"buildCommand": "pnpm install && pnpm run build",
+	"buildCommand": "./scripts/vercel_build.sh",
 	"outputDirectory": "public"
 }

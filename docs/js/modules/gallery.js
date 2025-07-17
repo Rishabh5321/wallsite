@@ -2,17 +2,54 @@ import { dom, state } from './state.js';
 import { isFavorite, toggleFavorite } from './favorites.js';
 import { showLightbox } from './lightbox.js';
 import { updatePageIndicator } from './ui.js';
-// import { shuffleArray } from './utils.js';
+
+const lazyLoadObserver = new IntersectionObserver(
+	(entries, observer) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				const galleryItem = entry.target;
+				const img = galleryItem.querySelector('img');
+
+				if (img && img.dataset.srcset) {
+					img.srcset = img.dataset.srcset;
+				}
+				if (img && img.dataset.src) {
+					img.src = img.dataset.src;
+				}
+
+				galleryItem.classList.remove('lazy');
+				observer.unobserve(galleryItem);
+			}
+		});
+	},
+	{
+		rootMargin: '0px 0px 200px 0px', // Load images 200px before they enter the viewport
+		threshold: 0.01,
+	}
+);
+
+function getAllFilesFromNode(node) {
+	if (node.type === 'file') {
+		return [node];
+	}
+	if (!node.children) {
+		return [];
+	}
+	return node.children.reduce(
+		(acc, child) => acc.concat(getAllFilesFromNode(child)),
+		[]
+	);
+}
 
 function createWallpaperItem(wallpaper) {
 	const galleryItem = document.createElement('div');
-	galleryItem.className = 'gallery-item';
+	galleryItem.className = 'gallery-item lazy'; // Add .lazy class for the observer
+
 	const link = document.createElement('a');
 	link.href = encodeURI(wallpaper.full);
 	link.setAttribute('aria-label', `View wallpaper ${wallpaper.name}`);
 	link.addEventListener('click', (e) => {
 		e.preventDefault();
-		// Pass only the wallpapers from the current view to the lightbox
 		const wallpapersInView = state.filteredWallpapers.filter(
 			(item) => item.type === 'file'
 		);
@@ -22,10 +59,21 @@ function createWallpaperItem(wallpaper) {
 		showLightbox(wallpapersInView, wallpaperIndex);
 	});
 
+	const picture = document.createElement('picture');
 	const img = new Image();
-	img.src = encodeURI(wallpaper.thumbnail);
+
+	// The data-srcset contains all the responsive image paths and sizes
+	img.dataset.srcset = wallpaper.srcset;
+	// The data-src is the smallest image, used as a thumbnail and for initial display
+	img.dataset.src = encodeURI(wallpaper.thumbnail);
+
 	img.alt = `Wallpaper: ${wallpaper.name}`;
-	img.loading = 'lazy';
+	img.loading = 'lazy'; // Native lazy loading as a fallback
+
+	// Set sizes attribute to give the browser hints on how the image will be displayed
+	img.sizes = '(max-width: 600px) 45vw, (max-width: 1200px) 30vw, 20vw';
+
+	picture.appendChild(img);
 	galleryItem.classList.add('loading');
 
 	img.onload = () => {
@@ -59,7 +107,7 @@ function createWallpaperItem(wallpaper) {
 		favoriteBtn.classList.toggle('favorited');
 	});
 
-	link.appendChild(img);
+	link.appendChild(picture);
 	galleryItem.appendChild(link);
 	galleryItem.appendChild(title);
 	galleryItem.appendChild(favoriteBtn);
@@ -116,6 +164,10 @@ function renderGallery(itemsToAppend) {
 	itemsToAppend.forEach((item) => {
 		const galleryItem = createGalleryItem(item);
 		dom.galleryContainer.appendChild(galleryItem);
+		// Observe the new item if it's a file
+		if (item.type === 'file') {
+			lazyLoadObserver.observe(galleryItem);
+		}
 	});
 	state.loadedWallpapersCount += itemsToAppend.length;
 
@@ -206,8 +258,27 @@ export function resetAndLoadGallery(shouldSort = true) {
 }
 
 export function showRandomWallpaper() {
-	const activeWallpapers = state.allWallpapersList;
-	if (activeWallpapers.length === 0) return;
-	const randomIndex = Math.floor(Math.random() * activeWallpapers.length);
-	showLightbox(activeWallpapers, randomIndex);
+	let wallpaperPool;
+
+	if (state.directoryHistory.length > 1) {
+		// User is inside a subdirectory. Get all files recursively from this point.
+		wallpaperPool = getAllFilesFromNode(state.currentDirectory);
+	} else {
+		// User is at the root. This could be the initial view, search, or favorites.
+		// In all these cases, the pool should be the files currently being displayed.
+		wallpaperPool = state.filteredWallpapers.filter(
+			(item) => item.type === 'file'
+		);
+	}
+
+	// Fallback to all wallpapers if the pool is empty for some reason
+	// (e.g., a folder with no files).
+	if (wallpaperPool.length === 0) {
+		wallpaperPool = state.allWallpapersList;
+	}
+
+	if (wallpaperPool.length === 0) return;
+
+	const randomIndex = Math.floor(Math.random() * wallpaperPool.length);
+	showLightbox(wallpaperPool, randomIndex);
 }

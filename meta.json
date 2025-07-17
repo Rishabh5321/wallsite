@@ -14,8 +14,13 @@
 			"bytes": 1186,
 			"imports": []
 		},
+		"docs/js/gallery-data.js": {
+			"bytes": 78266,
+			"imports": [],
+			"format": "esm"
+		},
 		"docs/js/modules/state.js": {
-			"bytes": 1207,
+			"bytes": 1504,
 			"imports": [],
 			"format": "esm"
 		},
@@ -58,7 +63,7 @@
 			"format": "cjs"
 		},
 		"docs/js/modules/lightbox.js": {
-			"bytes": 7768,
+			"bytes": 7578,
 			"imports": [
 				{
 					"path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js",
@@ -90,7 +95,7 @@
 			"format": "esm"
 		},
 		"docs/js/modules/gallery.js": {
-			"bytes": 6861,
+			"bytes": 8803,
 			"imports": [
 				{
 					"path": "docs/js/modules/state.js",
@@ -194,8 +199,13 @@
 			"format": "esm"
 		},
 		"docs/js/main.js": {
-			"bytes": 1359,
+			"bytes": 2291,
 			"imports": [
+				{
+					"path": "docs/js/gallery-data.js",
+					"kind": "import-statement",
+					"original": "./gallery-data.js"
+				},
 				{
 					"path": "docs/js/modules/state.js",
 					"kind": "import-statement",
@@ -269,7 +279,7 @@
 			"cssBundle": "public/js/bundle.css",
 			"inputs": {
 				"node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js": {
-					"bytesInOutput": 3184
+					"bytesInOutput": 3186
 				},
 				"node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs": {
 					"bytesInOutput": 1444
@@ -280,11 +290,14 @@
 				"node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.css": {
 					"bytesInOutput": 0
 				},
+				"docs/js/gallery-data.js": {
+					"bytesInOutput": 63116
+				},
 				"docs/js/modules/state.js": {
-					"bytesInOutput": 857
+					"bytesInOutput": 1074
 				},
 				"docs/js/modules/utils.js": {
-					"bytesInOutput": 320
+					"bytesInOutput": 212
 				},
 				"docs/js/modules/theme.js": {
 					"bytesInOutput": 1898
@@ -293,13 +306,13 @@
 					"bytesInOutput": 396
 				},
 				"docs/js/modules/lightbox.js": {
-					"bytesInOutput": 5228
+					"bytesInOutput": 4953
 				},
 				"docs/js/modules/ui.js": {
 					"bytesInOutput": 363
 				},
 				"docs/js/modules/gallery.js": {
-					"bytesInOutput": 4130
+					"bytesInOutput": 4836
 				},
 				"docs/js/modules/file-tree.js": {
 					"bytesInOutput": 2050
@@ -314,13 +327,13 @@
 					"bytesInOutput": 804
 				},
 				"docs/js/main.js": {
-					"bytesInOutput": 411
+					"bytesInOutput": 715
 				},
 				"docs/js/app.js": {
-					"bytesInOutput": 56
+					"bytesInOutput": 57
 				}
 			},
-			"bytes": 24289
+			"bytes": 88252
 		},
 		"public/js/bundle.css": {
 			"imports": [],

@@ -39,7 +39,6 @@ export function showLightbox(wallpaperList, index) {
 			const placeholder = lightboxElement.querySelector(
 				'.basicLightbox__placeholder'
 			);
-			// Move navigation controls and lightbox-details out of the placeholder
 			const navControls = placeholder.querySelectorAll(
 				'.lightbox-prev, .lightbox-next, .lightbox-close'
 			);
@@ -95,22 +94,18 @@ function updateLightbox(wallpaper) {
 
 	img.src = encodeURI(wallpaper.thumbnail);
 	img.alt = `Thumbnail for ${wallpaper.name}`;
-	//	const currentThumbnail = wallpaper.thumbnail;
+	img.sizes = '100vw'; // The lightbox image can take up the full viewport width
 
 	wallpaperName.textContent = wallpaper.name
 		.split('.')
 		.slice(0, -1)
 		.join('.');
 	wallpaperRes.textContent = 'Loading full resolution...';
-
-	// Extract format
-	const format = wallpaper.name.split('.').pop().toUpperCase();
-	wallpaperFormat.textContent = `Format: ${format}`;
-
-	// Extract folder and provide a fallback
-	wallpaperFolder.textContent = `Folder: ${wallpaper.path || 'Root'}`;
+	wallpaperFormat.textContent = wallpaper.name.split('.').pop().toUpperCase();
+	wallpaperFolder.textContent = wallpaper.path === '' ? '.' : wallpaper.path;
 
 	downloadBtn.href = encodeURI(wallpaper.full);
+	downloadBtn.download = wallpaper.name;
 
 	favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
 	favoriteBtn.onclick = () => {
@@ -121,22 +116,27 @@ function updateLightbox(wallpaper) {
 	shareBtn.onclick = () => {
 		const url = new URL(wallpaper.full, window.location.href).href;
 		navigator.clipboard.writeText(url).then(() => {
+			const originalContent = shareBtn.innerHTML;
 			shareBtn.textContent = 'Copied!';
 			setTimeout(() => {
-				shareBtn.innerHTML = `<svg class="icon" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"></path></svg>`;
+				shareBtn.innerHTML = originalContent;
 			}, 2000);
 		});
 	};
 
 	const fullImage = new Image();
 	fullImage.src = encodeURI(wallpaper.full);
+	fullImage.srcset = wallpaper.srcset;
+	fullImage.sizes = '100vw';
 
 	fullImage.onload = () => {
 		img.src = fullImage.src;
+		img.srcset = fullImage.srcset;
 		img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
 		contentElement.classList.remove('loading');
-		wallpaperRes.textContent = `${fullImage.naturalWidth}x${fullImage.naturalHeight}`;
+		wallpaperRes.textContent = `${wallpaper.width}x${wallpaper.height}`;
 
+		// Preload adjacent images
 		const nextIndex =
 			(state.currentLightboxIndex + 1) %
 			state.lightboxWallpaperList.length;
@@ -145,14 +145,15 @@ function updateLightbox(wallpaper) {
 				1 +
 				state.lightboxWallpaperList.length) %
 			state.lightboxWallpaperList.length;
-		if (nextIndex !== state.currentLightboxIndex)
-			new Image().src = encodeURI(
-				state.lightboxWallpaperList[nextIndex].full
-			);
-		if (prevIndex !== state.currentLightboxIndex)
-			new Image().src = encodeURI(
-				state.lightboxWallpaperList[prevIndex].full
-			);
+
+		if (nextIndex !== state.currentLightboxIndex) {
+			const nextWallpaper = state.lightboxWallpaperList[nextIndex];
+			new Image().src = encodeURI(nextWallpaper.full);
+		}
+		if (prevIndex !== state.currentLightboxIndex) {
+			const prevWallpaper = state.lightboxWallpaperList[prevIndex];
+			new Image().src = encodeURI(prevWallpaper.full);
+		}
 	};
 
 	fullImage.onerror = () => {
@@ -163,7 +164,7 @@ function updateLightbox(wallpaper) {
 
 function createLightboxContent(wallpaper) {
 	const imageName = wallpaper.name.split('.').slice(0, -1).join('.');
-	const encodedFullUrl = encodeURI(wallpaper.full);
+	const encodedDownloadUrl = encodeURI(wallpaper.full);
 
 	return `
         <div class="lightbox-main-wrapper">
@@ -182,10 +183,10 @@ function createLightboxContent(wallpaper) {
                     <button class="lightbox-favorite-btn" aria-label="Toggle Favorite">
                         <svg class="icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                     </button>
-                    <button class="share-btn" aria-label="Share Wallpaper">
-                        <svg class="icon" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
+                    <button class="share-btn" aria-label="Share">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
                     </button>
-                    <a href="${encodedFullUrl}" download class="download-btn">Download</a>
+                    <a href="${encodedDownloadUrl}" download="${imageName}.webp" class="download-btn">Download</a>
                 </div>
             </div>
         </div>
