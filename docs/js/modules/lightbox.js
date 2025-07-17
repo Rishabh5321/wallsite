@@ -96,33 +96,8 @@ function updateLightbox(wallpaper) {
 	img.alt = `Thumbnail for ${wallpaper.name}`;
 	img.sizes = '100vw'; // The lightbox image can take up the full viewport width
 
-	wallpaperName.textContent = wallpaper.name
-		.split('.')
-		.slice(0, -1)
-		.join('.');
+	// Set initial loading state for resolution
 	wallpaperRes.textContent = 'Loading full resolution...';
-	wallpaperFormat.textContent = wallpaper.name.split('.').pop().toUpperCase();
-	wallpaperFolder.textContent = wallpaper.path === '' ? '.' : wallpaper.path;
-
-	downloadBtn.href = encodeURI(wallpaper.full);
-	downloadBtn.download = wallpaper.name;
-
-	favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
-	favoriteBtn.onclick = () => {
-		toggleFavorite(wallpaper);
-		favoriteBtn.classList.toggle('favorited');
-	};
-
-	shareBtn.onclick = () => {
-		const url = new URL(wallpaper.full, window.location.href).href;
-		navigator.clipboard.writeText(url).then(() => {
-			const originalContent = shareBtn.innerHTML;
-			shareBtn.textContent = 'Copied!';
-			setTimeout(() => {
-				shareBtn.innerHTML = originalContent;
-			}, 2000);
-		});
-	};
 
 	const fullImage = new Image();
 	fullImage.src = encodeURI(wallpaper.full);
@@ -134,7 +109,39 @@ function updateLightbox(wallpaper) {
 		img.srcset = fullImage.srcset;
 		img.alt = wallpaper.name.split('.').slice(0, -1).join('.');
 		contentElement.classList.remove('loading');
+
+		// Update all metadata after the full image has loaded
+		wallpaperName.textContent = wallpaper.name
+			.split('.')
+			.slice(0, -1)
+			.join('.');
 		wallpaperRes.textContent = `${wallpaper.width}x${wallpaper.height}`;
+		wallpaperFormat.textContent = wallpaper.name
+			.split('.')
+			.pop()
+			.toUpperCase();
+		wallpaperFolder.textContent =
+			wallpaper.path === '' ? '.' : wallpaper.path;
+
+		downloadBtn.href = encodeURI(wallpaper.full);
+		downloadBtn.download = wallpaper.name;
+
+		favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
+		favoriteBtn.onclick = () => {
+			toggleFavorite(wallpaper);
+			favoriteBtn.classList.toggle('favorited');
+		};
+
+		shareBtn.onclick = () => {
+			const url = new URL(wallpaper.full, window.location.href).href;
+			navigator.clipboard.writeText(url).then(() => {
+				const originalContent = shareBtn.innerHTML;
+				shareBtn.textContent = 'Copied!';
+				setTimeout(() => {
+					shareBtn.innerHTML = originalContent;
+				}, 2000);
+			});
+		};
 
 		// Preload adjacent images
 		const nextIndex =
