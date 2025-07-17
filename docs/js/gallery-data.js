@@ -1,4 +1,4 @@
-const galleryData = [
+export const galleryData = [
 	{
 		type: 'file',
 		name: 'wall1.jpg',

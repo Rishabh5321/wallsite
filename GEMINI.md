@@ -79,7 +79,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - **Client-Side Search**: Instantly search and filter wallpapers by name.
 - **Advanced Sorting**: Users can sort wallpapers by name, modification date, or resolution.
 - **Favorites System**: Users can mark their favorite wallpapers, which are saved locally in the browser.
-- **Random Discovery**: A "Random" button to discover new wallpapers easily. The initial view is a random assortment of all available wallpapers.
+- **Random Discovery**: A "Random" button to discover new wallpapers easily. The initial view is a random assortment of all available wallpapers. When inside a category, the button will select a random wallpaper from within that category and its subcategories.
 - **User-Controlled Theme (Dark/Light Mode)**: The UI features a toggle for users to switch between dedicated light and dark modes. The theme also respects the user's system preference (`prefers-color-scheme`). On each page load, a new random color scheme is generated, and the toggle switches between the light and dark variants of that scheme.
 - **Fully Responsive**: The entire interface is optimized for both desktop and mobile devices. Conflicting UI elements are automatically hidden in the lightbox view for a cleaner experience.
 

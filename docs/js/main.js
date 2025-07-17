@@ -1,3 +1,4 @@
+import { galleryData } from './gallery-data.js';
 import { dom, state, initializeDom } from './modules/state.js';
 import { shuffleArray } from './modules/utils.js';
 import { initializeTheme } from './modules/theme.js';
@@ -62,17 +63,6 @@ function initializeState(galleryTree, allWallpapers) {
 
 export function initializeApp() {
 	initializeDom();
-	if (typeof galleryData === 'undefined' || !Array.isArray(galleryData)) {
-		console.error(
-			"Wallpaper data not found or is in the wrong format. Please ensure 'js/gallery-data.js' is loaded correctly and is an array."
-		);
-		if (dom.galleryContainer) {
-			dom.galleryContainer.innerHTML =
-				'<p>Error: Wallpaper data could not be loaded.</p>';
-		}
-		return;
-	}
-
 	const galleryTree = buildGalleryTree(galleryData);
 
 	initializeTheme();

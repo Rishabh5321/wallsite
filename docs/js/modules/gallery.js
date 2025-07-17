@@ -28,6 +28,19 @@ const lazyLoadObserver = new IntersectionObserver(
 	}
 );
 
+function getAllFilesFromNode(node) {
+	if (node.type === 'file') {
+		return [node];
+	}
+	if (!node.children) {
+		return [];
+	}
+	return node.children.reduce(
+		(acc, child) => acc.concat(getAllFilesFromNode(child)),
+		[]
+	);
+}
+
 function createWallpaperItem(wallpaper) {
 	const galleryItem = document.createElement('div');
 	galleryItem.className = 'gallery-item lazy'; // Add .lazy class for the observer
@@ -245,8 +258,27 @@ export function resetAndLoadGallery(shouldSort = true) {
 }
 
 export function showRandomWallpaper() {
-	const activeWallpapers = state.allWallpapersList;
-	if (activeWallpapers.length === 0) return;
-	const randomIndex = Math.floor(Math.random() * activeWallpapers.length);
-	showLightbox(activeWallpapers, randomIndex);
+	let wallpaperPool;
+
+	if (state.directoryHistory.length > 1) {
+		// User is inside a subdirectory. Get all files recursively from this point.
+		wallpaperPool = getAllFilesFromNode(state.currentDirectory);
+	} else {
+		// User is at the root. This could be the initial view, search, or favorites.
+		// In all these cases, the pool should be the files currently being displayed.
+		wallpaperPool = state.filteredWallpapers.filter(
+			(item) => item.type === 'file'
+		);
+	}
+
+	// Fallback to all wallpapers if the pool is empty for some reason
+	// (e.g., a folder with no files).
+	if (wallpaperPool.length === 0) {
+		wallpaperPool = state.allWallpapersList;
+	}
+
+	if (wallpaperPool.length === 0) return;
+
+	const randomIndex = Math.floor(Math.random() * wallpaperPool.length);
+	showLightbox(wallpaperPool, randomIndex);
 }

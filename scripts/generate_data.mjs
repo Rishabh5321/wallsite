@@ -70,7 +70,7 @@ async function generateGalleryData() {
         });
     }
 
-    const outputContent = `const galleryData = ${JSON.stringify(galleryData, null, 2)};`;
+    const outputContent = `export const galleryData = ${JSON.stringify(galleryData, null, 2)};`;
     await fs.writeFile(OUTPUT_JS, outputContent);
 
     console.log('Successfully generated flat gallery data.');
