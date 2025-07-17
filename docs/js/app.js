@@ -56,8 +56,8 @@ function initializeState(galleryTree, allWallpapers) {
 	state.allWallpapersList = allWallpapers;
 	state.currentDirectory = galleryTree;
 	state.directoryHistory = [galleryTree];
-	state.filteredWallpapers = [...state.allWallpapersList];
-	shuffleArray(state.filteredWallpapers);
+	// On initial load, display the contents of the root directory.
+	state.filteredWallpapers = [...galleryTree.children];
 }
 
 export function initializeApp() {
@@ -69,7 +69,7 @@ export function initializeApp() {
 	setupEventListeners();
 	initializeState(galleryTree, galleryData);
 	buildFileTree(galleryTree);
-	resetAndLoadGallery(false);
+	resetAndLoadGallery(true);
 }
 
 inject();

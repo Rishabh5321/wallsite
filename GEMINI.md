@@ -83,9 +83,9 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
     - **Enhanced Preloading**: Preloads multiple adjacent images (2 in each direction) to further reduce perceived loading times during navigation.
 - **Category Browsing**: A collapsible sidebar with a hierarchical file tree lets users browse by category.
 - **Client-Side Search**: Instantly search and filter wallpapers by name.
-- **Advanced Sorting**: Users can sort wallpapers by name, modification date, or resolution. This feature was recently fixed to correctly handle sort logic and data dependencies.
+- **Advanced Sorting**: Users can sort wallpapers by name, modification date, or resolution. The sorting logic always prioritizes folders, keeping them at the top of the list regardless of the chosen sort option.
 - **Favorites System**: Users can mark their favorite wallpapers, which are saved locally in the browser.
-- **Random Discovery**: A "Random" button to discover new wallpapers easily. The initial view is a random assortment of all available wallpapers. When inside a category, the button will select a random wallpaper from within that category and its subcategories.
+- **Random Discovery**: A "Random" button allows users to discover new wallpapers easily. The initial gallery view is now sorted by type (folders first) and name for a predictable experience. When inside a category, the random button will select a random wallpaper from within that category and its subcategories.
 - **User-Controlled Theme (Dark/Light Mode)**: The UI features a toggle for users to switch between dedicated light and dark modes. The theme also respects the user's system preference (`prefers-color-scheme`). On each page load, a new random color scheme is generated, and the toggle switches between the light and dark variants of that scheme.
 - **Fully Responsive**: The entire interface is optimized for both desktop and mobile devices. Conflicting UI elements are automatically hidden in the lightbox view for a cleaner experience.
 - **Accessibility (WCAG 2.2 AA)**:

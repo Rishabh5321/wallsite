@@ -4,33 +4,36 @@ import { resetAndLoadGallery } from './gallery.js';
 function sortWallpapers(sortBy, wallpapers) {
 	const sortedWallpapers = [...wallpapers];
 
-	switch (sortBy) {
-		case 'name-asc':
-			sortedWallpapers.sort((a, b) => a.name.localeCompare(b.name));
-			break;
-		case 'name-desc':
-			sortedWallpapers.sort((a, b) => b.name.localeCompare(a.name));
-			break;
-		case 'date-new':
-			sortedWallpapers.sort((a, b) => b.mtime - a.mtime);
-			break;
-		case 'date-old':
-			sortedWallpapers.sort((a, b) => a.mtime - b.mtime);
-			break;
-		case 'res-high':
-			sortedWallpapers.sort(
-				(a, b) => b.width * b.height - a.width * a.height
-			);
-			break;
-		case 'res-low':
-			sortedWallpapers.sort(
-				(a, b) => a.width * a.height - b.width * b.height
-			);
-			break;
-		default:
-			// 'default' or any other case will not re-sort, maintaining the current order
-			break;
-	}
+	// Primary sort: always put folders first
+	sortedWallpapers.sort((a, b) => {
+		if (a.type === 'folder' && b.type !== 'folder') return -1;
+		if (a.type !== 'folder' && b.type === 'folder') return 1;
+
+		// Secondary sort: based on user's selection
+		switch (sortBy) {
+			case 'name-asc':
+				return a.name.localeCompare(b.name);
+			case 'name-desc':
+				return b.name.localeCompare(a.name);
+			case 'date-new':
+				// Files have mtime, folders do not. Sort folders by name in this case.
+				if (!a.mtime || !b.mtime) return a.name.localeCompare(b.name);
+				return b.mtime - a.mtime;
+			case 'date-old':
+				if (!a.mtime || !b.mtime) return a.name.localeCompare(b.name);
+				return a.mtime - b.mtime;
+			case 'res-high':
+				// Files have resolution, folders do not. Sort folders by name.
+				if (!a.width || !b.width) return a.name.localeCompare(b.name);
+				return b.width * b.height - a.width * a.height;
+			case 'res-low':
+				if (!a.width || !b.width) return a.name.localeCompare(b.name);
+				return a.width * a.height - b.width * b.height;
+			default:
+				return 0; // Keep original order if 'default' or unknown
+		}
+	});
+
 	return sortedWallpapers;
 }
 
