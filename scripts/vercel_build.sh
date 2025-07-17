@@ -12,7 +12,7 @@ if [ -d ".vercel/cache/public/webp" ]; then
 fi
 
 # Run the actual build command
-pnpm install && pnpm run build
+pnpm install --ignore-scripts && pnpm run build
 
 # Save generated webp images to cache
 # Ensure the cache directories are clean before copying new ones
