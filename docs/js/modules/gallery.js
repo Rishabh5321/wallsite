@@ -73,6 +73,9 @@ function createWallpaperItem(wallpaper) {
 			const highResUrl = getHighestResUrl(wallpaper.srcset);
 			if (highResUrl) {
 				preloadImage.src = highResUrl;
+			} else if (wallpaper.full.toLowerCase().endsWith('.gif')) {
+				// Preload the GIF itself
+				preloadImage.src = encodeURI(wallpaper.full);
 			}
 		}
 	});

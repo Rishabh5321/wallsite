@@ -476,6 +476,7 @@ export const galleryData = [
 		width: 960,
 		height: 540,
 		path: 'Animated',
+		mtime: 1752736318187.6208,
 	},
 	{
 		type: 'file',
@@ -486,6 +487,7 @@ export const galleryData = [
 		width: 1280,
 		height: 720,
 		path: 'Animated',
+		mtime: 1752736318189.6208,
 	},
 	{
 		type: 'file',
@@ -496,6 +498,7 @@ export const galleryData = [
 		width: 1280,
 		height: 720,
 		path: 'Animated',
+		mtime: 1752736318189.6208,
 	},
 	{
 		type: 'file',
@@ -506,6 +509,7 @@ export const galleryData = [
 		width: 1920,
 		height: 1080,
 		path: 'Animated',
+		mtime: 1752736318208.6208,
 	},
 	{
 		type: 'file',
@@ -516,6 +520,7 @@ export const galleryData = [
 		width: 1920,
 		height: 1080,
 		path: 'Animated',
+		mtime: 1752736318218.6208,
 	},
 	{
 		type: 'file',

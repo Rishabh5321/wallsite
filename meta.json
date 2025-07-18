@@ -15,7 +15,7 @@
 			"imports": []
 		},
 		"docs/js/gallery-data.js": {
-			"bytes": 79088,
+			"bytes": 79253,
 			"imports": [],
 			"format": "esm"
 		},
@@ -63,7 +63,7 @@
 			"format": "cjs"
 		},
 		"docs/js/modules/lightbox.js": {
-			"bytes": 9521,
+			"bytes": 9895,
 			"imports": [
 				{
 					"path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js",
@@ -95,7 +95,7 @@
 			"format": "esm"
 		},
 		"docs/js/modules/gallery.js": {
-			"bytes": 9358,
+			"bytes": 9501,
 			"imports": [
 				{
 					"path": "docs/js/modules/state.js",
@@ -279,7 +279,7 @@
 			"cssBundle": "public/js/bundle.css",
 			"inputs": {
 				"node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js": {
-					"bytesInOutput": 3180
+					"bytesInOutput": 3178
 				},
 				"node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs": {
 					"bytesInOutput": 1444
@@ -291,7 +291,7 @@
 					"bytesInOutput": 0
 				},
 				"docs/js/gallery-data.js": {
-					"bytesInOutput": 60984
+					"bytesInOutput": 61119
 				},
 				"docs/js/modules/state.js": {
 					"bytesInOutput": 1074
@@ -306,16 +306,16 @@
 					"bytesInOutput": 396
 				},
 				"docs/js/modules/lightbox.js": {
-					"bytesInOutput": 5735
+					"bytesInOutput": 5966
 				},
 				"docs/js/modules/ui.js": {
 					"bytesInOutput": 363
 				},
 				"docs/js/modules/gallery.js": {
-					"bytesInOutput": 5065
+					"bytesInOutput": 5127
 				},
 				"docs/js/modules/file-tree.js": {
-					"bytesInOutput": 2053
+					"bytesInOutput": 2054
 				},
 				"docs/js/modules/search.js": {
 					"bytesInOutput": 313
@@ -327,10 +327,10 @@
 					"bytesInOutput": 718
 				},
 				"docs/js/app.js": {
-					"bytesInOutput": 740
+					"bytesInOutput": 741
 				}
 			},
-			"bytes": 86933
+			"bytes": 87361
 		},
 		"public/js/bundle.css": {
 			"imports": [],

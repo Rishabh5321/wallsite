@@ -49,6 +49,7 @@ async function generateGalleryData() {
 
         if (path.extname(file_name).toLowerCase() === '.gif') {
             const dimensions = getDimensions(imgPath);
+            const stats = await fs.stat(imgPath);
             galleryData.push({
                 type: 'file',
                 name: file_name,
@@ -58,6 +59,7 @@ async function generateGalleryData() {
                 width: dimensions.width,
                 height: dimensions.height,
                 path: rel_path_dir === '.' ? '' : rel_path_dir,
+                mtime: stats.mtimeMs,
             });
         } else {
             const base_name = path.basename(file_name, path.extname(file_name));
