@@ -1,14 +1,17 @@
 import { inject } from '@vercel/analytics';
 import { injectSpeedInsights } from '@vercel/speed-insights';
 import 'basiclightbox/dist/basicLightbox.min.css';
+import '../styles/layout.css';
+import '../styles/gallery.css';
+import '../styles/lightbox.css';
 import { galleryData } from './gallery-data.js';
-import { state, initializeDom } from './modules/state.js';
-import { shuffleArray } from './modules/utils.js';
-import { initializeTheme } from './modules/theme.js';
-import { loadFavorites } from './modules/favorites.js';
-import { buildFileTree } from './modules/file-tree.js';
-import { resetAndLoadGallery } from './modules/gallery.js';
-import { setupEventListeners } from './modules/events.js';
+import { state, initializeDom } from './components/state.js';
+import { shuffleArray } from './utils/utils.js';
+import { initializeTheme } from './components/theme.js';
+import { loadFavorites } from './components/favorites.js';
+import { buildFileTree } from './components/file-tree.js';
+import { resetAndLoadGallery } from './components/gallery.js';
+import { setupEventListeners } from './components/events.js';
 
 function buildGalleryTree(files) {
 	const root = { type: 'folder', name: 'root', path: '', children: [] };

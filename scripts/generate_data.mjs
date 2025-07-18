@@ -6,8 +6,8 @@ import sizeOf from 'image-size';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SRC_DIR = path.resolve(__dirname, '../src');
-const OUTPUT_JS = path.resolve(__dirname, '../docs/js/gallery-data.js');
+const SRC_DIR = path.resolve(__dirname, '../wallpapers');
+const OUTPUT_JS = path.resolve(__dirname, '../src/js/gallery-data.js');
 const IMG_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff', '.webp'];
 const RESPONSIVE_WIDTHS = [640, 1920];
 const LQIP_DIR = path.resolve(__dirname, '../public/lqip'); // New: LQIP directory

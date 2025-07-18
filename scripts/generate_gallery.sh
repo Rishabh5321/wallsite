@@ -6,7 +6,7 @@ set -uo pipefail
 
 # --- Configuration ---
 readonly SCRIPT_VERSION="5.3"
-readonly SRC_DIR="${SRC_DIR:-src}"
+readonly SRC_DIR="${SRC_DIR:-wallpapers}"
 readonly WEBP_DIR="${WEBP_DIR:-public/webp}"
 readonly LQIP_DIR="${LQIP_DIR:-public/lqip}" # New: Low Quality Image Placeholder directory
 readonly IMG_EXTENSIONS=("png" "jpg" "jpeg" "gif" "bmp" "tiff" "webp")

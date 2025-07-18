@@ -1,5 +1,5 @@
 import { dom, state } from './state.js';
-import { debounce } from './utils.js';
+import { debounce } from '../utils/utils.js';
 import { toggleSidebar } from './ui.js';
 import { showRandomWallpaper, resetAndLoadGallery } from './gallery.js';
 import { handleSearch } from './search.js';
