@@ -3,17 +3,40 @@
   <p>A curated collection of stunning wallpapers, fully automated and ready for deployment.</p>
 </div>
 
-## 📸 Screenshots
+## 🚀 Quick Start
 
-<div align="center">
-  <img src=".github/screenshot/screenshot1.png" alt="Screenshot 1" width="90%">
-  <img src=".github/screenshot/screenshot2.png" alt="Screenshot 2" width="45%">
-  <img src=".github/screenshot/screenshot3.png" alt="Screenshot 3" width="45%">
-</div>
+[![asciicast](https://asciinema.org/a/656458.svg)](https://asciinema.org/a/656458)
 
 ## ✨ Live Demo
 
 You can view the live wallpaper gallery hosted from this repository here: **[Live Gallery](https://wallsite.vercel.app/)**
+
+---
+
+## 🏗️ Architecture
+
+The following diagram illustrates the project's architecture and the relationship between the development repository (`wallsite`) and the user-facing template (`wallsite-template`).
+
+```mermaid
+graph TD
+    subgraph Development Repository (wallsite)
+        A[Developer's Wallpapers in /src] --> B{pnpm run build};
+        B --> C[Generates Gallery & Assets];
+        C --> D[Live Demo on Vercel];
+        B --> E{GitHub Actions};
+        E --> F[Sync to Template];
+        E --> G[Publish Docker Image];
+    end
+
+    subgraph User-Facing Template (wallsite-template)
+        H[Empty /src Folder];
+        I[User Generates Repository];
+        I --> J[Adds Their Own Wallpapers];
+        J --> K{Deploy to Vercel/Netlify or Self-Host};
+    end
+
+    F --> H;
+```
 
 ---
 
@@ -31,7 +54,17 @@ After you create your repository, follow the simple deployment instructions in y
 
 ---
 
-## 🔧 Advanced Use: Self-hosting with Docker
+## 🔧 Deployment Options
+
+### Vercel & Netlify (Recommended)
+
+For a quick and easy deployment, use Vercel or Netlify. Both platforms offer a seamless Git-based workflow.
+
+1.  **Generate from Template**: Create your own repository using the template.
+2.  **Add Wallpapers**: Clone your new repository and add your wallpapers to the `src` directory.
+3.  **Import to Vercel/Netlify**: Import your repository into Vercel or Netlify. The project is pre-configured for automatic builds and deployments.
+
+### Self-hosting with Docker
 
 For users who want to host the gallery on their own server, a pre-built Docker image is available.
 
@@ -40,6 +73,7 @@ For users who want to host the gallery on their own server, a pre-built Docker i
 </div>
 
 1.  **Pull the Docker Image:**
+
     ```bash
     docker pull ghcr.io/rishabh5321/wallsite:latest
     ```
@@ -53,6 +87,18 @@ For users who want to host the gallery on their own server, a pre-built Docker i
       ghcr.io/rishabh5321/wallsite:latest
     ```
     Your gallery will be running at `http://localhost:8000`.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these guidelines to ensure a smooth development process.
+
+### Coding Style
+
+- **JavaScript**: We use ESLint with the `airbnb-base` configuration and Prettier for code formatting.
+- **Shell Scripts**: Scripts should be POSIX-compliant and pass `shellcheck`.
+- **General**: Follow the existing code style and conventions.
 
 ## License
 

@@ -58,7 +58,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 
 - **Rule 1: Never edit generated files directly.** The `public/` directory and the `docs/js/gallery-data.js` file are generated artifacts. To update them, run `pnpm run build` or `pnpm run dev`.
 - **Rule 2: The template repository is sacred.** Do not make manual changes to the `wallsite-template` repository. All changes are synced from the main `wallsite` repository.
-- **Rule 3: The user experience is paramount.** The main `README.md` is for developers and directs users to the template. The template's `README.md` provides the actual deployment steps for the user.
+- **Rule 3: The user experience is paramount.** The main `README.md` is for developers and directs users to the template. The template's `README.md` provides the actual deployment steps for the user. The `README.md` in the main repository contains a quick-start GIF, an architecture diagram, and a "Contributing" section.
 - **Rule 4: Emphasize pure functions and separation of concerns.** The frontend JavaScript is organized into modules with specific responsibilities:
     - `app.js`: The main application entry point. Initializes all modules, builds the gallery data structure, and wires up event listeners. It also handles Vercel analytics injection.
     - `main.js`: A simple script that imports and runs the `initializeApp` function from `app.js`.
