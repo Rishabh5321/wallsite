@@ -10,7 +10,7 @@
 		"doc": "src"
 	},
 	"scripts": {
-		"generate": "bash ./scripts/generate_gallery.sh && node ./scripts/generate_data.mjs",
+		"generate": "node ./scripts/generate.mjs",
 		"dev": "pnpm run generate && esbuild src/js/index.js --bundle --outfile=public/js/bundle.js --loader:.js=jsx --loader:.css=css --allow-overwrite --servedir=public --serve=0.0.0.0:8000 --watch --target=es2020,chrome90,firefox90,safari15",
 		"build": "pnpm run generate && pnpm run build:assets && esbuild src/js/index.js --bundle --outfile=public/js/bundle.js --loader:.js=jsx --loader:.css=css --allow-overwrite --minify --target=es2020,chrome90,firefox90,safari15 --metafile=meta.json --drop:console --define:process.env.NODE_ENV='\"production\"'",
 		"start": "pnpm run build && http-server public --host 0.0.0.0 --port 8000",
@@ -39,7 +39,8 @@
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"@vercel/speed-insights",
-			"esbuild"
+			"esbuild",
+			"sharp"
 		]
 	},
 	"dependencies": {
@@ -59,9 +60,9 @@
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-prettier": "^5.5.1",
 		"husky": "^9.1.7",
-		"image-size": "^1.2.1",
 		"lint-staged": "^16.1.2",
 		"onchange": "^7.1.0",
-		"prettier": "^3.6.2"
+		"prettier": "^3.6.2",
+		"sharp": "^0.34.3"
 	}
 }

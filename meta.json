@@ -42,7 +42,7 @@
       "imports": []
     },
     "src/js/gallery-data.js": {
-      "bytes": 278502,
+      "bytes": 278625,
       "imports": [],
       "format": "esm"
     },
@@ -327,7 +327,7 @@
           "bytesInOutput": 0
         },
         "src/js/gallery-data.js": {
-          "bytesInOutput": 222192
+          "bytesInOutput": 222315
         },
         "src/js/components/state.js": {
           "bytesInOutput": 1074
@@ -363,7 +363,7 @@
           "bytesInOutput": 745
         }
       },
-      "bytes": 248528
+      "bytes": 248651
     },
     "public/js/bundle.css": {
       "imports": [
