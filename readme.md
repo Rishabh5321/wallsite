@@ -14,37 +14,46 @@ You can view the live wallpaper gallery hosted from this repository here: **[Liv
 The following diagram illustrates the project's architecture and the relationship between the development repository (`wallsite`) and the user-facing template (`wallsite-template`).
 
 ```mermaid
-%% GitHub-README friendly, light-mode colors
+%% ------------- THEME & LAYOUT -------------
+%% Title & styling
 %% -------------------------------
 graph TD
-    classDef repo   fill:#f3f4f6,stroke:#9ca3af,color:#111
-    classDef user   fill:#ecfdf5,stroke:#10b981,color:#111
-    classDef action fill:#fef2f2,stroke:#f87171,color:#111
-    classDef output fill:#eef2ff,stroke:#818cf8,color:#111
-    classDef sync   fill:#f0fdfa,stroke:#2dd4bf,color:#111
+    classDef repo    fill:#1f2937,stroke:#4b5563,color:#ffffff
+    classDef user    fill:#065f46,stroke:#047857,color:#ffffff
+    classDef action  fill:#7c2d12,stroke:#9a3412,color:#ffffff
+    classDef output  fill:#4338ca,stroke:#3730a3,color:#ffffff
+    classDef sync    fill:#0f766e,stroke:#0d9488,color:#ffffff
 
-    subgraph wallsite
+    %% ------------- DEVELOPMENT REPO -------------
+    subgraph "wallsite (main repo)"
+        direction LR
         A[Developer wallpapers<br>/src]:::repo
-        B[pnpm build]:::action
-        C[Gallery + assets]:::output
-        D[Live demo]:::output
+        B[pnpm run build]:::action
+        C[Gallery assets<br>optimized]:::output
+        D[Live demo<br>wallsite.vercel.app]:::output
         E[GitHub Actions]:::action
-        F[Docker image]:::output
-        G[Push updates]:::sync
-        A --> B --> C --> D
-        B --> E --> F
+        F["Docker image<br>ghcr.io/rishabh5321/wallsite:latest"]:::output
+        G[Sync commits to<br>template repo]:::sync
+
+        A --> B --> C
+        C --> D
+        B --> E
+        E --> F
         E --> G
     end
 
-    subgraph wallsite-template
-        H[Empty /src]:::user
-        I[User fork]:::user
-        J[Add wallpapers]:::user
-        K[Deploy]:::user
+    %% ------------- USER TEMPLATE -------------
+    subgraph "wallsite-template (generated copy)"
+        direction TB
+        H[Empty /src folder]:::user
+        I[User forks / uses template]:::user
+        J[User adds own wallpapers]:::user
+        K[Deploy to<br>Vercel, Netlify<br>or Docker]:::user
         H --> I --> J --> K
     end
 
-    G -.-> H
+    %% ------------- SYNC ARROW -------------
+    G -.->|push| H
 ```
 
 ---
