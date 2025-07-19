@@ -5,19 +5,41 @@ import sizeOf from 'image-size';
 import { execSync } from 'child_process';
 import nearestColor from 'nearest-color';
 
-// Basic color names and their hex values
+// A more comprehensive map of color names and their hex values
 const colorMap = {
-    red: '#ff0000',
-    green: '#008000',
+    black: '#000000',
     blue: '#0000ff',
-    yellow: '#ffff00',
-    purple: '#800080',
+    brown: '#a52a2a',
+    cyan: '#00ffff',
+    green: '#008000',
+    gray: '#808080',
+    magenta: '#ff00ff',
     orange: '#ffa500',
     pink: '#ffc0cb',
-    brown: '#a52a2a',
-    black: '#000000',
+    purple: '#800080',
+    red: '#ff0000',
     white: '#ffffff',
-    gray: '#808080',
+    yellow: '#ffff00',
+    maroon: '#800000',
+    navy: '#000080',
+    olive: '#808000',
+    teal: '#008080',
+    aqua: '#00ffff',
+    lime: '#00ff00',
+    silver: '#c0c0c0',
+    fuchsia: '#ff00ff',
+    indigo: '#4b0082',
+    gold: '#ffd700',
+    violet: '#ee82ee',
+    beige: '#f5f5dc',
+    tan: '#d2b48c',
+    khaki: '#f0e68c',
+    salmon: '#fa8072',
+    coral: '#ff7f50',
+    turquoise: '#40e0d0',
+    plum: '#dda0dd',
+    orchid: '#da70d6',
+    skyblue: '#87ceeb',
 };
 
 const getColorName = nearestColor.from(colorMap);
