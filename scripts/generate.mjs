@@ -100,9 +100,10 @@ async function processImage(imgPath, cache) {
     if (path.extname(fileName).toLowerCase() === '.gif') {
         const image = sharp(imgPath);
         const metadata = await image.metadata();
+        const encodedRelPath = relPath.split(path.sep).map(s => encodeURIComponent(s)).join('/');
         const data = {
-            type: 'file', name: fileName, thumbnail: `src/${relPath.replace(/\\/g, '/')}`,
-            srcset: '', full: `src/${relPath.replace(/\\/g, '/')}`, width: metadata.width,
+            type: 'file', name: fileName, thumbnail: `src/${encodedRelPath}`,
+            srcset: '', full: `src/${encodedRelPath}`, width: metadata.width,
             height: metadata.height, path: relPathDir === '.' ? '' : relPathDir,
             mtime: stats.mtimeMs, dominantColor: '', colorName: '',
         };
@@ -133,13 +134,17 @@ async function processImage(imgPath, cache) {
     const dominantColor = `#${dominant.r.toString(16).padStart(2, '0')}${dominant.g.toString(16).padStart(2, '0')}${dominant.b.toString(16).padStart(2, '0')}`;
     const colorName = getColorName(dominantColor).name;
 
-    const srcPathPrefix = (relPathDir === '.' ? `webp/${baseName}` : `webp/${relPathDir}/${baseName}`).replace(/\\/g, '/');
-    const lqipPathPrefix = (relPathDir === '.' ? `lqip/${baseName}` : `lqip/${relPathDir}/${baseName}`).replace(/\\/g, '/');
+    const encodedRelPath = relPath.split(path.sep).map(s => encodeURIComponent(s)).join('/');
+    const encodedBaseName = encodeURIComponent(baseName);
+    const encodedRelPathDir = relPathDir.split(path.sep).map(s => encodeURIComponent(s)).join('/');
+
+    const srcPathPrefix = (relPathDir === '.' ? `webp/${encodedBaseName}` : `webp/${encodedRelPathDir}/${encodedBaseName}`);
+    const lqipPathPrefix = (relPathDir === '.' ? `lqip/${encodedBaseName}` : `lqip/${encodedRelPathDir}/${encodedBaseName}`);
     const srcset = RESPONSIVE_WIDTHS.map(w => `${srcPathPrefix}_${w}w.webp ${w}w`).join(', ');
 
     const data = {
         type: 'file', name: fileName, thumbnail: `${srcPathPrefix}_640w.webp`,
-        srcset: srcset, full: `src/${relPath.replace(/\\/g, '/')}`, lqip: `${lqipPathPrefix}_lqip.webp`,
+        srcset: srcset, full: `src/${encodedRelPath}`, lqip: `${lqipPathPrefix}_lqip.webp`,
         width: metadata.width, height: metadata.height, path: relPathDir === '.' ? '' : relPathDir,
         mtime: stats.mtimeMs, dominantColor, colorName,
     };

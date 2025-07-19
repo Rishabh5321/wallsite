@@ -24,29 +24,29 @@ This project uses two separate repositories:
 
 1.  **`wallsite` (This Repository):**
     - The main development repository and live demo.
-    - Contains the developer's own wallpapers in the `/src` folder.
+    - Contains the developer's own wallpapers in the `/wallpapers` folder.
     - Contains all workflows, including `publish-docker.yml` and `sync-template.yml`.
 
 2.  **`wallsite-template` (The User-Facing Template):**
     - The repository that users generate from.
     - Automatically kept in sync with `wallsite` by the `sync-template.yml` workflow.
-    - Its `/src` folder is kept empty (with a placeholder `README.md`).
+    - Its `/wallpapers` folder is kept empty (with a placeholder `README.md`).
     - Its `README.md` is different and contains user-facing deployment instructions.
     - Does not contain developer-specific workflows.
 
 ### Core Automation Workflows
 
-- **`sync-template.yml`:** Runs in the main `wallsite` repo. It copies all relevant files (excluding `/src` and specific developer workflows) to the `wallsite-template` repo.
+- **`sync-template.yml`:** Runs in the main `wallsite` repo. It copies all relevant files (excluding `/wallpapers` and specific developer workflows) to the `wallsite-template` repo.
 - **`publish-docker.yml`:** Runs in the main `wallsite` repo to build and publish the Docker image to the GitHub Container Registry (GHCR).
 
 ### Dynamic Docker Deployment
 
-The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoint.sh` script. The gallery is generated **at runtime** when a user runs the container with their wallpaper directory mounted to `/app/src`. This allows for dynamic updates without rebuilding the image.
+The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoint.sh` script. The gallery is generated **at runtime** when a user runs the container with their wallpaper directory mounted to `/app/wallpapers`. This allows for dynamic updates without rebuilding the image.
 
 ## 4. File Structure Overview
 
-- `src/`: Contains the source wallpaper images, organized in subdirectories.
-- `docs/`: Contains the source code for the frontend application (HTML, CSS, JS). This is the directory to edit during development.
+- `wallpapers/`: Contains the source wallpaper images, organized in subdirectories.
+- `src/`: Contains the source code for the frontend application (HTML, CSS, JS). This is the directory to edit during development.
 - `public/`: The output directory for the build process. **Do not edit files here directly.**
 - `scripts/`: Contains the core generation script.
     - `generate.mjs`: A Node.js script using `sharp` to find all images, generate responsive WebP versions, create LQIPs, extract dominant colors, and create `src/js/gallery-data.js`. It processes images in parallel and uses a cache (`.gallery-cache.json`) to skip regeneration of unchanged files, making subsequent builds significantly faster.
