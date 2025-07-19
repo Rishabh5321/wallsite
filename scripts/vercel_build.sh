@@ -18,17 +18,17 @@ fi
 if [ -d ".vercel/cache/public/lqip" ]; then
   cp -r .vercel/cache/public/lqip/. public/lqip/
 fi
-if [ -f ".vercel/cache/scripts/.gallery-cache.json" ]; then
-  cp .vercel/cache/scripts/.gallery-cache.json scripts/
+if [ -f ".vercel/cache/scripts/gallery-cache.json" ]; then
+  cp .vercel/cache/scripts/gallery-cache.json scripts/
 fi
 
 # Run the actual build command
 pnpm run build
 
 # Save generated webp images and metadata to cache
-rm -rf .vercel/cache/public/webp .vercel/cache/public/lqip .vercel/cache/scripts/.gallery-cache.json
+rm -rf .vercel/cache/public/webp .vercel/cache/public/lqip .vercel/cache/scripts/gallery-cache.json
 cp -r public/webp .vercel/cache/public/
 cp -r public/lqip .vercel/cache/public/
-if [ -f "scripts/.gallery-cache.json" ]; then
-  cp scripts/.gallery-cache.json .vercel/cache/scripts/
+if [ -f "scripts/gallery-cache.json" ]; then
+  cp scripts/gallery-cache.json .vercel/cache/scripts/
 fi

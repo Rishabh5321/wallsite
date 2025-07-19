@@ -49,13 +49,13 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - `src/`: Contains the source code for the frontend application (HTML, CSS, JS). This is the directory to edit during development.
 - `public/`: The output directory for the build process. **Do not edit files here directly.**
 - `scripts/`: Contains the core generation script.
-    - `generate.mjs`: A Node.js script using `sharp` to find all images, generate responsive WebP versions, create LQIPs, extract dominant colors, and create `src/js/gallery-data.js`. It processes images in parallel and uses a cache (`.gallery-cache.json`) to skip regeneration of unchanged files, making subsequent builds significantly faster.
+    - `generate.mjs`: A Node.js script using `sharp` to find all images, generate responsive WebP versions, create LQIPs, extract dominant colors, and create `src/js/gallery-data.js`. It processes images in parallel and uses a cache (`gallery-cache.json`) to skip regeneration of unchanged files, making subsequent builds significantly faster.
 - `.github/workflows/`: Contains the GitHub Actions workflows.
 - `Dockerfile` & `docker-entrypoint.sh`: Define the Docker image and its runtime behavior.
 
 ## 5. Development Rules & Conventions
 
-- **Rule 1: Never edit generated files directly.** The `public/` directory, `src/js/gallery-data.js`, and `scripts/.gallery-cache.json` are generated artifacts. To update them, run `pnpm run build` or `pnpm run dev`.
+- **Rule 1: Never edit generated files directly.** The `public/` directory, `src/js/gallery-data.js`, and `scripts/gallery-cache.json` are generated artifacts. To update them, run `pnpm run build` or `pnpm run dev`.
 - **Rule 2: The template repository is sacred.** Do not make manual changes to the `wallsite-template` repository. All changes are synced from the main `wallsite` repository.
 - **Rule 3: The user experience is paramount.** The main `README.md` is for developers and directs users to the template. The template's `README.md` provides the actual deployment steps for the user. The `README.md` in the main repository contains a quick-start GIF, an architecture diagram, and a "Contributing" section.
 - **Rule 4: Emphasize pure functions and separation of concerns.** The frontend JavaScript is organized into modules with specific responsibilities:
@@ -98,7 +98,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 
 ### Automation & Deployment
 
-- **Optimized Gallery Generation**: The `generate.mjs` script is a highly optimized Node.js script using `sharp`. It processes images in parallel and uses a metadata cache (`.gallery-cache.json`) to skip processing for unchanged images. This works in tandem with the Vercel build cache to make subsequent deployments very fast. The script creates the necessary metadata for the frontend, including file modification times (`mtime`) to enable sorting by date and the dominant color of each image to enable searching by color.
+- **Optimized Gallery Generation**: The `generate.mjs` script is a highly optimized Node.js script using `sharp`. It processes images in parallel and uses a metadata cache (`gallery-cache.json`) to skip processing for unchanged images. This works in tandem with the Vercel build cache to make subsequent deployments very fast. The script creates the necessary metadata for the frontend, including file modification times (`mtime`) to enable sorting by date and the dominant color of each image to enable searching by color.
     - **Reduced WebP Quality**: The default WebP quality has been set to `78` for smaller file sizes and faster loading.
     - **Optimized Responsive Image Widths**: The number of generated responsive WebP image widths has been reduced to two (`640w` and `1920w`) to balance build time, storage, and performance.
 - **One-Click Deployment**: Pre-configured for seamless deployment to Vercel and Netlify.
@@ -106,7 +106,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - **Dynamic Self-Hosting**: A `Dockerfile` and `docker-entrypoint.sh` are provided for easy self-hosting.
     - **Long-term HTTP Caching**: The `docker-entrypoint.sh` now configures `http-server` to set `Cache-Control: max-age=31536000` for all served assets, significantly improving performance for returning users by enabling long-term browser and intermediate cache storage.
 - **Vercel Deployment & Caching**:
-    - **Build Cache**: The project uses a custom build script (`scripts/vercel_build.sh`) to significantly speed up deployments. It installs dependencies, and then manually caches the generated `public/webp`, `public/lqip`, and `scripts/.gallery-cache.json` files within Vercel's persistent cache. Before a new build starts, it restores these assets, and the generation script only processes new or changed wallpapers, saving significant time.
+    - **Build Cache**: The project uses a custom build script (`scripts/vercel_build.sh`) to significantly speed up deployments. It installs dependencies, and then manually caches the generated `public/webp`, `public/lqip`, and `scripts/gallery-cache.json` files within Vercel's persistent cache. Before a new build starts, it restores these assets, and the generation script only processes new or changed wallpapers, saving significant time.
     - **Edge Network (CDN) Caching**: Vercel automatically caches all static assets from the `public` directory on its Edge Network for up to 31 days. It uses a `Cache-control` header that forces browser revalidation on each request, ensuring users always get the latest content. A new deployment automatically purges the CDN cache.
     - **Dependency Build Script Handling**: To prevent warnings during Vercel deployments related to ignored build scripts (e.g., `@vercel/speed-insights`), the `pnpm install` command in `scripts/vercel_build.sh` now includes the `--ignore-scripts` flag. This ensures that lifecycle scripts are not run during installation, while the necessary build steps are still executed by `pnpm run build`.
 
