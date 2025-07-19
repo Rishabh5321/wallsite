@@ -14,24 +14,37 @@ You can view the live wallpaper gallery hosted from this repository here: **[Liv
 The following diagram illustrates the project's architecture and the relationship between the development repository (`wallsite`) and the user-facing template (`wallsite-template`).
 
 ```mermaid
+%% GitHub-README friendly, light-mode colors
+%% -------------------------------
 graph TD
-    subgraph "Development Repository (wallsite)"
-        A[Developer's Wallpapers in /src] --> B{pnpm run build};
-        B --> C[Generates Gallery & Assets];
-        C --> D[Live Demo on Vercel];
-        B --> E{GitHub Actions};
-        E --> F[Sync to Template];
-        E --> G[Publish Docker Image];
+    classDef repo   fill:#f3f4f6,stroke:#9ca3af,color:#111
+    classDef user   fill:#ecfdf5,stroke:#10b981,color:#111
+    classDef action fill:#fef2f2,stroke:#f87171,color:#111
+    classDef output fill:#eef2ff,stroke:#818cf8,color:#111
+    classDef sync   fill:#f0fdfa,stroke:#2dd4bf,color:#111
+
+    subgraph wallsite
+        A[Developer wallpapers<br>/src]:::repo
+        B[pnpm build]:::action
+        C[Gallery + assets]:::output
+        D[Live demo]:::output
+        E[GitHub Actions]:::action
+        F[Docker image]:::output
+        G[Push updates]:::sync
+        A --> B --> C --> D
+        B --> E --> F
+        E --> G
     end
 
-    subgraph "User-Facing Template (wallsite-template)"
-        H[Empty /src Folder];
-        I[User Generates Repository];
-        I --> J[Adds Their Own Wallpapers];
-        J --> K{Deploy to Vercel/Netlify or Self-Host};
+    subgraph wallsite-template
+        H[Empty /src]:::user
+        I[User fork]:::user
+        J[Add wallpapers]:::user
+        K[Deploy]:::user
+        H --> I --> J --> K
     end
 
-    F --> H;
+    G -.-> H
 ```
 
 ---
