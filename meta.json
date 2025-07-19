@@ -15,7 +15,7 @@
       "imports": []
     },
     "src/styles/sidebar.css": {
-      "bytes": 4641,
+      "bytes": 4318,
       "imports": []
     },
     "src/styles/layout.css": {
@@ -34,7 +34,7 @@
       ]
     },
     "src/styles/gallery.css": {
-      "bytes": 4531,
+      "bytes": 4538,
       "imports": []
     },
     "src/styles/lightbox.css": {
@@ -42,17 +42,12 @@
       "imports": []
     },
     "src/js/gallery-data.js": {
-      "bytes": 246576,
+      "bytes": 278372,
       "imports": [],
       "format": "esm"
     },
     "src/js/components/state.js": {
       "bytes": 1504,
-      "imports": [],
-      "format": "esm"
-    },
-    "src/js/utils/utils.js": {
-      "bytes": 924,
       "imports": [],
       "format": "esm"
     },
@@ -168,22 +163,6 @@
       ],
       "format": "esm"
     },
-    "src/js/components/search.js": {
-      "bytes": 696,
-      "imports": [
-        {
-          "path": "src/js/components/state.js",
-          "kind": "import-statement",
-          "original": "./state.js"
-        },
-        {
-          "path": "src/js/components/gallery.js",
-          "kind": "import-statement",
-          "original": "./gallery.js"
-        }
-      ],
-      "format": "esm"
-    },
     "src/js/components/sorting.js": {
       "bytes": 1515,
       "imports": [
@@ -201,17 +180,12 @@
       "format": "esm"
     },
     "src/js/components/events.js": {
-      "bytes": 1609,
+      "bytes": 1418,
       "imports": [
         {
           "path": "src/js/components/state.js",
           "kind": "import-statement",
           "original": "./state.js"
-        },
-        {
-          "path": "src/js/utils/utils.js",
-          "kind": "import-statement",
-          "original": "../utils/utils.js"
         },
         {
           "path": "src/js/components/ui.js",
@@ -224,11 +198,6 @@
           "original": "./gallery.js"
         },
         {
-          "path": "src/js/components/search.js",
-          "kind": "import-statement",
-          "original": "./search.js"
-        },
-        {
           "path": "src/js/components/sorting.js",
           "kind": "import-statement",
           "original": "./sorting.js"
@@ -236,8 +205,24 @@
       ],
       "format": "esm"
     },
+    "src/js/components/search.js": {
+      "bytes": 1389,
+      "imports": [
+        {
+          "path": "src/js/components/state.js",
+          "kind": "import-statement",
+          "original": "./state.js"
+        },
+        {
+          "path": "src/js/components/gallery.js",
+          "kind": "import-statement",
+          "original": "./gallery.js"
+        }
+      ],
+      "format": "esm"
+    },
     "src/js/index.js": {
-      "bytes": 2432,
+      "bytes": 2451,
       "imports": [
         {
           "path": "node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs",
@@ -280,11 +265,6 @@
           "original": "./components/state.js"
         },
         {
-          "path": "src/js/utils/utils.js",
-          "kind": "import-statement",
-          "original": "./utils/utils.js"
-        },
-        {
           "path": "src/js/components/theme.js",
           "kind": "import-statement",
           "original": "./components/theme.js"
@@ -308,6 +288,11 @@
           "path": "src/js/components/events.js",
           "kind": "import-statement",
           "original": "./components/events.js"
+        },
+        {
+          "path": "src/js/components/search.js",
+          "kind": "import-statement",
+          "original": "./components/search.js"
         }
       ],
       "format": "esm"
@@ -342,13 +327,10 @@
           "bytesInOutput": 0
         },
         "src/js/gallery-data.js": {
-          "bytesInOutput": 199114
+          "bytesInOutput": 222062
         },
         "src/js/components/state.js": {
           "bytesInOutput": 1074
-        },
-        "src/js/utils/utils.js": {
-          "bytesInOutput": 105
         },
         "src/js/components/theme.js": {
           "bytesInOutput": 1898
@@ -366,22 +348,22 @@
           "bytesInOutput": 5127
         },
         "src/js/components/file-tree.js": {
-          "bytesInOutput": 2054
-        },
-        "src/js/components/search.js": {
-          "bytesInOutput": 313
+          "bytesInOutput": 2053
         },
         "src/js/components/sorting.js": {
           "bytesInOutput": 749
         },
         "src/js/components/events.js": {
-          "bytesInOutput": 718
+          "bytesInOutput": 653
+        },
+        "src/js/components/search.js": {
+          "bytesInOutput": 574
         },
         "src/js/index.js": {
-          "bytesInOutput": 741
+          "bytesInOutput": 745
         }
       },
-      "bytes": 225356
+      "bytes": 248398
     },
     "public/js/bundle.css": {
       "imports": [

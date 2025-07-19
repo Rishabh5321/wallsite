@@ -6,12 +6,12 @@ import '../styles/gallery.css';
 import '../styles/lightbox.css';
 import { galleryData } from './gallery-data.js';
 import { state, initializeDom } from './components/state.js';
-import { shuffleArray } from './utils/utils.js';
 import { initializeTheme } from './components/theme.js';
 import { loadFavorites } from './components/favorites.js';
 import { buildFileTree } from './components/file-tree.js';
 import { resetAndLoadGallery } from './components/gallery.js';
 import { setupEventListeners } from './components/events.js';
+import { initSearch } from './components/search.js';
 
 function buildGalleryTree(files) {
 	const root = { type: 'folder', name: 'root', path: '', children: [] };
@@ -70,6 +70,7 @@ export function initializeApp() {
 	initializeTheme();
 	loadFavorites();
 	setupEventListeners();
+	initSearch();
 	initializeState(galleryTree, galleryData);
 	buildFileTree(galleryTree);
 	resetAndLoadGallery(true);

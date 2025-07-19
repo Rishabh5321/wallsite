@@ -50,7 +50,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - `public/`: The output directory for the build process. **Do not edit files here directly.**
 - `scripts/`: Contains the core generation scripts.
     - `generate_gallery.sh`: A highly optimized bash script that uses ImageMagick to create responsive WebP versions of all images. It intelligently skips processing images that already exist and are up-to-date, dramatically speeding up builds.
-    - `generate_data.mjs`: A Node.js script that scans the `src` directory and creates `docs/js/gallery-data.js` with all the metadata for the frontend.
+    - `generate_data.mjs`: A Node.js script that scans the `src` directory and creates `docs/js/gallery-data.js` with all the metadata for the frontend, including dominant color information for each image.
 - `.github/workflows/`: Contains the GitHub Actions workflows.
 - `Dockerfile` & `docker-entrypoint.sh`: Define the Docker image and its runtime behavior.
 
@@ -68,6 +68,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
     - `ui.js`: Controls UI elements like the sidebar, theme, and sorting.
     - `favorites.js`: Manages the favorites system using `localStorage`.
     - `sorting.js`: Contains the logic for sorting the wallpapers by different criteria.
+    - `search.js`: Handles the client-side search functionality, including debouncing and filtering.
 - **Rule 5: Keep the context file updated.** After any modification to the project's architecture, dependencies, or conventions, update `GEMINI.md` accordingly.
 
 ## 6. Project Features
@@ -84,7 +85,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
     - **Smoother Transitions**: A gentle 150ms fade-in effect is applied when images are swapped, making the experience feel fluid and less jarring.
     - **Enhanced Preloading**: The lightbox aggressively preloads the next two adjacent wallpapers to make sequential browsing feel instantaneous.
 - **Category Browsing**: A collapsible sidebar with a hierarchical file tree lets users browse by category.
-- **Client-Side Search**: Instantly search and filter wallpapers by name.
+- **Client-Side Search**: A debounced search bar allows users to instantly filter wallpapers by filename, tag (folder name), and dominant color name (e.g., "red", "blue").
 - **Advanced Sorting**: Users can sort wallpapers by name, modification date, or resolution. The sorting logic always prioritizes folders, keeping them at the top of the list regardless of the chosen sort option.
 - **Favorites System**: Users can mark their favorite wallpapers, which are saved locally in the browser.
 - **Random Discovery**: A "Random" button allows users to discover new wallpapers easily. The initial gallery view is now sorted by type (folders first) and name for a predictable experience. When inside a category, the random button will select a random wallpaper from within that category and its subcategories.
@@ -98,7 +99,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 
 ### Automation & Deployment
 
-- **Optimized Gallery Generation**: The `generate_gallery.sh` script is highly optimized. It intelligently checks if a wallpaper has already been converted to WebP and is up-to-date, skipping redundant processing. This works in tandem with the Vercel build cache to make subsequent deployments very fast. The `generate_data.mjs` script then creates the necessary metadata for the frontend, including file modification times (`mtime`) to enable sorting by date.
+- **Optimized Gallery Generation**: The `generate_gallery.sh` script is highly optimized. It intelligently checks if a wallpaper has already been converted to WebP and is up-to-date, skipping redundant processing. This works in tandem with the Vercel build cache to make subsequent deployments very fast. The `generate_data.mjs` script then creates the necessary metadata for the frontend, including file modification times (`mtime`) to enable sorting by date and the dominant color of each image to enable searching by color.
     - **Brotli Pre-compression**: The generation script automatically detects if `brotli` is installed and uses it to create pre-compressed `.webp.br` and `.lqip.webp.br` files. This allows hosts like Netlify and Vercel to serve smaller files directly, reducing bandwidth and speeding up load times.
     - **Reduced WebP Quality**: The default WebP quality has been set to `78` for smaller file sizes and faster loading.
     - **Optimized Responsive Image Widths**: The number of generated responsive WebP image widths has been reduced to two (`640w` and `1920w`) to balance build time, storage, and performance.

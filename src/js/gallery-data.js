@@ -10,6 +10,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Abstract',
 		mtime: 1752736317694.62,
+		dominantColor: '#5D68A5',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -22,6 +24,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Abstract',
 		mtime: 1752736317736.62,
+		dominantColor: '#24295C',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -34,6 +38,8 @@ export const galleryData = [
 		height: 4320,
 		path: 'Abstract',
 		mtime: 1752736317751.62,
+		dominantColor: '#5B5F5E',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -46,6 +52,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Abstract',
 		mtime: 1752736317752.62,
+		dominantColor: '#011E36',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -58,6 +66,8 @@ export const galleryData = [
 		height: 3384,
 		path: 'Abstract',
 		mtime: 1752736317790.62,
+		dominantColor: '#212020',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -70,6 +80,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Abstract',
 		mtime: 1752736317795.62,
+		dominantColor: '#565A99',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -82,6 +94,8 @@ export const galleryData = [
 		height: 3240,
 		path: 'Abstract',
 		mtime: 1752736317797.62,
+		dominantColor: '#160930',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -94,6 +108,8 @@ export const galleryData = [
 		height: 5400,
 		path: 'Abstract',
 		mtime: 1752736317802.62,
+		dominantColor: '#101713',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -106,6 +122,8 @@ export const galleryData = [
 		height: 2296,
 		path: 'Abstract',
 		mtime: 1752736317816.6204,
+		dominantColor: '#582B4B',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -118,6 +136,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Abstract',
 		mtime: 1752736317822.6204,
+		dominantColor: '#2F2E3C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -130,6 +150,8 @@ export const galleryData = [
 		height: 3264,
 		path: 'Abstract',
 		mtime: 1752736317845.6204,
+		dominantColor: '#4E2781',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -142,6 +164,8 @@ export const galleryData = [
 		height: 4320,
 		path: 'Abstract',
 		mtime: 1752736317969.6206,
+		dominantColor: '#633A47',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -154,6 +178,8 @@ export const galleryData = [
 		height: 4500,
 		path: 'Abstract',
 		mtime: 1752736317976.6206,
+		dominantColor: '#0C124D',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -166,6 +192,8 @@ export const galleryData = [
 		height: 3385,
 		path: 'Abstract',
 		mtime: 1752736318004.6206,
+		dominantColor: '#232323',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -178,6 +206,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Abstract',
 		mtime: 1752736318006.6206,
+		dominantColor: '#281E1A',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -190,6 +220,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Abstract',
 		mtime: 1752736318008.6206,
+		dominantColor: '#0F61A8',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -202,6 +234,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Abstract',
 		mtime: 1752736318009.6206,
+		dominantColor: '#1C2A92',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -214,6 +248,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Abstract',
 		mtime: 1752736318010.6206,
+		dominantColor: '#060C0E',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -226,6 +262,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Abstract',
 		mtime: 1752736318011.6206,
+		dominantColor: '#112529',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -238,6 +276,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Abstract',
 		mtime: 1752736318012.6206,
+		dominantColor: '#151C1C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -250,6 +290,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Abstract',
 		mtime: 1752736318014.6206,
+		dominantColor: '#3A1F27',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -262,6 +304,8 @@ export const galleryData = [
 		height: 1539,
 		path: 'Abstract',
 		mtime: 1752736318016.6206,
+		dominantColor: '#154560',
+		colorName: 'green',
 	},
 	{
 		type: 'file',
@@ -274,6 +318,8 @@ export const galleryData = [
 		height: 4320,
 		path: 'Abstract',
 		mtime: 1752736318125.6208,
+		dominantColor: '#633A47',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -286,6 +332,8 @@ export const galleryData = [
 		height: 1539,
 		path: 'Abstract',
 		mtime: 1752736318127.6208,
+		dominantColor: '#422D47',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -298,6 +346,8 @@ export const galleryData = [
 		height: 1539,
 		path: 'Abstract',
 		mtime: 1752736318132.6208,
+		dominantColor: '#5B372D',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -310,6 +360,8 @@ export const galleryData = [
 		height: 1539,
 		path: 'Abstract',
 		mtime: 1752736318133.6208,
+		dominantColor: '#78373F',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -322,6 +374,8 @@ export const galleryData = [
 		height: 1539,
 		path: 'Abstract',
 		mtime: 1752736318135.6208,
+		dominantColor: '#2891AF',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -334,6 +388,8 @@ export const galleryData = [
 		height: 1539,
 		path: 'Abstract',
 		mtime: 1752736318136.6208,
+		dominantColor: '#9989AB',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -346,6 +402,8 @@ export const galleryData = [
 		height: 1539,
 		path: 'Abstract',
 		mtime: 1752736318137.6208,
+		dominantColor: '#C09382',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -358,6 +416,8 @@ export const galleryData = [
 		height: 1539,
 		path: 'Abstract',
 		mtime: 1752736318137.6208,
+		dominantColor: '#C27377',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -370,6 +430,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Abstract',
 		mtime: 1752736318160.6208,
+		dominantColor: '#17121E',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -382,6 +444,8 @@ export const galleryData = [
 		height: 3184,
 		path: 'Abstract',
 		mtime: 1752736318164.6208,
+		dominantColor: '#3C4B3F',
+		colorName: 'green',
 	},
 	{
 		type: 'file',
@@ -394,6 +458,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Abstract',
 		mtime: 1752736318174.6208,
+		dominantColor: '#4F3734',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -406,6 +472,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Abstract',
 		mtime: 1752736318175.6208,
+		dominantColor: '#25130D',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -418,6 +486,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Abstract',
 		mtime: 1752736318175.6208,
+		dominantColor: '#353596',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -430,6 +500,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Abstract',
 		mtime: 1752736318177.6208,
+		dominantColor: '#191927',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -442,6 +514,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Abstract',
 		mtime: 1752736318178.6208,
+		dominantColor: '#27100B',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -454,6 +528,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Abstract',
 		mtime: 1752736318179.6208,
+		dominantColor: '#537A99',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -466,6 +542,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Abstract',
 		mtime: 1752736318184.6208,
+		dominantColor: '#8A6BCA',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -477,6 +555,8 @@ export const galleryData = [
 		height: 540,
 		path: 'Animated',
 		mtime: 1752736318187.6208,
+		dominantColor: '',
+		colorName: '',
 	},
 	{
 		type: 'file',
@@ -488,6 +568,8 @@ export const galleryData = [
 		height: 720,
 		path: 'Animated',
 		mtime: 1752736318189.6208,
+		dominantColor: '',
+		colorName: '',
 	},
 	{
 		type: 'file',
@@ -499,6 +581,8 @@ export const galleryData = [
 		height: 720,
 		path: 'Animated',
 		mtime: 1752736318189.6208,
+		dominantColor: '',
+		colorName: '',
 	},
 	{
 		type: 'file',
@@ -510,6 +594,8 @@ export const galleryData = [
 		height: 1080,
 		path: 'Animated',
 		mtime: 1752736318208.6208,
+		dominantColor: '',
+		colorName: '',
 	},
 	{
 		type: 'file',
@@ -521,6 +607,8 @@ export const galleryData = [
 		height: 1080,
 		path: 'Animated',
 		mtime: 1752736318218.6208,
+		dominantColor: '',
+		colorName: '',
 	},
 	{
 		type: 'file',
@@ -533,6 +621,8 @@ export const galleryData = [
 		height: 1080,
 		path: 'Art',
 		mtime: 1752736318224.621,
+		dominantColor: '#5D7987',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -545,6 +635,8 @@ export const galleryData = [
 		height: 1080,
 		path: 'Art',
 		mtime: 1752736318228.621,
+		dominantColor: '#3D597A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -557,6 +649,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Cars',
 		mtime: 1752736318232.621,
+		dominantColor: '#B1B3B5',
+		colorName: 'pink',
 	},
 	{
 		type: 'file',
@@ -569,6 +663,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Cars',
 		mtime: 1752736318233.621,
+		dominantColor: '#2F3236',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -581,6 +677,8 @@ export const galleryData = [
 		height: 4500,
 		path: 'Cars',
 		mtime: 1752736318238.621,
+		dominantColor: '#255F63',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -593,6 +691,8 @@ export const galleryData = [
 		height: 3750,
 		path: 'Cars',
 		mtime: 1752736318247.621,
+		dominantColor: '#3D8C9A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -605,6 +705,8 @@ export const galleryData = [
 		height: 1537,
 		path: 'Cars',
 		mtime: 1752736318248.621,
+		dominantColor: '#846C5D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -617,6 +719,8 @@ export const galleryData = [
 		height: 2868,
 		path: 'Cars',
 		mtime: 1752736318257.621,
+		dominantColor: '#26363B',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -629,6 +733,8 @@ export const galleryData = [
 		height: 1080,
 		path: 'Cars',
 		mtime: 1752736318263.621,
+		dominantColor: '#363241',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -641,6 +747,8 @@ export const galleryData = [
 		height: 2250,
 		path: 'Cars',
 		mtime: 1752736318265.621,
+		dominantColor: '#1C1D1D',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -653,6 +761,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#2A3E54',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -666,6 +776,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#491031',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -678,6 +790,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#8596C6',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -691,6 +805,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A88650',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -704,6 +820,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7E7368',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -716,6 +834,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#881B38',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -728,6 +848,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#74B2A7',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -740,6 +862,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#C6796A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -752,6 +876,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#33234D',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -764,6 +890,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#86545C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -776,6 +904,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#0F0D68',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -788,6 +918,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7D607D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -800,6 +932,8 @@ export const galleryData = [
 		height: 4320,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#AB4A75',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -812,6 +946,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#D57897',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -824,6 +960,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6F4990',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -836,6 +974,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#68294B',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -848,6 +988,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#604484',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -860,6 +1002,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#494784',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -872,6 +1016,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#734991',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -884,6 +1030,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#704B48',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -896,6 +1044,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#406FB4',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -908,6 +1058,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#826A6A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -920,6 +1072,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#474A58',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -932,6 +1086,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4C446A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -944,6 +1100,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#465975',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -956,6 +1114,8 @@ export const galleryData = [
 		height: 4320,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9A7AD0',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -968,6 +1128,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#63414E',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -980,6 +1142,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#442433',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -992,6 +1156,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#332E3C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -1004,6 +1170,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#49505D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1016,6 +1184,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#756369',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1028,6 +1198,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#263442',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -1040,6 +1212,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#112F29',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -1052,6 +1226,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#453C6D',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -1064,6 +1240,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#57415F',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1076,6 +1254,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#927DAD',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1088,6 +1268,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4C6791',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1100,6 +1282,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#3F383B',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -1112,6 +1296,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4E4F55',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1124,6 +1310,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#745F57',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1136,6 +1324,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6A6F7D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1148,6 +1338,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7A7188',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1160,6 +1352,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6A4D53',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1173,6 +1367,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#2D334C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -1185,6 +1381,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#343651',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -1197,6 +1395,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7B4860',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1209,6 +1409,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9C5932',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -1222,6 +1424,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6B5075',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1234,6 +1438,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4A354A',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -1246,6 +1452,8 @@ export const galleryData = [
 		height: 2048,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6F2B35',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -1258,6 +1466,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#0E5E93',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1270,6 +1480,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#1A417B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1282,6 +1494,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#686A6E',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1294,6 +1508,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4F5664',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1306,6 +1522,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#544451',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1318,6 +1536,8 @@ export const galleryData = [
 		height: 2395,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4D362D',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -1331,6 +1551,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#465F86',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1343,6 +1565,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7B549C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1355,6 +1579,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#C3C58F',
+		colorName: 'pink',
 	},
 	{
 		type: 'file',
@@ -1368,6 +1594,8 @@ export const galleryData = [
 		height: 1920,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#382438',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -1380,6 +1608,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#733D35',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -1392,6 +1622,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#B87992',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1404,6 +1636,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#842C6A',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -1416,6 +1650,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#2B0D3E',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -1429,6 +1665,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#173332',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -1441,6 +1679,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#55293F',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -1454,6 +1694,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A0531B',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -1466,6 +1708,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5780A2',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1478,6 +1722,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#837E8E',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1490,6 +1736,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7D7289',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1502,6 +1750,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#283F4F',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -1514,6 +1764,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#326B85',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1527,6 +1779,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#81A7CC',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1539,6 +1793,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7A4C48',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -1551,6 +1807,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#203052',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -1563,6 +1821,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#372746',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -1575,6 +1835,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#8F464A',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -1588,6 +1850,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#938AA0',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1601,6 +1865,8 @@ export const galleryData = [
 		height: 1239,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#403A5E',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -1613,6 +1879,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#321B4C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -1625,6 +1893,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#94595D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1637,6 +1907,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#50134D',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -1649,6 +1921,8 @@ export const galleryData = [
 		height: 2532,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A573AB',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1661,6 +1935,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#3A6797',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1673,6 +1949,8 @@ export const galleryData = [
 		height: 2303,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5261B4',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1685,6 +1963,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#98878B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1697,6 +1977,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#8BBEC8',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1709,6 +1991,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#B5ACCF',
+		colorName: 'pink',
 	},
 	{
 		type: 'file',
@@ -1721,6 +2005,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#837B8C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1734,6 +2020,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A081A5',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1746,6 +2034,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#70777D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1758,6 +2048,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#405870',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1770,6 +2062,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5E2138',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -1782,6 +2076,8 @@ export const galleryData = [
 		height: 2250,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6E8698',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1794,6 +2090,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7839A3',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -1806,6 +2104,8 @@ export const galleryData = [
 		height: 2250,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#576152',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1818,6 +2118,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9F5B81',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1830,6 +2132,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#97ABD9',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1842,6 +2146,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4A5F6C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1854,6 +2160,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#558CA2',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1866,6 +2174,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#707E80',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1878,6 +2188,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#3C5374',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1890,6 +2202,8 @@ export const galleryData = [
 		height: 1620,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#665C6D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1902,6 +2216,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#403552',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -1914,6 +2230,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#2F3470',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -1926,6 +2244,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4A5366',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1938,6 +2258,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#503260',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -1950,6 +2272,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#26508D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1962,6 +2286,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A05B78',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1974,6 +2300,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#794F54',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1987,6 +2315,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#82867B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -1999,6 +2329,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#552555',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2011,6 +2343,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A84647',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -2023,6 +2357,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#38537B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2035,6 +2371,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#638D87',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2048,6 +2386,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#8CAAB6',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2060,6 +2400,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#8F8C7C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2072,6 +2414,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#8BABB6',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2084,6 +2428,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#684A8D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2096,6 +2442,8 @@ export const galleryData = [
 		height: 4320,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#51517C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2108,6 +2456,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#53495A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2120,6 +2470,8 @@ export const galleryData = [
 		height: 1400,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9678AD',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2133,6 +2485,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#938788',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2145,6 +2499,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#558A7F',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2157,6 +2513,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#816B89',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2170,6 +2528,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6B374B',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -2182,6 +2542,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#BD6348',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -2194,6 +2556,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#545A5D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2206,6 +2570,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5788C9',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2218,6 +2584,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#594657',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2230,6 +2598,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#56145B',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2242,6 +2612,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#763B6F',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2254,6 +2626,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#36366A',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2266,6 +2640,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4B3C53',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2278,6 +2654,8 @@ export const galleryData = [
 		height: 2320,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#62A5A0',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2290,6 +2668,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#3F3249',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2302,6 +2682,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#514D6A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2314,6 +2696,8 @@ export const galleryData = [
 		height: 1600,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#45485B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2326,6 +2710,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#946681',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2338,6 +2724,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#583A56',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2350,6 +2738,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5F3E60',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2362,6 +2752,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#3B2635',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -2374,6 +2766,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5D5D87',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2387,6 +2781,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6D9486',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2399,6 +2795,8 @@ export const galleryData = [
 		height: 1406,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#0C2350',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -2412,6 +2810,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#38627A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2424,6 +2824,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#47498E',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2436,6 +2838,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#35538B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2448,6 +2852,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#B05120',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -2460,6 +2866,8 @@ export const galleryData = [
 		height: 2084,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#454788',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2472,6 +2880,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#552379',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2484,6 +2894,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#631D29',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -2496,6 +2908,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4E143C',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2508,6 +2922,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#3D657E',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2520,6 +2936,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4F2E65',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2532,6 +2950,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5A3984',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2544,6 +2964,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#AF5120',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -2556,6 +2978,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#721D41',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -2568,6 +2992,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5A173F',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2580,6 +3006,8 @@ export const galleryData = [
 		height: 1366,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4B5E95',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2592,6 +3020,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5F4E66',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2604,6 +3034,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#464D5C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2616,6 +3048,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#994781',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2628,6 +3062,8 @@ export const galleryData = [
 		height: 3024,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#8F6E87',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2640,6 +3076,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9DA39C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2652,6 +3090,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A29685',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2664,6 +3104,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#326185',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2676,6 +3118,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4D3671',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2688,6 +3132,8 @@ export const galleryData = [
 		height: 2302,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A44240',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -2700,6 +3146,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#323D6F',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2712,6 +3160,8 @@ export const galleryData = [
 		height: 1152,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#497491',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2724,6 +3174,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4C6B7F',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2737,6 +3189,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#537D99',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2749,6 +3203,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#335669',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2761,6 +3217,8 @@ export const galleryData = [
 		height: 1210,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#80AECB',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2773,6 +3231,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#56384F',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2785,6 +3245,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9A96B6',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2797,6 +3259,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#473D38',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -2809,6 +3273,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#324778',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2822,6 +3288,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#661F47',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2835,6 +3303,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#36556B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2847,6 +3317,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9D57BA',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2859,6 +3331,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#533749',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -2871,6 +3345,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#8C6388',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2883,6 +3359,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#33354E',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -2895,6 +3373,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#608391',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2907,6 +3387,8 @@ export const galleryData = [
 		height: 3264,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#744965',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2920,6 +3402,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#58445D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2932,6 +3416,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7E2F49',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -2944,6 +3430,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6C6777',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2956,6 +3444,8 @@ export const galleryData = [
 		height: 3416,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#B8605B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2968,6 +3458,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#32498E',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -2980,6 +3472,8 @@ export const galleryData = [
 		height: 3368,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#B5462A',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -2992,6 +3486,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9C383D',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3004,6 +3500,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#1A5C6C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3016,6 +3514,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7D386D',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -3028,6 +3528,8 @@ export const galleryData = [
 		height: 3240,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5C3B43',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3040,6 +3542,8 @@ export const galleryData = [
 		height: 3416,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4B81A1',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3052,6 +3556,8 @@ export const galleryData = [
 		height: 3949,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#522C46',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -3064,6 +3570,8 @@ export const galleryData = [
 		height: 3416,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7A4B37',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3076,6 +3584,8 @@ export const galleryData = [
 		height: 2432,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#90BFDA',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3089,6 +3599,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#96303F',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3101,6 +3613,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6A566B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3113,6 +3627,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#925564',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3126,6 +3642,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#623869',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -3139,6 +3657,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4738A9',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -3151,6 +3671,8 @@ export const galleryData = [
 		height: 3416,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6A2B33',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3164,6 +3686,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#652A35',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3176,6 +3700,8 @@ export const galleryData = [
 		height: 3673,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4D131C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -3188,6 +3714,8 @@ export const galleryData = [
 		height: 3416,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A33720',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3200,6 +3728,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#99393B',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3213,6 +3743,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#404F7C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3225,6 +3757,8 @@ export const galleryData = [
 		height: 2700,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#8D4D42',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3238,6 +3772,8 @@ export const galleryData = [
 		height: 1970,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#153E3C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -3250,6 +3786,8 @@ export const galleryData = [
 		height: 2736,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#924628',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3262,6 +3800,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#213D5F',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -3274,6 +3814,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5B775A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3286,6 +3828,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#121D2E',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -3298,6 +3842,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#19336D',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -3310,6 +3856,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#88554A',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3322,6 +3870,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A44728',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3334,6 +3884,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4E96A0',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3346,6 +3898,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#955515',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3359,6 +3913,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#859F84',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3372,6 +3928,8 @@ export const galleryData = [
 		height: 3600,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4C2795',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -3384,6 +3942,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#8FBFDC',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3396,6 +3956,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#3B92D5',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3408,6 +3970,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9C6E83',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3420,6 +3984,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#455D91',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3432,6 +3998,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#2A4054',
+		colorName: 'green',
 	},
 	{
 		type: 'file',
@@ -3444,6 +4012,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#54494F',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3456,6 +4026,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7B4D32',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3468,6 +4040,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#49415D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3480,6 +4054,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4563B7',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3492,6 +4068,8 @@ export const galleryData = [
 		height: 2176,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#BEA0C7',
+		colorName: 'pink',
 	},
 	{
 		type: 'file',
@@ -3504,6 +4082,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A5947F',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3516,6 +4096,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#542269',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -3528,6 +4110,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#997FA2',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3540,6 +4124,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#816680',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3552,6 +4138,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7E7F80',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3564,6 +4152,8 @@ export const galleryData = [
 		height: 2000,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#965F57',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3576,6 +4166,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7D566B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3588,6 +4180,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9A552A',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3600,6 +4194,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#438791',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3612,6 +4208,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#384281',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3624,6 +4222,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6974B2',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3636,6 +4236,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#293849',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -3648,6 +4250,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#563075',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -3660,6 +4264,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#75757E',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3672,6 +4278,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#596484',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3684,6 +4292,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#6158AB',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3697,6 +4307,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9D3B45',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3709,6 +4321,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#44797F',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3722,6 +4336,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#3F1A41',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -3734,6 +4350,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#887CC1',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3746,6 +4364,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#AA5152',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3759,6 +4379,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#AD3B0E',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3771,6 +4393,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#764977',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3784,6 +4408,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#956486',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3796,6 +4422,8 @@ export const galleryData = [
 		height: 1440,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#548DC3',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3808,6 +4436,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4C5352',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3820,6 +4450,8 @@ export const galleryData = [
 		height: 1152,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#3B7FAB',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3832,6 +4464,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#2A4148',
+		colorName: 'green',
 	},
 	{
 		type: 'file',
@@ -3844,6 +4478,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#715371',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3856,6 +4492,8 @@ export const galleryData = [
 		height: 1851,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5F554F',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3869,6 +4507,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7B6890',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3881,6 +4521,8 @@ export const galleryData = [
 		height: 3600,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#534C6B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3893,6 +4535,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#894135',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -3905,6 +4549,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#55494C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3917,6 +4563,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#0E2738',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -3929,6 +4577,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#498085',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3941,6 +4591,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#284059',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -3953,6 +4605,8 @@ export const galleryData = [
 		height: 2000,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#70715F',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3966,6 +4620,8 @@ export const galleryData = [
 		height: 2129,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#713559',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -3978,6 +4634,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4D626F',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -3990,6 +4648,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7E7188',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4003,6 +4663,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#65587D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4015,6 +4677,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#2A7177',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4027,6 +4691,8 @@ export const galleryData = [
 		height: 2458,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4A5277',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4039,6 +4705,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7A7D96',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4051,6 +4719,8 @@ export const galleryData = [
 		height: 1195,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#513F40',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -4063,6 +4733,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#34299F',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -4076,6 +4748,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#051E41',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4088,6 +4762,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#401429',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4100,6 +4776,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#703D52',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -4112,6 +4790,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#263047',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4124,6 +4804,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#590477',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -4136,6 +4818,8 @@ export const galleryData = [
 		height: 1687,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#2E3C73',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -4148,6 +4832,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#849471',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4160,6 +4846,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7AA2A5',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4172,6 +4860,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A6A0C3',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4184,6 +4874,8 @@ export const galleryData = [
 		height: 1600,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#96716F',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4196,6 +4888,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#E28775',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4208,6 +4902,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#D3B2AE',
+		colorName: 'pink',
 	},
 	{
 		type: 'file',
@@ -4221,6 +4917,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A86452',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4233,6 +4931,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#D76757',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -4245,6 +4945,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#C67786',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4257,6 +4959,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#985166',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4269,6 +4973,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#844D50',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -4282,6 +4988,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A66894',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4294,6 +5002,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#395A65',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4306,6 +5016,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#5B597D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4319,6 +5031,8 @@ export const galleryData = [
 		height: 2159,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#CA8077',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4331,6 +5045,8 @@ export const galleryData = [
 		height: 4320,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#336B94',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4343,6 +5059,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#888A9C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4355,6 +5073,8 @@ export const galleryData = [
 		height: 2000,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A996A4',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4367,6 +5087,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#782640',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -4379,6 +5101,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#2B4246',
+		colorName: 'green',
 	},
 	{
 		type: 'file',
@@ -4391,6 +5115,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#AFBAA2',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4403,6 +5129,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#375A64',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4415,6 +5143,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7F8F8E',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4427,6 +5157,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7D8794',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4439,6 +5171,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#8A8174',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4451,6 +5185,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#BA9C97',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4463,6 +5199,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#70899B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4475,6 +5213,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#7A8EBE',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4487,6 +5227,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#706B86',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4499,6 +5241,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A9A08F',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4511,6 +5255,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#CE6F3A',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -4524,6 +5270,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#767780',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4537,6 +5285,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#936B77',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4550,6 +5300,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#593E85',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -4563,6 +5315,8 @@ export const galleryData = [
 		height: 2250,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#843F4D',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -4576,6 +5330,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#146870',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4589,6 +5345,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9A5162',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4602,6 +5360,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#8D231C',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -4615,6 +5375,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9A475A',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -4627,6 +5389,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A895A5',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4639,6 +5403,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#396D99',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4652,6 +5418,8 @@ export const galleryData = [
 		height: 2304,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#361458',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -4664,6 +5432,8 @@ export const galleryData = [
 		height: 1800,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#362851',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -4677,6 +5447,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#AB715A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4689,6 +5461,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#9A78B5',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4701,6 +5475,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#353D5B',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -4713,6 +5489,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#4F4E5C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4725,6 +5503,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#434850',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4737,6 +5517,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Minimal',
 		mtime: 1682526065000,
+		dominantColor: '#A06E99',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4749,6 +5531,8 @@ export const galleryData = [
 		height: 1920,
 		path: 'Mobile',
 		mtime: 1752736318265.621,
+		dominantColor: '#151527',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4761,6 +5545,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318267.621,
+		dominantColor: '#1A202A',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4773,6 +5559,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318268.621,
+		dominantColor: '#80829C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4785,6 +5573,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318269.621,
+		dominantColor: '#484341',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -4797,6 +5587,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318269.621,
+		dominantColor: '#7F8386',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4809,6 +5601,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318269.621,
+		dominantColor: '#314250',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4821,6 +5615,8 @@ export const galleryData = [
 		height: 1152,
 		path: 'Mobile',
 		mtime: 1752736318270.621,
+		dominantColor: '#1B1715',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4833,6 +5629,8 @@ export const galleryData = [
 		height: 1152,
 		path: 'Mobile',
 		mtime: 1752736318270.621,
+		dominantColor: '#15131F',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4845,6 +5643,8 @@ export const galleryData = [
 		height: 1152,
 		path: 'Mobile',
 		mtime: 1752736318271.621,
+		dominantColor: '#0B0D17',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4857,6 +5657,8 @@ export const galleryData = [
 		height: 1152,
 		path: 'Mobile',
 		mtime: 1752736318271.621,
+		dominantColor: '#8392D0',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4869,6 +5671,8 @@ export const galleryData = [
 		height: 1152,
 		path: 'Mobile',
 		mtime: 1752736318271.621,
+		dominantColor: '#283750',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4881,6 +5685,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318272.621,
+		dominantColor: '#152235',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4893,6 +5699,8 @@ export const galleryData = [
 		height: 1152,
 		path: 'Mobile',
 		mtime: 1752736318272.621,
+		dominantColor: '#0C0403',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4905,6 +5713,8 @@ export const galleryData = [
 		height: 721,
 		path: 'Mobile',
 		mtime: 1752736318272.621,
+		dominantColor: '#8F7866',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4917,6 +5727,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318272.621,
+		dominantColor: '#98BECD',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4929,6 +5741,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318273.621,
+		dominantColor: '#4B4F5C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4941,6 +5755,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318273.621,
+		dominantColor: '#131419',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4953,6 +5769,8 @@ export const galleryData = [
 		height: 1920,
 		path: 'Mobile',
 		mtime: 1752736318274.621,
+		dominantColor: '#0F0815',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4965,6 +5783,8 @@ export const galleryData = [
 		height: 2560,
 		path: 'Mobile',
 		mtime: 1752736318275.621,
+		dominantColor: '#77BBC6',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -4977,6 +5797,8 @@ export const galleryData = [
 		height: 1920,
 		path: 'Mobile',
 		mtime: 1752736318276.621,
+		dominantColor: '#0E181B',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -4989,6 +5811,8 @@ export const galleryData = [
 		height: 1920,
 		path: 'Mobile',
 		mtime: 1752736318276.621,
+		dominantColor: '#2D193C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5001,6 +5825,8 @@ export const galleryData = [
 		height: 2560,
 		path: 'Mobile',
 		mtime: 1752736318277.621,
+		dominantColor: '#1D1D1D',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5013,6 +5839,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318277.621,
+		dominantColor: '#0A0A0A',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5025,6 +5853,8 @@ export const galleryData = [
 		height: 2880,
 		path: 'Mobile',
 		mtime: 1752736318278.621,
+		dominantColor: '#1B1A1E',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5037,6 +5867,8 @@ export const galleryData = [
 		height: 1920,
 		path: 'Mobile',
 		mtime: 1752736318278.621,
+		dominantColor: '#2A2830',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5049,6 +5881,8 @@ export const galleryData = [
 		height: 1920,
 		path: 'Mobile',
 		mtime: 1752736318279.621,
+		dominantColor: '#252124',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5061,6 +5895,8 @@ export const galleryData = [
 		height: 3840,
 		path: 'Mobile',
 		mtime: 1752736318281.621,
+		dominantColor: '#747169',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5073,6 +5909,8 @@ export const galleryData = [
 		height: 2200,
 		path: 'Mobile',
 		mtime: 1752736318282.621,
+		dominantColor: '#100E2A',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5085,6 +5923,8 @@ export const galleryData = [
 		height: 3265,
 		path: 'Mobile',
 		mtime: 1752736318283.621,
+		dominantColor: '#0D0C0C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5097,6 +5937,8 @@ export const galleryData = [
 		height: 1920,
 		path: 'Mobile',
 		mtime: 1752736318283.621,
+		dominantColor: '#171716',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5109,6 +5951,8 @@ export const galleryData = [
 		height: 2688,
 		path: 'Mobile',
 		mtime: 1752736318283.621,
+		dominantColor: '#000000',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5121,6 +5965,8 @@ export const galleryData = [
 		height: 2126,
 		path: 'Mobile',
 		mtime: 1752736318284.621,
+		dominantColor: '#140C05',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5133,6 +5979,8 @@ export const galleryData = [
 		height: 3840,
 		path: 'Mobile',
 		mtime: 1752736318286.621,
+		dominantColor: '#0E1E3B',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5145,6 +5993,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318286.621,
+		dominantColor: '#09080A',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5157,6 +6007,8 @@ export const galleryData = [
 		height: 3840,
 		path: 'Mobile',
 		mtime: 1752736318287.621,
+		dominantColor: '#090C0D',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5169,6 +6021,8 @@ export const galleryData = [
 		height: 4000,
 		path: 'Mobile',
 		mtime: 1752736318291.621,
+		dominantColor: '#08151E',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5181,6 +6035,8 @@ export const galleryData = [
 		height: 2500,
 		path: 'Mobile',
 		mtime: 1752736318293.621,
+		dominantColor: '#0B1F28',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5193,6 +6049,8 @@ export const galleryData = [
 		height: 4000,
 		path: 'Mobile',
 		mtime: 1752736318299.621,
+		dominantColor: '#061016',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5205,6 +6063,8 @@ export const galleryData = [
 		height: 4780,
 		path: 'Mobile',
 		mtime: 1752736318302.621,
+		dominantColor: '#142A38',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5217,6 +6077,8 @@ export const galleryData = [
 		height: 4780,
 		path: 'Mobile',
 		mtime: 1752736318304.621,
+		dominantColor: '#231831',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5229,6 +6091,8 @@ export const galleryData = [
 		height: 4780,
 		path: 'Mobile',
 		mtime: 1752736318306.621,
+		dominantColor: '#283158',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -5241,6 +6105,8 @@ export const galleryData = [
 		height: 1920,
 		path: 'Mobile',
 		mtime: 1752736318307.621,
+		dominantColor: '#0F0406',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5253,6 +6119,8 @@ export const galleryData = [
 		height: 1920,
 		path: 'Mobile',
 		mtime: 1752736318307.621,
+		dominantColor: '#460B0E',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5265,6 +6133,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318307.621,
+		dominantColor: '#1A202D',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5277,6 +6147,8 @@ export const galleryData = [
 		height: 1920,
 		path: 'Mobile',
 		mtime: 1752736318308.621,
+		dominantColor: '#38311C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5289,6 +6161,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318308.621,
+		dominantColor: '#271120',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5301,6 +6175,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318308.621,
+		dominantColor: '#2F2836',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5313,6 +6189,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318308.621,
+		dominantColor: '#221B35',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5325,6 +6203,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318309.621,
+		dominantColor: '#3A437B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5337,6 +6217,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318309.621,
+		dominantColor: '#060810',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5349,6 +6231,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318309.621,
+		dominantColor: '#202424',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5361,6 +6245,8 @@ export const galleryData = [
 		height: 2048,
 		path: 'Mobile',
 		mtime: 1752736318310.621,
+		dominantColor: '#0C0A09',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5373,6 +6259,8 @@ export const galleryData = [
 		height: 1920,
 		path: 'Mobile',
 		mtime: 1752736318310.621,
+		dominantColor: '#0E0E0E',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5385,6 +6273,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318310.621,
+		dominantColor: '#0F070F',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5397,6 +6287,8 @@ export const galleryData = [
 		height: 1280,
 		path: 'Mobile',
 		mtime: 1752736318313.621,
+		dominantColor: '#360E31',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5409,6 +6301,8 @@ export const galleryData = [
 		height: 2812,
 		path: 'Mountains',
 		mtime: 1752736318321.621,
+		dominantColor: '#937B74',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5421,6 +6315,8 @@ export const galleryData = [
 		height: 3249,
 		path: 'Mountains',
 		mtime: 1752736318325.621,
+		dominantColor: '#70757B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5433,6 +6329,8 @@ export const galleryData = [
 		height: 2718,
 		path: 'Mountains',
 		mtime: 1752736318346.621,
+		dominantColor: '#9D94D0',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5445,6 +6343,8 @@ export const galleryData = [
 		height: 3337,
 		path: 'Mountains',
 		mtime: 1752736318389.6213,
+		dominantColor: '#798181',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5457,6 +6357,8 @@ export const galleryData = [
 		height: 2343,
 		path: 'Mountains',
 		mtime: 1752736318406.6213,
+		dominantColor: '#7B6474',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5469,6 +6371,8 @@ export const galleryData = [
 		height: 2820,
 		path: 'Mountains',
 		mtime: 1752736318435.6213,
+		dominantColor: '#837668',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5481,6 +6385,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Mountains',
 		mtime: 1752736318543.6216,
+		dominantColor: '#576168',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5493,6 +6399,8 @@ export const galleryData = [
 		height: 3078,
 		path: 'Mountains',
 		mtime: 1752736318553.6216,
+		dominantColor: '#5D7280',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5505,6 +6413,8 @@ export const galleryData = [
 		height: 3512,
 		path: 'Mountains',
 		mtime: 1752736318562.6216,
+		dominantColor: '#496578',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5517,6 +6427,8 @@ export const galleryData = [
 		height: 2250,
 		path: 'Mountains',
 		mtime: 1752736318567.6216,
+		dominantColor: '#63576A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5529,6 +6441,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318570.6216,
+		dominantColor: '#3B3438',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5541,6 +6455,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318570.6216,
+		dominantColor: '#345C8A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5553,6 +6469,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318572.6216,
+		dominantColor: '#8C6C59',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5565,6 +6483,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318574.6216,
+		dominantColor: '#56638A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5577,6 +6497,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318575.6216,
+		dominantColor: '#928687',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5589,6 +6511,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318576.6216,
+		dominantColor: '#565B58',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5601,6 +6525,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318578.6216,
+		dominantColor: '#696253',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5613,6 +6539,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318579.6216,
+		dominantColor: '#895664',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5625,6 +6553,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318580.6216,
+		dominantColor: '#3E4C65',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5637,6 +6567,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318583.6216,
+		dominantColor: '#3C5489',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5649,6 +6581,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318584.6216,
+		dominantColor: '#5D3D68',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -5661,6 +6595,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318585.6216,
+		dominantColor: '#415D5C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5673,6 +6609,8 @@ export const galleryData = [
 		height: 3064,
 		path: 'Nature',
 		mtime: 1752736318589.6216,
+		dominantColor: '#313E34',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5685,6 +6623,8 @@ export const galleryData = [
 		height: 2161,
 		path: 'Nature',
 		mtime: 1752736318594.6216,
+		dominantColor: '#322B1F',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5697,6 +6637,8 @@ export const galleryData = [
 		height: 3384,
 		path: 'Nature',
 		mtime: 1752736318602.6216,
+		dominantColor: '#2D6977',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5709,6 +6651,8 @@ export const galleryData = [
 		height: 2802,
 		path: 'Nature',
 		mtime: 1752736318612.6216,
+		dominantColor: '#3E3055',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -5721,6 +6665,8 @@ export const galleryData = [
 		height: 1080,
 		path: 'Nature',
 		mtime: 1752736318619.6216,
+		dominantColor: '#3D6558',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5733,6 +6679,8 @@ export const galleryData = [
 		height: 1080,
 		path: 'Nature',
 		mtime: 1752736318622.6216,
+		dominantColor: '#012322',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5745,6 +6693,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318626.6216,
+		dominantColor: '#181818',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5757,6 +6707,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318628.6216,
+		dominantColor: '#4B7B8E',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5769,6 +6721,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318631.6216,
+		dominantColor: '#27243B',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5781,6 +6735,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318633.6216,
+		dominantColor: '#2B649B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5793,6 +6749,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318634.6216,
+		dominantColor: '#48342D',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -5805,6 +6763,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318636.6218,
+		dominantColor: '#254E37',
+		colorName: 'green',
 	},
 	{
 		type: 'file',
@@ -5817,6 +6777,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318637.6218,
+		dominantColor: '#616A8F',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5829,6 +6791,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Nature',
 		mtime: 1752736318641.6218,
+		dominantColor: '#2A2E49',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5841,6 +6805,8 @@ export const galleryData = [
 		height: 3384,
 		path: 'Technology',
 		mtime: 1752736318678.6218,
+		dominantColor: '#89594E',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5853,6 +6819,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Technology',
 		mtime: 1752736318690.6218,
+		dominantColor: '#784063',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -5865,6 +6833,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeA',
 		mtime: 1752736318693.6218,
+		dominantColor: '#470D4D',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -5877,6 +6847,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeA',
 		mtime: 1752736318696.6218,
+		dominantColor: '#141959',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5889,6 +6861,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeA',
 		mtime: 1752736318699.6218,
+		dominantColor: '#5A1225',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -5901,6 +6875,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeA',
 		mtime: 1752736318703.6218,
+		dominantColor: '#0B3147',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5913,6 +6889,8 @@ export const galleryData = [
 		height: 2401,
 		path: 'Windows/ThemeB',
 		mtime: 1752736318707.6218,
+		dominantColor: '#3E212D',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5925,6 +6903,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeB',
 		mtime: 1752736318710.6218,
+		dominantColor: '#4B2227',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -5937,6 +6917,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeB',
 		mtime: 1752736318715.6218,
+		dominantColor: '#3D1F29',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -5949,6 +6931,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeB',
 		mtime: 1752736318719.6218,
+		dominantColor: '#652A2F',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -5961,6 +6945,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeC',
 		mtime: 1752736318723.6218,
+		dominantColor: '#84A6AD',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5973,6 +6959,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeC',
 		mtime: 1752736318727.6218,
+		dominantColor: '#91A09C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5985,6 +6973,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeC',
 		mtime: 1752736318731.6218,
+		dominantColor: '#AAA9A7',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -5997,6 +6987,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeC',
 		mtime: 1752736318736.6218,
+		dominantColor: '#A8AFB7',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6009,6 +7001,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeD',
 		mtime: 1752736318740.6218,
+		dominantColor: '#8E9FAB',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6021,6 +7015,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeD',
 		mtime: 1752736318745.6218,
+		dominantColor: '#738080',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6033,6 +7029,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeD',
 		mtime: 1752736318750.6218,
+		dominantColor: '#BAABAE',
+		colorName: 'pink',
 	},
 	{
 		type: 'file',
@@ -6045,6 +7043,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows/ThemeD',
 		mtime: 1752736318754.6218,
+		dominantColor: '#888C8E',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6057,6 +7057,8 @@ export const galleryData = [
 		height: 1200,
 		path: 'Windows',
 		mtime: 1752736318756.6218,
+		dominantColor: '#5889CD',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6069,6 +7071,8 @@ export const galleryData = [
 		height: 1200,
 		path: 'Windows',
 		mtime: 1752736318758.6218,
+		dominantColor: '#0C266B',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6081,6 +7085,8 @@ export const galleryData = [
 		height: 2160,
 		path: 'Windows',
 		mtime: 1752736318762.6218,
+		dominantColor: '#163BD4',
+		colorName: 'blue',
 	},
 	{
 		type: 'file',
@@ -6093,6 +7099,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows',
 		mtime: 1752736318765.6218,
+		dominantColor: '#141959',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6105,6 +7113,8 @@ export const galleryData = [
 		height: 4000,
 		path: 'Windows',
 		mtime: 1752736318771.6218,
+		dominantColor: '#614D46',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -6117,6 +7127,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows',
 		mtime: 1752736318775.622,
+		dominantColor: '#3D2232',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6129,6 +7141,8 @@ export const galleryData = [
 		height: 2400,
 		path: 'Windows',
 		mtime: 1752736318778.622,
+		dominantColor: '#6B869D',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6141,6 +7155,8 @@ export const galleryData = [
 		height: 3040,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318786.622,
+		dominantColor: '#30124F',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6153,6 +7169,8 @@ export const galleryData = [
 		height: 2934,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318801.622,
+		dominantColor: '#6D997C',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6165,6 +7183,8 @@ export const galleryData = [
 		height: 2934,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318812.622,
+		dominantColor: '#203726',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6177,6 +7197,8 @@ export const galleryData = [
 		height: 2934,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318824.622,
+		dominantColor: '#367197',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6189,6 +7211,8 @@ export const galleryData = [
 		height: 3040,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318832.622,
+		dominantColor: '#2A2931',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6201,6 +7225,8 @@ export const galleryData = [
 		height: 3040,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318840.622,
+		dominantColor: '#131216',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6213,6 +7239,8 @@ export const galleryData = [
 		height: 3040,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318851.622,
+		dominantColor: '#1B252C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6225,6 +7253,8 @@ export const galleryData = [
 		height: 3040,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318859.622,
+		dominantColor: '#0D1417',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6237,6 +7267,8 @@ export const galleryData = [
 		height: 3040,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318903.622,
+		dominantColor: '#7548A9',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6249,6 +7281,8 @@ export const galleryData = [
 		height: 2934,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318911.6223,
+		dominantColor: '#D74A4A',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -6261,6 +7295,8 @@ export const galleryData = [
 		height: 2934,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318922.6223,
+		dominantColor: '#561211',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -6273,6 +7309,8 @@ export const galleryData = [
 		height: 2934,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318932.6223,
+		dominantColor: '#EDAB75',
+		colorName: 'pink',
 	},
 	{
 		type: 'file',
@@ -6285,6 +7323,8 @@ export const galleryData = [
 		height: 2934,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318943.6223,
+		dominantColor: '#4D361F',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -6297,6 +7337,8 @@ export const galleryData = [
 		height: 2934,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318956.6223,
+		dominantColor: '#4F5374',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6309,6 +7351,8 @@ export const galleryData = [
 		height: 2934,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318968.6223,
+		dominantColor: '#232742',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6321,6 +7365,8 @@ export const galleryData = [
 		height: 2934,
 		path: 'iPhone 12 Wallpaper',
 		mtime: 1752736318977.6223,
+		dominantColor: '#0A2A4C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6333,6 +7379,8 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736318979.6223,
+		dominantColor: '#379B3E',
+		colorName: 'green',
 	},
 	{
 		type: 'file',
@@ -6345,6 +7393,8 @@ export const galleryData = [
 		height: 1440,
 		path: '',
 		mtime: 1752736318980.6223,
+		dominantColor: '#432E43',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -6357,6 +7407,8 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736318983.6223,
+		dominantColor: '#1A131F',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6369,6 +7421,8 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736318985.6223,
+		dominantColor: '#363030',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6381,6 +7435,8 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736318987.6223,
+		dominantColor: '#2F2945',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6393,6 +7449,8 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736318994.6223,
+		dominantColor: '#43536B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6405,6 +7463,8 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736318994.6223,
+		dominantColor: '#191614',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6417,6 +7477,8 @@ export const galleryData = [
 		height: 1440,
 		path: '',
 		mtime: 1752736318995.6223,
+		dominantColor: '#191927',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6429,6 +7491,8 @@ export const galleryData = [
 		height: 3264,
 		path: '',
 		mtime: 1752736319002.6223,
+		dominantColor: '#B3724A',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6441,6 +7505,8 @@ export const galleryData = [
 		height: 1080,
 		path: '',
 		mtime: 1752736319003.6223,
+		dominantColor: '#322D3B',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6453,6 +7519,8 @@ export const galleryData = [
 		height: 2400,
 		path: '',
 		mtime: 1752736319006.6223,
+		dominantColor: '#233342',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6465,6 +7533,8 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736319027.6223,
+		dominantColor: '#122239',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6477,6 +7547,8 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736319033.6223,
+		dominantColor: '#664C93',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6489,6 +7561,8 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736319036.6223,
+		dominantColor: '#554D78',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6501,6 +7575,8 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736319041.6223,
+		dominantColor: '#294172',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6513,6 +7589,8 @@ export const galleryData = [
 		height: 1440,
 		path: '',
 		mtime: 1752736319043.6223,
+		dominantColor: '#373668',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -6525,6 +7603,8 @@ export const galleryData = [
 		height: 1080,
 		path: '',
 		mtime: 1752736319043.6223,
+		dominantColor: '#321331',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6537,6 +7617,8 @@ export const galleryData = [
 		height: 1440,
 		path: '',
 		mtime: 1752736319048.6226,
+		dominantColor: '#8D5433',
+		colorName: 'brown',
 	},
 	{
 		type: 'file',
@@ -6549,6 +7631,8 @@ export const galleryData = [
 		height: 1440,
 		path: '',
 		mtime: 1752736319052.6226,
+		dominantColor: '#211D20',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6561,6 +7645,8 @@ export const galleryData = [
 		height: 1440,
 		path: '',
 		mtime: 1752736319053.6226,
+		dominantColor: '#432E43',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -6573,6 +7659,8 @@ export const galleryData = [
 		height: 1080,
 		path: '',
 		mtime: 1752736319054.6226,
+		dominantColor: '#462433',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6585,6 +7673,8 @@ export const galleryData = [
 		height: 1080,
 		path: '',
 		mtime: 1752736319054.6226,
+		dominantColor: '#302E4E',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6597,6 +7687,8 @@ export const galleryData = [
 		height: 1080,
 		path: '',
 		mtime: 1752736319055.6226,
+		dominantColor: '#10161B',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6609,6 +7701,8 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736319058.6226,
+		dominantColor: '#311948',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6621,6 +7715,8 @@ export const galleryData = [
 		height: 2436,
 		path: '',
 		mtime: 1752736319059.6226,
+		dominantColor: '#010101',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6633,6 +7729,8 @@ export const galleryData = [
 		height: 2159,
 		path: '',
 		mtime: 1752736319067.6226,
+		dominantColor: '#0C0C0C',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6645,6 +7743,8 @@ export const galleryData = [
 		height: 1080,
 		path: '',
 		mtime: 1752736319067.6226,
+		dominantColor: '#010101',
+		colorName: 'black',
 	},
 	{
 		type: 'file',
@@ -6657,6 +7757,8 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736319072.6226,
+		dominantColor: '#39465B',
+		colorName: 'gray',
 	},
 	{
 		type: 'file',
@@ -6669,6 +7771,8 @@ export const galleryData = [
 		height: 2880,
 		path: '',
 		mtime: 1752736319078.6226,
+		dominantColor: '#2B345C',
+		colorName: 'purple',
 	},
 	{
 		type: 'file',
@@ -6681,5 +7785,7 @@ export const galleryData = [
 		height: 2160,
 		path: '',
 		mtime: 1752736319082.6226,
+		dominantColor: '#1B1D26',
+		colorName: 'black',
 	},
 ];

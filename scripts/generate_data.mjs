@@ -2,6 +2,26 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import sizeOf from 'image-size';
+import { execSync } from 'child_process';
+import nearestColor from 'nearest-color';
+
+// Basic color names and their hex values
+const colorMap = {
+    red: '#ff0000',
+    green: '#008000',
+    blue: '#0000ff',
+    yellow: '#ffff00',
+    purple: '#800080',
+    orange: '#ffa500',
+    pink: '#ffc0cb',
+    brown: '#a52a2a',
+    black: '#000000',
+    white: '#ffffff',
+    gray: '#808080',
+};
+
+const getColorName = nearestColor.from(colorMap);
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -60,6 +80,8 @@ async function generateGalleryData() {
                 height: dimensions.height,
                 path: rel_path_dir === '.' ? '' : rel_path_dir,
                 mtime: stats.mtimeMs,
+                dominantColor: '', // No dominant color for GIFs
+                colorName: '', // No color name for GIFs
             });
         } else {
             const base_name = path.basename(file_name, path.extname(file_name));
@@ -80,6 +102,18 @@ async function generateGalleryData() {
             const dimensions = getDimensions(imgPath);
             const stats = await fs.stat(imgPath);
 
+            // Get dominant color using ImageMagick
+            let dominantColor = '#000000'; // Default color
+            let colorName = 'black'; // Default color name
+            try {
+                const colorCmd = `magick "${imgPath}" -resize 1x1 -format "#%[hex:p{0,0}]" info:-`;
+                const hexWithAlpha = execSync(colorCmd).toString().trim();
+                dominantColor = hexWithAlpha.slice(0, 7); // Remove alpha channel
+                colorName = getColorName(dominantColor).name;
+            } catch (e) {
+                console.error(`Could not get dominant color for ${imgPath}:`, e.message);
+            }
+
             galleryData.push({
                 type: 'file',
                 name: file_name,
@@ -91,6 +125,8 @@ async function generateGalleryData() {
                 height: dimensions.height,
                 path: rel_path_dir === '.' ? '' : rel_path_dir,
                 mtime: stats.mtimeMs,
+                dominantColor,
+                colorName,
             });
         }
     }

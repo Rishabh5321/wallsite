@@ -46,7 +46,8 @@
 		"@vercel/analytics": "^1.5.0",
 		"@vercel/speed-insights": "^1.2.0",
 		"basiclightbox": "^5.0.4",
-		"http-server": "^14.1.1"
+		"http-server": "^14.1.1",
+		"nearest-color": "^0.4.4"
 	},
 	"devDependencies": {
 		"concurrently": "^9.2.0",

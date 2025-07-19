@@ -22,6 +22,9 @@ importers:
       http-server:
         specifier: ^14.1.1
         version: 14.1.1
+      nearest-color:
+        specifier: ^0.4.4
+        version: 0.4.4
     devDependencies:
       concurrently:
         specifier: ^9.2.0
@@ -1148,6 +1151,9 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+
+  nearest-color@0.4.4:
+    resolution: {integrity: sha512-orhcaIORC10tf41Ld2wwlcC+FaAavHG87JHWB3eHH5p7v2k9Tzym2XNEZzLAm5YJwGv6Q38WWc7SOb+Qfu/4NQ==}
 
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
@@ -2694,6 +2700,8 @@ snapshots:
   nano-spawn@1.0.2: {}
 
   natural-compare@1.4.0: {}
+
+  nearest-color@0.4.4: {}
 
   normalize-path@3.0.0: {}
 
