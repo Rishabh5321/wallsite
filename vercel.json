@@ -1,4 +1,7 @@
 {
 	"buildCommand": "./scripts/vercel_build.sh",
-	"outputDirectory": "public"
+	"outputDirectory": "public",
+	"cache": [
+		".vercel/cache/**"
+	]
 }
