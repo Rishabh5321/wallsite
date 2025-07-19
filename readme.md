@@ -3,10 +3,6 @@
   <p>A curated collection of stunning wallpapers, fully automated and ready for deployment.</p>
 </div>
 
-## 🚀 Quick Start
-
-[![asciicast](https://asciinema.org/a/656458.svg)](https://asciinema.org/a/656458)
-
 ## ✨ Live Demo
 
 You can view the live wallpaper gallery hosted from this repository here: **[Live Gallery](https://wallsite.vercel.app/)**
@@ -19,7 +15,7 @@ The following diagram illustrates the project's architecture and the relationshi
 
 ```mermaid
 graph TD
-    subgraph Development Repository (wallsite)
+    subgraph "Development Repository (wallsite)"
         A[Developer's Wallpapers in /src] --> B{pnpm run build};
         B --> C[Generates Gallery & Assets];
         C --> D[Live Demo on Vercel];
@@ -28,7 +24,7 @@ graph TD
         E --> G[Publish Docker Image];
     end
 
-    subgraph User-Facing Template (wallsite-template)
+    subgraph "User-Facing Template (wallsite-template)"
         H[Empty /src Folder];
         I[User Generates Repository];
         I --> J[Adds Their Own Wallpapers];
