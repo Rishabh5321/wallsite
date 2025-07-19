@@ -1,345 +1,396 @@
 {
-	"inputs": {
-		"node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs": {
-			"bytes": 5345,
-			"imports": [],
-			"format": "esm"
-		},
-		"node_modules/.pnpm/@vercel+speed-insights@1.2.0/node_modules/@vercel/speed-insights/dist/index.mjs": {
-			"bytes": 3522,
-			"imports": [],
-			"format": "esm"
-		},
-		"node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.css": {
-			"bytes": 1186,
-			"imports": []
-		},
-		"docs/js/gallery-data.js": {
-			"bytes": 246576,
-			"imports": [],
-			"format": "esm"
-		},
-		"docs/js/modules/state.js": {
-			"bytes": 1504,
-			"imports": [],
-			"format": "esm"
-		},
-		"docs/js/modules/utils.js": {
-			"bytes": 924,
-			"imports": [],
-			"format": "esm"
-		},
-		"docs/js/modules/theme.js": {
-			"bytes": 2741,
-			"imports": [
-				{
-					"path": "docs/js/modules/state.js",
-					"kind": "import-statement",
-					"original": "./state.js"
-				}
-			],
-			"format": "esm"
-		},
-		"docs/js/modules/favorites.js": {
-			"bytes": 866,
-			"imports": [
-				{
-					"path": "docs/js/modules/state.js",
-					"kind": "import-statement",
-					"original": "./state.js"
-				}
-			],
-			"format": "esm"
-		},
-		"node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js": {
-			"bytes": 3277,
-			"imports": [
-				{
-					"path": "<runtime>",
-					"kind": "import-statement",
-					"external": true
-				}
-			],
-			"format": "cjs"
-		},
-		"docs/js/modules/lightbox.js": {
-			"bytes": 9895,
-			"imports": [
-				{
-					"path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js",
-					"kind": "import-statement",
-					"original": "basiclightbox"
-				},
-				{
-					"path": "docs/js/modules/state.js",
-					"kind": "import-statement",
-					"original": "./state.js"
-				},
-				{
-					"path": "docs/js/modules/favorites.js",
-					"kind": "import-statement",
-					"original": "./favorites.js"
-				}
-			],
-			"format": "esm"
-		},
-		"docs/js/modules/ui.js": {
-			"bytes": 613,
-			"imports": [
-				{
-					"path": "docs/js/modules/state.js",
-					"kind": "import-statement",
-					"original": "./state.js"
-				}
-			],
-			"format": "esm"
-		},
-		"docs/js/modules/gallery.js": {
-			"bytes": 9501,
-			"imports": [
-				{
-					"path": "docs/js/modules/state.js",
-					"kind": "import-statement",
-					"original": "./state.js"
-				},
-				{
-					"path": "docs/js/modules/favorites.js",
-					"kind": "import-statement",
-					"original": "./favorites.js"
-				},
-				{
-					"path": "docs/js/modules/lightbox.js",
-					"kind": "import-statement",
-					"original": "./lightbox.js"
-				},
-				{
-					"path": "docs/js/modules/ui.js",
-					"kind": "import-statement",
-					"original": "./ui.js"
-				}
-			],
-			"format": "esm"
-		},
-		"docs/js/modules/file-tree.js": {
-			"bytes": 3643,
-			"imports": [
-				{
-					"path": "docs/js/modules/state.js",
-					"kind": "import-statement",
-					"original": "./state.js"
-				},
-				{
-					"path": "docs/js/modules/gallery.js",
-					"kind": "import-statement",
-					"original": "./gallery.js"
-				},
-				{
-					"path": "docs/js/modules/ui.js",
-					"kind": "import-statement",
-					"original": "./ui.js"
-				}
-			],
-			"format": "esm"
-		},
-		"docs/js/modules/search.js": {
-			"bytes": 696,
-			"imports": [
-				{
-					"path": "docs/js/modules/state.js",
-					"kind": "import-statement",
-					"original": "./state.js"
-				},
-				{
-					"path": "docs/js/modules/gallery.js",
-					"kind": "import-statement",
-					"original": "./gallery.js"
-				}
-			],
-			"format": "esm"
-		},
-		"docs/js/modules/sorting.js": {
-			"bytes": 1515,
-			"imports": [
-				{
-					"path": "docs/js/modules/state.js",
-					"kind": "import-statement",
-					"original": "./state.js"
-				},
-				{
-					"path": "docs/js/modules/gallery.js",
-					"kind": "import-statement",
-					"original": "./gallery.js"
-				}
-			],
-			"format": "esm"
-		},
-		"docs/js/modules/events.js": {
-			"bytes": 1602,
-			"imports": [
-				{
-					"path": "docs/js/modules/state.js",
-					"kind": "import-statement",
-					"original": "./state.js"
-				},
-				{
-					"path": "docs/js/modules/utils.js",
-					"kind": "import-statement",
-					"original": "./utils.js"
-				},
-				{
-					"path": "docs/js/modules/ui.js",
-					"kind": "import-statement",
-					"original": "./ui.js"
-				},
-				{
-					"path": "docs/js/modules/gallery.js",
-					"kind": "import-statement",
-					"original": "./gallery.js"
-				},
-				{
-					"path": "docs/js/modules/search.js",
-					"kind": "import-statement",
-					"original": "./search.js"
-				},
-				{
-					"path": "docs/js/modules/sorting.js",
-					"kind": "import-statement",
-					"original": "./sorting.js"
-				}
-			],
-			"format": "esm"
-		},
-		"docs/js/app.js": {
-			"bytes": 2320,
-			"imports": [
-				{
-					"path": "node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs",
-					"kind": "import-statement",
-					"original": "@vercel/analytics"
-				},
-				{
-					"path": "node_modules/.pnpm/@vercel+speed-insights@1.2.0/node_modules/@vercel/speed-insights/dist/index.mjs",
-					"kind": "import-statement",
-					"original": "@vercel/speed-insights"
-				},
-				{
-					"path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.css",
-					"kind": "import-statement",
-					"original": "basiclightbox/dist/basicLightbox.min.css"
-				},
-				{
-					"path": "docs/js/gallery-data.js",
-					"kind": "import-statement",
-					"original": "./gallery-data.js"
-				},
-				{
-					"path": "docs/js/modules/state.js",
-					"kind": "import-statement",
-					"original": "./modules/state.js"
-				},
-				{
-					"path": "docs/js/modules/utils.js",
-					"kind": "import-statement",
-					"original": "./modules/utils.js"
-				},
-				{
-					"path": "docs/js/modules/theme.js",
-					"kind": "import-statement",
-					"original": "./modules/theme.js"
-				},
-				{
-					"path": "docs/js/modules/favorites.js",
-					"kind": "import-statement",
-					"original": "./modules/favorites.js"
-				},
-				{
-					"path": "docs/js/modules/file-tree.js",
-					"kind": "import-statement",
-					"original": "./modules/file-tree.js"
-				},
-				{
-					"path": "docs/js/modules/gallery.js",
-					"kind": "import-statement",
-					"original": "./modules/gallery.js"
-				},
-				{
-					"path": "docs/js/modules/events.js",
-					"kind": "import-statement",
-					"original": "./modules/events.js"
-				}
-			],
-			"format": "esm"
-		}
-	},
-	"outputs": {
-		"public/js/bundle.js": {
-			"imports": [],
-			"exports": [],
-			"entryPoint": "docs/js/app.js",
-			"cssBundle": "public/js/bundle.css",
-			"inputs": {
-				"node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js": {
-					"bytesInOutput": 3178
-				},
-				"node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs": {
-					"bytesInOutput": 1444
-				},
-				"node_modules/.pnpm/@vercel+speed-insights@1.2.0/node_modules/@vercel/speed-insights/dist/index.mjs": {
-					"bytesInOutput": 1320
-				},
-				"node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.css": {
-					"bytesInOutput": 0
-				},
-				"docs/js/gallery-data.js": {
-					"bytesInOutput": 199114
-				},
-				"docs/js/modules/state.js": {
-					"bytesInOutput": 1074
-				},
-				"docs/js/modules/utils.js": {
-					"bytesInOutput": 105
-				},
-				"docs/js/modules/theme.js": {
-					"bytesInOutput": 1898
-				},
-				"docs/js/modules/favorites.js": {
-					"bytesInOutput": 396
-				},
-				"docs/js/modules/lightbox.js": {
-					"bytesInOutput": 5966
-				},
-				"docs/js/modules/ui.js": {
-					"bytesInOutput": 363
-				},
-				"docs/js/modules/gallery.js": {
-					"bytesInOutput": 5127
-				},
-				"docs/js/modules/file-tree.js": {
-					"bytesInOutput": 2054
-				},
-				"docs/js/modules/search.js": {
-					"bytesInOutput": 313
-				},
-				"docs/js/modules/sorting.js": {
-					"bytesInOutput": 749
-				},
-				"docs/js/modules/events.js": {
-					"bytesInOutput": 718
-				},
-				"docs/js/app.js": {
-					"bytesInOutput": 741
-				}
-			},
-			"bytes": 225356
-		},
-		"public/js/bundle.css": {
-			"imports": [],
-			"inputs": {
-				"node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.css": {
-					"bytesInOutput": 1155
-				}
-			},
-			"bytes": 1156
-		}
-	}
+  "inputs": {
+    "node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs": {
+      "bytes": 5345,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/.pnpm/@vercel+speed-insights@1.2.0/node_modules/@vercel/speed-insights/dist/index.mjs": {
+      "bytes": 3522,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.css": {
+      "bytes": 1186,
+      "imports": []
+    },
+    "src/styles/sidebar.css": {
+      "bytes": 4318,
+      "imports": []
+    },
+    "src/styles/layout.css": {
+      "bytes": 5851,
+      "imports": [
+        {
+          "path": "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap",
+          "kind": "import-rule",
+          "external": true
+        },
+        {
+          "path": "src/styles/sidebar.css",
+          "kind": "import-rule",
+          "original": "sidebar.css"
+        }
+      ]
+    },
+    "src/styles/gallery.css": {
+      "bytes": 4538,
+      "imports": []
+    },
+    "src/styles/lightbox.css": {
+      "bytes": 7884,
+      "imports": []
+    },
+    "src/js/gallery-data.js": {
+      "bytes": 278625,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/js/components/state.js": {
+      "bytes": 1504,
+      "imports": [],
+      "format": "esm"
+    },
+    "src/js/components/theme.js": {
+      "bytes": 2741,
+      "imports": [
+        {
+          "path": "src/js/components/state.js",
+          "kind": "import-statement",
+          "original": "./state.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/js/components/favorites.js": {
+      "bytes": 866,
+      "imports": [
+        {
+          "path": "src/js/components/state.js",
+          "kind": "import-statement",
+          "original": "./state.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js": {
+      "bytes": 3277,
+      "imports": [
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "cjs"
+    },
+    "src/js/components/lightbox.js": {
+      "bytes": 9895,
+      "imports": [
+        {
+          "path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js",
+          "kind": "import-statement",
+          "original": "basiclightbox"
+        },
+        {
+          "path": "src/js/components/state.js",
+          "kind": "import-statement",
+          "original": "./state.js"
+        },
+        {
+          "path": "src/js/components/favorites.js",
+          "kind": "import-statement",
+          "original": "./favorites.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/js/components/ui.js": {
+      "bytes": 613,
+      "imports": [
+        {
+          "path": "src/js/components/state.js",
+          "kind": "import-statement",
+          "original": "./state.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/js/components/gallery.js": {
+      "bytes": 9501,
+      "imports": [
+        {
+          "path": "src/js/components/state.js",
+          "kind": "import-statement",
+          "original": "./state.js"
+        },
+        {
+          "path": "src/js/components/favorites.js",
+          "kind": "import-statement",
+          "original": "./favorites.js"
+        },
+        {
+          "path": "src/js/components/lightbox.js",
+          "kind": "import-statement",
+          "original": "./lightbox.js"
+        },
+        {
+          "path": "src/js/components/ui.js",
+          "kind": "import-statement",
+          "original": "./ui.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/js/components/file-tree.js": {
+      "bytes": 3643,
+      "imports": [
+        {
+          "path": "src/js/components/state.js",
+          "kind": "import-statement",
+          "original": "./state.js"
+        },
+        {
+          "path": "src/js/components/gallery.js",
+          "kind": "import-statement",
+          "original": "./gallery.js"
+        },
+        {
+          "path": "src/js/components/ui.js",
+          "kind": "import-statement",
+          "original": "./ui.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/js/components/sorting.js": {
+      "bytes": 1515,
+      "imports": [
+        {
+          "path": "src/js/components/state.js",
+          "kind": "import-statement",
+          "original": "./state.js"
+        },
+        {
+          "path": "src/js/components/gallery.js",
+          "kind": "import-statement",
+          "original": "./gallery.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/js/components/events.js": {
+      "bytes": 1418,
+      "imports": [
+        {
+          "path": "src/js/components/state.js",
+          "kind": "import-statement",
+          "original": "./state.js"
+        },
+        {
+          "path": "src/js/components/ui.js",
+          "kind": "import-statement",
+          "original": "./ui.js"
+        },
+        {
+          "path": "src/js/components/gallery.js",
+          "kind": "import-statement",
+          "original": "./gallery.js"
+        },
+        {
+          "path": "src/js/components/sorting.js",
+          "kind": "import-statement",
+          "original": "./sorting.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/js/components/search.js": {
+      "bytes": 1389,
+      "imports": [
+        {
+          "path": "src/js/components/state.js",
+          "kind": "import-statement",
+          "original": "./state.js"
+        },
+        {
+          "path": "src/js/components/gallery.js",
+          "kind": "import-statement",
+          "original": "./gallery.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/js/index.js": {
+      "bytes": 2451,
+      "imports": [
+        {
+          "path": "node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs",
+          "kind": "import-statement",
+          "original": "@vercel/analytics"
+        },
+        {
+          "path": "node_modules/.pnpm/@vercel+speed-insights@1.2.0/node_modules/@vercel/speed-insights/dist/index.mjs",
+          "kind": "import-statement",
+          "original": "@vercel/speed-insights"
+        },
+        {
+          "path": "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.css",
+          "kind": "import-statement",
+          "original": "basiclightbox/dist/basicLightbox.min.css"
+        },
+        {
+          "path": "src/styles/layout.css",
+          "kind": "import-statement",
+          "original": "../styles/layout.css"
+        },
+        {
+          "path": "src/styles/gallery.css",
+          "kind": "import-statement",
+          "original": "../styles/gallery.css"
+        },
+        {
+          "path": "src/styles/lightbox.css",
+          "kind": "import-statement",
+          "original": "../styles/lightbox.css"
+        },
+        {
+          "path": "src/js/gallery-data.js",
+          "kind": "import-statement",
+          "original": "./gallery-data.js"
+        },
+        {
+          "path": "src/js/components/state.js",
+          "kind": "import-statement",
+          "original": "./components/state.js"
+        },
+        {
+          "path": "src/js/components/theme.js",
+          "kind": "import-statement",
+          "original": "./components/theme.js"
+        },
+        {
+          "path": "src/js/components/favorites.js",
+          "kind": "import-statement",
+          "original": "./components/favorites.js"
+        },
+        {
+          "path": "src/js/components/file-tree.js",
+          "kind": "import-statement",
+          "original": "./components/file-tree.js"
+        },
+        {
+          "path": "src/js/components/gallery.js",
+          "kind": "import-statement",
+          "original": "./components/gallery.js"
+        },
+        {
+          "path": "src/js/components/events.js",
+          "kind": "import-statement",
+          "original": "./components/events.js"
+        },
+        {
+          "path": "src/js/components/search.js",
+          "kind": "import-statement",
+          "original": "./components/search.js"
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "public/js/bundle.js": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "src/js/index.js",
+      "cssBundle": "public/js/bundle.css",
+      "inputs": {
+        "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.js": {
+          "bytesInOutput": 3178
+        },
+        "node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs": {
+          "bytesInOutput": 1444
+        },
+        "node_modules/.pnpm/@vercel+speed-insights@1.2.0/node_modules/@vercel/speed-insights/dist/index.mjs": {
+          "bytesInOutput": 1320
+        },
+        "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.css": {
+          "bytesInOutput": 0
+        },
+        "src/styles/layout.css": {
+          "bytesInOutput": 0
+        },
+        "src/styles/gallery.css": {
+          "bytesInOutput": 0
+        },
+        "src/styles/lightbox.css": {
+          "bytesInOutput": 0
+        },
+        "src/js/gallery-data.js": {
+          "bytesInOutput": 222315
+        },
+        "src/js/components/state.js": {
+          "bytesInOutput": 1074
+        },
+        "src/js/components/theme.js": {
+          "bytesInOutput": 1898
+        },
+        "src/js/components/favorites.js": {
+          "bytesInOutput": 396
+        },
+        "src/js/components/lightbox.js": {
+          "bytesInOutput": 5966
+        },
+        "src/js/components/ui.js": {
+          "bytesInOutput": 363
+        },
+        "src/js/components/gallery.js": {
+          "bytesInOutput": 5127
+        },
+        "src/js/components/file-tree.js": {
+          "bytesInOutput": 2053
+        },
+        "src/js/components/sorting.js": {
+          "bytesInOutput": 749
+        },
+        "src/js/components/events.js": {
+          "bytesInOutput": 653
+        },
+        "src/js/components/search.js": {
+          "bytesInOutput": 574
+        },
+        "src/js/index.js": {
+          "bytesInOutput": 745
+        }
+      },
+      "bytes": 248651
+    },
+    "public/js/bundle.css": {
+      "imports": [
+        {
+          "path": "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap",
+          "kind": "import-rule",
+          "external": true
+        }
+      ],
+      "inputs": {
+        "node_modules/.pnpm/basiclightbox@5.0.4/node_modules/basiclightbox/dist/basicLightbox.min.css": {
+          "bytesInOutput": 337
+        },
+        "src/styles/sidebar.css": {
+          "bytesInOutput": 3519
+        },
+        "src/styles/layout.css": {
+          "bytesInOutput": 4621
+        },
+        "src/styles/gallery.css": {
+          "bytesInOutput": 3863
+        },
+        "src/styles/lightbox.css": {
+          "bytesInOutput": 5869
+        }
+      },
+      "bytes": 18297
+    }
+  }
 }

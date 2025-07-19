@@ -11,7 +11,7 @@ This is a self-hostable wallpaper gallery project. Its primary goal is to be dis
     - **`@vercel/analytics` & `@vercel/speed-insights`**: For analytics, if deployed on Vercel.
 - **Build Tool:** `esbuild` is used for bundling JavaScript and CSS, with optimized configurations for development (watch mode, incremental builds) and production (minification, tree-shaking).
 - **Package Manager:** `pnpm`.
-- **Image Processing:** `ImageMagick` is a required dependency for the generation scripts. It handles thumbnail creation and responsive image resizing.
+- **Image Processing:** `sharp` is used for all image processing tasks. It's a high-performance Node.js library that handles thumbnail creation, responsive image resizing, and dominant color extraction. The processing is done in parallel, utilizing all available CPU cores to maximize speed.
 - **Automation:** GitHub Actions are used for syncing the template repository and publishing the Docker image.
 - **Containerization:** Docker is used for the self-hosting option, with a `docker-compose.yml` for easy setup.
 - **Development Environment:** A `flake.nix` file is provided for setting up a reproducible development environment with Nix.
@@ -48,15 +48,14 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - `src/`: Contains the source wallpaper images, organized in subdirectories.
 - `docs/`: Contains the source code for the frontend application (HTML, CSS, JS). This is the directory to edit during development.
 - `public/`: The output directory for the build process. **Do not edit files here directly.**
-- `scripts/`: Contains the core generation scripts.
-    - `generate_gallery.sh`: A highly optimized bash script that uses ImageMagick to create responsive WebP versions of all images. It intelligently skips processing images that already exist and are up-to-date, dramatically speeding up builds.
-    - `generate_data.mjs`: A Node.js script that scans the `src` directory and creates `docs/js/gallery-data.js` with all the metadata for the frontend.
+- `scripts/`: Contains the core generation script.
+    - `generate.mjs`: A Node.js script using `sharp` to find all images, generate responsive WebP versions, create LQIPs, extract dominant colors, and create `src/js/gallery-data.js`. It processes images in parallel and uses a cache (`.gallery-cache.json`) to skip regeneration of unchanged files, making subsequent builds significantly faster.
 - `.github/workflows/`: Contains the GitHub Actions workflows.
 - `Dockerfile` & `docker-entrypoint.sh`: Define the Docker image and its runtime behavior.
 
 ## 5. Development Rules & Conventions
 
-- **Rule 1: Never edit generated files directly.** The `public/` directory and the `docs/js/gallery-data.js` file are generated artifacts. To update them, run `pnpm run build` or `pnpm run dev`.
+- **Rule 1: Never edit generated files directly.** The `public/` directory, `src/js/gallery-data.js`, and `scripts/.gallery-cache.json` are generated artifacts. To update them, run `pnpm run build` or `pnpm run dev`.
 - **Rule 2: The template repository is sacred.** Do not make manual changes to the `wallsite-template` repository. All changes are synced from the main `wallsite` repository.
 - **Rule 3: The user experience is paramount.** The main `README.md` is for developers and directs users to the template. The template's `README.md` provides the actual deployment steps for the user. The `README.md` in the main repository contains a quick-start GIF, an architecture diagram, and a "Contributing" section.
 - **Rule 4: Emphasize pure functions and separation of concerns.** The frontend JavaScript is organized into modules with specific responsibilities:
@@ -68,6 +67,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
     - `ui.js`: Controls UI elements like the sidebar, theme, and sorting.
     - `favorites.js`: Manages the favorites system using `localStorage`.
     - `sorting.js`: Contains the logic for sorting the wallpapers by different criteria.
+    - `search.js`: Handles the client-side search functionality, including debouncing and filtering.
 - **Rule 5: Keep the context file updated.** After any modification to the project's architecture, dependencies, or conventions, update `GEMINI.md` accordingly.
 
 ## 6. Project Features
@@ -84,7 +84,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
     - **Smoother Transitions**: A gentle 150ms fade-in effect is applied when images are swapped, making the experience feel fluid and less jarring.
     - **Enhanced Preloading**: The lightbox aggressively preloads the next two adjacent wallpapers to make sequential browsing feel instantaneous.
 - **Category Browsing**: A collapsible sidebar with a hierarchical file tree lets users browse by category.
-- **Client-Side Search**: Instantly search and filter wallpapers by name.
+- **Client-Side Search**: A debounced search bar allows users to instantly filter wallpapers by filename, tag (folder name), and dominant color name (e.g., "red", "blue").
 - **Advanced Sorting**: Users can sort wallpapers by name, modification date, or resolution. The sorting logic always prioritizes folders, keeping them at the top of the list regardless of the chosen sort option.
 - **Favorites System**: Users can mark their favorite wallpapers, which are saved locally in the browser.
 - **Random Discovery**: A "Random" button allows users to discover new wallpapers easily. The initial gallery view is now sorted by type (folders first) and name for a predictable experience. When inside a category, the random button will select a random wallpaper from within that category and its subcategories.
@@ -98,8 +98,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 
 ### Automation & Deployment
 
-- **Optimized Gallery Generation**: The `generate_gallery.sh` script is highly optimized. It intelligently checks if a wallpaper has already been converted to WebP and is up-to-date, skipping redundant processing. This works in tandem with the Vercel build cache to make subsequent deployments very fast. The `generate_data.mjs` script then creates the necessary metadata for the frontend, including file modification times (`mtime`) to enable sorting by date.
-    - **Brotli Pre-compression**: The generation script automatically detects if `brotli` is installed and uses it to create pre-compressed `.webp.br` and `.lqip.webp.br` files. This allows hosts like Netlify and Vercel to serve smaller files directly, reducing bandwidth and speeding up load times.
+- **Optimized Gallery Generation**: The `generate.mjs` script is a highly optimized Node.js script using `sharp`. It processes images in parallel and uses a metadata cache (`.gallery-cache.json`) to skip processing for unchanged images. This works in tandem with the Vercel build cache to make subsequent deployments very fast. The script creates the necessary metadata for the frontend, including file modification times (`mtime`) to enable sorting by date and the dominant color of each image to enable searching by color.
     - **Reduced WebP Quality**: The default WebP quality has been set to `78` for smaller file sizes and faster loading.
     - **Optimized Responsive Image Widths**: The number of generated responsive WebP image widths has been reduced to two (`640w` and `1920w`) to balance build time, storage, and performance.
 - **One-Click Deployment**: Pre-configured for seamless deployment to Vercel and Netlify.
@@ -107,8 +106,8 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 - **Dynamic Self-Hosting**: A `Dockerfile` and `docker-entrypoint.sh` are provided for easy self-hosting.
     - **Long-term HTTP Caching**: The `docker-entrypoint.sh` now configures `http-server` to set `Cache-Control: max-age=31536000` for all served assets, significantly improving performance for returning users by enabling long-term browser and intermediate cache storage.
 - **Vercel Deployment & Caching**:
-    - **Build Cache**: The project uses a custom build script (`scripts/vercel_build.sh`) to significantly speed up deployments. It manually caches the generated `public/webp` and `public/lqip` directories within Vercel's persistent cache (`.vercel/cache`). Before a new build starts, it restores these images, and the generation script only processes new or changed wallpapers, saving significant time.
-    - **Edge Network (CDN) Caching**: Vercel automatically caches all static assets from the `public` directory on its Edge Network for up to 31 days. It uses a `Cache-Control` header that forces browser revalidation on each request, ensuring users always get the latest content. A new deployment automatically purges the CDN cache.
+    - **Build Cache**: The project uses a custom build script (`scripts/vercel_build.sh`) to significantly speed up deployments. It installs dependencies, and then manually caches the generated `public/webp`, `public/lqip`, and `scripts/.gallery-cache.json` files within Vercel's persistent cache. Before a new build starts, it restores these assets, and the generation script only processes new or changed wallpapers, saving significant time.
+    - **Edge Network (CDN) Caching**: Vercel automatically caches all static assets from the `public` directory on its Edge Network for up to 31 days. It uses a `Cache-control` header that forces browser revalidation on each request, ensuring users always get the latest content. A new deployment automatically purges the CDN cache.
     - **Dependency Build Script Handling**: To prevent warnings during Vercel deployments related to ignored build scripts (e.g., `@vercel/speed-insights`), the `pnpm install` command in `scripts/vercel_build.sh` now includes the `--ignore-scripts` flag. This ensures that lifecycle scripts are not run during installation, while the necessary build steps are still executed by `pnpm run build`.
 
 ### Developer Experience

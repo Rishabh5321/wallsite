@@ -2,25 +2,21 @@
 	"name": "wallpapers",
 	"version": "1.0.0",
 	"description": "<div align=\"center\">   <h1>Wallpaper Gallery</h1>   <p>A curated collection of stunning wallpapers, ready for one-click deployment.</p> </div>",
-	"main": "index.js",
+	"main": "src/js/index.js",
 	"sideEffects": [
-		"docs/js/app.js"
+		"src/js/index.js"
 	],
 	"directories": {
-		"doc": "docs"
+		"doc": "src"
 	},
 	"scripts": {
-		"generate": "bash ./scripts/generate_gallery.sh && node ./scripts/generate_data.mjs",
-		"dev": "pnpm run generate && pnpm run build:assets && concurrently \"pnpm:watch:assets\" \"pnpm:watch:js\"",
-		"watch:js": "esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --servedir=public --serve=0.0.0.0:8000 --watch --target=es2020,chrome90,firefox90,safari15",
-		"watch:assets": "onchange 'docs/**' -- pnpm run copy:assets",
-		"copy:assets": "cp -r docs/. public/",
-		"generate:gallery": "bash ./scripts/generate_gallery.sh",
-		"build": "pnpm run generate && pnpm run build:assets && esbuild docs/js/app.js --bundle --outfile=public/js/bundle.js --loader:.css=css --allow-overwrite --minify --target=es2020,chrome90,firefox90,safari15 --metafile=meta.json --drop:console --define:process.env.NODE_ENV='\"production\"'",
+		"generate": "node ./scripts/generate.mjs",
+		"dev": "pnpm run generate && esbuild src/js/index.js --bundle --outfile=public/js/bundle.js --loader:.js=jsx --loader:.css=css --allow-overwrite --servedir=public --serve=0.0.0.0:8000 --watch --target=es2020,chrome90,firefox90,safari15",
+		"build": "pnpm run generate && pnpm run build:assets && esbuild src/js/index.js --bundle --outfile=public/js/bundle.js --loader:.js=jsx --loader:.css=css --allow-overwrite --minify --target=es2020,chrome90,firefox90,safari15 --metafile=meta.json --drop:console --define:process.env.NODE_ENV='\"production\"'",
 		"start": "pnpm run build && http-server public --host 0.0.0.0 --port 8000",
-		"build:assets": "mkdir -p public && rm -rf public/js public/css public/src && cp -r docs/. public/ && cp -r src public/",
-		"lint": "eslint docs/js/**/*.js --fix",
-		"format": "prettier --write docs/js/**/*.js",
+		"build:assets": "mkdir -p public/assets public/css public/js && rm -rf public/js/* public/css/* public/assets/* && cp src/templates/index.html public/index.html && cp -r src/assets/* public/assets && cp -r wallpapers public/src",
+		"lint": "eslint src/js/**/*.js --fix",
+		"format": "prettier --write \"src/**/*.{js,css,json,md}\"",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"prepare": "husky",
 		"analyze": "esbuild-visualizer --metadata meta.json"
@@ -37,23 +33,22 @@
 	},
 	"homepage": "https://github.com/Rishabh5321/wallpapers#readme",
 	"lint-staged": {
-		"*.js": [
-			"eslint --fix",
-			"prettier --write"
-		],
-		"*.{css,json,md}": "prettier --write"
+		"src/**/*.{js,css,json,md}": "prettier --write",
+		"src/js/**/*.js": "eslint --fix"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"@vercel/speed-insights",
-			"esbuild"
+			"esbuild",
+			"sharp"
 		]
 	},
 	"dependencies": {
 		"@vercel/analytics": "^1.5.0",
 		"@vercel/speed-insights": "^1.2.0",
 		"basiclightbox": "^5.0.4",
-		"http-server": "^14.1.1"
+		"http-server": "^14.1.1",
+		"nearest-color": "^0.4.4"
 	},
 	"devDependencies": {
 		"concurrently": "^9.2.0",
@@ -65,9 +60,9 @@
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-prettier": "^5.5.1",
 		"husky": "^9.1.7",
-		"image-size": "^1.2.1",
 		"lint-staged": "^16.1.2",
 		"onchange": "^7.1.0",
-		"prettier": "^3.6.2"
+		"prettier": "^3.6.2",
+		"sharp": "^0.34.3"
 	}
 }
