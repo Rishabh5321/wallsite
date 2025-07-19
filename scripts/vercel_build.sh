@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Install ImageMagick for Vercel environment
+sudo yum install -y ImageMagick
+
 # Create cache directory if it doesn't exist
 mkdir -p .vercel/cache/public
 
