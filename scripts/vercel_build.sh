@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# Install ImageMagick for Vercel environment
-sudo yum install -y ImageMagick
+# ✅ Assume ImageMagick is available in the Vercel build environment
+# (Check with: `convert -version` if needed)
 
 # Create cache directory if it doesn't exist
 mkdir -p .vercel/cache/public
@@ -18,10 +19,10 @@ if [ -d ".vercel/cache/public/lqip" ]; then
 fi
 
 # Run the actual build command
-pnpm install --ignore-scripts && pnpm run build
+pnpm install --ignore-scripts
+pnpm run build
 
 # Save generated webp images to cache
-# Ensure the cache directories are clean before copying new ones
 rm -rf .vercel/cache/public/webp .vercel/cache/public/lqip
 cp -r public/webp .vercel/cache/public/
 cp -r public/lqip .vercel/cache/public/
