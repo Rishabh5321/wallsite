@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Install dependencies first
-pnpm install --ignore-scripts
-
 # Create cache directory if it doesn't exist
 mkdir -p .vercel/cache/public
 mkdir -p .vercel/cache/scripts
@@ -23,7 +20,7 @@ if [ -f ".vercel/cache/scripts/gallery-cache.json" ]; then
 fi
 
 # Run the actual build command
-pnpm run build
+pnpm install --ignore-scripts && pnpm run build
 
 # Save generated webp images and metadata to cache
 rm -rf .vercel/cache/public/webp .vercel/cache/public/lqip .vercel/cache/scripts/gallery-cache.json
