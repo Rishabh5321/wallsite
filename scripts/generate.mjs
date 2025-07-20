@@ -1,219 +1,290 @@
+/**
+ * Improved gallery generator
+ *   – atomic write
+ *   – I/O-aware concurrency
+ *   – early cache hit
+ *   – faster dominant-colour sampling
+ */
 import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 import nearestColor from 'nearest-color';
-import os from 'os';
+import { availableParallelism } from 'os';
+import glob from 'fast-glob';
 
-// --- Configuration ---
+// --- Configuration -------------------------------------------------
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const SRC_DIR = path.resolve(__dirname, '../wallpapers');
 const WEBP_DIR = path.resolve(__dirname, '../public/webp');
 const LQIP_DIR = path.resolve(__dirname, '../public/lqip');
-const GALLERY_DATA_FILE = path.resolve(__dirname, '../public/gallery-data.json');
+const GALLERY_DATA_FILE = path.resolve(
+	__dirname,
+	'../public/gallery-data.json'
+);
 
-const IMG_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.webp'];
 const RESPONSIVE_WIDTHS = [640, 1920];
 const WEBP_QUALITY = 78;
 const LQIP_QUALITY = 20;
 const LQIP_WIDTH = 40;
-const CONCURRENCY_LIMIT = os.cpus().length;
+const CONCURRENCY_LIMIT = Math.min(8, availableParallelism());
 
 const colorMap = {
-    black: '#000000', blue: '#0000ff', brown: '#a52a2a', cyan: '#00ffff',
-    green: '#008000', gray: '#808080', magenta: '#ff00ff', orange: '#ffa500',
-    pink: '#ffc0cb', purple: '#800080', red: '#ff0000', white: '#ffffff',
-    yellow: '#ffff00', maroon: '#800000', navy: '#000080', olive: '#808000',
-    teal: '#008080', aqua: '#00ffff', lime: '#00ff00', silver: '#c0c0c0',
-    fuchsia: '#ff00ff', indigo: '#4b0082', gold: '#ffd700', violet: '#ee82ee',
-    beige: '#f5f5dc', tan: '#d2b48c', khaki: '#f0e68c', salmon: '#fa8072',
-    coral: '#ff7f50', turquoise: '#40e0d0', plum: '#dda0dd', orchid: '#da70d6',
-    skyblue: '#87ceeb',
+	black: '#000000',
+	blue: '#0000ff',
+	brown: '#a52a2a',
+	cyan: '#00ffff',
+	green: '#008000',
+	gray: '#808080',
+	magenta: '#ff00ff',
+	orange: '#ffa500',
+	pink: '#ffc0cb',
+	purple: '#800080',
+	red: '#ff0000',
+	white: '#ffffff',
+	yellow: '#ffff00',
+	maroon: '#800000',
+	navy: '#000080',
+	olive: '#808000',
+	teal: '#008080',
+	aqua: '#00ffff',
+	lime: '#00ff00',
+	silver: '#c0c0c0',
+	fuchsia: '#ff00ff',
+	indigo: '#4b0082',
+	gold: '#ffd700',
+	violet: '#ee82ee',
+	beige: '#f5f5dc',
+	tan: '#d2b48c',
+	khaki: '#f0e68c',
+	salmon: '#fa8072',
+	coral: '#ff7f50',
+	turquoise: '#40e0d0',
+	plum: '#dda0dd',
+	orchid: '#da70d6',
+	skyblue: '#87ceeb',
 };
 const getColorName = nearestColor.from(colorMap);
 
-// --- Helper Functions ---
+// --- Helpers -------------------------------------------------------
 
-async function findFiles(dir) {
-    let files = [];
-    const items = await fs.readdir(dir, { withFileTypes: true });
-    for (const item of items) {
-        const fullPath = path.join(dir, item.name);
-        if (item.isDirectory()) {
-            files = files.concat(await findFiles(fullPath));
-        } else if (IMG_EXTENSIONS.includes(path.extname(item.name).toLowerCase()) || path.extname(item.name).toLowerCase() === '.gif') {
-            files.push(fullPath);
-        }
-    }
-    return files;
-}
-
-async function needsRegeneration(srcPath, destPath) {
-    try {
-        const srcStat = await fs.stat(srcPath);
-        const destStat = await fs.stat(destPath);
-        return srcStat.mtime > destStat.mtime;
-    } catch (err) {
-        if (err.code === 'ENOENT') return true;
-        throw err;
-    }
+async function needsRegeneration(src, dest) {
+	try {
+		const [srcStat, destStat] = await Promise.all([
+			fs.stat(src),
+			fs.stat(dest),
+		]);
+		return srcStat.mtime > destStat.mtime;
+	} catch (e) {
+		return e.code === 'ENOENT';
+	}
 }
 
 async function loadGalleryData() {
-    try {
-        const data = await fs.readFile(GALLERY_DATA_FILE, 'utf-8');
-        return JSON.parse(data);
-    } catch (error) {
-        if (error.code === 'ENOENT') {
-            return { cache: {}, galleryData: [] };
-        }
-        throw error;
-    }
+	try {
+		return JSON.parse(await fs.readFile(GALLERY_DATA_FILE, 'utf8'));
+	} catch (e) {
+		return e.code === 'ENOENT'
+			? { cache: {}, galleryData: [] }
+			: Promise.reject(e);
+	}
 }
 
 async function saveGalleryData(data) {
-    await fs.writeFile(GALLERY_DATA_FILE, JSON.stringify(data, null, 2));
+	const tmp = GALLERY_DATA_FILE + '.tmp';
+	await fs.writeFile(tmp, JSON.stringify(data, null, 2));
+	await fs.rename(tmp, GALLERY_DATA_FILE);
 }
 
 async function processImage(imgPath, cache) {
-    const relPath = path.relative(SRC_DIR, imgPath);
-    const stats = await fs.stat(imgPath);
-    const cachedItem = cache[relPath];
+	const relPath = path.relative(SRC_DIR, imgPath);
+	const stats = await fs.stat(imgPath);
 
-    if (cachedItem && cachedItem.mtime === stats.mtimeMs) {
-        return cachedItem.data; // Return cached data if valid
-    }
+	// 1. Fast cache hit ------------------------------------------------
+	const cachedItem = cache[relPath];
+	if (cachedItem && cachedItem.mtime === stats.mtimeMs) {
+		return cachedItem.data;
+	}
 
-    // If not cached or outdated, process the image
-    const relPathDir = path.dirname(relPath);
-    const fileName = path.basename(imgPath);
-    const baseName = path.basename(fileName, path.extname(fileName));
+	// 2. Prepare paths -------------------------------------------------
+	const relPathDir = path.dirname(relPath);
+	const fileName = path.basename(imgPath);
+	const baseName = path.basename(fileName, path.extname(fileName));
 
-    if (path.extname(fileName).toLowerCase() === '.gif') {
-        const image = sharp(imgPath);
-        const metadata = await image.metadata();
-        const encodedRelPath = relPath.split(path.sep).map(s => encodeURIComponent(s)).join('/');
-        const data = {
-            type: 'file', name: fileName, thumbnail: `src/${encodedRelPath}`,
-            srcset: '', full: `src/${encodedRelPath}`, width: metadata.width,
-            height: metadata.height, path: relPathDir === '.' ? '' : relPathDir,
-            mtime: stats.mtimeMs, dominantColor: '', colorName: '',
-        };
-        cache[relPath] = { mtime: stats.mtimeMs, data };
-        return data;
-    }
+	// 3. Handle GIF ----------------------------------------------------
+	if (path.extname(fileName).toLowerCase() === '.gif') {
+		const metadata = await sharp(imgPath).metadata();
+		if (metadata.pages > 1) {
+			console.warn(`Skipping animated GIF: ${relPath}`);
+			return null;
+		}
+		const encodedRelPath = relPath
+			.split(path.sep)
+			.map(encodeURIComponent)
+			.join('/');
+		const data = {
+			type: 'file',
+			name: fileName,
+			thumbnail: `src/${encodedRelPath}`,
+			srcset: '',
+			full: `src/${encodedRelPath}`,
+			width: metadata.width,
+			height: metadata.height,
+			path: relPathDir === '.' ? '' : relPathDir,
+			mtime: stats.mtimeMs,
+			dominantColor: '',
+			colorName: '',
+		};
+		cache[relPath] = { mtime: stats.mtimeMs, data };
+		return data;
+	}
 
-    const image = sharp(imgPath);
-    const metadata = await image.metadata();
+	// 4. Raster formats -------------------------------------------------
+	const image = sharp(imgPath);
+	const metadata = await image.metadata();
 
-    for (const width of RESPONSIVE_WIDTHS) {
-        const outDir = path.join(WEBP_DIR, relPathDir);
-        await fs.mkdir(outDir, { recursive: true });
-        const outPath = path.join(outDir, `${baseName}_${width}w.webp`);
-        if (await needsRegeneration(imgPath, outPath)) {
-            await image.clone().resize(width).webp({ quality: WEBP_QUALITY }).toFile(outPath);
-        }
-    }
+	// 4a. Generate responsive WebP (run in parallel)
+	const webpTasks = RESPONSIVE_WIDTHS.map(async (w) => {
+		const outDir = path.join(WEBP_DIR, relPathDir);
+		const out = path.join(outDir, `${baseName}_${w}w.webp`);
+		if (await needsRegeneration(imgPath, out)) {
+			await fs.mkdir(outDir, { recursive: true }); // safe to race
+			return image
+				.clone()
+				.resize(w)
+				.webp({ quality: WEBP_QUALITY })
+				.toFile(out);
+		}
+	});
+	await Promise.all(webpTasks);
 
-    const lqipDir = path.join(LQIP_DIR, relPathDir);
-    await fs.mkdir(lqipDir, { recursive: true });
-    const lqipPath = path.join(lqipDir, `${baseName}_lqip.webp`);
-    if (await needsRegeneration(imgPath, lqipPath)) {
-        await image.clone().resize(LQIP_WIDTH).webp({ quality: LQIP_QUALITY }).toFile(lqipPath);
-    }
+	// 4b. LQIP
+	const lqipDir = path.join(LQIP_DIR, relPathDir);
+	const lqipOut = path.join(lqipDir, `${baseName}_lqip.webp`);
+	if (await needsRegeneration(imgPath, lqipOut)) {
+		await fs.mkdir(lqipDir, { recursive: true });
+		await image
+			.clone()
+			.resize(LQIP_WIDTH)
+			.webp({ quality: LQIP_QUALITY })
+			.toFile(lqipOut);
+	}
 
-    const { dominant } = await image.stats();
-    const dominantColor = `#${dominant.r.toString(16).padStart(2, '0')}${dominant.g.toString(16).padStart(2, '0')}${dominant.b.toString(16).padStart(2, '0')}`;
-    const colorName = getColorName(dominantColor).name;
+	// 4c. Dominant colour (down-sample first)
+	const { dominant } = await image
+		.clone()
+		.resize(64, 64, { fit: 'fill' })
+		.stats();
+	const dominantColor = `#${[dominant.r, dominant.g, dominant.b]
+		.map((v) => v.toString(16).padStart(2, '0'))
+		.join('')}`;
+	const colorName = getColorName(dominantColor).name;
 
-    const encodedRelPath = relPath.split(path.sep).map(s => encodeURIComponent(s)).join('/');
-    const encodedBaseName = encodeURIComponent(baseName);
-    const encodedRelPathDir = relPathDir.split(path.sep).map(s => encodeURIComponent(s)).join('/');
+	// 4d. Build URLs
+	const encodedRelPathDir = relPathDir
+		.split(path.sep)
+		.map(encodeURIComponent)
+		.join('/');
+	const encodedBaseName = encodeURIComponent(baseName);
 
-    const srcPathPrefix = (relPathDir === '.' ? `webp/${encodedBaseName}` : `webp/${encodedRelPathDir}/${encodedBaseName}`);
-    const lqipPathPrefix = (relPathDir === '.' ? `lqip/${encodedBaseName}` : `lqip/${encodedRelPathDir}/${encodedBaseName}`);
-    const srcset = RESPONSIVE_WIDTHS.map(w => `${srcPathPrefix}_${w}w.webp ${w}w`).join(', ');
+	const srcPathPrefix =
+		relPathDir === '.'
+			? `webp/${encodedBaseName}`
+			: `webp/${encodedRelPathDir}/${encodedBaseName}`;
+	const lqipPathPrefix =
+		relPathDir === '.'
+			? `lqip/${encodedBaseName}`
+			: `lqip/${encodedRelPathDir}/${encodedBaseName}`;
+	const srcset = RESPONSIVE_WIDTHS.map(
+		(w) => `${srcPathPrefix}_${w}w.webp ${w}w`
+	).join(', ');
 
-    const data = {
-        type: 'file', name: fileName, thumbnail: `${srcPathPrefix}_640w.webp`,
-        srcset: srcset, full: `src/${encodedRelPath}`, lqip: `${lqipPathPrefix}_lqip.webp`,
-        width: metadata.width, height: metadata.height, path: relPathDir === '.' ? '' : relPathDir,
-        mtime: stats.mtimeMs, dominantColor, colorName,
-    };
-
-    cache[relPath] = { mtime: stats.mtimeMs, data };
-    return data;
+	const data = {
+		type: 'file',
+		name: fileName,
+		thumbnail: `${srcPathPrefix}_640w.webp`,
+		srcset,
+		full: `src/${relPath.split(path.sep).map(encodeURIComponent).join('/')}`,
+		lqip: `${lqipPathPrefix}_lqip.webp`,
+		width: metadata.width,
+		height: metadata.height,
+		path: relPathDir === '.' ? '' : relPathDir,
+		mtime: stats.mtimeMs,
+		dominantColor,
+		colorName,
+	};
+	cache[relPath] = { mtime: stats.mtimeMs, data };
+	return data;
 }
 
-
+// --- Parallel runner -----------------------------------------------
 async function runParallel(tasks, concurrency) {
-    const results = [];
-    const queue = [...tasks];
-    const workers = [];
-    let processedCount = 0;
-    let fromCacheCount = 0;
+	const results = [];
+	let done = 0,
+		fromCache = 0;
 
-    const updateProgress = (fromCache) => {
-        processedCount++;
-        if (fromCache) fromCacheCount++;
-        const cacheStatus = `(${fromCacheCount} from cache)`;
-        process.stdout.write(`\rProcessing images: ${processedCount}/${tasks.length} ${cacheStatus}`);
-    };
+	const update = (cached) => {
+		done++;
+		if (cached) fromCache++;
+		process.stdout.write(
+			`\rProcessing images: ${done}/${tasks.length} (${fromCache} from cache)`
+		);
+	};
 
-    for (let i = 0; i < concurrency; i++) {
-        workers.push((async () => {
-            while (queue.length > 0) {
-                const task = queue.shift();
-                if (task) {
-                    try {
-                        const { taskFn, isCached } = task;
-                        const result = await taskFn();
-                        if (result) results.push(result);
-                        updateProgress(isCached);
-                    } catch (error) {
-                        console.error(`\nError processing task:`, error);
-                    }
-                }
-            }
-        })());
-    }
-
-    await Promise.all(workers);
-    process.stdout.write('\n');
-    return results;
+	const queue = [...tasks];
+	const workers = Array.from({ length: concurrency }, () =>
+		(async () => {
+			while (queue.length) {
+				const { taskFn, isCached } = queue.shift();
+				try {
+					const res = await taskFn();
+					if (res) results.push(res);
+					update(isCached);
+				} catch (e) {
+					console.error('\nTask failed:', e);
+				}
+			}
+		})()
+	);
+	await Promise.all(workers);
+	console.log(); // newline
+	return results;
 }
 
-// --- Main Execution ---
-
+// --- Main ----------------------------------------------------------
 async function main() {
-    console.log('Starting gallery generation...');
-    await fs.mkdir(WEBP_DIR, { recursive: true });
-    await fs.mkdir(LQIP_DIR, { recursive: true });
+	console.log('Starting gallery generation...');
+	await fs.mkdir(WEBP_DIR, { recursive: true });
+	await fs.mkdir(LQIP_DIR, { recursive: true });
 
-    const { cache, galleryData: oldGalleryData } = await loadGalleryData();
-    const allImages = await findFiles(SRC_DIR);
-    console.log(`Found ${allImages.length} images to process. Using ${CONCURRENCY_LIMIT} parallel workers.`);
+	const { cache, galleryData: _ } = await loadGalleryData();
+	const imgPaths = await glob('**/*.{png,jpg,jpeg,bmp,tiff,webp,gif}', {
+		cwd: SRC_DIR,
+	});
+	const allImages = imgPaths.map((p) => path.join(SRC_DIR, p));
 
-    const tasks = [];
-    for (const imgPath of allImages) {
-        const relPath = path.relative(SRC_DIR, imgPath);
-        const stats = await fs.stat(imgPath);
-        const cachedItem = cache[relPath];
-        const isCached = cachedItem && cachedItem.mtime === stats.mtimeMs;
+	console.log(
+		`Found ${allImages.length} images. Using ${CONCURRENCY_LIMIT} workers.`
+	);
 
-        tasks.push({
-            taskFn: () => processImage(imgPath, cache),
-            isCached
-        });
-    }
+	const tasks = [];
+	for (const imgPath of allImages) {
+		const relPath = path.relative(SRC_DIR, imgPath);
+		const stats = await fs.stat(imgPath);
+		const cached = cache[relPath] && cache[relPath].mtime === stats.mtimeMs;
 
-    const newGalleryData = await runParallel(tasks, CONCURRENCY_LIMIT);
+		tasks.push({
+			taskFn: () => processImage(imgPath, cache),
+			isCached: cached,
+		});
+	}
 
-    await saveGalleryData({ cache, galleryData: newGalleryData });
+	const galleryData = await runParallel(tasks, CONCURRENCY_LIMIT);
+	await saveGalleryData({ cache, galleryData });
 
-    console.log('Successfully generated gallery data and images.');
+	console.log('Gallery generation complete.');
 }
 
 main().catch(console.error);
