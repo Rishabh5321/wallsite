@@ -12,8 +12,7 @@ const __dirname = path.dirname(__filename);
 const SRC_DIR = path.resolve(__dirname, '../wallpapers');
 const WEBP_DIR = path.resolve(__dirname, '../public/webp');
 const LQIP_DIR = path.resolve(__dirname, '../public/lqip');
-const OUTPUT_JS = path.resolve(__dirname, '../src/js/gallery-data.js');
-const CACHE_FILE = path.resolve(__dirname, 'gallery-cache.json');
+const GALLERY_DATA_FILE = path.resolve(__dirname, '../public/gallery-data.json');
 
 const IMG_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.bmp', '.tiff', '.webp'];
 const RESPONSIVE_WIDTHS = [640, 1920];
@@ -62,20 +61,20 @@ async function needsRegeneration(srcPath, destPath) {
     }
 }
 
-async function loadCache() {
+async function loadGalleryData() {
     try {
-        const cacheData = await fs.readFile(CACHE_FILE, 'utf-8');
-        return JSON.parse(cacheData);
+        const data = await fs.readFile(GALLERY_DATA_FILE, 'utf-8');
+        return JSON.parse(data);
     } catch (error) {
         if (error.code === 'ENOENT') {
-            return {}; // Cache file doesn't exist, return empty object
+            return { cache: {}, galleryData: [] };
         }
         throw error;
     }
 }
 
-async function saveCache(cache) {
-    await fs.writeFile(CACHE_FILE, JSON.stringify(cache, null, 2));
+async function saveGalleryData(data) {
+    await fs.writeFile(GALLERY_DATA_FILE, JSON.stringify(data, null, 2));
 }
 
 async function processImage(imgPath, cache) {
@@ -84,12 +83,7 @@ async function processImage(imgPath, cache) {
     const cachedItem = cache[relPath];
 
     if (cachedItem && cachedItem.mtime === stats.mtimeMs) {
-        // Check if all generated files exist, otherwise regenerate
-        const thumbnailExists = await fs.access(path.join(__dirname, '../public', cachedItem.data.thumbnail)).then(() => true).catch(() => false);
-        const lqipExists = cachedItem.data.lqip ? await fs.access(path.join(__dirname, '../public', cachedItem.data.lqip)).then(() => true).catch(() => false) : true;
-        if (thumbnailExists && lqipExists) {
-            return cachedItem.data; // Return cached data if valid
-        }
+        return cachedItem.data; // Return cached data if valid
     }
 
     // If not cached or outdated, process the image
@@ -153,6 +147,7 @@ async function processImage(imgPath, cache) {
     return data;
 }
 
+
 async function runParallel(tasks, concurrency) {
     const results = [];
     const queue = [...tasks];
@@ -197,7 +192,7 @@ async function main() {
     await fs.mkdir(WEBP_DIR, { recursive: true });
     await fs.mkdir(LQIP_DIR, { recursive: true });
 
-    const cache = await loadCache();
+    const { cache, galleryData: oldGalleryData } = await loadGalleryData();
     const allImages = await findFiles(SRC_DIR);
     console.log(`Found ${allImages.length} images to process. Using ${CONCURRENCY_LIMIT} parallel workers.`);
 
@@ -214,11 +209,9 @@ async function main() {
         });
     }
 
-    const galleryData = await runParallel(tasks, CONCURRENCY_LIMIT);
+    const newGalleryData = await runParallel(tasks, CONCURRENCY_LIMIT);
 
-    await saveCache(cache);
-    const outputContent = `export const galleryData = ${JSON.stringify(galleryData, null, 2)};`;
-    await fs.writeFile(OUTPUT_JS, outputContent);
+    await saveGalleryData({ cache, galleryData: newGalleryData });
 
     console.log('Successfully generated gallery data and images.');
 }

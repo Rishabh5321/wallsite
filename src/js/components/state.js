@@ -27,7 +27,6 @@ export function initializeDom() {
 export const state = {
 	lightbox: null,
 	keydownHandler: null,
-	galleryData: null, // The full tree from gallery-data.js
 	currentDirectory: null, // The node of the directory being viewed
 	directoryHistory: [], // For back button functionality
 	allWallpapersList: [], // A flat list of all wallpapers, used for search

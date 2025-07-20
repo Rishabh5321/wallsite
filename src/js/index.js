@@ -4,7 +4,6 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 import '../styles/layout.css';
 import '../styles/gallery.css';
 import '../styles/lightbox.css';
-import { galleryData } from './gallery-data.js';
 import { state, initializeDom } from './components/state.js';
 import { initializeTheme } from './components/theme.js';
 import { loadFavorites } from './components/favorites.js';
@@ -63,7 +62,7 @@ function initializeState(galleryTree, allWallpapers) {
 	state.filteredWallpapers = [...galleryTree.children];
 }
 
-export function initializeApp() {
+function startApp(galleryData) {
 	initializeDom();
 	const galleryTree = buildGalleryTree(galleryData);
 
@@ -74,6 +73,16 @@ export function initializeApp() {
 	initializeState(galleryTree, galleryData);
 	buildFileTree(galleryTree);
 	resetAndLoadGallery(true);
+}
+
+async function initializeApp() {
+	try {
+		const response = await fetch('/gallery-data.json');
+		const { galleryData } = await response.json();
+		startApp(galleryData);
+	} catch (error) {
+		console.error('Error loading gallery data:', error);
+	}
 }
 
 inject();

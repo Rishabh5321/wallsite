@@ -41,13 +41,8 @@
       "bytes": 7884,
       "imports": []
     },
-    "src/js/gallery-data.js": {
-      "bytes": 62160,
-      "imports": [],
-      "format": "esm"
-    },
     "src/js/components/state.js": {
-      "bytes": 1504,
+      "bytes": 1446,
       "imports": [],
       "format": "esm"
     },
@@ -222,7 +217,7 @@
       "format": "esm"
     },
     "src/js/index.js": {
-      "bytes": 2451,
+      "bytes": 2682,
       "imports": [
         {
           "path": "node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs",
@@ -253,11 +248,6 @@
           "path": "src/styles/lightbox.css",
           "kind": "import-statement",
           "original": "../styles/lightbox.css"
-        },
-        {
-          "path": "src/js/gallery-data.js",
-          "kind": "import-statement",
-          "original": "./gallery-data.js"
         },
         {
           "path": "src/js/components/state.js",
@@ -326,11 +316,8 @@
         "src/styles/lightbox.css": {
           "bytesInOutput": 0
         },
-        "src/js/gallery-data.js": {
-          "bytesInOutput": 47874
-        },
         "src/js/components/state.js": {
-          "bytesInOutput": 1074
+          "bytesInOutput": 1057
         },
         "src/js/components/theme.js": {
           "bytesInOutput": 1898
@@ -348,7 +335,7 @@
           "bytesInOutput": 5127
         },
         "src/js/components/file-tree.js": {
-          "bytesInOutput": 2053
+          "bytesInOutput": 2050
         },
         "src/js/components/sorting.js": {
           "bytesInOutput": 749
@@ -360,10 +347,10 @@
           "bytesInOutput": 574
         },
         "src/js/index.js": {
-          "bytesInOutput": 745
+          "bytesInOutput": 855
         }
       },
-      "bytes": 74210
+      "bytes": 26426
     },
     "public/js/bundle.css": {
       "imports": [
