@@ -1,6 +1,6 @@
 {
 	"extends": ["airbnb-base", "plugin:prettier/recommended"],
-	"ignorePatterns": ["src/js/gallery-data.js"],
+	"ignorePatterns": ["src/js/gallery-data.js", "meta.json", "scripts/gallery-cache.json"],
 	"env": {
 		"browser": true,
 		"es2021": true
