@@ -217,7 +217,7 @@
       "format": "esm"
     },
     "src/js/index.js": {
-      "bytes": 2682,
+      "bytes": 2649,
       "imports": [
         {
           "path": "node_modules/.pnpm/@vercel+analytics@1.5.0/node_modules/@vercel/analytics/dist/index.mjs",
