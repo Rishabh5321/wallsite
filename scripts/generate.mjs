@@ -20,10 +20,8 @@ const __dirname = path.dirname(__filename);
 const SRC_DIR = path.resolve(__dirname, '../wallpapers');
 const WEBP_DIR = path.resolve(__dirname, '../public/webp');
 const LQIP_DIR = path.resolve(__dirname, '../public/lqip');
-const GALLERY_DATA_FILE = path.resolve(
-	__dirname,
-	'../src/gallery-data.json'
-);
+const GALLERY_DATA_FILE =
+	process.argv[2] || path.resolve(__dirname, '../src/gallery-data.json');
 
 const RESPONSIVE_WIDTHS = [640, 1920];
 const WEBP_QUALITY = 78;
