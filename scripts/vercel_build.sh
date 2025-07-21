@@ -7,8 +7,8 @@ CACHE_DIR=".vercel/cache/public"
 # Restore cached public directory from the previous build
 echo "Restoring cached public directory..."
 if [ -d "$CACHE_DIR" ]; then
-  # Use rsync to be more efficient and handle deletions
-  rsync -a --delete "$CACHE_DIR/" "public/"
+  # Use cp to be compatible with Vercel's build environment
+  cp -r "$CACHE_DIR/"* "public/"
 else
   echo "No cache found. Performing a full build."
   mkdir -p public
@@ -21,7 +21,8 @@ pnpm run build
 
 # Save the generated public directory to the cache for the next build
 echo "Saving public directory to cache..."
+rm -rf "$CACHE_DIR"
 mkdir -p "$CACHE_DIR"
-rsync -a --delete "public/" "$CACHE_DIR/"
+cp -r "public/"* "$CACHE_DIR/"
 
 echo "Vercel build script finished."
