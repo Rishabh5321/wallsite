@@ -1,31 +1,48 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Create cache directory if it doesn't exist
-mkdir -p .vercel/cache/public
-mkdir -p .vercel/cache/scripts
+# Define cache directories and file paths
+CACHE_DIR_PUBLIC=".vercel/cache/public"
+CACHE_DIR_DATA=".vercel/cache/data"
+SRC_GALLERY_DATA="src/gallery-data.json"
+PUBLIC_GALLERY_DATA="public/gallery-data.json"
 
-# Ensure target directories exist in public/
-mkdir -p public/webp public/lqip
+# Create cache directories if they don't exist
+mkdir -p "$CACHE_DIR_PUBLIC/webp"
+mkdir -p "$CACHE_DIR_PUBLIC/lqip"
+mkdir -p "$CACHE_DIR_DATA"
+mkdir -p "public" # Ensure public directory exists
 
-# Restore cached webp, lqip images, and metadata
-if [ -d ".vercel/cache/public/webp" ]; then
-  cp -r .vercel/cache/public/webp/. public/webp/
+# Restore cached assets from the previous build
+echo "Restoring cached assets..."
+if [ -d "$CACHE_DIR_PUBLIC/webp" ]; then
+  cp -r "$CACHE_DIR_PUBLIC/webp/." "public/webp/"
 fi
-if [ -d ".vercel/cache/public/lqip" ]; then
-  cp -r .vercel/cache/public/lqip/. public/lqip/
+if [ -d "$CACHE_DIR_PUBLIC/lqip" ]; then
+  cp -r "$CACHE_DIR_PUBLIC/lqip/." "public/lqip/"
 fi
-if [ -f ".vercel/cache/scripts/gallery-cache.json" ]; then
-  cp .vercel/cache/scripts/gallery-cache.json scripts/
+if [ -f "$CACHE_DIR_DATA/gallery-data.json" ]; then
+  cp "$CACHE_DIR_DATA/gallery-data.json" "$SRC_GALLERY_DATA"
 fi
 
 # Run the actual build command
-pnpm install --ignore-scripts && pnpm run build
+# The --ignore-scripts flag is used to prevent unnecessary post-install scripts from running.
+# The main build script will handle all necessary generation and asset compilation.
+pnpm install --ignore-scripts
+pnpm run build
 
-# Save generated webp images and metadata to cache
-rm -rf .vercel/cache/public/webp .vercel/cache/public/lqip .vercel/cache/scripts/gallery-cache.json
-cp -r public/webp .vercel/cache/public/
-cp -r public/lqip .vercel/cache/public/
-if [ -f "scripts/gallery-cache.json" ]; then
-  cp scripts/gallery-cache.json .vercel/cache/scripts/
+# After build, copy the generated data file to the public directory to be served
+if [ -f "$SRC_GALLERY_DATA" ]; then
+  cp "$SRC_GALLERY_DATA" "$PUBLIC_GALLERY_DATA"
 fi
+
+# Save generated assets to the cache for the next build
+echo "Saving assets to cache..."
+rm -rf "$CACHE_DIR_PUBLIC/webp" "$CACHE_DIR_PUBLIC/lqip" "$CACHE_DIR_DATA/gallery-data.json"
+cp -r "public/webp" "$CACHE_DIR_PUBLIC/"
+cp -r "public/lqip" "$CACHE_DIR_PUBLIC/"
+if [ -f "$SRC_GALLERY_DATA" ]; then
+  cp "$SRC_GALLERY_DATA" "$CACHE_DIR_DATA/gallery-data.json"
+fi
+
+echo "Vercel build script finished."

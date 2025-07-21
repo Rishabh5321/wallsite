@@ -22,7 +22,7 @@ const WEBP_DIR = path.resolve(__dirname, '../public/webp');
 const LQIP_DIR = path.resolve(__dirname, '../public/lqip');
 const GALLERY_DATA_FILE = path.resolve(
 	__dirname,
-	'../public/gallery-data.json'
+	'../src/gallery-data.json'
 );
 
 const RESPONSIVE_WIDTHS = [640, 1920];

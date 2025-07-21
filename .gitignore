@@ -8,4 +8,4 @@ node_modules/
 gallery-generator.log
 
 # Gallery generator cache
-scripts/.gallery-cache.json
+src/gallery-data.json
