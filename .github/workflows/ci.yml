@@ -1,0 +1,61 @@
+name: CI/CD
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+    release:
+        types: [created]
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Install pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 8
+            - name: Use Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20'
+                  cache: 'pnpm'
+            - name: Install dependencies
+              run: pnpm install
+            - name: Run linter
+              run: pnpm run lint
+
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Run tests
+              run: echo "No tests found, skipping."
+
+    lighthouse:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Install pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 8
+            - name: Use Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20'
+                  cache: 'pnpm'
+            - name: Install dependencies
+              run: pnpm install
+            - name: Build
+              run: pnpm run build
+            - name: Start server
+              run: pnpm run start &
+            - name: Wait for server
+              run: pnpm exec wait-on http://localhost:8000
+            - name: Run Lighthouse CI
+              run: pnpm run lighthouse
+
+    

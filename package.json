@@ -19,7 +19,8 @@
 		"format": "prettier --write \"src/**/*.{js,css,json,md}\"",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"prepare": "husky",
-		"analyze": "esbuild-visualizer --metadata meta.json"
+		"analyze": "esbuild-visualizer --metadata meta.json",
+		"lighthouse": "lhci autorun"
 	},
 	"repository": {
 		"type": "git",
@@ -40,7 +41,8 @@
 		"onlyBuiltDependencies": [
 			"@vercel/speed-insights",
 			"esbuild",
-			"sharp"
+			"sharp",
+			"puppeteer"
 		]
 	},
 	"dependencies": {
@@ -52,6 +54,7 @@
 		"nearest-color": "^0.4.4"
 	},
 	"devDependencies": {
+		"@lhci/cli": "^0.15.1",
 		"concurrently": "^9.2.0",
 		"esbuild": "^0.25.6",
 		"esbuild-visualizer": "^0.7.0",
@@ -64,6 +67,7 @@
 		"lint-staged": "^16.1.2",
 		"onchange": "^7.1.0",
 		"prettier": "^3.6.2",
-		"sharp": "^0.34.3"
+		"sharp": "^0.34.3",
+		"wait-on": "^8.0.3"
 	}
 }

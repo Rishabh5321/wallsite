@@ -23,8 +23,8 @@ const LQIP_DIR = path.resolve(__dirname, '../public/lqip');
 const GALLERY_DATA_FILE =
 	process.argv[2] || path.resolve(__dirname, '../src/gallery-data.json');
 
-const RESPONSIVE_WIDTHS = [640, 1920];
-const WEBP_QUALITY = 78;
+const RESPONSIVE_WIDTHS = [320, 640, 1920]; // Added 320w for faster thumbnails
+const WEBP_QUALITY = 75; // Lowered from 78 for smaller file sizes
 const LQIP_QUALITY = 20;
 const LQIP_WIDTH = 40;
 const CONCURRENCY_LIMIT = Math.min(8, availableParallelism());
@@ -66,6 +66,47 @@ const colorMap = {
 };
 const getColorName = nearestColor.from(colorMap);
 
+function buildGalleryTree(files) {
+	const root = { type: 'folder', name: 'root', path: '', children: [] };
+	const nodeMap = { root };
+
+	files.forEach((file) => {
+		const pathParts = file.path.split('/').filter((p) => p);
+		let currentNode = root;
+
+		pathParts.forEach((part, index) => {
+			const currentPath = pathParts.slice(0, index + 1).join('/');
+			let childNode = currentNode.children.find(
+				(child) => child.name === part && child.type === 'folder'
+			);
+
+			if (!childNode) {
+				childNode = {
+					type: 'folder',
+					name: part,
+					path: currentPath,
+					children: [],
+				};
+				currentNode.children.push(childNode);
+				nodeMap[currentPath] = childNode;
+			}
+			currentNode = childNode;
+		});
+
+		currentNode.children.push(file);
+	});
+
+	if (root.children.length === 1 && root.children[0].type === 'folder') {
+		const singleFolder = root.children[0];
+		const rootFiles = root.children.filter((c) => c.type === 'file');
+		if (rootFiles.length === 0) {
+			return singleFolder;
+		}
+	}
+
+	return root;
+}
+
 // --- Helpers -------------------------------------------------------
 
 async function needsRegeneration(src, dest) {
@@ -82,10 +123,15 @@ async function needsRegeneration(src, dest) {
 
 async function loadGalleryData() {
 	try {
-		return JSON.parse(await fs.readFile(GALLERY_DATA_FILE, 'utf8'));
+		const data = JSON.parse(await fs.readFile(GALLERY_DATA_FILE, 'utf8'));
+		return {
+			cache: data.cache || {},
+			galleryData: data.galleryData || [],
+			galleryTree: data.galleryTree || null,
+		};
 	} catch (e) {
 		return e.code === 'ENOENT'
-			? { cache: {}, galleryData: [] }
+			? { cache: {}, galleryData: [], galleryTree: null }
 			: Promise.reject(e);
 	}
 }
@@ -106,43 +152,20 @@ async function processImage(imgPath, cache) {
 		return cachedItem.data;
 	}
 
-	// 2. Prepare paths -------------------------------------------------
+	// 2. Prepare paths and image instance ----------------------------
 	const relPathDir = path.dirname(relPath);
 	const fileName = path.basename(imgPath);
 	const baseName = path.basename(fileName, path.extname(fileName));
-
-	// 3. Handle GIF ----------------------------------------------------
-	if (path.extname(fileName).toLowerCase() === '.gif') {
-		const metadata = await sharp(imgPath).metadata();
-		if (metadata.pages > 1) {
-			console.warn(`Skipping animated GIF: ${relPath}`);
-			return null;
-		}
-		const encodedRelPath = relPath
-			.split(path.sep)
-			.map(encodeURIComponent)
-			.join('/');
-		const data = {
-			type: 'file',
-			name: fileName,
-			thumbnail: `src/${encodedRelPath}`,
-			srcset: '',
-						full: `wallpapers/${encodedRelPath}`,
-			width: metadata.width,
-			height: metadata.height,
-			path: relPathDir === '.' ? '' : relPathDir,
-			mtime: stats.mtimeMs,
-			dominantColor: '',
-			colorName: '',
-		};
-		cache[relPath] = { mtime: stats.mtimeMs, data };
-		return data;
-	}
-
-	// 4. Raster formats -------------------------------------------------
 	const image = sharp(imgPath);
 	const metadata = await image.metadata();
 
+	// 3. Skip animated GIFs --------------------------------------------
+	if (metadata.pages && metadata.pages > 1) {
+		console.warn(`Skipping animated GIF: ${relPath}`);
+		return null;
+	}
+
+	// 4. Raster formats -------------------------------------------------
 	// 4a. Generate responsive WebP (run in parallel)
 	const webpTasks = RESPONSIVE_WIDTHS.map(async (w) => {
 		const outDir = path.join(WEBP_DIR, relPathDir);
@@ -202,7 +225,7 @@ async function processImage(imgPath, cache) {
 	const data = {
 		type: 'file',
 		name: fileName,
-		thumbnail: `${srcPathPrefix}_640w.webp`,
+		thumbnail: `${srcPathPrefix}_320w.webp`, // Use smaller thumbnail for faster LCP
 		srcset,
 		full: `wallpapers/${relPath
 			.split(path.sep)
@@ -260,7 +283,7 @@ async function main() {
 	await fs.mkdir(WEBP_DIR, { recursive: true });
 	await fs.mkdir(LQIP_DIR, { recursive: true });
 
-	const { cache, galleryData: _ } = await loadGalleryData();
+	const { cache } = await loadGalleryData();
 	const imgPaths = await glob('**/*.{png,jpg,jpeg,bmp,tiff,webp,gif}', {
 		cwd: SRC_DIR,
 	});
@@ -283,9 +306,11 @@ async function main() {
 	}
 
 	const galleryData = await runParallel(tasks, CONCURRENCY_LIMIT);
-	await saveGalleryData({ cache, galleryData });
+	const galleryTree = buildGalleryTree(galleryData);
+	await saveGalleryData({ cache, galleryData, galleryTree });
 
 	console.log('Gallery generation complete.');
 }
 
 main().catch(console.error);
+
