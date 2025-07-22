@@ -14,7 +14,7 @@
 		"dev": "pnpm run generate && esbuild src/js/index.js --bundle --outfile=public/js/bundle.js --loader:.js=jsx --loader:.css=css --allow-overwrite --servedir=public --serve=0.0.0.0:8000 --watch --target=es2020,chrome90,firefox90,safari15",
 		"build": "pnpm run generate && pnpm run build:assets && esbuild src/js/index.js --bundle --outfile=public/js/bundle.js --loader:.js=jsx --loader:.css=css --allow-overwrite --minify --target=es2020,chrome90,firefox90,safari15 --metafile=meta.json --drop:console --define:process.env.NODE_ENV='\"production\"'",
 		"start": "pnpm run build && http-server public --host 0.0.0.0 --port 8000",
-		"build:assets": "mkdir -p public/assets public/css public/js && rm -rf public/js/* public/css/* public/assets/* public/src && cp src/templates/index.html public/index.html && cp -r src/assets/* public/assets && ln -s wallpapers public/src",
+		"build:assets": "mkdir -p public/assets public/css public/js && rm -rf public/js/* public/css/* public/assets/* public/wallpapers && cp src/templates/index.html public/index.html && cp -r src/assets/* public/assets && ln -s ../wallpapers public/wallpapers",
 		"lint": "eslint src/js/**/*.js --fix",
 		"format": "prettier --write \"src/**/*.{js,css,json,md}\"",
 		"test": "echo \"Error: no test specified\" && exit 1",
