@@ -52,6 +52,7 @@
 		"nearest-color": "^0.4.4"
 	},
 	"devDependencies": {
+		"@lhci/cli": "^0.15.1",
 		"concurrently": "^9.2.0",
 		"esbuild": "^0.25.6",
 		"esbuild-visualizer": "^0.7.0",
