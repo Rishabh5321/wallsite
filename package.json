@@ -67,6 +67,7 @@
 		"lint-staged": "^16.1.2",
 		"onchange": "^7.1.0",
 		"prettier": "^3.6.2",
-		"sharp": "^0.34.3"
+		"sharp": "^0.34.3",
+		"wait-on": "^8.0.3"
 	}
 }
