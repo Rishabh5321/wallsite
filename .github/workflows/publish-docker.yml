@@ -32,5 +32,5 @@ jobs:
                   context: .
                   push: true
                   tags: |
-                    ghcr.io/rishabh5321/wallsite:latest
-                    ghcr.io/rishabh5321/wallsite:${{ steps.sha.outputs.sha }}
+                    ghcr.io/${{ github.repository }}:latest
+                    ghcr.io/${{ github.repository }}:${{ steps.sha.outputs.sha }}

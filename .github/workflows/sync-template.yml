@@ -24,16 +24,16 @@ jobs:
       - name: Sync files from source to destination
         run: |
           # Copy all files, deleting ones that no longer exist in source
-          # Crucially, exclude the src, .git, and specific workflow files
-          rsync -av --delete --exclude='/src/' --exclude='.git/' --exclude='.github/workflows/publish-docker.yml' --exclude='.github/workflows/sync-template.yml' source/ destination/
+          # Crucially, exclude the wallpapers, .git, and specific workflow files
+          rsync -av --delete --exclude='/wallpapers/' --exclude='.git/' --exclude='.github/workflows/publish-docker.yml' --exclude='.github/workflows/sync-template.yml' source/ destination/
 
       - name: Create placeholder and README for template
         run: |
-          # Create src placeholder
-          mkdir -p destination/src
-          echo "## Add Your Wallpapers Here" > destination/src/README.md
-          echo "" >> destination/src/README.md
-          echo "You can upload your .jpg, .png, .gif, or .webp files directly into this folder." >> destination/src/README.md
+          # Create wallpapers placeholder
+          mkdir -p destination/wallpapers
+          echo "## Add Your Wallpapers Here" > destination/wallpapers/README.md
+          echo "" >> destination/wallpapers/README.md
+          echo "You can upload your .jpg, .png, .gif, or .webp files directly into this folder." >> destination/wallpapers/README.md
 
           # Create the main README for the template repo
           cat > destination/README.md <<'EOF'
@@ -70,7 +70,7 @@ jobs:
 
             Once your site is live:
             1.  Go to this repository on GitHub.
-            2.  Navigate to the `src` folder.
+            2.  Navigate to the `wallpapers` folder.
             3.  Click **Add file** > **Upload files** and upload your wallpapers.
             4.  Commit the changes. Your site will automatically update with the new images.
             EOF
