@@ -1,8 +1,8 @@
 version: '3.8'
 services:
-  wallsite:
-    image: ghcr.io/rishabh5321/wallsite:latest
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./src:/app/src
+    wallsite:
+        image: ghcr.io/rishabh5321/wallsite:latest
+        ports:
+            - '8000:8000'
+        volumes:
+            - Wallpapers-Location:/app/wallpapers
