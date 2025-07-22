@@ -50,7 +50,7 @@ jobs:
             - name: Install dependencies
               run: pnpm install
             - name: Install wait-on
-              run: pnpm add -D wait-on
+              run: pnpm add -D wait-on -w
             - name: Build
               run: pnpm run build
             - name: Start server
