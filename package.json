@@ -19,7 +19,8 @@
 		"format": "prettier --write \"src/**/*.{js,css,json,md}\"",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"prepare": "husky",
-		"analyze": "esbuild-visualizer --metadata meta.json"
+		"analyze": "esbuild-visualizer --metadata meta.json",
+		"lighthouse": "lhci autorun"
 	},
 	"repository": {
 		"type": "git",
@@ -40,7 +41,8 @@
 		"onlyBuiltDependencies": [
 			"@vercel/speed-insights",
 			"esbuild",
-			"sharp"
+			"sharp",
+			"puppeteer"
 		]
 	},
 	"dependencies": {
