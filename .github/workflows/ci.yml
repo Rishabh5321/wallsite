@@ -1,88 +1,88 @@
 name: CI/CD
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  release:
-    types: [ created ]
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+    release:
+        types: [created]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 8
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
-        cache: 'pnpm'
-    - name: Install dependencies
-      run: pnpm install
-    - name: Run linter
-      run: pnpm run lint
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Install pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 8
+            - name: Use Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20'
+                  cache: 'pnpm'
+            - name: Install dependencies
+              run: pnpm install
+            - name: Run linter
+              run: pnpm run lint
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Run tests
-      run: ./scripts/test.sh
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Run tests
+              run: ./scripts/test.sh
 
-  lighthouse:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install
-      - name: Install Lighthouse CI
-        run: pnpm add -D @lhci/cli
-      - name: Build
-        run: pnpm run build
-      - name: Start server
-        run: pnpm run start &
-      - name: Run Lighthouse CI
-        run: |
-          pnpm lhci autorun \
-            --collect.url=http://localhost:8000 \
-            --assert.preset=lighthouse:recommended \
-            --assert.assertions.performance=0.95 \
-            --assert.assertions.accessibility=1
+    lighthouse:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Install pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 8
+            - name: Use Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20'
+                  cache: 'pnpm'
+            - name: Install dependencies
+              run: pnpm install
+            - name: Install Lighthouse CI
+              run: pnpm add -D @lhci/cli --ignore-workspace-root-check
+            - name: Build
+              run: pnpm run build
+            - name: Start server
+              run: pnpm run start &
+            - name: Run Lighthouse CI
+              run: |
+                  pnpm lhci autorun \
+                    --collect.url=http://localhost:8000 \
+                    --assert.preset=lighthouse:recommended \
+                    --assert.assertions.performance=0.95 \
+                    --assert.assertions.accessibility=1
 
-  build-docker:
-    if: github.event_name == 'release' && github.event.action == 'created'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    build-docker:
+        if: github.event_name == 'release' && github.event.action == 'created'
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            packages: write
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+            - name: Log in to the Container registry
+              uses: docker/login-action@v2
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }}
+            - name: Build and push Docker image
+              uses: docker/build-push-action@v3
+              with:
+                  context: .
+                  push: true
+                  tags: ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }}
