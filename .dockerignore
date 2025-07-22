@@ -19,6 +19,3 @@ flake.lock
 
 # Build output
 public
-
-# Source files (to be mounted by user)
-src
