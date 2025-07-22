@@ -2,7 +2,10 @@ module.exports = {
   ci: {
     collect: {
       staticDistDir: './public',
-      url: ['http://localhost:8000']
+      url: ['http://localhost:8000'],
+      settings: {
+        emulatedFormFactor: 'desktop',
+      }
     },
     assert: {
       assertions: {
