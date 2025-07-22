@@ -127,7 +127,7 @@ async function processImage(imgPath, cache) {
 			name: fileName,
 			thumbnail: `src/${encodedRelPath}`,
 			srcset: '',
-			full: `src/${encodedRelPath}`,
+						full: `wallpapers/${encodedRelPath}`,
 			width: metadata.width,
 			height: metadata.height,
 			path: relPathDir === '.' ? '' : relPathDir,
@@ -204,7 +204,10 @@ async function processImage(imgPath, cache) {
 		name: fileName,
 		thumbnail: `${srcPathPrefix}_640w.webp`,
 		srcset,
-		full: `src/${relPath.split(path.sep).map(encodeURIComponent).join('/')}`,
+		full: `wallpapers/${relPath
+			.split(path.sep)
+			.map(encodeURIComponent)
+			.join('/')}`,
 		lqip: `${lqipPathPrefix}_lqip.webp`,
 		width: metadata.width,
 		height: metadata.height,
