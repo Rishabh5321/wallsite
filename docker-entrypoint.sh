@@ -33,13 +33,14 @@ fi
 
 # --- Main Execution ---
 
-# Clean old thumbnails to ensure a fresh start, since the main script no longer does this.
-echo "🗑️  Cleaning old thumbnails directory..."
-rm -rf public/thumbnails
-
-# Build the application. This will run the gallery generation script and then build the assets.
-echo "🏗️  Building static assets and generating gallery..."
-pnpm run build
+# Check if the gallery has already been generated to allow for persistent volumes.
+if [ -f "/app/public/gallery-data.json" ]; then
+    echo "✅ Gallery data found, skipping build."
+else
+    echo "🏗️  No gallery data found. Building static assets and generating gallery..."
+    # Build the application. This will run the gallery generation script and then build the assets.
+    pnpm run build
+fi
 
 # Start the http-server to serve the generated content.
 echo "✅ Build complete. Starting server on port 8000..."

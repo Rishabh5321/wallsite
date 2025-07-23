@@ -5,4 +5,7 @@ services:
         ports:
             - '8000:8000'
         volumes:
-            - Wallpapers-Location:/app/wallpapers
+            # Mount a local directory for your wallpapers
+            - ./wallpapers:/app/wallpapers
+            # Mount a local directory for your cache
+            - ./app_cache:/app/public
