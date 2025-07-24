@@ -2,6 +2,7 @@ import { dom, state } from './state.js';
 import { isFavorite, toggleFavorite } from './favorites.js';
 import { showLightbox } from './lightbox.js';
 import { updatePageIndicator } from './ui.js';
+import { encodePath } from '../utils/path.js';
 
 const lazyLoadObserver = new IntersectionObserver(
 	(entries, observer) => {
@@ -53,7 +54,7 @@ function createWallpaperItem(wallpaper) {
 	galleryItem.className = 'gallery-item lazy'; // Add .lazy class for the observer
 
 	const link = document.createElement('a');
-	link.href = encodeURI(wallpaper.full);
+	link.href = encodePath(wallpaper.full);
 	link.setAttribute('aria-label', `View wallpaper ${wallpaper.name}`);
 	link.addEventListener('click', (e) => {
 		e.preventDefault();
@@ -75,7 +76,7 @@ function createWallpaperItem(wallpaper) {
 				preloadImage.src = highResUrl;
 			} else if (wallpaper.full.toLowerCase().endsWith('.gif')) {
 				// Preload the GIF itself
-				preloadImage.src = encodeURI(wallpaper.full);
+				preloadImage.src = encodePath(wallpaper.full);
 			}
 		}
 	});
@@ -86,10 +87,12 @@ function createWallpaperItem(wallpaper) {
 	// The data-srcset contains all the responsive image paths and sizes
 	img.dataset.srcset = wallpaper.srcset;
 	// The data-src is the smallest image, used as a thumbnail and for initial display
-	img.dataset.src = encodeURI(wallpaper.thumbnail);
+	img.dataset.src = encodePath(wallpaper.thumbnail);
 
 	img.alt = `Wallpaper: ${wallpaper.name}`;
 	img.loading = 'lazy'; // Native lazy loading as a fallback
+	img.width = wallpaper.width;
+	img.height = wallpaper.height;
 
 	// Set sizes attribute to give the browser hints on how the image will be displayed
 	img.sizes = '(max-width: 600px) 45vw, (max-width: 1200px) 30vw, 20vw';

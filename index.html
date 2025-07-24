@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazy Load Images</title>
+    <link rel="stylesheet" href="lazy-load.css">
+    <style>
+        /* Basic styling for the demo */
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lazy Loading Gallery with Blur-Up Effect</h1>
+    <p style="text-align: center;">Scroll down to see the images load as they approach the viewport.</p>
+
+    <div class="gallery">
+        <!--
+          - src: A tiny, 30px wide placeholder image.
+          - data-src: The high-resolution image to be loaded.
+        -->
+        <img src="https://via.placeholder.com/30x20" data-src="https://picsum.photos/600/400?random=1" alt="Random placeholder image 1">
+        <img src="https://via.placeholder.com/30x20" data-src="https://picsum.photos/600/400?random=2" alt="Random placeholder image 2">
+        <img src="https://via.placeholder.com/30x20" data-src="https://picsum.photos/600/400?random=3" alt="Random placeholder image 3">
+        <img src="https://via.placeholder.com/30x20" data-src="https://picsum.photos/600/400?random=4" alt="Random placeholder image 4">
+        <img src="https://via.placeholder.com/30x20" data-src="https://picsum.photos/600/400?random=5" alt="Random placeholder image 5">
+        <img src="https://via.placeholder.com/30x20" data-src="https://picsum.photos/600/400?random=6" alt="Random placeholder image 6">
+        <img src="https://via.placeholder.com/30x20" data-src="https://picsum.photos/600/400?random=7" alt="Random placeholder image 7">
+        <img src="https://via.placeholder.com/30x20" data-src="https://picsum.photos/600/400?random=8" alt="Random placeholder image 8">
+        <img src="https://via.placeholder.com/30x20" data-src="https://picsum.photos/600/400?random=9" alt="Random placeholder image 9">
+        <img src="https://via.placeholder.com/30x20" data-src="https://picsum.photos/600/400?random=10" alt="Random placeholder image 10">
+        <img src="https://via.placeholder.com/30x20" data-src="https://picsum.photos/600/400?random=11" alt="Random placeholder image 11">
+        <img src="https://via.placeholder.com/30x20" data-src="https://picsum.photos/600/400?random=12" alt="Random placeholder image 12">
+    </div>
+
+    <script src="lazy-load.js"></script>
+
+</body>
+</html>

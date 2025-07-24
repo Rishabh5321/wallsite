@@ -1,0 +1,16 @@
+/*
+Initial state for lazy-loading images.
+They start blurred and will transition smoothly.
+*/
+img[data-src] {
+    filter: blur(20px);
+    transition: filter 0.3s ease-in-out;
+}
+
+/*
+Class to add once the high-resolution image is loaded.
+This will trigger the transition to un-blur the image.
+*/
+img.unblur {
+    filter: blur(0);
+}
