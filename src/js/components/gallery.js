@@ -90,6 +90,8 @@ function createWallpaperItem(wallpaper) {
 
 	img.alt = `Wallpaper: ${wallpaper.name}`;
 	img.loading = 'lazy'; // Native lazy loading as a fallback
+	img.width = wallpaper.width;
+	img.height = wallpaper.height;
 
 	// Set sizes attribute to give the browser hints on how the image will be displayed
 	img.sizes = '(max-width: 600px) 45vw, (max-width: 1200px) 30vw, 20vw';
