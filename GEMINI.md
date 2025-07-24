@@ -74,7 +74,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 
 ### Frontend & User Experience
 
-- **Hierarchical Folder Navigation**: Users can navigate through nested folders in the main gallery view, with a "Back" button.
+- **Hierarchical Folder Navigation**: Users can navigate through nested folders in the main gallery view, with a "Back" button. URL paths are correctly encoded to handle special characters and spaces in folder names.
 - **Dynamic Masonry Grid**: A responsive grid that intelligently arranges wallpapers based on their aspect ratio (portrait, ultrawide).
 - **Performant Image Loading**: Utilizes lazy loading (`IntersectionObserver`), responsive images (`srcset`), and infinite scroll to ensure a fast and smooth user experience, even with large galleries.
 - **Advanced Lightbox**: A full-featured lightbox for viewing images with keyboard navigation, an explicit close button, and metadata display. It's engineered for a near-instant response time (<200ms on a 4G network) through several performance optimizations:
@@ -99,6 +99,7 @@ The Docker setup uses a single-stage `Dockerfile` with a custom `docker-entrypoi
 ### Automation & Deployment
 
 - **Optimized Gallery Generation**: The `generate.mjs` script is a highly optimized Node.js script using `sharp`. It processes images in parallel and uses a metadata cache within the `public/gallery-data.json` file to skip processing for unchanged images. This works in tandem with the Vercel build cache to make subsequent deployments very fast. The script creates the necessary metadata for the frontend, including file modification times (`mtime`) to enable sorting by date and the dominant color of each image to enable searching by color.
+    - **Animated GIF Support**: The script now correctly processes animated GIFs. Instead of attempting to generate thumbnails (which would break the animation), it uses the original GIF for both the gallery view and the lightbox, ensuring animations are preserved.
     - **Reduced WebP Quality**: The default WebP quality has been set to `78` for smaller file sizes and faster loading.
     - **Optimized Responsive Image Widths**: The number of generated responsive WebP image widths has been reduced to two (`640w` and `1920w`) to balance build time, storage, and performance.
 - **One-Click Deployment**: Pre-configured for seamless deployment to Vercel and Netlify.

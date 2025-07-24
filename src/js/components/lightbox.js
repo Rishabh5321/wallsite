@@ -1,6 +1,7 @@
 import * as basicLightbox from 'basiclightbox';
 import { state } from './state.js';
 import { isFavorite, toggleFavorite } from './favorites.js';
+import { encodePath } from '../utils/path.js';
 
 function getHighestResUrl(srcset) {
 	if (!srcset) return null;
@@ -159,7 +160,7 @@ function updateLightbox(wallpaper) {
 	wallpaperFormat.textContent = wallpaper.name.split('.').pop().toUpperCase();
 	wallpaperFolder.textContent = wallpaper.path === '' ? '.' : wallpaper.path;
 	wallpaperRes.textContent = 'Loading...';
-	downloadBtn.href = encodeURI(wallpaper.full);
+	downloadBtn.href = encodePath(wallpaper.full);
 	downloadBtn.download = wallpaper.name;
 	favoriteBtn.classList.toggle('favorited', isFavorite(wallpaper));
 	favoriteBtn.onclick = () => {
@@ -184,7 +185,7 @@ function updateLightbox(wallpaper) {
 	if (isGif || !highResUrl) {
 		// Fallback for items without srcset (like GIFs)
 		contentElement.classList.add('loading');
-		img.src = encodeURI(wallpaper.full);
+		img.src = encodePath(wallpaper.full);
 		img.onload = () => {
 			wallpaperRes.textContent = `${wallpaper.width}x${wallpaper.height}`;
 			contentElement.classList.remove('loading');
@@ -210,7 +211,7 @@ function updateLightbox(wallpaper) {
 	} else {
 		contentElement.classList.add('loading');
 		img.classList.add('blurred');
-		img.src = encodeURI(wallpaper.lqip);
+		img.src = encodePath(wallpaper.lqip);
 		img.alt = `Low quality thumbnail for ${wallpaper.name}`;
 
 		const fullImage = new Image();
@@ -245,7 +246,7 @@ function updateLightbox(wallpaper) {
 
 function createLightboxContent(wallpaper) {
 	const imageName = wallpaper.name.split('.').slice(0, -1).join('.');
-	const encodedDownloadUrl = encodeURI(wallpaper.full);
+	const encodedDownloadUrl = encodePath(wallpaper.full);
 
 	return `
         <div class="lightbox-main-wrapper">

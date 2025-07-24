@@ -159,10 +159,39 @@ async function processImage(imgPath, cache) {
 	const image = sharp(imgPath);
 	const metadata = await image.metadata();
 
-	// 3. Skip animated GIFs --------------------------------------------
-	if (metadata.pages && metadata.pages > 1) {
-		console.warn(`Skipping animated GIF: ${relPath}`);
-		return null;
+	// 3. Handle GIFs: Don't generate thumbnails, use the original
+	if (metadata.format === 'gif') {
+		const { dominant } = await image
+			.clone()
+			.resize(64, 64, { fit: 'fill' })
+			.stats();
+		const dominantColor = `#${[dominant.r, dominant.g, dominant.b]
+			.map((v) => v.toString(16).padStart(2, '0'))
+			.join('')}`;
+		const colorName = getColorName(dominantColor).name;
+
+		const data = {
+			type: 'file',
+			name: fileName,
+			thumbnail: `wallpapers/${relPath
+				.split(path.sep)
+				.map(encodeURIComponent)
+				.join('/')}`,
+			srcset: '', // No srcset for GIFs
+			full: `wallpapers/${relPath
+				.split(path.sep)
+				.map(encodeURIComponent)
+				.join('/')}`,
+			lqip: '', // No LQIP for GIFs
+			width: metadata.width,
+			height: metadata.height,
+			path: relPathDir === '.' ? '' : relPathDir,
+			mtime: stats.mtimeMs,
+			dominantColor,
+			colorName,
+		};
+		cache[relPath] = { mtime: stats.mtimeMs, data };
+		return data;
 	}
 
 	// 4. Raster formats -------------------------------------------------
