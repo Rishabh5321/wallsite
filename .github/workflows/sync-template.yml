@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Repo (wallsite)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: source
 
       - name: Checkout Destination Repo (wallsite-template)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ${{ github.repository_owner }}/wallsite-template
           token: ${{ secrets.REPO_ACCESS_TOKEN }} # A PAT is required
